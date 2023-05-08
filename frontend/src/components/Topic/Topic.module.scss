@@ -1,0 +1,39 @@
+.root {
+  display: grid;
+}
+
+.foto {
+  grid-area: foto;
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+  padding: 5px 0px 5px;
+}
+
+.useConteiner {
+  //height: 30px;
+  display: grid;
+  grid-template-columns: min-content auto;
+  grid-template-rows: min-content;
+  grid-template-areas:
+    'foto name'
+    'foto sity'
+    'foto data';
+  h3 {
+    grid-area: name;
+    margin: 0;
+  }
+  p {
+    grid-area: sity;
+  }
+  span {
+    grid-area: data;
+  }
+}
+
+.massage{
+    font-size: 24px;
+    background-color: rgb(222, 232, 234);
+    margin: 0;
+    padding: 5px 5px;
+}
