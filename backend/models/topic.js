@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 // const { regularLink } = require('../utils/constants');
 
 const cardSchema = new mongoose.Schema({
-  name: {
+  title: {
     type: String,
     required: true,
     minlength: 2,

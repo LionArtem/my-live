@@ -3,10 +3,10 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { topicApi } from '../../utils/TopicApi';
 
 export const fetchTopicAll = createAsyncThunk(
-  'page/fetchMessageAll',
+  'page/fetchTopicAll',
   async (params, thunkAPI) => {
     const data = await topicApi.getAllTopics();
-    return data;
+    return data.reverse();
   }
 );
 

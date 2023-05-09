@@ -4,11 +4,13 @@ class TopicApi {
     this.headers = headers;
   }
 
-  // getPaginationPage(currentPage) {
-  //   return fetch(`${this.baseUrl}?page=${currentPage}&limit=10`, {
-  //     headers: this.headers,
-  //   }).then(this._checkResponse);
-  // }
+  addNewTopic(title) {
+    return fetch(this.baseUrl, {
+      method: 'POST',
+      headers: this.headers,
+      body: JSON.stringify({ title }),
+    }).then(this._checkResponse);
+  }
 
   getAllTopics() {
     return fetch(this.baseUrl, {

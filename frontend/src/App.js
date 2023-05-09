@@ -27,7 +27,6 @@ function App() {
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/topics" element={<ForumTopics />} />
-      {/* <Route path="/topics" element={<Forum />} /> */}
     </Routes>
   );
 }

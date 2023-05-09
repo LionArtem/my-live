@@ -4,9 +4,9 @@ const IncorrectErr = require('../errors/incorrect-err');
 
 const createTopic = (req, res, next) => {
   // const id = req.user._id;
-  const { name } = req.body;
+  const { title } = req.body;
   Topic.create({
-    name,
+    title,
     // owner: id,
   })
     .then((newTopic) => {
