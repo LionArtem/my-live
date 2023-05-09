@@ -1,0 +1,50 @@
+.overflow {
+  position: fixed;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+  background-color: rgb(2, 4, 2);
+  .form_contener {
+    display: flex;
+    height: 100vh;
+    .form {
+      min-width: 50vh;
+      min-height: 50vh;
+      margin: auto;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      border: 1px solid aliceblue;
+      border-radius: 5px;
+      padding: 10px;
+      .buttoncloseform {
+        color: rgb(217, 179, 179);
+        position: relative;
+        width: 50px;
+        top: -40px;
+        right: -330px;
+        cursor: pointer;
+      }
+      .buttoncloseform:hover {
+        text-shadow: 1px 1px #524e4e;
+      }
+      .title {
+        color: aliceblue;
+        margin: 0px auto;
+      }
+      .button {
+        all: unset;
+        background-color: aliceblue;
+        margin: 0px auto;
+        color: black;
+        padding: 5px;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+      .button:hover {
+        text-shadow: 1px 1px #524e4e;
+      }
+    }
+  }
+}

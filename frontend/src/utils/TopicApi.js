@@ -45,7 +45,10 @@ class TopicApi {
 
 const topicApi = new TopicApi({
   baseUrl: 'http://localhost:3000/topic',
-  headers: { 'content-type': 'application/json' },
+  headers: {
+    authorization: `Bearer ${localStorage.getItem('token')}`,
+    'content-type': 'application/json',
+  },
 });
 
 export { topicApi };
