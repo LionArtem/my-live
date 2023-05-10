@@ -22,8 +22,19 @@ class Auth {
   //   }).then(this._checkResponse);
   // }
 
-  addUser(email, password, url) {
-    return fetch(`${this.baseUrl}/${url}`, {
+  addUser(email, password,) {
+    return fetch(`${this.baseUrl}/signup`, {
+      method: 'POST',
+      headers: this.headers,
+      body: JSON.stringify({
+        email,
+        password,
+      }),
+    }).then(this._checkResponse);
+  }
+
+  loginUser(email, password,) {
+    return fetch(`${this.baseUrl}/signin`, {
       method: 'POST',
       headers: this.headers,
       body: JSON.stringify({

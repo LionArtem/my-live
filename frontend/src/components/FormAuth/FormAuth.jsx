@@ -1,32 +1,40 @@
 import React from 'react';
-import style from './FormAuth.module.scss';
-import { auth } from '../../utils/Auth';
 
-export default function FormAuth({ isForm, textButton, text }) {
+import { useDispatch } from 'react-redux';
+import {
+  fetchAddUser,
+  fetchLoginUser,
+  setfopmReg,
+  setFormSign,
+} from '../../redax/slices/authSlice';
+
+import style from './FormAuth.module.scss';
+
+export default function FormAuth({ textButton, text }) {
+  const triggerPopap = text === 'Pегистрация';
+  const dispatch = useDispatch();
   const handleSubmit = (e) => {
+    const email = e.target.email.value;
+    const password = e.target.password.value;
     e.preventDefault();
-    if (text === 'Pегистрация') {
-      auth
-        .addUser(e.target.email.value, e.target.password.value, 'signup')
-        .then((user) => console.log(user))
-        .catch((err) => console.log(err));
+    if (triggerPopap) {
+      dispatch(fetchAddUser({ email, password }));
     } else {
-      auth
-        .addUser(e.target.email.value, e.target.password.value, 'signin')
-        .then((user) => {
-          console.log(user);
-          localStorage.setItem('token', user.token);
-        })
-        .catch((err) => console.log(err));
+      dispatch(fetchLoginUser({ email, password }));
     }
-    isForm(false);
+    dispatch(setFormSign());
   };
 
   return (
     <div className={style.overflow}>
       <div className={style.form_contener}>
         <form onSubmit={(e) => handleSubmit(e)} className={style.form}>
-          <div onClick={() => isForm(false)} className={style.buttoncloseform}>
+          <div
+            onClick={() =>
+              dispatch(triggerPopap ? setfopmReg() : setFormSign())
+            }
+            className={style.buttoncloseform}
+          >
             закрыть
           </div>
           <p className={style.title}>{text}</p>

@@ -11,8 +11,7 @@ export const fetchTopicAll = createAsyncThunk(
 );
 
 const initialState = {
-//   messageValue: '',
-//   messagePage: [],
+
   topicsAll: [],
 };
 
@@ -20,24 +19,6 @@ const topicsSlice = createSlice({
   name: 'topic',
   initialState,
   reducers: {
-    // setMessageValue(state, action) {
-    //   state.messageValue = action.payload;
-    // },
-    // setMessagePage(state, action) {
-    //   state.messagePage = action.payload;
-    // },
-    // addNewMessageState(state, action) {
-    //   state.messagePage.push(action.payload);
-    // },
-    // setMessageAll(state, action) {
-    //   state.messageAll = action.payload;
-    // },
-    // addNewMessageAll(state, action) {
-    //   state.messageAll.push(action.payload);
-    // },
-    // deleteOneMessageAll(state) {
-    //   state.messageAll.shift();
-    // },
   },
   extraReducers: (builder) => {
     builder.addCase(fetchTopicAll.pending, (state) => {
@@ -53,13 +34,4 @@ const topicsSlice = createSlice({
 });
 
 export const selectTopics = (state) => state.topics;
-
-// export const {
-//   setMessageValue,
-//   setMessagePage,
-//   addNewMessageState,
-//   setMessageAll,
-//   addNewMessageAll,
-//   deleteOneMessageAll,
-// } = topicsSlice.actions;
 export default topicsSlice.reducer;
