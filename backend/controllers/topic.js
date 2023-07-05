@@ -3,11 +3,11 @@ const Topic = require('../models/topic');
 const IncorrectErr = require('../errors/incorrect-err');
 
 const createTopic = (req, res, next) => {
-  // const id = req.user._id;
+  const id = req.user._id;
   const { title } = req.body;
   Topic.create({
     title,
-    // owner: id,
+    owner: id,
   })
     .then((newTopic) => {
       res.status(201).send(newTopic);
@@ -22,7 +22,7 @@ const createTopic = (req, res, next) => {
 };
 
 const getTopics = (req, res, next) => {
-  Topic.find()
+  Topic.find().populate('owner')
     .then((card) => {
       res.send(card);
     })

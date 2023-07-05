@@ -8,7 +8,7 @@ const cardSchema = new mongoose.Schema({
     minlength: 2,
     maxlength: 30,
   },
-  // owner: { type: mongoose.Schema.Types.ObjectId, ref: 'user', required: true },
+  owner: { type: mongoose.Schema.Types.ObjectId, ref: 'user', required: true },
   createdAt: {
     type: Date,
     default: Date.now,

@@ -25,6 +25,7 @@ const topicsSlice = createSlice({
       console.log('загрузка всех topics');
     });
     builder.addCase(fetchTopicAll.fulfilled, (state, { payload }) => {
+      console.log(payload);
       state.topicsAll = payload;
     });
     builder.addCase(fetchTopicAll.rejected, (state) => {
