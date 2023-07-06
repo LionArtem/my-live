@@ -3,7 +3,7 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchTopicAll, selectTopics } from '../../redax/slices/topicSlice';
 import { topicApi } from '../../utils/TopicApi';
-import Topic from '../TopicList/TopicList';
+import Topic from './TopicList/TopicList';
 
 export default function ForumTopics() {
   const titleRef = React.useRef();

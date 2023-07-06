@@ -11,7 +11,7 @@ export const fetchTopicAll = createAsyncThunk(
 );
 
 const initialState = {
-
+  authorTopic: {},
   topicsAll: [],
 };
 
@@ -19,6 +19,9 @@ const topicsSlice = createSlice({
   name: 'topic',
   initialState,
   reducers: {
+    addAuthorTopic(state, action) {
+      state.authorTopic = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(fetchTopicAll.pending, (state) => {
@@ -35,4 +38,5 @@ const topicsSlice = createSlice({
 });
 
 export const selectTopics = (state) => state.topics;
+export const { addAuthorTopic } = topicsSlice.actions;
 export default topicsSlice.reducer;

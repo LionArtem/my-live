@@ -10,6 +10,7 @@ import //fetchPaginationPage,
 import Forum from './components/Forum/Forum';
 import Home from './components/Home/Home';
 import ForumTopics from './components/ForumTopics/ForumTopics';
+import Topic from './components/ForumTopics/Topic/Topic';
 
 function App() {
   //const { pageNumber } = useSelector(selectPagination);
@@ -27,6 +28,7 @@ function App() {
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/topics" element={<ForumTopics />} />
+      <Route path="/topic" element={<Topic />} />
     </Routes>
   );
 }
