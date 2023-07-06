@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { selectTopics, fetchGetTopic } from '../../../redax/slices/topicSlice';
 
+import FormMessage from "../../FormMessage/FormMessage";
+
 export default function Topic() {
   const dispatch = useDispatch();
   const { authorTopic } = useSelector(selectTopics);
@@ -17,7 +19,7 @@ export default function Topic() {
         <h1>{authorTopic.title}</h1>
         <h2>{authorTopic.name}</h2>
       </div>
-      
+     <FormMessage/>
     </div>
   );
 }

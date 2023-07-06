@@ -5,6 +5,7 @@ const {
   createTopic,
   getTopics,
   getTopicId,
+  addInTopicMessage,
   // deleteCard,
   // addCardLike,
   // remuveCardLike,
@@ -29,6 +30,16 @@ topicRouter.get('/:id', celebrate({
     id: Joi.string().hex().length(24).required(),
   }),
 }), getTopicId);
+
+topicRouter.put('/:topicId/message', celebrate({
+  params: Joi.object().keys({
+    topicId: Joi.string().hex().length(24).required(),
+  }),
+  body: Joi.object()
+    .keys({
+      message: Joi.string().required(),
+    }),
+}), addInTopicMessage);
 
 // cardsRouter.delete('/:id', celebrate({
 //   params: Joi.object().keys({

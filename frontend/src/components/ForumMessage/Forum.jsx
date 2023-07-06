@@ -1,7 +1,7 @@
 import React from 'react';
 
 import MyLoader from '../MessageUser/sceleton';
-import Form from '../FormMessage/FormMessage';
+import Form from '../FormMessage/Form';
 import Topic from '../MessageUser/MessageUser';
 import Pagination from '../Pagination/Pagination';
 

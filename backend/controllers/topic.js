@@ -46,8 +46,36 @@ const getTopicId = (req, res, next) => {
     .catch(next);
 };
 
+const addInTopicMessage = (req, res, next) => {
+  const { topicId } = req.params;
+  const { message } = req.body;
+
+  Topic.findByIdAndUpdate(
+    topicId,
+    { $push: { message } },
+    // { $addToSet: { likes: id } }, // добавить _id в массив, если его там нет
+    { new: true },
+  )
+    .then((resTopic) => {
+      if (resTopic) {
+        res.send(resTopic);
+        return;
+      }
+      throw new NotFoundError('карточка с таким id не найдена');
+    })
+    .catch((err) => {
+      if (err.name === 'CastError') {
+        const error = new IncorrectErr('не корректные данные');
+        next(error);
+      } else {
+        next(err);
+      }
+    });
+};
+
 module.exports = {
   createTopic,
   getTopics,
   getTopicId,
+  addInTopicMessage,
 };

@@ -1,15 +1,10 @@
 import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 
-import {
-  selectTopics,
-  addAuthorTopic,
-  fetchGetTopic,
-} from '../../../redax/slices/topicSlice';
+import { selectTopics } from '../../../redax/slices/topicSlice';
 import { Link } from 'react-router-dom';
 
 export default function TopicList() {
-  const dispatch = useDispatch();
   const { topicsAll } = useSelector(selectTopics);
 
   return (
@@ -20,7 +15,6 @@ export default function TopicList() {
             <h1
               onClick={() => {
                 localStorage.setItem('authorId', obj._id);
-                // dispatch(fetchGetTopic({ id: obj._id }));
               }}
             >
               {obj.title}

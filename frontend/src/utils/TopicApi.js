@@ -19,10 +19,20 @@ class TopicApi {
     }).then(this._checkResponse);
   }
 
-  getPost(id) {
+  getTopic(id) {
     return fetch(`${this.baseUrl}/${id}`, {
       method: 'GET',
       headers: this.headers,
+    }).then(this._checkResponse);
+  }
+
+  addMessageInTopic(id,message) {
+    return fetch(`${this.baseUrl}/${id}/message`, {
+      method: 'PUT',
+      headers: this.headers,
+      body: JSON.stringify({
+        message,
+      }),
     }).then(this._checkResponse);
   }
 
