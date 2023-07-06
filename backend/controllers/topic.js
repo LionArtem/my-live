@@ -1,6 +1,7 @@
 const Topic = require('../models/topic');
 
 const IncorrectErr = require('../errors/incorrect-err');
+const NotFoundError = require('../errors/not-found-err');
 
 const createTopic = (req, res, next) => {
   const id = req.user._id;
@@ -31,7 +32,22 @@ const getTopics = (req, res, next) => {
     });
 };
 
+const getTopicId = (req, res, next) => {
+  const { id } = req.params;
+
+  Topic.findById(id).populate('owner')
+    .then((topic) => {
+      if (topic) {
+        res.send(topic);
+        return;
+      }
+      throw new NotFoundError('тема не найдена');
+    })
+    .catch(next);
+};
+
 module.exports = {
   createTopic,
   getTopics,
+  getTopicId,
 };

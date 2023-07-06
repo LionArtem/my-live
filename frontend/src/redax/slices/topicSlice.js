@@ -10,6 +10,16 @@ export const fetchTopicAll = createAsyncThunk(
   }
 );
 
+export const fetchGetTopic = createAsyncThunk(
+  'page/fetchGetTopic',
+  async (params, thunkAPI) => {
+    // console.log(thunkAPI.getState().topics.authorTopic._id);
+    // const id = thunkAPI.getState().topics.authorTopic._id
+    const data = await topicApi.getPost(params.id);
+    return data;
+  }
+);
+
 const initialState = {
   authorTopic: {},
   topicsAll: [],
@@ -33,6 +43,17 @@ const topicsSlice = createSlice({
     });
     builder.addCase(fetchTopicAll.rejected, (state) => {
       console.log('ошибка загрузки все topics');
+    });
+
+    builder.addCase(fetchGetTopic.pending, (state) => {
+      console.log('загрузка topic');
+    });
+    builder.addCase(fetchGetTopic.fulfilled, (state, { payload }) => {
+      console.log(payload);
+      state.authorTopic = { title: payload.title, name: payload.owner.name };
+    });
+    builder.addCase(fetchGetTopic.rejected, (state) => {
+      console.log('ошибка загрузки topic');
     });
   },
 });

@@ -19,6 +19,13 @@ class TopicApi {
     }).then(this._checkResponse);
   }
 
+  getPost(id) {
+    return fetch(`${this.baseUrl}/${id}`, {
+      method: 'GET',
+      headers: this.headers,
+    }).then(this._checkResponse);
+  }
+
   // deletePost(id) {
   //   return fetch(`${this.baseUrl}/${id}`, {
   //     method: 'DELETE',

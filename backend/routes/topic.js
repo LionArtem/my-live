@@ -4,6 +4,7 @@ const { celebrate, Joi } = require('celebrate');
 const {
   createTopic,
   getTopics,
+  getTopicId,
   // deleteCard,
   // addCardLike,
   // remuveCardLike,
@@ -22,6 +23,12 @@ topicRouter.post(
   }),
   createTopic,
 );
+
+topicRouter.get('/:id', celebrate({
+  params: Joi.object().keys({
+    id: Joi.string().hex().length(24).required(),
+  }),
+}), getTopicId);
 
 // cardsRouter.delete('/:id', celebrate({
 //   params: Joi.object().keys({
