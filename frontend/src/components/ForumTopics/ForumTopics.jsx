@@ -3,11 +3,11 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchTopicAll, selectTopics } from '../../redax/slices/topicSlice';
 import { topicApi } from '../../utils/TopicApi';
+import Topic from '../TopicList/TopicList';
 
 export default function ForumTopics() {
   const titleRef = React.useRef();
   const dispatch = useDispatch();
-  const { topicsAll } = useSelector(selectTopics);
 
   const addPost = (e) => {
     e.preventDefault();
@@ -32,7 +32,7 @@ export default function ForumTopics() {
         ></input>
         <button type="submit">создать новую тему</button>
       </form>
-      {topicsAll && topicsAll.map((obj) => <h1 key={obj._id}>{obj.title}</h1>)}
+      <Topic />
     </>
   );
 }

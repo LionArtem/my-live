@@ -1,8 +1,8 @@
 import React from 'react';
 
-import MyLoader from '../Topic/sceleton';
+import MyLoader from '../MessageUser/sceleton';
 import Form from '../Form/Form';
-import Topic from '../Topic/Topic';
+import Topic from '../MessageUser/MessageUser';
 import Pagination from '../Pagination/Pagination';
 
 import { useSelector } from 'react-redux';

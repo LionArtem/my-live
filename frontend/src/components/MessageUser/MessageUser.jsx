@@ -1,8 +1,8 @@
 import React from 'react';
 
-import Style from './Topic.module.scss';
+import Style from './MessageUser.scss';
 
-export default function Topic({ text }) {
+export default function MessageUser({ text }) {
   return (
     <div className={Style.root}>
       <div className={Style.useConteiner}>
