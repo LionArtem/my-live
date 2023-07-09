@@ -21,7 +21,11 @@ export const fetchGetTopic = createAsyncThunk(
 export const fetchAddMessageInTopic = createAsyncThunk(
   'page/fetchAddMessageInTopic',
   async (params, thunkAPI) => {
-    const data = await topicApi.addMessageInTopic(params.id, params.message);
+    const data = await topicApi.addMessageInTopic(
+      params.id,
+      params.message,
+      params.author
+    );
     return data;
   }
 );

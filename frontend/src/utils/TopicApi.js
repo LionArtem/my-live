@@ -26,12 +26,13 @@ class TopicApi {
     }).then(this._checkResponse);
   }
 
-  addMessageInTopic(id,message) {
+  addMessageInTopic(id, message, author) {
     return fetch(`${this.baseUrl}/${id}/message`, {
       method: 'PUT',
       headers: this.headers,
       body: JSON.stringify({
         message,
+        author,
       }),
     }).then(this._checkResponse);
   }

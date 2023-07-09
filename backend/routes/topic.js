@@ -38,6 +38,7 @@ topicRouter.put('/:topicId/message', celebrate({
   body: Joi.object()
     .keys({
       message: Joi.string().required(),
+      author: Joi.string().required(),
     }),
 }), addInTopicMessage);
 

@@ -13,7 +13,10 @@ export default function ForumTopics() {
     e.preventDefault();
     topicApi
       .addNewTopic(titleRef.current.value)
-      .then(dispatch(fetchTopicAll()))
+      .then((res) => {
+        console.log(res);
+        dispatch(fetchTopicAll());
+      })
       .catch((err) => console.log(err));
   };
 

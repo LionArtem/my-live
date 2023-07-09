@@ -9,7 +9,13 @@ const cardSchema = new mongoose.Schema({
     maxlength: 30,
   },
   owner: { type: mongoose.Schema.Types.ObjectId, ref: 'user', required: true },
-  message: [{ type: String }],
+  // message: [{ type: String }],
+  messages: [
+    {
+      message: { type: String },
+      author: { type: String },
+    },
+  ],
   createdAt: {
     type: Date,
     default: Date.now,
