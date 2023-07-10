@@ -20,7 +20,7 @@ export default function Topic() {
         <h1>{authorTopic.title}</h1>
         <h2>{authorTopic.name}</h2>
       </div>
-      {/* <MessageUser /> */}
+      <MessageUser />
       <FormMessage />
     </div>
   );

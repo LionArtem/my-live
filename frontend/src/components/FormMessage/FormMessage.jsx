@@ -11,7 +11,6 @@ export default function Form() {
   const textAreaRef = React.useRef();
   const formRef = React.useRef();
   const { messageValue, authorTopic } = useSelector(selectTopics);
-  console.log(authorTopic);
 
   const dispatch = useDispatch();
 

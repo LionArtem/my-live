@@ -14,7 +14,6 @@ export default function ForumTopics() {
     topicApi
       .addNewTopic(titleRef.current.value)
       .then((res) => {
-        console.log(res);
         dispatch(fetchTopicAll());
       })
       .catch((err) => console.log(err));
