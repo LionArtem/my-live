@@ -1,9 +1,8 @@
 import { configureStore } from '@reduxjs/toolkit';
-import message from './slices/messageSlice';
-import pagination from './slices/paginationSlice';
 import topics from './slices/topicSlice';
 import auth from './slices/authSlice';
+import user from './slices/userSlice';
 
 export const store = configureStore({
-  reducer: { message, pagination, topics, auth },
+  reducer: { topics, auth, user },
 });

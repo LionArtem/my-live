@@ -4,24 +4,6 @@ class Auth {
     this.headers = headers;
   }
 
-  // getPaginationPage(currentPage) {
-  //   return fetch(`${this.baseUrl}?page=${currentPage}&limit=10`, {
-  //     headers: this.headers,
-  //   }).then(this._checkResponse);
-  // }
-
-  // getAllMessage() {
-  //   return fetch(this.baseUrl, {
-  //     headers: this.headers,
-  //   }).then(this._checkResponse);
-  // }
-
-  // deletePost(id) {
-  //   return fetch(`${this.baseUrl}/${id}`, {
-  //     method: 'DELETE',
-  //   }).then(this._checkResponse);
-  // }
-
   addUser(email, password,) {
     return fetch(`${this.baseUrl}/signup`, {
       method: 'POST',

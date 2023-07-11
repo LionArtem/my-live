@@ -60,7 +60,6 @@ const topicsSlice = createSlice({
       console.log('загрузка topic');
     });
     builder.addCase(fetchGetTopic.fulfilled, (state, { payload }) => {
-      console.log(payload);
       state.authorTopic = { title: payload.title, name: payload.owner.name };
       state.topicMessage = payload.messages;
     });
