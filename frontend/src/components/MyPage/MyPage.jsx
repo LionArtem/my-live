@@ -12,8 +12,6 @@ export default function MyPage() {
     dispatch(fetchGetUser());
   }, []);
 
-  console.log(user.avatar);
-
   return (
     <div className={Style.root}>
       <div className={Style.useConteiner}>

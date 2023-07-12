@@ -1,21 +1,93 @@
 import React from 'react';
 
 import Style from './FormEditUser.module.scss';
+import { useDispatch, useSelector } from 'react-redux';
+
+import {
+  setValue,
+  selectformValidetion,
+  defaultValues,
+} from '../../redax/slices/formValidetionSlice';
+
+import { fetchGetUser } from '../../redax/slices/userSlice';
 
 export default function FormEditUser() {
+  const dispatch = useDispatch();
+
+  const { value } = useSelector(selectformValidetion);
+  console.log(value);
+
+  React.useEffect(() => {
+    dispatch(fetchGetUser()).then((res) => {
+      if (res.meta.requestStatus === 'fulfilled') {
+        dispatch(
+          defaultValues({
+            name: res.payload.name,
+            email: res.payload.email,
+            age: res.payload.age,
+            avatar: res.payload.avatar,
+            sity: res.payload.sity,
+          })
+        );
+      }
+    });
+  }, []);
+
+  const hendelSumit = (evt) => {
+    evt.preventDefault();
+  };
+
+  const changeValue = (evt) => {
+    dispatch(
+      setValue({
+        value: evt.target.value,
+        name: evt.target.name,
+        errors: evt.target.validationMessage,
+        valid: evt.target.closest('form').checkValidity(),
+      })
+    );
+  };
+
   return (
-    <form className={Style.form}>
+    <form onSubmit={(evt) => hendelSumit(evt)} className={Style.form}>
       <label>link foto</label>
-      <input placeholder="ввидите ссылку на фотографию"></input>
+      <input
+        value={value.avatar ? value.avatar : ''}
+        name="avatar"
+        onChange={(evt) => changeValue(evt)}
+        placeholder="ввидите ссылку на фотографию"
+      ></input>
       <label>name</label>
-      <input placeholder="ввидите name"></input>
+      <input
+        value={value.name ? value.name : ''}
+        onChange={(evt) => changeValue(evt)}
+        name="name"
+        placeholder="ввидите name"
+      ></input>
       <label>age</label>
-      <input placeholder="ввидите your age"></input>
+      <input
+        value={value.age ? value.age : ''}
+        onChange={(evt) => changeValue(evt)}
+        name="age"
+        type="number"
+        placeholder="ввидите your age"
+      ></input>
       <label>sity</label>
-      <input placeholder="ввидите your sity"></input>
+      <input
+        value={value.sity ? value.sity : ''}
+        onChange={(evt) => changeValue(evt)}
+        name="sity"
+        placeholder="ввидите your sity"
+      ></input>
       <label>sity</label>
-      <input placeholder="ввидите your email"></input>
-      <button>edit</button>
+      <input
+        value={value.email ? value.email : ''}
+        onChange={(evt) => changeValue(evt)}
+        name="email"
+        type="email"
+        placeholder="ввидите your email"
+      ></input>
+      <button type="submit">edit</button>
     </form>
   );
 }

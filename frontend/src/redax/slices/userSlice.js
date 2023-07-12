@@ -23,7 +23,7 @@ const userSlice = createSlice({
       console.log('запрос на получение пользователя');
     });
     builder.addCase(fetchGetUser.fulfilled, (state, { payload }) => {
-      console.log(payload);
+      //console.log(payload);
       state.user = payload;
     });
     builder.addCase(fetchGetUser.rejected, (state) => {
