@@ -44,8 +44,8 @@ const userSlice = createSlice({
       console.log('запрос на редактирования пользователя');
     });
     builder.addCase(fetchPatchUser.fulfilled, (state, { payload }) => {
-      console.log(payload);
-      //state.user = payload;
+      //console.log(payload);
+      state.user = payload;
     });
     builder.addCase(fetchPatchUser.rejected, (state) => {
       console.log('ошибка запроса на редактирование пользователя');

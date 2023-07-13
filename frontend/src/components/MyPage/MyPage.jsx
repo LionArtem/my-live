@@ -23,6 +23,9 @@ export default function MyPage() {
         <Link to="/edit-user">
           <p>Edit profile</p>
         </Link>
+        <Link to="/">
+          <p>Назад</p>
+        </Link>
       </div>
     </div>
   );
