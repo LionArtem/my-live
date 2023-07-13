@@ -10,6 +10,16 @@ export const fetchGetUser = createAsyncThunk(
   }
 );
 
+export const fetchPatchUser = createAsyncThunk(
+  'page/fetchPatchUser',
+  async (params, thunkAPI) => {
+    const { age, avatar, email, name, sity } =
+      thunkAPI.getState().formValidetion.value;
+    const data = await usercApi.patchUserMe(age, avatar, email, name, sity);
+    return data;
+  }
+);
+
 const initialState = {
   user: {},
 };
@@ -28,6 +38,17 @@ const userSlice = createSlice({
     });
     builder.addCase(fetchGetUser.rejected, (state) => {
       console.log('ошибка запроса на получение пользователя');
+    });
+
+    builder.addCase(fetchPatchUser.pending, (state) => {
+      console.log('запрос на редактирования пользователя');
+    });
+    builder.addCase(fetchPatchUser.fulfilled, (state, { payload }) => {
+      console.log(payload);
+      //state.user = payload;
+    });
+    builder.addCase(fetchPatchUser.rejected, (state) => {
+      console.log('ошибка запроса на редактирование пользователя');
     });
   },
 });

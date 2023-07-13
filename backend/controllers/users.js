@@ -115,34 +115,14 @@ const getUsersId = (req, res, next) => {
 
 const patchUsersInfo = (req, res, next) => {
   const id = req.user._id;
-  const { name, about } = req.body;
+  const {
+    age, avatar, email, name, sity,
+  } = req.body;
   User.findByIdAndUpdate(
     id,
-    { name, about },
     {
-      new: true, // обработчик then получит на вход обновлённую запись
-      runValidators: true,
+      age, avatar, email, name, sity,
     },
-  )
-    .then((user) => {
-      res.send(user);
-    })
-    .catch((err) => {
-      if (err.name === 'ValidationError') {
-        const erros = new IncorrectErr('Некорректный данные');
-        next(erros);
-      } else {
-        next(err);
-      }
-    });
-};
-
-const patchUsersAvatar = (req, res, next) => {
-  const id = req.user._id;
-  const { avatar } = req.body;
-  User.findByIdAndUpdate(
-    id,
-    { avatar },
     {
       new: true, // обработчик then получит на вход обновлённую запись
       runValidators: true,
@@ -166,7 +146,6 @@ module.exports = {
   getUsers,
   getUsersMe,
   patchUsersInfo,
-  patchUsersAvatar,
   login,
   getUsersId,
 };

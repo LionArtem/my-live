@@ -9,13 +9,12 @@ import {
   defaultValues,
 } from '../../redax/slices/formValidetionSlice';
 
-import { fetchGetUser } from '../../redax/slices/userSlice';
+import { fetchGetUser, fetchPatchUser } from '../../redax/slices/userSlice';
 
 export default function FormEditUser() {
   const dispatch = useDispatch();
 
   const { value } = useSelector(selectformValidetion);
-  console.log(value);
 
   React.useEffect(() => {
     dispatch(fetchGetUser()).then((res) => {
@@ -35,6 +34,7 @@ export default function FormEditUser() {
 
   const hendelSumit = (evt) => {
     evt.preventDefault();
+    dispatch(fetchPatchUser());
   };
 
   const changeValue = (evt) => {
@@ -79,7 +79,7 @@ export default function FormEditUser() {
         name="sity"
         placeholder="ввидите your sity"
       ></input>
-      <label>sity</label>
+      <label>email</label>
       <input
         value={value.email ? value.email : ''}
         onChange={(evt) => changeValue(evt)}
