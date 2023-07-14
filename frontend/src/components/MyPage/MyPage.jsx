@@ -17,7 +17,7 @@ export default function MyPage() {
       <div className={Style.useConteiner}>
         <img className={Style.foto} src={user.avatar} alt="аватарка" />
         <h3>{user.name}</h3>
-        <p>{user.age}</p>
+        <p>{`(${user.gender})${user.age}`}</p>
         <p>{user.sity}</p>
         <p>{user.email}</p>
         <Link to="/edit-user">

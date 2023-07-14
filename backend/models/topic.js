@@ -13,6 +13,7 @@ const cardSchema = new mongoose.Schema({
   messages: [
     {
       message: { type: String, minlength: 1, maxlength: 300 },
+      gender: { type: String, minlength: 1, maxlength: 1 },
       name: { type: String, minlength: 2, maxlength: 30 },
       sity: { type: String, minlength: 2, maxlength: 30 },
       avatar: {

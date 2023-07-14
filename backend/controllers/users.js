@@ -12,17 +12,11 @@ const NotauthorizationError = require('../errors/authorization-err');
 
 const createUsers = (req, res, next) => {
   const {
-    name,
-    about,
-    avatar,
     email,
     password,
   } = req.body;// получим из объекта запроса имя и описание пользователя
   bcrypt.hash(password, 10)
     .then((hash) => User.create({
-      name,
-      about,
-      avatar,
       email,
       password: hash,
     }).then((newUser) => {
@@ -116,12 +110,12 @@ const getUsersId = (req, res, next) => {
 const patchUsersInfo = (req, res, next) => {
   const id = req.user._id;
   const {
-    age, avatar, email, name, sity,
+    age, avatar, email, name, sity, gender,
   } = req.body;
   User.findByIdAndUpdate(
     id,
     {
-      age, avatar, email, name, sity,
+      age, avatar, email, name, sity, gender,
     },
     {
       new: true, // обработчик then получит на вход обновлённую запись

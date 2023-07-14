@@ -22,6 +22,7 @@ const formValidetionSlice = createSlice({
         age: action.payload.age,
         avatar: action.payload.avatar,
         sity: action.payload.sity,
+        gender: action.payload.gender,
       };
     },
     setValue(state, action) {

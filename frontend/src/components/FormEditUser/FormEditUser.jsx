@@ -75,6 +75,13 @@ export default function FormEditUser() {
           type="number"
           placeholder="ввидите your age"
         ></input>
+        <label>gender</label>
+        <input
+          value={value.gender ? value.gender : ''}
+          onChange={(evt) => changeValue(evt)}
+          name="gender"
+          placeholder="ввидите your gender"
+        ></input>
         <label>sity</label>
         <input
           value={value.sity ? value.sity : ''}

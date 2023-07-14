@@ -36,6 +36,7 @@ topicRouter.put('/:topicId/message', celebrate({
   body: Joi.object()
     .keys({
       message: Joi.string().required(),
+      gender: Joi.string().min(1).max(1),
       name: Joi.string().required(),
       sity: Joi.string().required(),
       avatar: Joi.string().pattern(regularAvatar),

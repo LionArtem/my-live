@@ -9,6 +9,12 @@ const userSchema = new mongoose.Schema({
     minlength: 2,
     maxlength: 30,
   },
+  gender: {
+    type: String,
+    minlength: 1,
+    maxlength: 1,
+    default: 'ж',
+  },
   sity: {
     type: String,
     default: 'Sity',
