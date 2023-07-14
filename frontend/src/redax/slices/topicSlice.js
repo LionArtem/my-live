@@ -21,11 +21,7 @@ export const fetchGetTopic = createAsyncThunk(
 export const fetchAddMessageInTopic = createAsyncThunk(
   'page/fetchAddMessageInTopic',
   async (params, thunkAPI) => {
-    const data = await topicApi.addMessageInTopic(
-      params.id,
-      params.message,
-      params.author
-    );
+    const data = await topicApi.addMessageInTopic(params);
     return data;
   }
 );
@@ -33,6 +29,7 @@ export const fetchAddMessageInTopic = createAsyncThunk(
 const initialState = {
   messageValue: '',
   authorTopic: {},
+  titleTopic: '',
   topicsAll: [],
   topicMessage: [],
 };
@@ -60,7 +57,8 @@ const topicsSlice = createSlice({
       console.log('загрузка topic');
     });
     builder.addCase(fetchGetTopic.fulfilled, (state, { payload }) => {
-      state.authorTopic = { title: payload.title, name: payload.owner.name };
+      state.titleTopic = payload.title;
+      state.authorTopic = payload.owner;
       state.topicMessage = payload.messages;
     });
     builder.addCase(fetchGetTopic.rejected, (state) => {
@@ -71,7 +69,6 @@ const topicsSlice = createSlice({
       console.log('загрузка message');
     });
     builder.addCase(fetchAddMessageInTopic.fulfilled, (state, { payload }) => {
-      console.log(payload);
       state.topicMessage = payload.messages;
     });
     builder.addCase(fetchAddMessageInTopic.rejected, (state) => {

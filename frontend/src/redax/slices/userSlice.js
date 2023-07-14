@@ -35,6 +35,7 @@ const userSlice = createSlice({
     builder.addCase(fetchGetUser.fulfilled, (state, { payload }) => {
       //console.log(payload);
       state.user = payload;
+      localStorage.setItem('user', JSON.stringify(payload));
     });
     builder.addCase(fetchGetUser.rejected, (state) => {
       console.log('ошибка запроса на получение пользователя');
@@ -46,6 +47,7 @@ const userSlice = createSlice({
     builder.addCase(fetchPatchUser.fulfilled, (state, { payload }) => {
       //console.log(payload);
       state.user = payload;
+      localStorage.setItem('user', JSON.stringify(payload));
     });
     builder.addCase(fetchPatchUser.rejected, (state) => {
       console.log('ошибка запроса на редактирование пользователя');

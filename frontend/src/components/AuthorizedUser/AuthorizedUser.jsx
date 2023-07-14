@@ -19,7 +19,7 @@ export default function AuthorizedUser() {
         className={Style.buttonOpen}
         onClick={() => {
           console.log('удалить токен');
-          localStorage.removeItem('token');
+          localStorage.clear();
           dispatch(setAuth());
         }}
       >

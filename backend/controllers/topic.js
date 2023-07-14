@@ -48,11 +48,27 @@ const getTopicId = (req, res, next) => {
 
 const addInTopicMessage = (req, res, next) => {
   const { topicId } = req.params;
-  const { message, author } = req.body;
+  const {
+    message,
+    sity,
+    avatar,
+    age,
+    name,
+  } = req.body;
 
   Topic.findByIdAndUpdate(
     topicId,
-    { $push: { messages: { message, author } } },
+    {
+      $push: {
+        messages: {
+          message,
+          sity,
+          avatar,
+          age,
+          name,
+        },
+      },
+    },
     { new: true },
   )
     .then((resTopic) => {

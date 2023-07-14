@@ -13,13 +13,9 @@ export default function MessageUser() {
         ? topicMessage.map((obj) => (
             <div key={obj._id} className={Style.root}>
               <div className={Style.useConteiner}>
-                <img
-                  className={Style.foto}
-                  src="https://images.unsplash.com/photo-1674156395389-2574986a9c50?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHx0b3BpYy1mZWVkfDI3fFM0TUtMQXNCQjc0fHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
-                  alt="аватарка"
-                />
-                <h3>{`${obj.author} (ж.30)`}</h3>
-                <p>Sity</p>
+                <img className={Style.foto} src={obj.avatar} alt="аватарка" />
+                <h3>{`${obj.name} (ж.${obj.age})`}</h3>
+                <p>{obj.sity}</p>
                 <span>2023-02-24 15.00</span>
               </div>
               <p className={Style.massage}>{obj.message}</p>

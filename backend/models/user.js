@@ -18,6 +18,8 @@ const userSchema = new mongoose.Schema({
   age: {
     type: Number,
     default: 18,
+    min: [18],
+    max: [80],
   },
   avatar: {
     type: String,

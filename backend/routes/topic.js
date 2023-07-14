@@ -1,5 +1,6 @@
 const topicRouter = require('express').Router();
 const { celebrate, Joi } = require('celebrate');
+const { regularAvatar } = require('../utils/constants');
 
 const {
   createTopic,
@@ -35,7 +36,10 @@ topicRouter.put('/:topicId/message', celebrate({
   body: Joi.object()
     .keys({
       message: Joi.string().required(),
-      author: Joi.string().required(),
+      name: Joi.string().required(),
+      sity: Joi.string().required(),
+      avatar: Joi.string().pattern(regularAvatar),
+      age: Joi.number().min(18).max(80),
     }),
 }), addInTopicMessage);
 

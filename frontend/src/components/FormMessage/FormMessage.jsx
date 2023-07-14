@@ -10,7 +10,7 @@ import {
 export default function Form() {
   const textAreaRef = React.useRef();
   const formRef = React.useRef();
-  const { messageValue, authorTopic } = useSelector(selectTopics);
+  const { messageValue } = useSelector(selectTopics);
 
   const dispatch = useDispatch();
 
@@ -19,8 +19,8 @@ export default function Form() {
     dispatch(
       fetchAddMessageInTopic({
         id: localStorage.getItem('authorId'),
+        user :JSON.parse(localStorage.getItem('user')),
         message: messageValue,
-        author: authorTopic.name,
       })
     );
   };

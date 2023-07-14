@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-// const { regularLink } = require('../utils/constants');
+const { regularAvatar } = require('../utils/constants');
 
 const cardSchema = new mongoose.Schema({
   title: {
@@ -9,11 +9,23 @@ const cardSchema = new mongoose.Schema({
     maxlength: 30,
   },
   owner: { type: mongoose.Schema.Types.ObjectId, ref: 'user', required: true },
-  // message: [{ type: String }],
+
   messages: [
     {
-      message: { type: String },
-      author: { type: String },
+      message: { type: String, minlength: 1, maxlength: 300 },
+      name: { type: String, minlength: 2, maxlength: 30 },
+      sity: { type: String, minlength: 2, maxlength: 30 },
+      avatar: {
+        type: String,
+        validate: {
+          validator: (v) => regularAvatar.test(v),
+        },
+      },
+      age: {
+        type: Number,
+        min: [18],
+        max: [80],
+      },
     },
   ],
   createdAt: {
