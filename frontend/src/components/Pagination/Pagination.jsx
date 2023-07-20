@@ -1,13 +1,16 @@
 import React from 'react';
 import Style from './Pagination.module.scss';
+import { useSelector } from 'react-redux';
+import { selectTopics } from '../../redax/slices/topicSlice';
 
 export default function Pagination() {
+  const { numberPages } = useSelector(selectTopics);
   return (
     <nav>
       <ul className={Style.list}>
-        <li>1</li>
-        <li>2</li>
-        <li>3</li>
+        {numberPages.map((res, i) => (
+          <li key={i}>{i + 1}</li>
+        ))}
       </ul>
     </nav>
   );
