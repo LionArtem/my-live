@@ -91,11 +91,15 @@ const userSlice = createSlice({
     });
     builder.addCase(fetchGetUserFindId.fulfilled, (state, { payload }) => {
       state.allMessagesAndAuthors = payload.messages.map((messages) => {
+        console.log(payload.data);
         return {
           messages,
-          user: payload.data.find(
-            (userInfo) => userInfo._id === messages.userId
-          ),
+          user: payload.data.find((userInfo) => {
+            if (userInfo) {
+              return userInfo._id === messages.userId;
+            }
+            return null;
+          }),
         };
       });
     });

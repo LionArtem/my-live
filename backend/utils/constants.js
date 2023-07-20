@@ -4,7 +4,7 @@ const ERROR__DEFAULT = 500;
 const ERROR__REPEATS_EMAIL = 409;
 const ERROR__AUTHORIZATION = 401;
 const ERROR__NO_ACCESS = 403;
-const regularAvatar = /^((http|https:\/\/.)[a-zA-Z0-9-._~:/?#[\]@!$&'()*+,;=]*\.[a-zA-Z0-9-._~:/?#[\]@!$&'()*+,;=]*)$/;
+const regularAvatar = /^(ftp|http|https):\/\/[^ "]+$/;
 const regularLink = /^(ftp|http|https):\/\/[^ "]+$/;
 const regularEmail = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/;
 

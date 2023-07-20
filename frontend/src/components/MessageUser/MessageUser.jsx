@@ -13,7 +13,7 @@ export default function MessageUser() {
         ? allMessagesAndAuthors.map((obj) => (
             <div key={obj.messages._id} className={Style.root}>
               <div className={Style.useConteiner}>
-                {
+                {obj.user ? (
                   <>
                     <img
                       className={Style.foto}
@@ -24,7 +24,18 @@ export default function MessageUser() {
                     <p>{obj.user.sity}</p>
                     <span>2023-02-24 15.00</span>
                   </>
-                }
+                ) : (
+                  <>
+                    <img
+                      className={Style.foto}
+                      src="https://www.murrayglass.com/wp-content/uploads/2020/10/avatar-scaled.jpeg"
+                      alt="аватарка"
+                    />
+                    <h3>Пользователь удалён</h3>
+                    <p></p>
+                    <span>2023-02-24 15.00</span>
+                  </>
+                )}
               </div>
               <p className={Style.massage}>{obj.messages.message}</p>
             </div>

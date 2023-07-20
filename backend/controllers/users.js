@@ -150,30 +150,6 @@ const getUsersFaindId = (req, res, next) => {
     .catch(next);
 };
 
-// const getUsersFaindId = (req, res, next) => {
-//   const {
-//     arrIdUser,
-//   } = req.body;
-//   arrIdUser.forEach((id)=> {
-//     User.findById(id)
-//       .then((user) => {
-//         if (user) {
-//           res.send(user);
-//           return;
-//         }
-//         throw new NotFoundError('пользователь не найден');
-//       })
-//       .catch((err) => {
-//         if (err.name === 'CastError') {
-//           const error = new IncorrectErr('Некорректный id');
-//           next(error);
-//         } else {
-//           next(err);
-//         }
-//       });
-//   }),
-// };
-
 module.exports = {
   createUsers,
   getUsers,
@@ -182,5 +158,4 @@ module.exports = {
   login,
   getUsersId,
   getUsersFaindId,
-  // getUsersFaindId,
 };
