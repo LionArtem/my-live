@@ -14,20 +14,6 @@ const cardSchema = new mongoose.Schema({
     {
       message: { type: String, minlength: 1, maxlength: 300 },
       userId: { type: String, minlength: 24, maxlength: 24 },
-      // gender: { type: String, minlength: 1, maxlength: 1 },
-      // name: { type: String, minlength: 2, maxlength: 30 },
-      // sity: { type: String, minlength: 2, maxlength: 30 },
-      // avatar: {
-      //   type: String,
-      //   validate: {
-      //     validator: (v) => regularAvatar.test(v),
-      //   },
-      // },
-      // age: {
-      //   type: Number,
-      //   min: [18],
-      //   max: [80],
-      // },
     },
   ],
   createdAt: {

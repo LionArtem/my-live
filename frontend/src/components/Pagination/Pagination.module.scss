@@ -1,0 +1,11 @@
+.list {
+  all: unset;
+  display: flex;
+  li {
+    all: unset;
+    margin-right: 10px;
+    border: 1px solid black;
+    min-width: 20px;
+    text-align: center;
+  }
+}

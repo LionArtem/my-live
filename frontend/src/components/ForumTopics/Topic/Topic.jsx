@@ -10,6 +10,7 @@ import {
 
 import FormMessage from '../../FormMessage/FormMessage';
 import MessageUser from '../../MessageUser/MessageUser';
+import Pagination from '../../Pagination/Pagination';
 
 export default function Topic() {
   const dispatch = useDispatch();
@@ -54,6 +55,7 @@ export default function Topic() {
       </div>
       <MessageUser />
       <FormMessage getMessages={getMessages} />
+      <Pagination />
     </div>
   );
 }

@@ -51,11 +51,6 @@ const addInTopicMessage = (req, res, next) => {
   const {
     message,
     userId,
-    // sity,
-    // avatar,
-    // age,
-    // name,
-    // gender,
   } = req.body;
 
   Topic.findByIdAndUpdate(
@@ -65,11 +60,6 @@ const addInTopicMessage = (req, res, next) => {
         messages: {
           message,
           userId,
-          // gender,
-          // sity,
-          // avatar,
-          // age,
-          // name,
         },
       },
     },
