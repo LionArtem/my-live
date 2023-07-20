@@ -27,18 +27,14 @@ class TopicApi {
   }
 
   addMessageInTopic(params) {
-    const { id, message } = params;
-    const { sity, avatar, age, name, gender } = params.user;
+    const { id, message, userId } = params;
+    // const { sity, avatar, age, name, gender } = params.user;
     return fetch(`${this.baseUrl}/${id}/message`, {
       method: 'PUT',
       headers: this.headers,
       body: JSON.stringify({
         message,
-        sity,
-        avatar,
-        age,
-        name,
-        gender
+        userId,
       }),
     }).then(this._checkResponse);
   }

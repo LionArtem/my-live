@@ -135,6 +135,45 @@ const patchUsersInfo = (req, res, next) => {
     });
 };
 
+const getUsersFaindId = (req, res, next) => {
+  const { id } = req.params;
+  const { arrIdUser } = JSON.parse(id);
+
+  User.find()
+    .then((users) => {
+      const arrUser = [];
+      arrIdUser.forEach((idUser) => {
+        arrUser.push(users.find((user) => user._id.toString() === idUser));
+      });
+      res.send(arrUser);
+    })
+    .catch(next);
+};
+
+// const getUsersFaindId = (req, res, next) => {
+//   const {
+//     arrIdUser,
+//   } = req.body;
+//   arrIdUser.forEach((id)=> {
+//     User.findById(id)
+//       .then((user) => {
+//         if (user) {
+//           res.send(user);
+//           return;
+//         }
+//         throw new NotFoundError('пользователь не найден');
+//       })
+//       .catch((err) => {
+//         if (err.name === 'CastError') {
+//           const error = new IncorrectErr('Некорректный id');
+//           next(error);
+//         } else {
+//           next(err);
+//         }
+//       });
+//   }),
+// };
+
 module.exports = {
   createUsers,
   getUsers,
@@ -142,4 +181,6 @@ module.exports = {
   patchUsersInfo,
   login,
   getUsersId,
+  getUsersFaindId,
+  // getUsersFaindId,
 };

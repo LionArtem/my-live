@@ -11,6 +11,20 @@ class UserApi {
     }).then(this._checkResponse);
   }
 
+  getUserId(id) {
+    return fetch(`${this.baseUrl}/${id}`, {
+      method: 'GET',
+      headers: this.headers,
+    }).then(this._checkResponse);
+  }
+
+  getUserFindId(arrIdUser) {
+    return fetch(`${this.baseUrl}/faindIdUsers/${JSON.stringify({arrIdUser})}`, {
+      method: 'GET',
+      headers: this.headers,
+    }).then(this._checkResponse);
+  }
+
   patchUserMe(age, avatar, email, name, sity) {
     return fetch(`${this.baseUrl}/me`, {
       method: 'PATCH',
@@ -27,7 +41,7 @@ class UserApi {
   };
 }
 
-const usercApi = new UserApi({
+const usersApi = new UserApi({
   baseUrl: 'http://localhost:3000/users',
   headers: {
     authorization: `Bearer ${localStorage.getItem('token')}`,
@@ -35,4 +49,4 @@ const usercApi = new UserApi({
   },
 });
 
-export { usercApi };
+export { usersApi };

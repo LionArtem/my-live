@@ -14,7 +14,7 @@ export default function TopicList() {
           <Link to={'/topic'} key={obj._id}>
             <h1
               onClick={() => {
-                localStorage.setItem('authorId', obj._id);
+                localStorage.setItem('topicId', obj._id);
               }}
             >
               {obj.title}

@@ -7,7 +7,7 @@ import {
   fetchAddMessageInTopic,
 } from '../../redax/slices/topicSlice';
 
-export default function Form() {
+export default function Form({ getMessages }) {
   const textAreaRef = React.useRef();
   const formRef = React.useRef();
   const { messageValue } = useSelector(selectTopics);
@@ -18,11 +18,15 @@ export default function Form() {
     e.preventDefault();
     dispatch(
       fetchAddMessageInTopic({
-        id: localStorage.getItem('authorId'),
-        user :JSON.parse(localStorage.getItem('user')),
+        id: localStorage.getItem('topicId'),
+        userId: localStorage.getItem('userId'),
         message: messageValue,
       })
-    );
+    ).then((res) => {
+      if (res.meta.requestStatus === 'fulfilled') {
+        getMessages();
+      }
+    });
   };
 
   return (

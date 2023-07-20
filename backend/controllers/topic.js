@@ -24,8 +24,8 @@ const createTopic = (req, res, next) => {
 
 const getTopics = (req, res, next) => {
   Topic.find().populate('owner')
-    .then((card) => {
-      res.send(card);
+    .then((topic) => {
+      res.send(topic);
     })
     .catch((err) => {
       next(err);
@@ -50,11 +50,12 @@ const addInTopicMessage = (req, res, next) => {
   const { topicId } = req.params;
   const {
     message,
-    sity,
-    avatar,
-    age,
-    name,
-    gender,
+    userId,
+    // sity,
+    // avatar,
+    // age,
+    // name,
+    // gender,
   } = req.body;
 
   Topic.findByIdAndUpdate(
@@ -63,11 +64,12 @@ const addInTopicMessage = (req, res, next) => {
       $push: {
         messages: {
           message,
-          gender,
-          sity,
-          avatar,
-          age,
-          name,
+          userId,
+          // gender,
+          // sity,
+          // avatar,
+          // age,
+          // name,
         },
       },
     },

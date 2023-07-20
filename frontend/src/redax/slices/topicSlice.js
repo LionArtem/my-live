@@ -31,7 +31,6 @@ const initialState = {
   authorTopic: {},
   titleTopic: '',
   topicsAll: [],
-  topicMessage: [],
 };
 
 const topicsSlice = createSlice({
@@ -59,7 +58,6 @@ const topicsSlice = createSlice({
     builder.addCase(fetchGetTopic.fulfilled, (state, { payload }) => {
       state.titleTopic = payload.title;
       state.authorTopic = payload.owner;
-      state.topicMessage = payload.messages;
     });
     builder.addCase(fetchGetTopic.rejected, (state) => {
       console.log('ошибка загрузки message');
@@ -69,9 +67,9 @@ const topicsSlice = createSlice({
       console.log('загрузка message');
     });
     builder.addCase(fetchAddMessageInTopic.fulfilled, (state, { payload }) => {
-      state.topicMessage = payload.messages;
     });
-    builder.addCase(fetchAddMessageInTopic.rejected, (state) => {
+    builder.addCase(fetchAddMessageInTopic.rejected, (state,action) => {
+      console.log(action);
       console.log('ошибка загрузки message');
     });
   },
