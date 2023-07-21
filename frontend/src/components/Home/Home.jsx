@@ -4,9 +4,9 @@ import { useSelector } from 'react-redux';
 import { selectAuth } from '../../redax/slices/authSlice';
 
 import Header from '../Header/Header';
-import { Link } from 'react-router-dom';
 import Authorization from '../Authorization/Authorization';
 import AuthorizedUser from '../AuthorizedUser/AuthorizedUser';
+import MenuApp from './MenuApp/MenuApp';
 
 export default function Home() {
   const { auth } = useSelector(selectAuth);
@@ -19,13 +19,7 @@ export default function Home() {
       <main>
         <section>{auth ? <AuthorizedUser /> : <Authorization />}</section>
         <section>
-          <ul>
-            <li>
-              <Link to="/topics">
-                <h2>Форум</h2>
-              </Link>
-            </li>
-          </ul>
+          <MenuApp />
         </section>
       </main>
       <footer>

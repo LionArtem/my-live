@@ -1,8 +1,11 @@
+body {
+  background-color: #92c898;
+}
+
 .page {
   min-width: 320px;
   max-width: 1280px;
   margin: 0 auto;
-  background-color: #92c898;
   padding: 5px;
   font-family: 'Josefin Sans', Arial, Helvetica, sans-serif;
   display: grid;
@@ -10,7 +13,6 @@
   min-height: 100vh;
   box-sizing: border-box;
   main {
-    
     border-bottom: 1px solid white;
   }
 }
