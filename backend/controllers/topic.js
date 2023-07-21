@@ -82,9 +82,32 @@ const addInTopicMessage = (req, res, next) => {
     });
 };
 
+const getMessagePaginetion = (req, res, next) => {
+  const { topicId } = req.params;
+  const id = topicId.split('&')[0];
+  const page = topicId.split('&')[1];
+
+  Topic.findById(id).populate('owner')
+    .then((topic) => {
+      if (topic) {
+        res.send({
+          numberMessages: topic.messages.length,
+          user: topic.owner,
+          createdAt: topic.createdAt,
+          title: topic.title,
+          messages: topic.messages.slice(page * 10 - 10, page * 10),
+        });
+        return;
+      }
+      throw new NotFoundError('тема не найдена');
+    })
+    .catch(next);
+};
+
 module.exports = {
   createTopic,
   getTopics,
   getTopicId,
   addInTopicMessage,
+  getMessagePaginetion,
 };

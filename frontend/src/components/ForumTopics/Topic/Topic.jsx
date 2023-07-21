@@ -1,10 +1,12 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { selectTopics, fetchGetTopic } from '../../../redax/slices/topicSlice';
+import {
+  selectTopics,
+  fetchGetMessagePaginetion,
+} from '../../../redax/slices/topicSlice';
 import {
   fetchGetUser,
-  fetchGetUserId,
   fetchGetUserFindId,
 } from '../../../redax/slices/userSlice';
 
@@ -18,7 +20,7 @@ export default function Topic() {
 
   const collectNewArrMessage = (res) => {
     // собираю массив уникальных id users
-    const result = res.reduce((acc, obj) => {
+    const result = res.messages.reduce((acc, obj) => {
       if (acc.find((item) => item === obj.userId)) {
         return acc;
       }
@@ -27,19 +29,21 @@ export default function Topic() {
     return result;
   };
 
-  const getMessages = () => {
-    dispatch(fetchGetTopic({ id: localStorage.getItem('topicId') })).then(
-      (resMessage) => {
-        if (resMessage.meta.requestStatus === 'fulfilled') {
-          dispatch(
-            fetchGetUserFindId({
-              arrIdUser: collectNewArrMessage(resMessage.payload.messages),
-              messages: resMessage.payload.messages,
-            })
-          );
-        }
+  const getMessages = (
+    page = localStorage.getItem('page') ? localStorage.getItem('page') : 1
+  ) => {
+    dispatch(
+      fetchGetMessagePaginetion({ id: localStorage.getItem('topicId'), page })
+    ).then((resMessage) => {
+      if (resMessage.meta.requestStatus === 'fulfilled') {
+        dispatch(
+          fetchGetUserFindId({
+            arrIdUser: collectNewArrMessage(resMessage.payload),
+            messages: resMessage.payload,
+          })
+        );
       }
-    );
+    });
   };
 
   React.useEffect(() => {
@@ -55,7 +59,7 @@ export default function Topic() {
       </div>
       <MessageUser />
       <FormMessage getMessages={getMessages} />
-      <Pagination />
+      <Pagination getMessages={getMessages} />
     </div>
   );
 }

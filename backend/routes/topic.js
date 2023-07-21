@@ -7,6 +7,7 @@ const {
   getTopics,
   getTopicId,
   addInTopicMessage,
+  getMessagePaginetion,
 } = require('../controllers/topic');
 
 topicRouter.get('/', getTopics);
@@ -28,6 +29,16 @@ topicRouter.get('/:id', celebrate({
     id: Joi.string().hex().length(24).required(),
   }),
 }), getTopicId);
+
+topicRouter.get(
+  '/:topicId/message',
+  celebrate({
+    params: Joi.object().keys({
+      topicId: Joi.string().required(),
+    }),
+  }),
+  getMessagePaginetion,
+);
 
 topicRouter.put('/:topicId/message', celebrate({
   params: Joi.object().keys({

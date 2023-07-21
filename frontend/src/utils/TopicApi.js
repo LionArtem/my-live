@@ -28,7 +28,6 @@ class TopicApi {
 
   addMessageInTopic(params) {
     const { id, message, userId } = params;
-    // const { sity, avatar, age, name, gender } = params.user;
     return fetch(`${this.baseUrl}/${id}/message`, {
       method: 'PUT',
       headers: this.headers,
@@ -36,6 +35,14 @@ class TopicApi {
         message,
         userId,
       }),
+    }).then(this._checkResponse);
+  }
+
+  getMessagePaginetion(params) {
+    const { id, page } = params;
+    return fetch(`${this.baseUrl}/${id}&${page}/message`, {
+      method: 'GET',
+      headers: this.headers,
     }).then(this._checkResponse);
   }
 

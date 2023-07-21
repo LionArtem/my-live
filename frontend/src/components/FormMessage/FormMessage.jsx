@@ -7,10 +7,13 @@ import {
   fetchAddMessageInTopic,
 } from '../../redax/slices/topicSlice';
 
+import { selectUser } from '../../redax/slices/userSlice';
+
 export default function Form({ getMessages }) {
   const textAreaRef = React.useRef();
   const formRef = React.useRef();
   const { messageValue } = useSelector(selectTopics);
+  const { allMessagesAndAuthors } = useSelector(selectUser);
 
   const dispatch = useDispatch();
 
@@ -28,26 +31,32 @@ export default function Form({ getMessages }) {
       }
     });
   };
-
+ 
   return (
-    <form
-      onSubmit={(e) => handleSubmit(e)}
-      ref={formRef}
-      className={Style.form}
-    >
-      <textarea
-        placeholder="text"
-        ref={textAreaRef}
-        value={messageValue}
-        onChange={(e) => {
-          dispatch(setMessageValue(e.target.value));
-        }}
-        className={Style.input}
-        type="text"
-      ></textarea>
-      <button className={Style.button} type="submit">
-        Отправить
-      </button>
-    </form>
+    <>
+      {allMessagesAndAuthors.length >= 10 ? (
+        ''
+      ) : (
+        <form
+          onSubmit={(e) => handleSubmit(e)}
+          ref={formRef}
+          className={Style.form}
+        >
+          <textarea
+            placeholder="text"
+            ref={textAreaRef}
+            value={messageValue}
+            onChange={(e) => {
+              dispatch(setMessageValue(e.target.value));
+            }}
+            className={Style.input}
+            type="text"
+          ></textarea>
+          <button className={Style.button} type="submit">
+            Отправить
+          </button>
+        </form>
+      )}
+    </>
   );
 }

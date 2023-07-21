@@ -32,7 +32,7 @@ export const fetchGetUserFindId = createAsyncThunk(
   'page/fetchGetUserFindId',
   async (params, thunkAPI) => {
     const data = await usersApi.getUserFindId(params.arrIdUser);
-    return { data, messages: params.messages };
+    return { data, topic: params.messages };
   }
 );
 
@@ -90,7 +90,7 @@ const userSlice = createSlice({
       console.log('запрос на получение пользователя по массиву id');
     });
     builder.addCase(fetchGetUserFindId.fulfilled, (state, { payload }) => {
-      state.allMessagesAndAuthors = payload.messages.map((messages) => {
+      state.allMessagesAndAuthors = payload.topic.messages.map((messages) => {
         return {
           messages,
           user: payload.data.find((userInfo) => {

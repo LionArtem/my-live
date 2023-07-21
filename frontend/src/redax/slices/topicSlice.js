@@ -10,18 +10,26 @@ export const fetchTopicAll = createAsyncThunk(
   }
 );
 
-export const fetchGetTopic = createAsyncThunk(
-  'page/fetchGetTopic',
-  async (params, thunkAPI) => {
-    const data = await topicApi.getTopic(params.id);
-    return data;
-  }
-);
+// export const fetchGetTopic = createAsyncThunk(
+//   'page/fetchGetTopic',
+//   async (params, thunkAPI) => {
+//     const data = await topicApi.getTopic(params.id);
+//     return data;
+//   }
+// );
 
 export const fetchAddMessageInTopic = createAsyncThunk(
   'page/fetchAddMessageInTopic',
   async (params, thunkAPI) => {
     const data = await topicApi.addMessageInTopic(params);
+    return data;
+  }
+);
+
+export const fetchGetMessagePaginetion = createAsyncThunk(
+  'page/fetchGetMessagePaginetion',
+  async (params, thunkAPI) => {
+    const data = await topicApi.getMessagePaginetion(params);
     return data;
   }
 );
@@ -53,20 +61,19 @@ const topicsSlice = createSlice({
       console.log('ошибка загрузки все topics');
     });
 
-    builder.addCase(fetchGetTopic.pending, (state) => {
-      console.log('загрузка topic');
-    });
-    builder.addCase(fetchGetTopic.fulfilled, (state, { payload }) => {
-      state.titleTopic = payload.title;
-      state.authorTopic = payload.owner;
-      console.log(Math.ceil(payload.messages.length / 10));
-      state.numberPages = [
-        ...new Array(Math.ceil(payload.messages.length / 10)),
-      ];
-    });
-    builder.addCase(fetchGetTopic.rejected, (state) => {
-      console.log('ошибка загрузки message');
-    });
+    // builder.addCase(fetchGetTopic.pending, (state) => {
+    //   console.log('загрузка topic');
+    // });
+    // builder.addCase(fetchGetTopic.fulfilled, (state, { payload }) => {
+    //   state.titleTopic = payload.title;
+    //   state.authorTopic = payload.owner;
+    //   state.numberPages = [
+    //     ...new Array(Math.ceil(payload.messages.length / 10)),
+    //   ];
+    // });
+    // builder.addCase(fetchGetTopic.rejected, (state) => {
+    //   console.log('ошибка загрузки message');
+    // });
 
     builder.addCase(fetchAddMessageInTopic.pending, (state) => {
       console.log('загрузка message');
@@ -78,6 +85,24 @@ const topicsSlice = createSlice({
     builder.addCase(fetchAddMessageInTopic.rejected, (state, action) => {
       console.log(action);
       console.log('ошибка загрузки message');
+    });
+
+    builder.addCase(fetchGetMessagePaginetion.pending, (state) => {
+      console.log('загрузка paginetion message');
+    });
+    builder.addCase(
+      fetchGetMessagePaginetion.fulfilled,
+      (state, { payload }) => {
+        state.titleTopic = payload.title;
+        state.authorTopic = payload.user;
+        state.numberPages = [
+          ...new Array(Math.ceil(payload.numberMessages / 10)),
+        ];
+      }
+    );
+    builder.addCase(fetchGetMessagePaginetion.rejected, (state, action) => {
+      console.log(action);
+      console.log('ошибка загрузки paginetion message');
     });
   },
 });
