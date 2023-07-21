@@ -5,7 +5,6 @@ const { celebrate, Joi } = require('celebrate');
 const {
   createTopic,
   getTopics,
-  getTopicId,
   addInTopicMessage,
   getMessagePaginetion,
 } = require('../controllers/topic');
@@ -23,12 +22,6 @@ topicRouter.post(
   }),
   createTopic,
 );
-
-topicRouter.get('/:id', celebrate({
-  params: Joi.object().keys({
-    id: Joi.string().hex().length(24).required(),
-  }),
-}), getTopicId);
 
 topicRouter.get(
   '/:topicId/message',

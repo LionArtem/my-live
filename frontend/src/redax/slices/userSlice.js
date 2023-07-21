@@ -38,21 +38,24 @@ export const fetchGetUserFindId = createAsyncThunk(
 
 const initialState = {
   user: {},
-  authorMessage: [],
   allMessagesAndAuthors: [],
 };
 
 const userSlice = createSlice({
   name: 'user',
   initialState,
-  reducers: {},
+  reducers: {
+    killAllStateUser(state) {
+      state.user = {};
+      state.allMessagesAndAuthors = [];
+    },
+  },
   extraReducers: (builder) => {
     // запрос на получение текущего пользователя
     builder.addCase(fetchGetUser.pending, (state) => {
       console.log('запрос на получение пользователя');
     });
     builder.addCase(fetchGetUser.fulfilled, (state, { payload }) => {
-      //console.log(payload);
       state.user = payload;
       localStorage.setItem('userId', payload._id);
     });
@@ -65,7 +68,6 @@ const userSlice = createSlice({
       console.log('запрос на редактирования пользователя');
     });
     builder.addCase(fetchPatchUser.fulfilled, (state, { payload }) => {
-      //console.log(payload);
       state.user = payload;
       localStorage.setItem('userId', payload._id);
     });
@@ -77,10 +79,7 @@ const userSlice = createSlice({
     builder.addCase(fetchGetUserId.pending, (state) => {
       console.log('запрос на получение пользователя по id');
     });
-    builder.addCase(fetchGetUserId.fulfilled, (state, { payload }) => {
-      console.log(payload);
-      // state.authorMessage.push(payload)
-    });
+    builder.addCase(fetchGetUserId.fulfilled, (state, { payload }) => {});
     builder.addCase(fetchGetUserId.rejected, (state) => {
       console.log('ошибка запроса получение пользователя по id');
     });
@@ -111,5 +110,5 @@ const userSlice = createSlice({
 
 export const selectUser = (state) => state.user;
 
-export const {} = userSlice.actions;
+export const { killAllStateUser } = userSlice.actions;
 export default userSlice.reducer;

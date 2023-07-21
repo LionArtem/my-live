@@ -28,14 +28,16 @@ const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
+    killAllStateAuth(state) {
+      state.fopmReg = false;
+      state.fopmSign = false;
+      state.auth = '';
+    },
     setfopmReg(state) {
       state.fopmReg = !state.fopmReg;
     },
     setFormSign(state) {
       state.fopmSign = !state.fopmSign;
-    },
-    setAuth(state) {
-      state.auth = '';
     },
   },
   extraReducers: (builder) => {
@@ -64,5 +66,5 @@ const authSlice = createSlice({
 
 export const selectAuth = (state) => state.auth;
 
-export const { setfopmReg, setFormSign, setAuth } = authSlice.actions;
+export const { setfopmReg, setFormSign, killAllStateAuth } = authSlice.actions;
 export default authSlice.reducer;

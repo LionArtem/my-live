@@ -32,20 +32,6 @@ const getTopics = (req, res, next) => {
     });
 };
 
-const getTopicId = (req, res, next) => {
-  const { id } = req.params;
-
-  Topic.findById(id).populate('owner')
-    .then((topic) => {
-      if (topic) {
-        res.send(topic);
-        return;
-      }
-      throw new NotFoundError('тема не найдена');
-    })
-    .catch(next);
-};
-
 const addInTopicMessage = (req, res, next) => {
   const { topicId } = req.params;
   const {
@@ -107,7 +93,6 @@ const getMessagePaginetion = (req, res, next) => {
 module.exports = {
   createTopic,
   getTopics,
-  getTopicId,
   addInTopicMessage,
   getMessagePaginetion,
 };

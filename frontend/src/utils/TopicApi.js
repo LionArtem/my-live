@@ -19,13 +19,6 @@ class TopicApi {
     }).then(this._checkResponse);
   }
 
-  getTopic(id) {
-    return fetch(`${this.baseUrl}/${id}`, {
-      method: 'GET',
-      headers: this.headers,
-    }).then(this._checkResponse);
-  }
-
   addMessageInTopic(params) {
     const { id, message, userId } = params;
     return fetch(`${this.baseUrl}/${id}/message`, {
