@@ -52,6 +52,11 @@
       }
       .button {
         all: unset;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 250px;
+        text-align: center;
         background-color: aliceblue;
         margin: 0px auto;
         color: black;

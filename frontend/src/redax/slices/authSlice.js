@@ -22,6 +22,7 @@ const initialState = {
   fopmReg: false,
   fopmSign: false,
   auth: localStorage.getItem('token'),
+  showPreloader: false,
 };
 
 const authSlice = createSlice({
@@ -32,6 +33,7 @@ const authSlice = createSlice({
       state.fopmReg = false;
       state.fopmSign = false;
       state.auth = '';
+      state.showPreloader = false;
     },
     setfopmReg(state) {
       state.fopmReg = !state.fopmReg;
@@ -42,6 +44,7 @@ const authSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(fetchAddUser.pending, (state) => {
+      state.showPreloader = true;
       console.log('запрос на регистрацию');
     });
     builder.addCase(fetchAddUser.fulfilled, (state, { payload }) => {
@@ -49,9 +52,11 @@ const authSlice = createSlice({
     });
     builder.addCase(fetchAddUser.rejected, (state) => {
       console.log('ошибка регистрации');
+      state.showPreloader = false;
     });
 
     builder.addCase(fetchLoginUser.pending, (state) => {
+      state.showPreloader = true;
       console.log('запрос на авторизацию');
     });
     builder.addCase(fetchLoginUser.fulfilled, (state, { payload }) => {
@@ -59,6 +64,7 @@ const authSlice = createSlice({
       state.auth = payload.token;
     });
     builder.addCase(fetchLoginUser.rejected, (state) => {
+      state.showPreloader = false;
       console.log('ошибка авторизации');
     });
   },

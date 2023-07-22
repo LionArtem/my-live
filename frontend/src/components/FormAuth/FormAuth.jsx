@@ -6,6 +6,7 @@ import {
   fetchLoginUser,
   setfopmReg,
   setFormSign,
+  selectAuth,
 } from '../../redax/slices/authSlice';
 
 import {
@@ -15,9 +16,11 @@ import {
 } from '../../redax/slices/formValidetionSlice';
 
 import Style from './FormAuth.module.scss';
+import PreloaderPoint from '../Preloaders/PreloaderPoint/PreloaderPoint';
 
 export default function FormAuth({ textButton, text }) {
   const { value, errors, valid } = useSelector(selectformValidetion);
+  const { showPreloader } = useSelector(selectAuth);
   const triggerPopap = text === 'Pегистрация';
   const dispatch = useDispatch();
 
@@ -95,17 +98,24 @@ export default function FormAuth({ textButton, text }) {
           ></input>
           <span className={Style.error}>{errors.password}</span>
           {valid ? (
-            <button type="submit" className={Style.button}>
-              {textButton}
-            </button>
+            <>
+              {' '}
+              <button type="submit" className={Style.button}>
+                {textButton}
+                {showPreloader ? <PreloaderPoint /> : ''}
+              </button>
+            </>
           ) : (
-            <button
-              disabled
-              type="submit"
-              className={`${Style.button} ${Style.buttonOff}`}
-            >
-              {textButton}
-            </button>
+            <>
+              {' '}
+              <button
+                disabled
+                type="submit"
+                className={`${Style.button} ${Style.buttonOff}`}
+              >
+                {textButton}
+              </button>
+            </>
           )}
         </form>
       </div>
