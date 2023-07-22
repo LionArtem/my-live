@@ -4,7 +4,7 @@
   right: 0px;
   bottom: 0px;
   left: 0px;
-  background-color: rgb(2, 4, 2);
+  background-color: #92c898;
   .form_contener {
     display: flex;
     height: 100vh;
@@ -19,9 +19,13 @@
       border-radius: 5px;
       padding: 10px;
       .buttoncloseform {
-        color: rgb(217, 179, 179);
+        color: rgb(26, 25, 25);
+        border: 1px solid white;
         position: relative;
-        width: 50px;
+        width: 70px;
+        text-align: center;
+        background-color: aliceblue;
+        border-radius: 3px;
         top: -40px;
         right: -330px;
         cursor: pointer;
@@ -32,6 +36,12 @@
       .title {
         color: aliceblue;
         margin: 0px auto;
+        font-size: 20px;
+        font-weight: 600;
+        letter-spacing: 1px;
+      }
+      input {
+        height: 20px;
       }
       .button {
         all: unset;
