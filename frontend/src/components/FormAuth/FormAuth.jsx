@@ -20,6 +20,12 @@ export default function FormAuth({ textButton, text }) {
   const { value, errors, valid } = useSelector(selectformValidetion);
   const triggerPopap = text === 'Pегистрация';
   const dispatch = useDispatch();
+
+  const resetForm = () => {
+    dispatch(setFormSign());
+    dispatch(killAllStateFormValidetion());
+  };
+
   const handleSubmit = (e) => {
     const email = e.target.email.value;
     const password = e.target.password.value;
@@ -27,14 +33,16 @@ export default function FormAuth({ textButton, text }) {
     if (triggerPopap) {
       dispatch(fetchAddUser({ email, password })).then((res) => {
         if (res.meta.requestStatus === 'fulfilled') {
-          dispatch(fetchLoginUser({ email, password }));
+          dispatch(fetchLoginUser({ email, password })).then(() => {
+            resetForm();
+          });
         }
       });
     } else {
-      dispatch(fetchLoginUser({ email, password }));
+      dispatch(fetchLoginUser({ email, password })).then(() => {
+        resetForm();
+      });
     }
-    dispatch(setFormSign());
-    dispatch(killAllStateFormValidetion());
   };
 
   const collectValidetion = (evt) => {
@@ -47,7 +55,7 @@ export default function FormAuth({ textButton, text }) {
       })
     );
   };
- 
+
   return (
     <div className={Style.overflow}>
       <div className={Style.form_contener}>
