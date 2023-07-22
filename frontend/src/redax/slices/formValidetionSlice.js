@@ -29,6 +29,7 @@ const formValidetionSlice = createSlice({
       const { value, name, errors, valid } = action.payload;
       state.value = { ...state.value, [name]: value };
       state.errors = { ...state.errors, [name]: errors };
+    
       state.valid = valid;
     },
     resetValues(state) {

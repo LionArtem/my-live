@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   fetchAddUser,
   fetchLoginUser,
@@ -8,9 +8,16 @@ import {
   setFormSign,
 } from '../../redax/slices/authSlice';
 
-import style from './FormAuth.module.scss';
+import {
+  setValue,
+  selectformValidetion,
+  killAllStateFormValidetion,
+} from '../../redax/slices/formValidetionSlice';
+
+import Style from './FormAuth.module.scss';
 
 export default function FormAuth({ textButton, text }) {
+  const { value, errors, valid } = useSelector(selectformValidetion);
   const triggerPopap = text === 'Pегистрация';
   const dispatch = useDispatch();
   const handleSubmit = (e) => {
@@ -18,31 +25,80 @@ export default function FormAuth({ textButton, text }) {
     const password = e.target.password.value;
     e.preventDefault();
     if (triggerPopap) {
-      dispatch(fetchAddUser({ email, password }));
+      dispatch(fetchAddUser({ email, password })).then((res) => {
+        if (res.meta.requestStatus === 'fulfilled') {
+          dispatch(fetchLoginUser({ email, password }));
+        }
+      });
     } else {
       dispatch(fetchLoginUser({ email, password }));
     }
     dispatch(setFormSign());
+    dispatch(killAllStateFormValidetion());
   };
 
+  const collectValidetion = (evt) => {
+    dispatch(
+      setValue({
+        value: evt.target.value,
+        name: evt.target.name,
+        errors: evt.target.validationMessage,
+        valid: evt.target.closest('form').checkValidity(),
+      })
+    );
+  };
+ 
   return (
-    <div className={style.overflow}>
-      <div className={style.form_contener}>
-        <form onSubmit={(e) => handleSubmit(e)} className={style.form}>
+    <div className={Style.overflow}>
+      <div className={Style.form_contener}>
+        <form onSubmit={(e) => handleSubmit(e)} className={Style.form}>
           <div
-            onClick={() =>
-              dispatch(triggerPopap ? setfopmReg() : setFormSign())
-            }
-            className={style.buttoncloseform}
+            onClick={() => {
+              dispatch(triggerPopap ? setfopmReg() : setFormSign());
+              dispatch(killAllStateFormValidetion());
+            }}
+            className={Style.buttoncloseform}
           >
             закрыть
           </div>
-          <p className={style.title}>{text}</p>
-          <input type="email" name="email" placeholder="email"></input>
-          <input type="password" name="password" placeholder="пароль"></input>
-          <button type="submit" className={style.button}>
-            {textButton}
-          </button>
+          <p className={Style.title}>{text}</p>
+          <input
+            pattern="[a-zA-Z0-9._\-]+@[a-zA-Z0-9._\-]+\.[a-zA-Z0-9_\-]+"
+            value={value.email ? value.email : ''}
+            onChange={(evt) => {
+              collectValidetion(evt);
+            }}
+            type="email"
+            name="email"
+            placeholder="email"
+            required
+          ></input>
+          <span className={Style.error}>{errors.email}</span>
+          <input
+            value={value.password ? value.password : ''}
+            onChange={(evt) => {
+              collectValidetion(evt);
+            }}
+            type="password"
+            name="password"
+            placeholder="пароль"
+            minLength={8}
+            required
+          ></input>
+          <span className={Style.error}>{errors.password}</span>
+          {valid ? (
+            <button type="submit" className={Style.button}>
+              {textButton}
+            </button>
+          ) : (
+            <button
+              disabled
+              type="submit"
+              className={`${Style.button} ${Style.buttonOff}`}
+            >
+              {textButton}
+            </button>
+          )}
         </form>
       </div>
     </div>

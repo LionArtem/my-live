@@ -9,8 +9,8 @@
     display: flex;
     height: 100vh;
     .form {
-      min-width: 50vh;
-      min-height: 50vh;
+      width: 50vh;
+      height: 50vh;
       margin: auto;
       display: flex;
       flex-direction: column;
@@ -43,6 +43,13 @@
       input {
         height: 20px;
       }
+      .error {
+        height: 20px;
+        max-width: 100%;
+        font-size: 10px;
+        line-height: 10px;
+        color: brown;
+      }
       .button {
         all: unset;
         background-color: aliceblue;
@@ -52,8 +59,16 @@
         border-radius: 5px;
         cursor: pointer;
       }
+      .buttonOff {
+        cursor: none;
+        color: rgb(119, 115, 115);
+      }
+
       .button:hover {
         text-shadow: 1px 1px #524e4e;
+      }
+      .buttonOff:hover {
+        text-shadow: none;
       }
     }
   }
