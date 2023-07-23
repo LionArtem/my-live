@@ -13,9 +13,16 @@ export const fetchGetUser = createAsyncThunk(
 export const fetchPatchUser = createAsyncThunk(
   'page/fetchPatchUser',
   async (params, thunkAPI) => {
-    const { age, avatar, email, name, sity } =
+    const { age, avatar, email, name, sity, gender } =
       thunkAPI.getState().formValidetion.value;
-    const data = await usersApi.patchUserMe(age, avatar, email, name, sity);
+    const data = await usersApi.patchUserMe(
+      age,
+      avatar,
+      email,
+      name,
+      sity,
+      gender
+    );
     return data;
   }
 );
@@ -68,6 +75,7 @@ const userSlice = createSlice({
       console.log('запрос на редактирования пользователя');
     });
     builder.addCase(fetchPatchUser.fulfilled, (state, { payload }) => {
+      console.log(payload);
       state.user = payload;
       localStorage.setItem('userId', payload._id);
     });

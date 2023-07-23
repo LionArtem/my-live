@@ -27,6 +27,7 @@ export default function FormEditUser() {
             age: res.payload.age,
             avatar: res.payload.avatar,
             sity: res.payload.sity,
+            gender: res.payload.gender,
           })
         );
       }
@@ -49,45 +50,72 @@ export default function FormEditUser() {
     );
   };
 
+  console.log();
+
   return (
     <>
       {' '}
       <form onSubmit={(evt) => hendelSumit(evt)} className={Style.form}>
-        <label>link foto</label>
+        <label>ссылка на фото</label>
         <input
+          type="url"
           value={value.avatar ? value.avatar : ''}
           name="avatar"
           onChange={(evt) => changeValue(evt)}
           placeholder="ввидите ссылку на фотографию"
+          required
         ></input>
-        <label>name</label>
+        <label>ваше имя</label>
         <input
           value={value.name ? value.name : ''}
           onChange={(evt) => changeValue(evt)}
           name="name"
-          placeholder="ввидите name"
+          placeholder="ввидите имя"
+          required
+          minLength={1}
+          maxLength={30}
         ></input>
-        <label>age</label>
-        <input
-          value={value.age ? value.age : ''}
-          onChange={(evt) => changeValue(evt)}
-          name="age"
-          type="number"
-          placeholder="ввидите your age"
-        ></input>
-        <label>gender</label>
-        <input
-          value={value.gender ? value.gender : ''}
-          onChange={(evt) => changeValue(evt)}
-          name="gender"
-          placeholder="ввидите your gender"
-        ></input>
-        <label>sity</label>
+        <div className={Style.conteinerAgeGender}>
+          <label>возраст</label>
+          <input
+            className={Style.age}
+            value={value.age ? value.age : ''}
+            onChange={(evt) => changeValue(evt)}
+            name="age"
+            type="number"
+            min={18}
+            max={80}
+            placeholder="выберите ваш возраст"
+          ></input>
+          <label>м</label>
+          <input
+            checked={value.gender === 'м' ? 'checked' : ''}
+            className={Style.radio}
+            value="м"
+            onChange={(evt) => changeValue(evt)}
+            type="radio"
+            name="gender"
+            placeholder="ввидите пол"
+          ></input>
+
+          <label>ж</label>
+          <input
+            checked={value.gender === 'ж' ? 'checked' : ''}
+            className={Style.radio}
+            value="ж"
+            onChange={(evt) => changeValue(evt)}
+            type="radio"
+            name="gender"
+            placeholder="ввидите пол"
+          ></input>
+        </div>
+
+        <label>город</label>
         <input
           value={value.sity ? value.sity : ''}
           onChange={(evt) => changeValue(evt)}
           name="sity"
-          placeholder="ввидите your sity"
+          placeholder="ввидите ваш город"
         ></input>
         <label>email</label>
         <input
@@ -97,12 +125,14 @@ export default function FormEditUser() {
           type="email"
           placeholder="ввидите your email"
         ></input>
-        <button type="submit">edit</button>
+        <button className={Style.buttonForm} type="submit">
+          редактировать профиль
+        </button>
       </form>
-      <Link to="/my-page">
+      <Link className={`${Style.buttonForm} ${Style.button} `} to="/my-page">
         <p>назад</p>
       </Link>
-      <Link to="/">
+      <Link className={`${Style.buttonForm} ${Style.button} `} to="/">
         <p>На главную</p>
       </Link>
     </>

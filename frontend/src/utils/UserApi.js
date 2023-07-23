@@ -31,11 +31,11 @@ class UserApi {
     ).then(this._checkResponse);
   }
 
-  patchUserMe(age, avatar, email, name, sity) {
+  patchUserMe(age, avatar, email, name, sity, gender) {
     return fetch(`${this.baseUrl}/me`, {
       method: 'PATCH',
       headers: this.headers,
-      body: JSON.stringify({ age, avatar, email, name, sity }),
+      body: JSON.stringify({ age, avatar, email, name, sity, gender }),
     }).then(this._checkResponse);
   }
 

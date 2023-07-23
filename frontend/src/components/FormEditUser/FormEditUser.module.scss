@@ -1,4 +1,50 @@
-.form{
+.form {
+  display: flex;
+  flex-direction: column;
+  width: 320px;
+  border: 1px solid rgb(232, 230, 230);
+  padding: 5px;
+  input {
+    height: 20px;
+    font-size: 15px;
+  }
+  .conteinerAgeGender {
     display: flex;
-    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px;
+    width: 200px;
+    margin: 0 auto;
+  }
+  .age {
+    width: 35px;
+  }
+  .radio {
+    width: 15px;
+    margin: 0;
+  }
+}
+
+.buttonForm {
+  all: unset;
+  background-color: rgb(216, 224, 231);
+  text-align: center;
+  max-width: 80%;
+  margin: 20px auto 5px;
+  padding: 5px;
+  cursor: pointer;
+  transition: border-radius 0.5s linear, background-color 0.5s linear;
+}
+.buttonForm:hover {
+  border-radius: 5px;
+  background-color: rgb(251, 252, 254);
+}
+
+.button {
+  display: block;
+  max-width: max-content;
+  margin: 10px 0px 0px 0px;
+  p {
+    margin: 0;
+  }
 }
