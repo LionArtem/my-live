@@ -4,10 +4,13 @@ class UserApi {
     this.headers = headers;
   }
 
-  getUserMe() {
+  getUserMe(token) {
     return fetch(`${this.baseUrl}/me`, {
       method: 'GET',
-      headers: this.headers,
+      headers: {
+        authorization: `Bearer ${localStorage.getItem('token') || token}`,
+        'content-type': 'application/json',
+      },
     }).then(this._checkResponse);
   }
 
@@ -19,10 +22,13 @@ class UserApi {
   }
 
   getUserFindId(arrIdUser) {
-    return fetch(`${this.baseUrl}/faindIdUsers/${JSON.stringify({arrIdUser})}`, {
-      method: 'GET',
-      headers: this.headers,
-    }).then(this._checkResponse);
+    return fetch(
+      `${this.baseUrl}/faindIdUsers/${JSON.stringify({ arrIdUser })}`,
+      {
+        method: 'GET',
+        headers: this.headers,
+      }
+    ).then(this._checkResponse);
   }
 
   patchUserMe(age, avatar, email, name, sity) {

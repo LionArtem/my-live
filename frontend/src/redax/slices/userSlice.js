@@ -5,7 +5,7 @@ import { usersApi } from '../../utils/UserApi';
 export const fetchGetUser = createAsyncThunk(
   'page/fetchGetUser',
   async (params, thunkAPI) => {
-    const data = await usersApi.getUserMe();
+    const data = await usersApi.getUserMe(params);
     return data;
   }
 );
