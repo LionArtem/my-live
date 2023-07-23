@@ -79,7 +79,7 @@ export default function FormAuth({ textButton, text }) {
           <p className={Style.title}>{text}</p>
           <input
             pattern="[a-zA-Z0-9._\-]+@[a-zA-Z0-9._\-]+\.[a-zA-Z0-9_\-]+"
-            value={value.email ? value.email : ''}
+            value={value.email ?? ''}
             onChange={(evt) => {
               collectValidetion(evt);
             }}
@@ -90,7 +90,7 @@ export default function FormAuth({ textButton, text }) {
           ></input>
           <span className={Style.error}>{errors.email}</span>
           <input
-            value={value.password ? value.password : ''}
+            value={value.password ?? ''}
             onChange={(evt) => {
               collectValidetion(evt);
             }}

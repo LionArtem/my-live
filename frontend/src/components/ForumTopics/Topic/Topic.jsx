@@ -29,9 +29,7 @@ export default function Topic() {
     return result;
   };
 
-  const getMessages = (
-    page = localStorage.getItem('page') ? localStorage.getItem('page') : 1
-  ) => {
+  const getMessages = (page = localStorage.getItem('page') ?? 1) => {
     dispatch(
       fetchGetMessagePaginetion({ id: localStorage.getItem('topicId'), page })
     ).then((resMessage) => {

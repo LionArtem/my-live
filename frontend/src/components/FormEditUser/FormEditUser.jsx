@@ -8,6 +8,7 @@ import {
   setValue,
   selectformValidetion,
   defaultValues,
+  killAllStateFormValidetion,
 } from '../../redax/slices/formValidetionSlice';
 
 import { fetchGetUser, fetchPatchUser } from '../../redax/slices/userSlice';
@@ -16,6 +17,10 @@ export default function FormEditUser() {
   const dispatch = useDispatch();
 
   const { value } = useSelector(selectformValidetion);
+
+  React.useEffect(() => {
+    return () => dispatch(killAllStateFormValidetion());
+  }, []);
 
   React.useEffect(() => {
     dispatch(fetchGetUser()).then((res) => {
@@ -38,6 +43,7 @@ export default function FormEditUser() {
     evt.preventDefault();
     dispatch(fetchPatchUser());
   };
+  console.log(value);
 
   const changeValue = (evt) => {
     dispatch(
@@ -50,8 +56,6 @@ export default function FormEditUser() {
     );
   };
 
-  console.log();
-
   return (
     <>
       {' '}
@@ -59,7 +63,7 @@ export default function FormEditUser() {
         <label>ссылка на фото</label>
         <input
           type="url"
-          value={value.avatar ? value.avatar : ''}
+          value={value.avatar ?? ''}
           name="avatar"
           onChange={(evt) => changeValue(evt)}
           placeholder="ввидите ссылку на фотографию"
@@ -67,7 +71,7 @@ export default function FormEditUser() {
         ></input>
         <label>ваше имя</label>
         <input
-          value={value.name ? value.name : ''}
+          value={value.name ?? ''}
           onChange={(evt) => changeValue(evt)}
           name="name"
           placeholder="ввидите имя"
@@ -79,7 +83,7 @@ export default function FormEditUser() {
           <label>возраст</label>
           <input
             className={Style.age}
-            value={value.age ? value.age : ''}
+            value={value.age ?? ''}
             onChange={(evt) => changeValue(evt)}
             name="age"
             type="number"
@@ -112,14 +116,14 @@ export default function FormEditUser() {
 
         <label>город</label>
         <input
-          value={value.sity ? value.sity : ''}
+          value={value.sity ?? ''}
           onChange={(evt) => changeValue(evt)}
           name="sity"
           placeholder="ввидите ваш город"
         ></input>
         <label>email</label>
         <input
-          value={value.email ? value.email : ''}
+          value={value.email ?? ''}
           onChange={(evt) => changeValue(evt)}
           name="email"
           type="email"
