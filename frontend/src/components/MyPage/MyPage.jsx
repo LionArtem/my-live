@@ -17,16 +17,18 @@ export default function MyPage() {
   return (
     <div className={Style.root}>
       <div className={Style.useConteiner}>
-        <img className={Style.foto} src={user.avatar} alt="аватарка" />
-        <h3>{user.name}</h3>
-        <p>{`(${user.gender})${user.age}`}</p>
-        <p>{user.sity}</p>
-        <p>{user.email}</p>
-        <Link to="/edit-user">
-          <p>Edit profile</p>
-        </Link>
+        <div className={Style.infoUser}>
+          <img className={Style.foto} src={user.avatar} alt="аватарка" />
+          <h3>{user.name}</h3>
+          <p>{`(${user.gender})${user.age}`}</p>
+          <p>{user.sity}</p>
+          <p>{user.email}</p>
+          <Link to="/edit-user">
+            <p className={Style.button}>Редактировать профиль</p>
+          </Link>
+        </div>
         <Link to="/">
-          <p>Назад</p>
+          <p className={Style.button}>Назад</p>
         </Link>
       </div>
     </div>
