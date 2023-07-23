@@ -4,7 +4,7 @@ class Auth {
     this.headers = headers;
   }
 
-  addUser(email, password,) {
+  addUser(email, password) {
     return fetch(`${this.baseUrl}/signup`, {
       method: 'POST',
       headers: this.headers,
@@ -15,7 +15,7 @@ class Auth {
     }).then(this._checkResponse);
   }
 
-  loginUser(email, password,) {
+  loginUser(email, password) {
     return fetch(`${this.baseUrl}/signin`, {
       method: 'POST',
       headers: this.headers,
@@ -30,7 +30,7 @@ class Auth {
     if (res.ok) {
       return res.json();
     }
-    return Promise.reject(`Ошибка: ${res.status}`);
+    return res.text().then((err) => Promise.reject(JSON.parse(err)));
   };
 }
 

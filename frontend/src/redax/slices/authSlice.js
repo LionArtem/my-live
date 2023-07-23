@@ -23,17 +23,22 @@ const initialState = {
   fopmSign: false,
   auth: localStorage.getItem('token'),
   showPreloader: false,
+  errMessage: '',
 };
 
 const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
+    resetErrMessage(state) {
+      state.errMessage = '';
+    },
     killAllStateAuth(state) {
       state.fopmReg = false;
       state.fopmSign = false;
       state.auth = '';
       state.showPreloader = false;
+      state.errMessage = '';
     },
     setfopmReg(state) {
       state.fopmReg = !state.fopmReg;
@@ -50,8 +55,9 @@ const authSlice = createSlice({
     builder.addCase(fetchAddUser.fulfilled, (state, { payload }) => {
       // console.log(payload);
     });
-    builder.addCase(fetchAddUser.rejected, (state) => {
+    builder.addCase(fetchAddUser.rejected, (state, action) => {
       console.log('ошибка регистрации');
+      state.errMessage = action.error.message;
       state.showPreloader = false;
     });
 
@@ -63,7 +69,8 @@ const authSlice = createSlice({
       localStorage.setItem('token', payload.token);
       state.auth = payload.token;
     });
-    builder.addCase(fetchLoginUser.rejected, (state) => {
+    builder.addCase(fetchLoginUser.rejected, (state, action) => {
+      state.errMessage = action.error.message;
       state.showPreloader = false;
       console.log('ошибка авторизации');
     });
@@ -72,5 +79,6 @@ const authSlice = createSlice({
 
 export const selectAuth = (state) => state.auth;
 
-export const { setfopmReg, setFormSign, killAllStateAuth } = authSlice.actions;
+export const { setfopmReg, setFormSign, killAllStateAuth, resetErrMessage } =
+  authSlice.actions;
 export default authSlice.reducer;

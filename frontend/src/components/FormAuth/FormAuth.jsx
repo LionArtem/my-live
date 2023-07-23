@@ -7,6 +7,7 @@ import {
   setfopmReg,
   setFormSign,
   selectAuth,
+  resetErrMessage,
 } from '../../redax/slices/authSlice';
 
 import {
@@ -20,7 +21,7 @@ import PreloaderPoint from '../Preloaders/PreloaderPoint/PreloaderPoint';
 
 export default function FormAuth({ textButton, text }) {
   const { value, errors, valid } = useSelector(selectformValidetion);
-  const { showPreloader } = useSelector(selectAuth);
+  const { showPreloader, errMessage } = useSelector(selectAuth);
   const triggerPopap = text === 'Pегистрация';
   const dispatch = useDispatch();
 
@@ -42,13 +43,16 @@ export default function FormAuth({ textButton, text }) {
         }
       });
     } else {
-      dispatch(fetchLoginUser({ email, password })).then(() => {
-        resetForm();
+      dispatch(fetchLoginUser({ email, password })).then((res) => {
+        if (res.meta.requestStatus === 'fulfilled') {
+          resetForm();
+        }
       });
     }
   };
 
   const collectValidetion = (evt) => {
+    errMessage.length > 0 && dispatch(resetErrMessage());
     dispatch(
       setValue({
         value: evt.target.value,
@@ -117,6 +121,7 @@ export default function FormAuth({ textButton, text }) {
               </button>
             </>
           )}
+          <span className={Style.error}>{errMessage}</span>
         </form>
       </div>
     </div>
