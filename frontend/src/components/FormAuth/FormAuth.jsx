@@ -106,7 +106,7 @@ export default function FormAuth({ textButton, text }) {
               {' '}
               <button type="submit" className={Style.button}>
                 {textButton}
-                {showPreloader ? <PreloaderPoint /> : ''}
+                {showPreloader && <PreloaderPoint />}
               </button>
             </>
           ) : (

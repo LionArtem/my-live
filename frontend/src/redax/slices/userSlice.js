@@ -46,15 +46,23 @@ export const fetchGetUserFindId = createAsyncThunk(
 const initialState = {
   user: {},
   allMessagesAndAuthors: [],
+  showPreloader: false,
+  textSuccess: '',
+  textErr: '',
 };
 
 const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
+    addTextSuccess(state, action) {
+      state.textSuccess = action.payload;
+    },
     killAllStateUser(state) {
       state.user = {};
       state.allMessagesAndAuthors = [];
+      state.showPreloader = false;
+      state.textSuccess = '';
     },
   },
   extraReducers: (builder) => {
@@ -73,14 +81,18 @@ const userSlice = createSlice({
     // запрос на редактирование пользователя
     builder.addCase(fetchPatchUser.pending, (state) => {
       console.log('запрос на редактирования пользователя');
+      state.showPreloader = true;
     });
     builder.addCase(fetchPatchUser.fulfilled, (state, { payload }) => {
-      console.log(payload);
       state.user = payload;
       localStorage.setItem('userId', payload._id);
+      state.showPreloader = false;
     });
-    builder.addCase(fetchPatchUser.rejected, (state) => {
+    builder.addCase(fetchPatchUser.rejected, (state, payload) => {
       console.log('ошибка запроса на редактирование пользователя');
+      console.log(payload);
+      state.showPreloader = false;
+      state.textErr = 'на сервере произошла ошибка';
     });
 
     // запрос на получение пользователя по id
@@ -118,5 +130,5 @@ const userSlice = createSlice({
 
 export const selectUser = (state) => state.user;
 
-export const { killAllStateUser } = userSlice.actions;
+export const { killAllStateUser, addTextSuccess } = userSlice.actions;
 export default userSlice.reducer;

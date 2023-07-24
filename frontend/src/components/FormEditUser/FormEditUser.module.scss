@@ -37,9 +37,12 @@
 
 .buttonForm {
   all: unset;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   background-color: rgb(216, 224, 231);
   text-align: center;
-  max-width: 80%;
+  width: 250px;
   margin: 0px auto 5px;
   padding: 5px;
   cursor: pointer;

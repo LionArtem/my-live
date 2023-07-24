@@ -3,6 +3,7 @@ import React from 'react';
 import Style from './FormEditUser.module.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import PreloaderPoint from '../Preloaders/PreloaderPoint/PreloaderPoint';
 
 import {
   setValue,
@@ -15,13 +16,14 @@ import {
   fetchGetUser,
   fetchPatchUser,
   selectUser,
+  addTextSuccess,
 } from '../../redax/slices/userSlice';
 
 export default function FormEditUser() {
   const dispatch = useDispatch();
 
   const { value, errors, valid } = useSelector(selectformValidetion);
-  const { user } = useSelector(selectUser);
+  const { user, showPreloader, textSuccess, textErr } = useSelector(selectUser);
 
   React.useEffect(() => {
     return () => dispatch(killAllStateFormValidetion());
@@ -58,6 +60,7 @@ export default function FormEditUser() {
   const hendelSumit = (evt) => {
     evt.preventDefault();
     if (findNoCoincidenceForm(user, value)) {
+      dispatch(addTextSuccess('изменения сохранены'));
     } else {
       dispatch(fetchPatchUser());
     }
@@ -162,6 +165,7 @@ export default function FormEditUser() {
         {valid ? (
           <button className={Style.buttonForm} type="submit">
             редактировать профиль
+            {showPreloader && <PreloaderPoint />}
           </button>
         ) : (
           <button
@@ -170,10 +174,11 @@ export default function FormEditUser() {
             type="submit"
           >
             редактировать профиль
+            {showPreloader && <PreloaderPoint />}
           </button>
         )}
-        <span className={Style.error}></span>
-        <span className={Style.success}></span>
+        <span className={Style.error}>{textErr}</span>
+        <span className={Style.success}>{textSuccess}</span>
       </form>
       <Link className={`${Style.buttonForm} ${Style.button} `} to="/my-page">
         <p>назад</p>
