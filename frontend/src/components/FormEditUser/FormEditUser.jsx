@@ -11,12 +11,17 @@ import {
   killAllStateFormValidetion,
 } from '../../redax/slices/formValidetionSlice';
 
-import { fetchGetUser, fetchPatchUser } from '../../redax/slices/userSlice';
+import {
+  fetchGetUser,
+  fetchPatchUser,
+  selectUser,
+} from '../../redax/slices/userSlice';
 
 export default function FormEditUser() {
   const dispatch = useDispatch();
 
-  const { value } = useSelector(selectformValidetion);
+  const { value, errors, valid } = useSelector(selectformValidetion);
+  const { user } = useSelector(selectUser);
 
   React.useEffect(() => {
     return () => dispatch(killAllStateFormValidetion());
@@ -39,12 +44,24 @@ export default function FormEditUser() {
     });
   }, []);
 
+  const findNoCoincidenceForm = (value1, value2) => {
+    const valid =
+      value1.age === value2.age &&
+      value1.avatar === value2.avatar &&
+      value1.email === value2.email &&
+      value1.gender === value2.gender &&
+      value1.name === value2.name &&
+      value1.sity === value2.sity;
+    return valid;
+  };
+
   const hendelSumit = (evt) => {
     evt.preventDefault();
-    dispatch(fetchPatchUser());
+    if (findNoCoincidenceForm(user, value)) {
+    } else {
+      dispatch(fetchPatchUser());
+    }
   };
-  console.log(value);
-
   const changeValue = (evt) => {
     dispatch(
       setValue({
@@ -62,6 +79,7 @@ export default function FormEditUser() {
       <form onSubmit={(evt) => hendelSumit(evt)} className={Style.form}>
         <label>ссылка на фото</label>
         <input
+          pattern="^\S*$"
           type="url"
           value={value.avatar ?? ''}
           name="avatar"
@@ -69,8 +87,10 @@ export default function FormEditUser() {
           placeholder="ввидите ссылку на фотографию"
           required
         ></input>
+        <span className={Style.error}>{errors.avatar}</span>
         <label>ваше имя</label>
         <input
+          pattern="^\S*$"
           value={value.name ?? ''}
           onChange={(evt) => changeValue(evt)}
           name="name"
@@ -79,6 +99,7 @@ export default function FormEditUser() {
           minLength={1}
           maxLength={30}
         ></input>
+        <span className={Style.error}>{errors.name}</span>
         <div className={Style.conteinerAgeGender}>
           <label>возраст</label>
           <input
@@ -90,6 +111,7 @@ export default function FormEditUser() {
             min={18}
             max={80}
             placeholder="выберите ваш возраст"
+            required
           ></input>
           <label>м</label>
           <input
@@ -116,22 +138,42 @@ export default function FormEditUser() {
 
         <label>город</label>
         <input
+          pattern="^\S*$"
           value={value.sity ?? ''}
           onChange={(evt) => changeValue(evt)}
           name="sity"
           placeholder="ввидите ваш город"
+          required
+          minLength={1}
+          maxLength={30}
         ></input>
+        <span className={Style.error}>{errors.sity}</span>
         <label>email</label>
         <input
+          pattern="^\S*$"
           value={value.email ?? ''}
           onChange={(evt) => changeValue(evt)}
           name="email"
           type="email"
           placeholder="ввидите your email"
+          required
         ></input>
-        <button className={Style.buttonForm} type="submit">
-          редактировать профиль
-        </button>
+        <span className={Style.error}>{errors.email}</span>
+        {valid ? (
+          <button className={Style.buttonForm} type="submit">
+            редактировать профиль
+          </button>
+        ) : (
+          <button
+            disabled
+            className={`${Style.buttonForm} ${Style.buttonFormOff}`}
+            type="submit"
+          >
+            редактировать профиль
+          </button>
+        )}
+        <span className={Style.error}></span>
+        <span className={Style.success}></span>
       </form>
       <Link className={`${Style.buttonForm} ${Style.button} `} to="/my-page">
         <p>назад</p>

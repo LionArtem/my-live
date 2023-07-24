@@ -8,6 +8,16 @@
     height: 20px;
     font-size: 15px;
   }
+
+  .error {
+    min-height: 15px;
+    max-width: 100%;
+    font-size: 15px;
+    line-height: 15px;
+    color: brown;
+    text-align: center;
+    padding: 5px 0px 5px;
+  }
   .conteinerAgeGender {
     display: flex;
     justify-content: space-between;
@@ -30,14 +40,25 @@
   background-color: rgb(216, 224, 231);
   text-align: center;
   max-width: 80%;
-  margin: 20px auto 5px;
+  margin: 0px auto 5px;
   padding: 5px;
   cursor: pointer;
   transition: border-radius 0.5s linear, background-color 0.5s linear;
 }
+
+.buttonFormOff {
+  cursor: none;
+  color: rgb(72, 72, 72);
+}
+
 .buttonForm:hover {
   border-radius: 5px;
   background-color: rgb(251, 252, 254);
+}
+
+.buttonFormOff:hover {
+  border-radius: 0px;
+  background-color: rgb(216, 224, 231);
 }
 
 .button {
