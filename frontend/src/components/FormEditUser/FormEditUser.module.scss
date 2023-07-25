@@ -9,6 +9,18 @@
     font-size: 15px;
   }
 
+  @keyframes opacityList {
+    from {
+      opacity: 0;
+    }
+    50% {
+      opacity: 1;
+    }
+    to {
+      opacity: 0;
+    }
+  }
+
   .error {
     min-height: 15px;
     max-width: 100%;
@@ -17,7 +29,13 @@
     color: brown;
     text-align: center;
     padding: 5px 0px 5px;
+    animation: opacityList 2s linear;
   }
+
+  .success {
+    color: rgb(79, 99, 216);
+  }
+
   .conteinerAgeGender {
     display: flex;
     justify-content: space-between;

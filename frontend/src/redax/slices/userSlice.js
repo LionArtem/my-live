@@ -47,22 +47,26 @@ const initialState = {
   user: {},
   allMessagesAndAuthors: [],
   showPreloader: false,
-  textSuccess: '',
-  textErr: '',
+  textAnswerRequest: '',
+  successRequest: false,
 };
 
 const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
+    isSuccessRequest(state) {
+      state.successRequest = !state.successRequest;
+    },
     addTextSuccess(state, action) {
-      state.textSuccess = action.payload;
+      state.textAnswerRequest = action.payload;
     },
     killAllStateUser(state) {
       state.user = {};
       state.allMessagesAndAuthors = [];
       state.showPreloader = false;
-      state.textSuccess = '';
+      state.textAnswerRequest = '';
+      state.successRequest = false;
     },
   },
   extraReducers: (builder) => {
@@ -87,12 +91,14 @@ const userSlice = createSlice({
       state.user = payload;
       localStorage.setItem('userId', payload._id);
       state.showPreloader = false;
+      state.textAnswerRequest = 'изменения сохранены';
+      state.successRequest = true;
     });
     builder.addCase(fetchPatchUser.rejected, (state, payload) => {
       console.log('ошибка запроса на редактирование пользователя');
       console.log(payload);
       state.showPreloader = false;
-      state.textErr = 'на сервере произошла ошибка';
+      state.textAnswerRequest = payload.error.message;
     });
 
     // запрос на получение пользователя по id
@@ -130,5 +136,6 @@ const userSlice = createSlice({
 
 export const selectUser = (state) => state.user;
 
-export const { killAllStateUser, addTextSuccess } = userSlice.actions;
+export const { killAllStateUser, addTextSuccess, isSuccessRequest } =
+  userSlice.actions;
 export default userSlice.reducer;

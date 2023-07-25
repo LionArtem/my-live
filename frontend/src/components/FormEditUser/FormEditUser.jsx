@@ -17,13 +17,15 @@ import {
   fetchPatchUser,
   selectUser,
   addTextSuccess,
+  isSuccessRequest,
 } from '../../redax/slices/userSlice';
 
 export default function FormEditUser() {
   const dispatch = useDispatch();
 
   const { value, errors, valid } = useSelector(selectformValidetion);
-  const { user, showPreloader, textSuccess, textErr } = useSelector(selectUser);
+  const { user, showPreloader, textAnswerRequest, successRequest } =
+    useSelector(selectUser);
 
   React.useEffect(() => {
     return () => dispatch(killAllStateFormValidetion());
@@ -61,8 +63,22 @@ export default function FormEditUser() {
     evt.preventDefault();
     if (findNoCoincidenceForm(user, value)) {
       dispatch(addTextSuccess('изменения сохранены'));
+      dispatch(isSuccessRequest());
+      setTimeout(() => {
+        dispatch(addTextSuccess(''));
+        dispatch(isSuccessRequest());
+      }, 1000);
     } else {
-      dispatch(fetchPatchUser());
+      dispatch(fetchPatchUser()).then((res) => {
+        if (res.meta.requestStatus === 'fulfilled') {
+          setTimeout(() => {
+            dispatch(isSuccessRequest());
+          }, 1000);
+        }
+        setTimeout(() => {
+          dispatch(addTextSuccess(''));
+        }, 1000);
+      });
     }
   };
   const changeValue = (evt) => {
@@ -177,8 +193,9 @@ export default function FormEditUser() {
             {showPreloader && <PreloaderPoint />}
           </button>
         )}
-        <span className={Style.error}>{textErr}</span>
-        <span className={Style.success}>{textSuccess}</span>
+        <span className={`${Style.error} ${successRequest && Style.success} `}>
+          {textAnswerRequest}
+        </span>
       </form>
       <Link className={`${Style.buttonForm} ${Style.button} `} to="/my-page">
         <p>назад</p>

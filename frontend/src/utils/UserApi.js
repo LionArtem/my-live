@@ -38,13 +38,19 @@ class UserApi {
       body: JSON.stringify({ age, avatar, email, name, sity, gender }),
     }).then(this._checkResponse);
   }
-
   _checkResponse = (res) => {
     if (res.ok) {
       return res.json();
     }
-    return Promise.reject(`Ошибка: ${res.status}`);
+    return res.text().then((err) => Promise.reject(JSON.parse(err)));
   };
+
+  // _checkResponse = (res) => {
+  //   if (res.ok) {
+  //     return res.json();
+  //   }
+  //   return Promise.reject(`Ошибка: ${res.status}`);
+  // };
 }
 
 const usersApi = new UserApi({
