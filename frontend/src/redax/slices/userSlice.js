@@ -49,6 +49,7 @@ const initialState = {
   showPreloader: false,
   textAnswerRequest: '',
   successRequest: false,
+  showPreloaderMyPage: false,
 };
 
 const userSlice = createSlice({
@@ -73,15 +74,17 @@ const userSlice = createSlice({
     // запрос на получение текущего пользователя
     builder.addCase(fetchGetUser.pending, (state) => {
       console.log('запрос на получение пользователя');
+      state.showPreloaderMyPage = true;
     });
     builder.addCase(fetchGetUser.fulfilled, (state, { payload }) => {
       state.user = payload;
       localStorage.setItem('userId', payload._id);
+      state.showPreloaderMyPage = false;
     });
     builder.addCase(fetchGetUser.rejected, (state) => {
       console.log('ошибка запроса на получение пользователя');
+      state.showPreloaderMyPage = false;
     });
-
     // запрос на редактирование пользователя
     builder.addCase(fetchPatchUser.pending, (state) => {
       console.log('запрос на редактирования пользователя');

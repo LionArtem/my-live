@@ -4,10 +4,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchGetUser, selectUser } from '../../redax/slices/userSlice';
 import { selectAuth } from '../../redax/slices/authSlice';
 import { Link } from 'react-router-dom';
+import MyPagePreloader from './MyPagePreloader';
 
 export default function MyPage() {
   const dispatch = useDispatch();
-  const { user } = useSelector(selectUser);
+  const { user, showPreloaderMyPage } = useSelector(selectUser);
   const { auth } = useSelector(selectAuth);
 
   React.useEffect(() => {
@@ -17,16 +18,20 @@ export default function MyPage() {
   return (
     <div className={Style.root}>
       <div className={Style.useConteiner}>
-        <div className={Style.infoUser}>
-          <img className={Style.foto} src={user.avatar} alt="аватарка" />
-          <h3>{user.name}</h3>
-          <p>{`(${user.gender})${user.age}`}</p>
-          <p>{user.sity}</p>
-          <p>{user.email}</p>
-          <Link to="/edit-user">
-            <p className={Style.button}>Редактировать профиль</p>
-          </Link>
-        </div>
+        {showPreloaderMyPage ? (
+          <MyPagePreloader />
+        ) : (
+          <div className={Style.infoUser}>
+            <img className={Style.foto} src={user.avatar} alt="аватарка" />
+            <h3>{user.name}</h3>
+            <p>{`(${user.gender})${user.age}`}</p>
+            <p>{user.sity}</p>
+            <p>{user.email}</p>
+            <Link to="/edit-user">
+              <p className={Style.button}>Редактировать профиль</p>
+            </Link>
+          </div>
+        )}
         <Link to="/">
           <p className={Style.button}>Назад</p>
         </Link>
