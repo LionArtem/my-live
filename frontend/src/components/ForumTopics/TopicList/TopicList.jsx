@@ -5,12 +5,12 @@ import { selectTopics } from '../../../redax/slices/topicSlice';
 import { Link } from 'react-router-dom';
 
 export default function TopicList() {
-  const { topicsAll } = useSelector(selectTopics);
+  const { topicsInPage } = useSelector(selectTopics);
 
   return (
     <div>
-      {topicsAll &&
-        topicsAll.map((obj) => (
+      {topicsInPage &&
+        topicsInPage.map((obj) => (
           <Link to={'/topic'} key={obj._id}>
             <h1
               onClick={() => {

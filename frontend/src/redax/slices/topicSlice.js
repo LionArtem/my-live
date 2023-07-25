@@ -2,14 +2,6 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
 import { topicApi } from '../../utils/TopicApi';
 
-export const fetchTopicAll = createAsyncThunk(
-  'page/fetchTopicAll',
-  async (params, thunkAPI) => {
-    const data = await topicApi.getAllTopics();
-    return data.reverse();
-  }
-);
-
 export const fetchAddMessageInTopic = createAsyncThunk(
   'page/fetchAddMessageInTopic',
   async (params, thunkAPI) => {
@@ -26,11 +18,27 @@ export const fetchGetMessagePaginetion = createAsyncThunk(
   }
 );
 
+export const fetchGetTopicPaginetion = createAsyncThunk(
+  'page/fetchGetTopicPaginetion',
+  async (params, thunkAPI) => {
+    const data = await topicApi.getTopicPaginetion(params);
+    return data;
+  }
+);
+
+export const fetchAddTopic = createAsyncThunk(
+  'page/fetchAddTopic',
+  async (params, thunkAPI) => {
+    const data = await topicApi.addNewTopic(params);
+    return data;
+  }
+);
+
 const initialState = {
   messageValue: '',
   authorTopic: {},
   titleTopic: '',
-  topicsAll: [],
+  topicsInPage: [],
   numberPages: [],
 };
 
@@ -50,16 +58,6 @@ const topicsSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(fetchTopicAll.pending, (state) => {
-      console.log('загрузка всех topics');
-    });
-    builder.addCase(fetchTopicAll.fulfilled, (state, { payload }) => {
-      state.topicsAll = payload;
-    });
-    builder.addCase(fetchTopicAll.rejected, (state) => {
-      console.log('ошибка загрузки все topics');
-    });
-
     builder.addCase(fetchAddMessageInTopic.pending, (state) => {
       console.log('загрузка message');
     });
@@ -86,6 +84,28 @@ const topicsSlice = createSlice({
     );
     builder.addCase(fetchGetMessagePaginetion.rejected, (state, action) => {
       console.log('ошибка загрузки paginetion message');
+    });
+
+    builder.addCase(fetchGetTopicPaginetion.pending, (state) => {
+      console.log('загрузка paginetion topics');
+    });
+    builder.addCase(fetchGetTopicPaginetion.fulfilled, (state, { payload }) => {
+      state.topicsInPage = payload.topic;
+      state.numberPages = [...new Array(Math.ceil(payload.numberTopics / 10))];
+    });
+    builder.addCase(fetchGetTopicPaginetion.rejected, (state, action) => {
+      console.log('ошибка загрузки paginetion topic');
+    });
+
+    builder.addCase(fetchAddTopic.pending, (state) => {
+      console.log('создание темы');
+    });
+    builder.addCase(fetchAddTopic.fulfilled, (state, { payload }) => {
+    // console.log(payload);
+    });
+    builder.addCase(fetchAddTopic.rejected, (state, action) => {
+      console.log(action);
+      console.log('ошибка создания темы');
     });
   },
 });

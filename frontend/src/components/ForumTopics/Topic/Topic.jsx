@@ -57,7 +57,7 @@ export default function Topic() {
       </div>
       <MessageUser />
       <FormMessage getMessages={getMessages} />
-      <Pagination getMessages={getMessages} />
+      <Pagination getNumberPage={getMessages} />
     </div>
   );
 }

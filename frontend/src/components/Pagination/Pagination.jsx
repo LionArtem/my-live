@@ -3,7 +3,7 @@ import Style from './Pagination.module.scss';
 import { useSelector } from 'react-redux';
 import { selectTopics } from '../../redax/slices/topicSlice';
 
-export default function Pagination({ getMessages }) {
+export default function Pagination({ getNumberPage }) {
   const { numberPages } = useSelector(selectTopics);
   return (
     <nav>
@@ -12,7 +12,7 @@ export default function Pagination({ getMessages }) {
           <li
             key={i}
             onClick={() => {
-              getMessages(i + 1);
+              getNumberPage(i + 1);
               localStorage.setItem('page', i + 1);
             }}
           >

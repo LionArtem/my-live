@@ -1,27 +1,41 @@
 import React from 'react';
 
 import { useDispatch } from 'react-redux';
-import { fetchTopicAll } from '../../redax/slices/topicSlice';
-import { topicApi } from '../../utils/TopicApi';
+import {
+  fetchGetTopicPaginetion,
+  killAllStateTopic,
+  fetchAddTopic,
+} from '../../redax/slices/topicSlice';
 import Topic from './TopicList/TopicList';
+import Pagination from '../Pagination/Pagination';
 
 export default function ForumTopics() {
   const titleRef = React.useRef();
   const dispatch = useDispatch();
 
+  const getTopic = (page = localStorage.getItem('page') ?? 1) => {
+    dispatch(fetchGetTopicPaginetion(page));
+  };
+
   const addPost = (e) => {
     e.preventDefault();
-    topicApi
-      .addNewTopic(titleRef.current.value)
-      .then(() => {
-        dispatch(fetchTopicAll());
-      })
-      .catch((err) => console.log(err));
+    dispatch(fetchAddTopic(titleRef.current.value)).then((res) => {
+      if (res.meta.requestStatus === 'fulfilled') {
+        getTopic();
+      }
+    });
   };
 
   React.useEffect(() => {
-    dispatch(fetchTopicAll());
+    getTopic();
   }, []);
+
+  React.useEffect(() => {
+    return () => {
+      dispatch(killAllStateTopic());
+      localStorage.removeItem('page');
+    };
+  });
 
   return (
     <>
@@ -35,6 +49,7 @@ export default function ForumTopics() {
         <button type="submit">создать новую тему</button>
       </form>
       <Topic />
+      <Pagination getNumberPage={getTopic} />
     </>
   );
 }

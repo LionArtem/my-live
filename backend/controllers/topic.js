@@ -23,9 +23,23 @@ const createTopic = (req, res, next) => {
 };
 
 const getTopics = (req, res, next) => {
-  Topic.find().populate('owner')
+  Topic.find()
     .then((topic) => {
       res.send(topic);
+    })
+    .catch((err) => {
+      next(err);
+    });
+};
+
+const getTopicsPaginetion = (req, res, next) => {
+  const { page } = req.params;
+  Topic.find()
+    .then((topic) => {
+      res.send({
+        topic: topic.reverse().slice(page * 10 - 10, page * 10),
+        numberTopics: topic.length,
+      });
     })
     .catch((err) => {
       next(err);
@@ -95,4 +109,5 @@ module.exports = {
   getTopics,
   addInTopicMessage,
   getMessagePaginetion,
+  getTopicsPaginetion,
 };
