@@ -49,7 +49,7 @@ const initialState = {
   showPreloader: false,
   textAnswerRequest: '',
   successRequest: false,
-  showPreloaderMyPage: false,
+  showSceletonPage: false,
 };
 
 const userSlice = createSlice({
@@ -68,22 +68,23 @@ const userSlice = createSlice({
       state.showPreloader = false;
       state.textAnswerRequest = '';
       state.successRequest = false;
+      state.showSceletonPage = false;
     },
   },
   extraReducers: (builder) => {
     // запрос на получение текущего пользователя
     builder.addCase(fetchGetUser.pending, (state) => {
       console.log('запрос на получение пользователя');
-      state.showPreloaderMyPage = true;
+      state.showSceletonPage = true;
     });
     builder.addCase(fetchGetUser.fulfilled, (state, { payload }) => {
       state.user = payload;
       localStorage.setItem('userId', payload._id);
-      state.showPreloaderMyPage = false;
+      state.showSceletonPage = false;
     });
     builder.addCase(fetchGetUser.rejected, (state) => {
       console.log('ошибка запроса на получение пользователя');
-      state.showPreloaderMyPage = false;
+      state.showSceletonPage = false;
     });
     // запрос на редактирование пользователя
     builder.addCase(fetchPatchUser.pending, (state) => {
