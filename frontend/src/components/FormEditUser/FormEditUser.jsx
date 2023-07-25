@@ -67,17 +67,17 @@ export default function FormEditUser() {
       setTimeout(() => {
         dispatch(addTextSuccess(''));
         dispatch(isSuccessRequest());
-      }, 1000);
+      },1500);
     } else {
       dispatch(fetchPatchUser()).then((res) => {
         if (res.meta.requestStatus === 'fulfilled') {
           setTimeout(() => {
             dispatch(isSuccessRequest());
-          }, 1000);
+          }, 1500);
         }
         setTimeout(() => {
           dispatch(addTextSuccess(''));
-        }, 1000);
+        }, 1500);
       });
     }
   };

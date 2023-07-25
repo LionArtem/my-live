@@ -129,6 +129,9 @@ const patchUsersInfo = (req, res, next) => {
       if (err.name === 'ValidationError') {
         const erros = new IncorrectErr('Некорректный данные');
         next(erros);
+      } else if (err.codeName === 'DuplicateKey') {
+        const erros = new RepeatsEmailError('Этот email уже существует');
+        next(erros);
       } else {
         next(err);
       }
