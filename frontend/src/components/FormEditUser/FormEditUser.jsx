@@ -31,6 +31,7 @@ export default function FormEditUser() {
     textAnswerRequest,
     successRequest,
     showSceletonPage,
+    errServer,
   } = useSelector(selectUser);
 
   React.useEffect(() => {
@@ -104,6 +105,8 @@ export default function FormEditUser() {
       <form onSubmit={(evt) => hendelSumit(evt)} className={Style.form}>
         {showSceletonPage ? (
           <FormEditUserPreloader />
+        ) : errServer ? (
+          <h1 className={Style.textErrServer}>{`${textAnswerRequest} :(`}</h1>
         ) : (
           <>
             {' '}

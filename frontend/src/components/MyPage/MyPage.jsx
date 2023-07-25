@@ -27,23 +27,25 @@ export default function MyPage() {
   return (
     <div className={Style.root}>
       <div className={Style.useConteiner}>
-        {showSceletonPage ? (
-          <MyPagePreloader />
-        ) : errServer ? (
-          <h1 className={Style.textErrServer}>{`${textAnswerRequest} :(`}</h1>
-        ) : (
-          <div className={Style.infoUser}>
-            <img className={Style.foto} src={user.avatar} alt="аватарка" />
-            <h3>{user.name}</h3>
-            <p>{`(${user.gender})${user.age}`}</p>
-            <p>{user.sity}</p>
-            <p>{user.email}</p>
-            <Link to="/edit-user">
-              <p className={Style.button}>Редактировать профиль</p>
-            </Link>
-          </div>
-        )}
-
+        <div className={Style.infoUser}>
+          {showSceletonPage ? (
+            <MyPagePreloader />
+          ) : errServer ? (
+            <h1 className={Style.textErrServer}>{`${textAnswerRequest} :(`}</h1>
+          ) : (
+            <>
+              {' '}
+              <img className={Style.foto} src={user.avatar} alt="аватарка" />
+              <h3>{user.name}</h3>
+              <p>{`(${user.gender})${user.age}`}</p>
+              <p>{user.sity}</p>
+              <p>{user.email}</p>
+              <Link to="/edit-user">
+                <p className={Style.button}>Редактировать профиль</p>
+              </Link>
+            </>
+          )}
+        </div>
         <Link to="/">
           <p className={Style.button}>Назад</p>
         </Link>
