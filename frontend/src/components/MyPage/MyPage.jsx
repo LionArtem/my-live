@@ -12,7 +12,8 @@ import MyPagePreloader from './MyPagePreloader';
 
 export default function MyPage() {
   const dispatch = useDispatch();
-  const { user, showSceletonPage } = useSelector(selectUser);
+  const { user, showSceletonPage, errServer, textAnswerRequest } =
+    useSelector(selectUser);
   const { auth } = useSelector(selectAuth);
 
   React.useEffect(() => {
@@ -28,6 +29,8 @@ export default function MyPage() {
       <div className={Style.useConteiner}>
         {showSceletonPage ? (
           <MyPagePreloader />
+        ) : errServer ? (
+          <h1 className={Style.textErrServer}>{`${textAnswerRequest} :(`}</h1>
         ) : (
           <div className={Style.infoUser}>
             <img className={Style.foto} src={user.avatar} alt="аватарка" />
@@ -40,6 +43,7 @@ export default function MyPage() {
             </Link>
           </div>
         )}
+
         <Link to="/">
           <p className={Style.button}>Назад</p>
         </Link>

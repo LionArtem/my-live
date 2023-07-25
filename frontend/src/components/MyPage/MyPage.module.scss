@@ -4,6 +4,11 @@
   padding: 5px;
 }
 
+.textErrServer {
+  margin: 15vh 0px 15vh;
+  color: rgb(150, 15, 15);
+}
+
 .foto {
   width: 100px;
   display: block;
@@ -19,8 +24,6 @@ a:hover {
 
 .button {
   background-color: rgb(216, 224, 231);
-  background-color: #e8e8e8;
-  background-color: #fcfbfb;
   max-width: max-content;
   padding: 5px;
   transition: border-radius 0.5s linear, background-color 0.5s linear;

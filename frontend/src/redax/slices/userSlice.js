@@ -50,6 +50,7 @@ const initialState = {
   textAnswerRequest: '',
   successRequest: false,
   showSceletonPage: false,
+  errServer: false,
 };
 
 const userSlice = createSlice({
@@ -69,6 +70,7 @@ const userSlice = createSlice({
       state.textAnswerRequest = '';
       state.successRequest = false;
       state.showSceletonPage = false;
+      state.errServer = false;
     },
   },
   extraReducers: (builder) => {
@@ -82,9 +84,12 @@ const userSlice = createSlice({
       localStorage.setItem('userId', payload._id);
       state.showSceletonPage = false;
     });
-    builder.addCase(fetchGetUser.rejected, (state) => {
+    builder.addCase(fetchGetUser.rejected, (state, action) => {
       console.log('ошибка запроса на получение пользователя');
       state.showSceletonPage = false;
+      state.errServer = true;
+      console.log(action);
+      state.textAnswerRequest = action.error.message;
     });
     // запрос на редактирование пользователя
     builder.addCase(fetchPatchUser.pending, (state) => {
@@ -98,11 +103,11 @@ const userSlice = createSlice({
       state.textAnswerRequest = 'изменения сохранены';
       state.successRequest = true;
     });
-    builder.addCase(fetchPatchUser.rejected, (state, payload) => {
+    builder.addCase(fetchPatchUser.rejected, (state, action) => {
       console.log('ошибка запроса на редактирование пользователя');
-      console.log(payload);
+      console.log(action);
       state.showPreloader = false;
-      state.textAnswerRequest = payload.error.message;
+      state.textAnswerRequest = action.error.message;
     });
 
     // запрос на получение пользователя по id
