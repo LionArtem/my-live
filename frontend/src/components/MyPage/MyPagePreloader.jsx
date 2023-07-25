@@ -11,12 +11,12 @@ const MyPagePreloader = (props) => (
     foregroundColor="#ecebeb"
     {...props}
   >
-    <rect x="5" y="0" rx="0" ry="0" width="170" height="110" />
-    <rect x="5" y="125" rx="0" ry="0" width="170" height="30" />
-    <rect x="5" y="175" rx="0" ry="0" width="170" height="30" />
-    <rect x="5" y="225" rx="0" ry="0" width="170" height="30" />
-    <rect x="5" y="275" rx="0" ry="0" width="170" height="30" />
-    <rect x="5" y="325" rx="0" ry="0" width="170" height="30" />
+    <rect x="5" y="0" rx="0" ry="0" width="170" height="170" />
+    <rect x="5" y="195" rx="0" ry="0" width="170" height="20" />
+    <rect x="5" y="230" rx="0" ry="0" width="170" height="20" />
+    <rect x="5" y="265" rx="0" ry="0" width="170" height="20" />
+    <rect x="5" y="300" rx="0" ry="0" width="170" height="20" />
+    <rect x="5" y="335" rx="0" ry="0" width="170" height="20" />
   </ContentLoader>
 );
 

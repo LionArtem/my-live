@@ -46,6 +46,7 @@ export default function MyPage() {
             </>
           )}
         </div>
+
         <Link to="/">
           <p className={Style.button}>Назад</p>
         </Link>
