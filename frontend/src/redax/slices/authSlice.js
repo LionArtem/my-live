@@ -21,7 +21,7 @@ export const fetchLoginUser = createAsyncThunk(
 const initialState = {
   fopmReg: false,
   fopmSign: false,
-  auth: localStorage.getItem('token'),
+  token: localStorage.getItem('token'),
   showPreloader: false,
   textArrAnswerServer: '',
 };
@@ -36,7 +36,7 @@ const authSlice = createSlice({
     killAllStateAuth(state) {
       state.fopmReg = false;
       state.fopmSign = false;
-      state.auth = '';
+      state.token = '';
       state.showPreloader = false;
       state.textArrAnswerServer = '';
     },
@@ -67,7 +67,7 @@ const authSlice = createSlice({
     });
     builder.addCase(fetchLoginUser.fulfilled, (state, { payload }) => {
       localStorage.setItem('token', payload.token);
-      state.auth = payload.token;
+      state.token = payload.token;
     });
     builder.addCase(fetchLoginUser.rejected, (state, action) => {
       state.textArrAnswerServer = action.error.message;

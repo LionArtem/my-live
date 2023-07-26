@@ -45,6 +45,8 @@ export default function ForumTopics() {
           type="text"
           placeholder="введите название темы"
           required
+          minLength={5}
+          maxLength={50}
         ></input>
         <button type="submit">создать новую тему</button>
       </form>

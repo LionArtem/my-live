@@ -18,7 +18,7 @@ export default function Topic() {
   const dispatch = useDispatch();
   const { authorTopic, titleTopic } = useSelector(selectTopics);
 
-  const collectNewArrMessage = (res) => {
+  const findUniqueAuthors = (res) => {
     // собираю массив уникальных id users
     const result = res.messages.reduce((acc, obj) => {
       if (acc.find((item) => item === obj.userId)) {
@@ -36,7 +36,7 @@ export default function Topic() {
       if (resMessage.meta.requestStatus === 'fulfilled') {
         dispatch(
           fetchGetUserFindId({
-            arrIdUser: collectNewArrMessage(resMessage.payload),
+            arrIdUser: findUniqueAuthors(resMessage.payload),
             messages: resMessage.payload,
           })
         );

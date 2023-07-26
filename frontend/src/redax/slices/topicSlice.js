@@ -75,8 +75,6 @@ const topicsSlice = createSlice({
     builder.addCase(
       fetchGetMessagePaginetion.fulfilled,
       (state, { payload }) => {
-        console.log(payload.numberMessages);
-        console.log(payload.numberMessages % 10);
         state.titleTopic = payload.title;
         state.authorTopic = payload.user;
         state.numberPages = [

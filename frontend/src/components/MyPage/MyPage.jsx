@@ -11,13 +11,15 @@ import { Link } from 'react-router-dom';
 import MyPagePreloader from './MyPagePreloader';
 
 export default function MyPage() {
+
   const dispatch = useDispatch();
+
   const { user, showSceletonPage, errServer, textAnswerRequest } =
     useSelector(selectUser);
-  const { auth } = useSelector(selectAuth);
+  const { token } = useSelector(selectAuth);
 
   React.useEffect(() => {
-    dispatch(fetchGetUser(auth));
+    dispatch(fetchGetUser(token));
   }, []);
 
   React.useEffect(() => {

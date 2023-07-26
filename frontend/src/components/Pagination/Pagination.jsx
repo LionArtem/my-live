@@ -4,7 +4,9 @@ import { useSelector } from 'react-redux';
 import { selectTopics } from '../../redax/slices/topicSlice';
 
 export default function Pagination({ getNumberPage }) {
+  
   const { numberPages } = useSelector(selectTopics);
+
   return (
     <nav>
       <ul className={Style.list}>
