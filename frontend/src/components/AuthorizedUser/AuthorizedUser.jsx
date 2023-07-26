@@ -20,7 +20,6 @@ export default function AuthorizedUser() {
       <p
         className={Style.buttonOpen}
         onClick={() => {
-          console.log('удалить токен');
           localStorage.clear();
           dispatch(killAllStateAuth());
           dispatch(killAllStateFormValidetion());

@@ -7,7 +7,7 @@ import {
   setfopmReg,
   setFormSign,
   selectAuth,
-  resetErrMessage,
+  resetTextArrAnswerServer,
 } from '../../redax/slices/authSlice';
 
 import {
@@ -21,13 +21,16 @@ import PreloaderPoint from '../Preloaders/PreloaderPoint/PreloaderPoint';
 
 export default function FormAuth({ textButton, text }) {
   const { value, errors, valid } = useSelector(selectformValidetion);
-  const { showPreloader, errMessage } = useSelector(selectAuth);
+  const { showPreloader, textArrAnswerServer } = useSelector(selectAuth);
   const triggerPopap = text === 'Pегистрация';
   const dispatch = useDispatch();
 
-  const resetForm = () => {
-    dispatch(setFormSign());
-    dispatch(killAllStateFormValidetion());
+  const loginUser = (email, password) => {
+    dispatch(fetchLoginUser({ email, password })).then((res) => {
+      if (res.meta.requestStatus === 'fulfilled') {
+        dispatch(killAllStateFormValidetion());
+      }
+    });
   };
 
   const handleSubmit = (e) => {
@@ -37,22 +40,16 @@ export default function FormAuth({ textButton, text }) {
     if (triggerPopap) {
       dispatch(fetchAddUser({ email, password })).then((res) => {
         if (res.meta.requestStatus === 'fulfilled') {
-          dispatch(fetchLoginUser({ email, password })).then(() => {
-            resetForm();
-          });
+          loginUser(email, password);
         }
       });
     } else {
-      dispatch(fetchLoginUser({ email, password })).then((res) => {
-        if (res.meta.requestStatus === 'fulfilled') {
-          resetForm();
-        }
-      });
+      loginUser(email, password);
     }
   };
 
   const collectValidetion = (evt) => {
-    errMessage.length > 0 && dispatch(resetErrMessage());
+    textArrAnswerServer.length > 0 && dispatch(resetTextArrAnswerServer());
     dispatch(
       setValue({
         value: evt.target.value,
@@ -121,7 +118,7 @@ export default function FormAuth({ textButton, text }) {
               </button>
             </>
           )}
-          <span className={Style.error}>{errMessage}</span>
+          <span className={Style.error}>{textArrAnswerServer}</span>
         </form>
       </div>
     </div>
