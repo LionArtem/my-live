@@ -75,10 +75,18 @@ const topicsSlice = createSlice({
     builder.addCase(
       fetchGetMessagePaginetion.fulfilled,
       (state, { payload }) => {
+        console.log(payload.numberMessages);
+        console.log(payload.numberMessages % 10);
         state.titleTopic = payload.title;
         state.authorTopic = payload.user;
         state.numberPages = [
-          ...new Array(Math.ceil(payload.numberMessages / 10)),
+          ...new Array(
+            Math.ceil(
+              payload.numberMessages % 10 === 0
+                ? payload.numberMessages / 10 + 1
+                : payload.numberMessages / 10
+            )
+          ),
         ];
       }
     );
@@ -101,7 +109,7 @@ const topicsSlice = createSlice({
       console.log('создание темы');
     });
     builder.addCase(fetchAddTopic.fulfilled, (state, { payload }) => {
-    // console.log(payload);
+      // console.log(payload);
     });
     builder.addCase(fetchAddTopic.rejected, (state, action) => {
       console.log(action);
