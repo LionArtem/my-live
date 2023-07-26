@@ -1,6 +1,9 @@
 import React from 'react';
 
 import { useDispatch } from 'react-redux';
+
+import Style from './ForumTopics.module.scss';
+
 import {
   fetchGetTopicPaginetion,
   killAllStateTopic,
@@ -38,7 +41,7 @@ export default function ForumTopics() {
   });
 
   return (
-    <>
+    <div className={Style.conteiner}>
       <form onSubmit={(e) => addPost(e)}>
         <input
           ref={titleRef}
@@ -52,6 +55,6 @@ export default function ForumTopics() {
       </form>
       <Topic />
       <Pagination getNumberPage={getTopic} />
-    </>
+    </div>
   );
 }

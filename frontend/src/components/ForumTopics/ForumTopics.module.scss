@@ -1,0 +1,6 @@
+.conteiner{
+    height: 100vh;
+    box-sizing: border-box;
+    display: grid;
+    grid-template-rows: min-content auto min-content;
+}
