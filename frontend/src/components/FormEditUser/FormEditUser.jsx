@@ -66,25 +66,24 @@ export default function FormEditUser() {
     return valid;
   };
 
+  const deleteTextAnswerServer = () => {
+    setTimeout(() => {
+      dispatch(addTextSuccess(''));
+      dispatch(isSuccessRequest());
+    }, 1500);
+  };
+
   const hendelSumit = (evt) => {
     evt.preventDefault();
     if (findNoCoincidenceForm(user, value)) {
       dispatch(addTextSuccess('изменения сохранены'));
       dispatch(isSuccessRequest());
-      setTimeout(() => {
-        dispatch(addTextSuccess(''));
-        dispatch(isSuccessRequest());
-      }, 1500);
+      deleteTextAnswerServer();
     } else {
       dispatch(fetchPatchUser()).then((res) => {
         if (res.meta.requestStatus === 'fulfilled') {
-          setTimeout(() => {
-            dispatch(isSuccessRequest());
-          }, 1500);
+          deleteTextAnswerServer();
         }
-        setTimeout(() => {
-          dispatch(addTextSuccess(''));
-        }, 1500);
       });
     }
   };
