@@ -9,9 +9,9 @@ import {
 import { selectAuth } from '../../redax/slices/authSlice';
 import { Link } from 'react-router-dom';
 import MyPagePreloader from './MyPagePreloader';
+import ButtonsNavigation from '../ButtonsNavigation/ButtonsNavigation';
 
 export default function MyPage() {
-
   const dispatch = useDispatch();
 
   const { user, showSceletonPage, errServer, textAnswerRequest } =
@@ -42,16 +42,14 @@ export default function MyPage() {
               <p>{`(${user.gender})${user.age}`}</p>
               <p>{user.sity}</p>
               <p>{user.email}</p>
-              <Link to="/edit-user">
-                <p className={Style.button}>Редактировать профиль</p>
-              </Link>
+              <ButtonsNavigation
+                page={'/edit-user'}
+                text={'Редактировать профиль'}
+              />
             </>
           )}
         </div>
-
-        <Link to="/">
-          <p className={Style.button}>Назад</p>
-        </Link>
+        <ButtonsNavigation page={'/'} text={'Назад'} />
       </div>
     </div>
   );
