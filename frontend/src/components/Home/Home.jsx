@@ -9,7 +9,7 @@ import AuthorizedUser from '../AuthorizedUser/AuthorizedUser';
 import MenuApp from './MenuApp/MenuApp';
 
 export default function Home() {
-  const { auth } = useSelector(selectAuth);
+  const { token } = useSelector(selectAuth);
 
   return (
     <div className="page">
@@ -17,7 +17,7 @@ export default function Home() {
         <Header />
       </header>
       <main>
-        <section>{auth ? <AuthorizedUser /> : <Authorization />}</section>
+        <section>{token ? <AuthorizedUser /> : <Authorization />}</section>
         <section>
           <MenuApp />
         </section>

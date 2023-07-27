@@ -4,16 +4,16 @@ import { useDispatch, useSelector } from 'react-redux';
 import {
   fetchAddUser,
   fetchLoginUser,
-  setfopmReg,
-  setFormSign,
   selectAuth,
   resetTextArrAnswerServer,
+  resetForm,
 } from '../../redax/slices/authSlice';
 
 import {
   setValue,
   selectformValidetion,
   killAllStateFormValidetion,
+  setValid,
 } from '../../redax/slices/formValidetionSlice';
 
 import Style from './FormAuth.module.scss';
@@ -21,14 +21,18 @@ import PreloaderPoint from '../Preloaders/PreloaderPoint/PreloaderPoint';
 
 export default function FormAuth({ textButton, text }) {
   const { value, errors, valid } = useSelector(selectformValidetion);
-  const { showPreloader, textArrAnswerServer } = useSelector(selectAuth);
-  const triggerPopap = text === 'Pегистрация';
+  const { showPreloader, textArrAnswerServer, fopmReg } =
+    useSelector(selectAuth);
+  // const triggerPopap = text === 'Pегистрация';
   const dispatch = useDispatch();
 
   const loginUser = (email, password) => {
     dispatch(fetchLoginUser({ email, password })).then((res) => {
       if (res.meta.requestStatus === 'fulfilled') {
+        dispatch(resetForm());
         dispatch(killAllStateFormValidetion());
+      } else {
+        dispatch(setValid());
       }
     });
   };
@@ -37,10 +41,12 @@ export default function FormAuth({ textButton, text }) {
     const email = e.target.email.value;
     const password = e.target.password.value;
     e.preventDefault();
-    if (triggerPopap) {
+    if (fopmReg) {
       dispatch(fetchAddUser({ email, password })).then((res) => {
         if (res.meta.requestStatus === 'fulfilled') {
           loginUser(email, password);
+        } else {
+          dispatch(setValid());
         }
       });
     } else {
@@ -66,7 +72,7 @@ export default function FormAuth({ textButton, text }) {
         <form onSubmit={(e) => handleSubmit(e)} className={Style.form}>
           <div
             onClick={() => {
-              dispatch(triggerPopap ? setfopmReg() : setFormSign());
+              dispatch(resetForm());
               dispatch(killAllStateFormValidetion());
             }}
             className={Style.buttoncloseform}

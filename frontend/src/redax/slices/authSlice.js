@@ -40,11 +40,17 @@ const authSlice = createSlice({
       state.showPreloader = false;
       state.textArrAnswerServer = '';
     },
+    resetForm(state) {
+      state.fopmReg = false;
+      state.fopmSign = false;
+      state.showPreloader = false;
+      state.textArrAnswerServer = '';
+    },
     setfopmReg(state) {
-      state.fopmReg = !state.fopmReg;
+      state.fopmReg = true;
     },
     setFormSign(state) {
-      state.fopmSign = !state.fopmSign;
+      state.fopmSign = true;
     },
   },
   extraReducers: (builder) => {
@@ -79,6 +85,11 @@ const authSlice = createSlice({
 
 export const selectAuth = (state) => state.auth;
 
-export const { setfopmReg, setFormSign, killAllStateAuth, resetTextArrAnswerServer } =
-  authSlice.actions;
+export const {
+  setfopmReg,
+  setFormSign,
+  killAllStateAuth,
+  resetTextArrAnswerServer,
+  resetForm,
+} = authSlice.actions;
 export default authSlice.reducer;
