@@ -20,6 +20,7 @@ import {
   isSuccessRequest,
 } from '../../redax/slices/userSlice';
 import FormEditUserPreloader from './FormEditUserPreloader';
+import ButtonsNavigation from '../ButtonsNavigation/ButtonsNavigation';
 
 export default function FormEditUser() {
   const dispatch = useDispatch();
@@ -213,12 +214,8 @@ export default function FormEditUser() {
           </>
         )}
       </form>
-      <Link className={`${Style.buttonForm} ${Style.button} `} to="/my-page">
-        <p>назад</p>
-      </Link>
-      <Link className={`${Style.buttonForm} ${Style.button} `} to="/">
-        <p>На главную</p>
-      </Link>
+      <ButtonsNavigation page={'/my-page'} text={'Назад'} />
+      <ButtonsNavigation page={'/'} text={'На главную'} />
     </>
   );
 }
