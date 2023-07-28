@@ -11,6 +11,7 @@ import {
 } from '../../redax/slices/topicSlice';
 import Topic from './TopicList/TopicList';
 import Pagination from '../Pagination/Pagination';
+import ButtonsNavigation from '../ButtonsNavigation/ButtonsNavigation';
 
 export default function ForumTopics() {
   const titleRef = React.useRef();
@@ -42,17 +43,21 @@ export default function ForumTopics() {
 
   return (
     <div className={Style.conteiner}>
-      <form onSubmit={(e) => addPost(e)}>
-        <input
-          ref={titleRef}
-          type="text"
-          placeholder="введите название темы"
-          required
-          minLength={5}
-          maxLength={50}
-        ></input>
-        <button type="submit">создать новую тему</button>
-      </form>
+      <div>
+        {' '}
+        <ButtonsNavigation page={'/'} text={'Назад'} />
+        <form onSubmit={(e) => addPost(e)}>
+          <input
+            ref={titleRef}
+            type="text"
+            placeholder="введите название темы"
+            required
+            minLength={5}
+            maxLength={50}
+          ></input>
+          <button type="submit">создать новую тему</button>
+        </form>
+      </div>
       <Topic />
       <Pagination getNumberPage={getTopic} />
     </div>

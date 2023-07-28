@@ -13,6 +13,7 @@ import {
 import FormMessage from '../../FormMessage/FormMessage';
 import MessageUser from '../../MessageUser/MessageUser';
 import Pagination from '../../Pagination/Pagination';
+import ButtonsNavigation from '../../ButtonsNavigation/ButtonsNavigation';
 
 export default function Topic() {
   const dispatch = useDispatch();
@@ -51,6 +52,8 @@ export default function Topic() {
 
   return (
     <div>
+      <ButtonsNavigation page={'/topics'} text={'Назад'} />
+      <ButtonsNavigation page={'/'} text={'На главную'} />
       <div>
         <h1>{titleTopic}</h1>
         <h2>{authorTopic.name}</h2>
