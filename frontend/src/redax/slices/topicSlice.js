@@ -40,6 +40,9 @@ const initialState = {
   titleTopic: '',
   topicsInPage: [],
   numberPages: [],
+  showPreloader: false,
+  successRequest: false,
+  textAnswerRequest: '',
 };
 
 const topicsSlice = createSlice({
@@ -52,6 +55,14 @@ const topicsSlice = createSlice({
       state.titleTopic = '';
       state.topicsAll = [];
       state.numberPages = [];
+      state.showPreloader = false;
+      state.successRequest = false;
+    },
+    resetTextAnswerRequest(state) {
+      state.textAnswerRequest = '';
+    },
+    resetSuccessRequest(state) {
+      state.successRequest = false;
     },
     setMessageValue(state, action) {
       state.messageValue = action.payload;
@@ -105,18 +116,29 @@ const topicsSlice = createSlice({
 
     builder.addCase(fetchAddTopic.pending, (state) => {
       console.log('создание темы');
+      state.showPreloader = true;
     });
     builder.addCase(fetchAddTopic.fulfilled, (state, { payload }) => {
       // console.log(payload);
+      state.showPreloader = false;
+      state.successRequest = true;
+      state.textAnswerRequest = 'тема успешно создана';
     });
     builder.addCase(fetchAddTopic.rejected, (state, action) => {
-      console.log(action);
+      state.showPreloader = false;
+      state.textAnswerRequest = 'при создании темы на сервере произошла ошибка';
+      // console.log(action);
       console.log('ошибка создания темы');
     });
   },
 });
 
 export const selectTopics = (state) => state.topics;
-export const { addAuthorTopic, setMessageValue, killAllStateTopic } =
-  topicsSlice.actions;
+export const {
+  addAuthorTopic,
+  setMessageValue,
+  killAllStateTopic,
+  resetSuccessRequest,
+  resetTextAnswerRequest,
+} = topicsSlice.actions;
 export default topicsSlice.reducer;

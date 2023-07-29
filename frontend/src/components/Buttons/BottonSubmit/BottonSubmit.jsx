@@ -10,7 +10,7 @@ export default function BottonSubmit({
   text,
 }) {
   return (
-    <>
+    <div>
       {' '}
       {valid ? (
         <button className={Style.buttonForm} type="submit">
@@ -30,6 +30,6 @@ export default function BottonSubmit({
       <span className={`${Style.error} ${successRequest && Style.success} `}>
         {textAnswerRequest}
       </span>
-    </>
+    </div>
   );
 }
