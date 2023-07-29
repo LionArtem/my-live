@@ -11,7 +11,7 @@ import {
 } from '../../redax/slices/topicSlice';
 import Topic from './TopicList/TopicList';
 import Pagination from '../Pagination/Pagination';
-import ButtonsNavigation from '../ButtonsNavigation/ButtonsNavigation';
+import ButtonsNavigation from '../Buttons/ButtonsNavigation/ButtonsNavigation';
 
 export default function ForumTopics() {
   const titleRef = React.useRef();

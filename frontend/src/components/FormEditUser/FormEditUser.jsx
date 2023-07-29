@@ -2,8 +2,8 @@ import React from 'react';
 
 import Style from './FormEditUser.module.scss';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
-import PreloaderPoint from '../Preloaders/PreloaderPoint/PreloaderPoint';
+// import { Link } from 'react-router-dom';
+// import PreloaderPoint from '../Preloaders/PreloaderPoint/PreloaderPoint';
 
 import {
   setValue,
@@ -17,10 +17,11 @@ import {
   fetchPatchUser,
   selectUser,
   addTextSuccess,
-  isSuccessRequest,
+  setSuccessRequest,
 } from '../../redax/slices/userSlice';
 import FormEditUserPreloader from './FormEditUserPreloader';
-import ButtonsNavigation from '../ButtonsNavigation/ButtonsNavigation';
+import ButtonsNavigation from '../Buttons/ButtonsNavigation/ButtonsNavigation';
+import BottonSubmit from '../Buttons/BottonSubmit/BottonSubmit';
 
 export default function FormEditUser() {
   const dispatch = useDispatch();
@@ -70,7 +71,7 @@ export default function FormEditUser() {
   const deleteTextAnswerServer = () => {
     setTimeout(() => {
       dispatch(addTextSuccess(''));
-      dispatch(isSuccessRequest());
+      dispatch(setSuccessRequest(false));
     }, 1500);
   };
 
@@ -78,13 +79,11 @@ export default function FormEditUser() {
     evt.preventDefault();
     if (findNoCoincidenceForm(user, value)) {
       dispatch(addTextSuccess('изменения сохранены'));
-      dispatch(isSuccessRequest());
+      dispatch(setSuccessRequest(true));
       deleteTextAnswerServer();
     } else {
       dispatch(fetchPatchUser()).then((res) => {
-        if (res.meta.requestStatus === 'fulfilled') {
-          deleteTextAnswerServer();
-        }
+        deleteTextAnswerServer();
       });
     }
   };
@@ -191,7 +190,13 @@ export default function FormEditUser() {
               required
             ></input>
             <span className={Style.error}>{errors.email}</span>
-            {valid ? (
+            <BottonSubmit
+              valid={valid}
+              showPreloader={showPreloader}
+              successRequest={successRequest}
+              textAnswerRequest={textAnswerRequest}
+            />
+            {/* {valid ? (
               <button className={Style.buttonForm} type="submit">
                 редактировать профиль
                 {showPreloader && <PreloaderPoint />}
@@ -210,7 +215,7 @@ export default function FormEditUser() {
               className={`${Style.error} ${successRequest && Style.success} `}
             >
               {textAnswerRequest}
-            </span>
+            </span> */}
           </>
         )}
       </form>

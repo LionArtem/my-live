@@ -13,7 +13,7 @@ import {
 import FormMessage from '../../FormMessage/FormMessage';
 import MessageUser from '../../MessageUser/MessageUser';
 import Pagination from '../../Pagination/Pagination';
-import ButtonsNavigation from '../../ButtonsNavigation/ButtonsNavigation';
+import ButtonsNavigation from '../../Buttons/ButtonsNavigation/ButtonsNavigation';
 
 export default function Topic() {
   const dispatch = useDispatch();

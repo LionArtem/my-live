@@ -57,8 +57,8 @@ const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    isSuccessRequest(state) {
-      state.successRequest = !state.successRequest;
+    setSuccessRequest(state, action) {
+      state.successRequest = action.payload;
     },
     addTextSuccess(state, action) {
       state.textAnswerRequest = action.payload;
@@ -145,6 +145,6 @@ const userSlice = createSlice({
 
 export const selectUser = (state) => state.user;
 
-export const { killAllStateUser, addTextSuccess, isSuccessRequest } =
+export const { killAllStateUser, addTextSuccess, setSuccessRequest } =
   userSlice.actions;
 export default userSlice.reducer;
