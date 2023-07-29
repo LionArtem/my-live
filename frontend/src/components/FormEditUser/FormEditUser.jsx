@@ -99,8 +99,7 @@ export default function FormEditUser() {
   };
 
   return (
-    <>
-      {' '}
+    <div className={Style.conteiner}>
       <form onSubmit={(evt) => hendelSumit(evt)} className={Style.form}>
         {showSceletonPage ? (
           <FormEditUserPreloader />
@@ -202,6 +201,6 @@ export default function FormEditUser() {
       </form>
       <ButtonsNavigation page={'/my-page'} text={'Назад'} />
       <ButtonsNavigation page={'/'} text={'На главную'} />
-    </>
+    </div>
   );
 }

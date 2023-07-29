@@ -94,7 +94,6 @@ export default function ForumTopics() {
           text={'создать тему'}
         />
       </form>
-
       <Topic />
       <Pagination getNumberPage={getTopic} />
     </div>
