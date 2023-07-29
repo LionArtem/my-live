@@ -15,6 +15,7 @@ import {
 import {
   selectformValidetion,
   setValue,
+  resetValues,
 } from '../../redax/slices/formValidetionSlice';
 
 import Topic from './TopicList/TopicList';
@@ -40,6 +41,7 @@ export default function ForumTopics() {
         getTopic();
       }
       setTimeout(() => dispatch(resetTextAnswerRequest()), 1500);
+      dispatch(resetValues());
     });
   };
 
