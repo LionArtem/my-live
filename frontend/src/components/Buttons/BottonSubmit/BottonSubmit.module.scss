@@ -1,11 +1,13 @@
 .error {
   min-height: 15px;
-  max-width: 100%;
   font-size: 15px;
   line-height: 15px;
   color: brown;
   text-align: center;
-  padding: 5px 0px 5px;
+  padding: 5px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 .success {
@@ -19,9 +21,10 @@
   justify-content: center;
   background-color: rgb(216, 224, 231);
   text-align: center;
-  width: 250px;
-  margin: 0px auto 5px;
-  padding: 5px;
+  width: max-content;
+  //max-width: 250px;
+  margin: 0px auto;
+  padding: 5px 32px;
   cursor: pointer;
   transition: border-radius 0.5s linear, background-color 0.5s linear;
 }

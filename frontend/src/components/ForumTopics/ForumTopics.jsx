@@ -12,6 +12,7 @@ import {
 import Topic from './TopicList/TopicList';
 import Pagination from '../Pagination/Pagination';
 import ButtonsNavigation from '../Buttons/ButtonsNavigation/ButtonsNavigation';
+import BottonSubmit from '../Buttons/BottonSubmit/BottonSubmit';
 
 export default function ForumTopics() {
   const titleRef = React.useRef();
@@ -43,21 +44,26 @@ export default function ForumTopics() {
 
   return (
     <div className={Style.conteiner}>
-      <div>
-        {' '}
-        <ButtonsNavigation page={'/'} text={'Назад'} />
-        <form onSubmit={(e) => addPost(e)}>
-          <input
-            ref={titleRef}
-            type="text"
-            placeholder="введите название темы"
-            required
-            minLength={5}
-            maxLength={50}
-          ></input>
-          <button type="submit">создать новую тему</button>
-        </form>
-      </div>
+      <ButtonsNavigation page={'/'} text={'Назад'} />
+      <form onSubmit={(e) => addPost(e)}>
+        <input
+          ref={titleRef}
+          type="text"
+          placeholder="введите название темы"
+          required
+          minLength={5}
+          maxLength={50}
+        ></input>
+        <BottonSubmit
+          valid={true}
+          showPreloader={true}
+          //successRequest={successRequest}
+          textAnswerRequest={'textAnswerRequestggggggggggggggggjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj'}
+          text={'создать тему'}
+        />
+        {/* <button type="submit">создать новую тему</button> */}
+      </form>
+
       <Topic />
       <Pagination getNumberPage={getTopic} />
     </div>

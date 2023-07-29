@@ -195,6 +195,7 @@ export default function FormEditUser() {
               showPreloader={showPreloader}
               successRequest={successRequest}
               textAnswerRequest={textAnswerRequest}
+              text={'редактировать профиль'}
             />
             {/* {valid ? (
               <button className={Style.buttonForm} type="submit">

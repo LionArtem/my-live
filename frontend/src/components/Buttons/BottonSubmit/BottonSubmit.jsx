@@ -7,14 +7,14 @@ export default function BottonSubmit({
   showPreloader,
   successRequest,
   textAnswerRequest,
+  text,
 }) {
-  
   return (
     <>
       {' '}
       {valid ? (
         <button className={Style.buttonForm} type="submit">
-          редактировать профиль
+          {text}
           {showPreloader && <PreloaderPoint />}
         </button>
       ) : (
@@ -23,7 +23,7 @@ export default function BottonSubmit({
           className={`${Style.buttonForm} ${Style.buttonFormOff}`}
           type="submit"
         >
-          редактировать профиль
+          {text}
           {showPreloader && <PreloaderPoint />}
         </button>
       )}

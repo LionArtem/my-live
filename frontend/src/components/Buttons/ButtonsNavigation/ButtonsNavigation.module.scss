@@ -1,11 +1,13 @@
 a {
   all: unset;
+  display: inline-block;
   cursor: pointer;
+  width: max-content;
 }
 
 .button {
   background-color: rgb(216, 224, 231);
-  max-width: max-content;
+  //max-width: max-content;
   padding: 5px;
   transition: border-radius 0.5s linear, background-color 0.5s linear;
 }

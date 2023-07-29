@@ -1,6 +1,20 @@
-.conteiner{
-    height: 100vh;
-    box-sizing: border-box;
+.conteiner {
+  height: 100vh;
+  box-sizing: border-box;
+  display: grid;
+  grid-template-rows: min-content min-content auto min-content;
+  form {
     display: grid;
-    grid-template-rows: min-content auto min-content;
+    grid-template-columns: min-content min-content 1fr;
+    align-items: center;
+    justify-self: start;
+    input {
+      all: unset;
+      height: 28px;
+      width: 250px;
+      border-bottom: 1px solid rgb(216, 224, 231);
+      margin-right: 5px;
+      text-align: center;
+    }
+  }
 }
