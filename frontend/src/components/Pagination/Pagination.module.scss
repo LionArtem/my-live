@@ -6,33 +6,31 @@ nav {
 }
 
 nav::-webkit-scrollbar {
-  height: 8px; /* высота для горизонтального скролла */
-  background-color: #143861;
+  height: 12px; /* высота для горизонтального скролла */
+  background-color: rgb(206, 209, 212);
 }
 /* ползунок скроллбара */
 nav::-webkit-scrollbar-thumb {
-  background-color: #843465;
+  background-color: #000000;
   border-radius: 9em;
-  box-shadow: inset 1px 1px 10px #f3faf7;
 }
 
 nav::-webkit-scrollbar-thumb:hover {
-  background-color: #253861;
+  background-color: #3a3a3c;
 }
 /* Стрелки */
-
 nav::-webkit-scrollbar-button:horizontal:start:decrement {
-  background: linear-gradient(30deg, #02141a 40%, rgba(0, 0, 0, 0) 41%),
-    linear-gradient(150deg, #02141a 40%, rgba(0, 0, 0, 0) 41%),
-    linear-gradient(270deg, #02141a 30%, rgba(0, 0, 0, 0) 31%);
-  background-color: #f6f8f4;
+  background: linear-gradient(30deg, #92c898 40%, rgba(0, 0, 0, 0) 41%),
+    linear-gradient(150deg, #92c898 40%, rgba(0, 0, 0, 0) 41%),
+    linear-gradient(270deg, #92c898 10%, rgba(0, 0, 0, 0) 31%);
+  background-color: #000000;
 }
 
 nav::-webkit-scrollbar-button:horizontal:end:increment {
-  background: linear-gradient(210deg, #02141a 40%, rgba(0, 0, 0, 0) 41%),
-    linear-gradient(330deg, #02141a 40%, rgba(0, 0, 0, 0) 41%),
-    linear-gradient(90deg, #02141a 30%, rgba(0, 0, 0, 0) 31%);
-  background-color: #f6f8f4;
+  background: linear-gradient(210deg, #92c898 40%, rgba(0, 0, 0, 0) 41%),
+    linear-gradient(330deg, #92c898 40%, rgba(0, 0, 0, 0) 41%),
+    linear-gradient(90deg, #92c898 10%, rgba(0, 0, 0, 0) 31%);
+  background-color: #000000;
 }
 
 .list {

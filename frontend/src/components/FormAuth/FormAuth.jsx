@@ -23,7 +23,6 @@ export default function FormAuth({ textButton, text }) {
   const { value, errors, valid } = useSelector(selectformValidetion);
   const { showPreloader, textArrAnswerServer, fopmReg } =
     useSelector(selectAuth);
-  // const triggerPopap = text === 'Pегистрация';
   const dispatch = useDispatch();
 
   const loginUser = (email, password) => {

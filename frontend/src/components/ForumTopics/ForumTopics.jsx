@@ -50,7 +50,6 @@ export default function ForumTopics() {
   }, []);
 
   React.useEffect(() => {
-    // return () => console.log('exit');
     return () => {
       dispatch(killAllStateTopic());
       localStorage.removeItem('page');
