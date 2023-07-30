@@ -108,7 +108,8 @@ const topicsSlice = createSlice({
     });
     builder.addCase(fetchGetTopicPaginetion.fulfilled, (state, { payload }) => {
       state.topicsInPage = payload.topic;
-      state.numberPages = [...new Array(Math.ceil(payload.numberTopics / 10))];
+      state.numberPages = [...new Array(Math.ceil(130))];
+      // state.numberPages = [...new Array(Math.ceil(payload.numberTopics / 10))];
     });
     builder.addCase(fetchGetTopicPaginetion.rejected, (state, action) => {
       console.log('ошибка загрузки paginetion topic');

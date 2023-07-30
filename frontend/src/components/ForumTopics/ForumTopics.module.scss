@@ -1,5 +1,5 @@
 .conteiner {
-  height: 100vh;
+  min-height: 100vh;
   box-sizing: border-box;
   display: grid;
   grid-template-rows: min-content min-content auto min-content;
