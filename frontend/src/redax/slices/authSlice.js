@@ -59,7 +59,7 @@ const authSlice = createSlice({
       console.log('запрос на регистрацию');
     });
     builder.addCase(fetchAddUser.fulfilled, (state, { payload }) => {
-      console.log(payload);
+      //console.log(payload);
     });
     builder.addCase(fetchAddUser.rejected, (state, action) => {
       console.log('ошибка регистрации');
