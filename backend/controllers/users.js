@@ -3,7 +3,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const User = require('../models/user');
 
-const { NODE_ENV, JWT_SECRET } = process.env;
+const { NODE_ENV, JWT_SECRET, EMAIL_ADMIN } = process.env;
 
 const RepeatsEmailError = require('../errors/repeats-email-err');
 const IncorrectErr = require('../errors/incorrect-err');
@@ -15,10 +15,17 @@ const createUsers = (req, res, next) => {
     email,
     password,
   } = req.body;// получим из объекта запроса имя и описание пользователя
+  let admin;
+  if (email === EMAIL_ADMIN) {
+    admin = true;
+  } else {
+    admin = false;
+  }
   bcrypt.hash(password, 10)
     .then((hash) => User.create({
       email,
       password: hash,
+      admin,
     }).then((newUser) => {
       const newUserNoPassword = newUser.toObject();
       delete newUserNoPassword.password;
