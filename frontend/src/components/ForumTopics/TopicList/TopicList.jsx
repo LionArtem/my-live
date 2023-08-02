@@ -2,12 +2,15 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Style from './TopicList.module.scss';
 
-import { selectTopics } from '../../../redax/slices/topicSlice';
+import {
+  selectTopics,
+  fetchDeleteTopic,
+} from '../../../redax/slices/topicSlice';
 import { selectUser, fetchGetUser } from '../../../redax/slices/userSlice';
 import { selectAuth } from '../../../redax/slices/authSlice';
 import { Link } from 'react-router-dom';
 
-export default function TopicList() {
+export default function TopicList({ getTopic }) {
   const dispatch = useDispatch();
   const { topicsInPage } = useSelector(selectTopics);
   const { user } = useSelector(selectUser);
@@ -17,7 +20,15 @@ export default function TopicList() {
     dispatch(fetchGetUser(token));
   }, []);
 
-  console.log(user);
+  const deleteTopic = (evt, id) => {
+    evt.preventDefault();
+    evt.stopPropagation();
+    dispatch(fetchDeleteTopic(id)).then((res) => {
+      if (res.meta.requestStatus === 'fulfilled') {
+        getTopic();
+      }
+    });
+  };
 
   return (
     <div className={Style.conteiner}>
@@ -31,7 +42,11 @@ export default function TopicList() {
             >
               {obj.title}
             </h1>
-            {user.admin && <button>удалить</button>}
+            {user.admin && (
+              <button onClick={(evt) => deleteTopic(evt, obj._id)}>
+                удалить
+              </button>
+            )}
           </Link>
         ))}
     </div>

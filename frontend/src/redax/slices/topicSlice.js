@@ -34,6 +34,14 @@ export const fetchAddTopic = createAsyncThunk(
   }
 );
 
+export const fetchDeleteTopic = createAsyncThunk(
+  'page/fetchDeleteTopic',
+  async (params, thunkAPI) => {
+    const data = await topicApi.deleteTopic(params);
+    return data;
+  }
+);
+
 const initialState = {
   messageValue: '',
   authorTopic: {},
@@ -129,6 +137,18 @@ const topicsSlice = createSlice({
       state.textAnswerRequest = 'при создании темы на сервере произошла ошибка';
       // console.log(action);
       console.log('ошибка создания темы');
+    });
+
+    builder.addCase(fetchDeleteTopic.pending, (state) => {
+      console.log('удаление темы');
+      state.showPreloader = true;
+    });
+    builder.addCase(fetchDeleteTopic.fulfilled, (state, { payload }) => {
+       console.log(payload);
+    });
+    builder.addCase(fetchDeleteTopic.rejected, (state, action) => {
+      // console.log(action);
+      console.log('ошибка удаления темы');
     });
   },
 });

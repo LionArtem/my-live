@@ -104,10 +104,37 @@ const getMessagePaginetion = (req, res, next) => {
     .catch(next);
 };
 
+const deleteTopic = (req, res, next) => {
+  const { id } = req.params;
+  Topic.findById(id)
+    .then((cardFind) => {
+      if (!cardFind) {
+        const err = new NotFoundError('карточка с таким id не найдена');
+        next(err);
+        return;
+      }
+      cardFind.deleteOne()
+        .then((card) => {
+          res.send(card);
+        }).catch((err) => {
+          next(err);
+        });
+    })
+    .catch((err) => {
+      if (err.name === 'CastError') {
+        const error = new IncorrectErr('Не корректные данные');
+        next(error);
+      } else {
+        next(err);
+      }
+    });
+};
+
 module.exports = {
   createTopic,
   getTopics,
   addInTopicMessage,
   getMessagePaginetion,
   getTopicsPaginetion,
+  deleteTopic,
 };

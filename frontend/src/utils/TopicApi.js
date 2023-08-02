@@ -46,6 +46,13 @@ class TopicApi {
     }).then(this._checkResponse);
   }
 
+  deleteTopic(params) {
+    return fetch(`${this.baseUrl}/${params}`, {
+      method: 'DELETE',
+      headers: this.headers,
+    }).then(this._checkResponse);
+  }
+
   _checkResponse = (res) => {
     if (res.ok) {
       return res.json();

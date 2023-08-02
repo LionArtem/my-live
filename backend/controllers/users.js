@@ -4,7 +4,6 @@ const jwt = require('jsonwebtoken');
 const User = require('../models/user');
 
 const { NODE_ENV, JWT_SECRET, EMAIL_ADMIN } = process.env;
-
 const RepeatsEmailError = require('../errors/repeats-email-err');
 const IncorrectErr = require('../errors/incorrect-err');
 const NotFoundError = require('../errors/not-found-err');
