@@ -4,7 +4,52 @@
   grid-template-rows: min-content min-content auto min-content min-content;
 }
 
-.conteiner_navigation{
-    display: flex;
-    column-gap: 7px;
+.conteiner_navigation {
+  display: flex;
+  column-gap: 7px;
+}
+
+.info_topic {
+  display: flex;
+  align-items: center;
+  border: 1px solid rgb(216, 224, 231);
+  padding: 5px;
+  margin-bottom: 20px;
+  h1 {
+    margin: 0px 10px 0px 0px;
+    letter-spacing: 3px;
+    width: 50%;
+  }
+}
+
+.use_conteiner {
+  display: grid;
+  grid-template-columns: min-content auto;
+  grid-template-rows: min-content;
+  grid-template-areas:
+    'foto name'
+    'foto sity'
+    'foto data';
+    column-gap: 5px;
+  h3 {
+    grid-area: name;
+    margin: 0;
+    font-size: 1em;
+  }
+  p {
+    grid-area: sity;
+    margin: 0;
+    font-size: 0.8em;
+  }
+  span {
+    grid-area: data;
+    font-size: 0.8em;
+  }
+  img {
+    grid-area: foto;
+    width: 50px;
+    height: 50px;
+    object-fit: contain;
+    padding: 5px 0px 5px;
+  }
 }

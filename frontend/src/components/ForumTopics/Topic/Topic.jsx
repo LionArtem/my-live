@@ -57,9 +57,14 @@ export default function Topic() {
         <ButtonsNavigation page={'/topics'} text={'Назад'} />
         <ButtonsNavigation page={'/'} text={'На главную'} />
       </div>
-      <div>
+      <div className={Style.info_topic}>
         <h1>{titleTopic}</h1>
-        <h2>{authorTopic.name}</h2>
+        <div className={Style.use_conteiner}>
+          <img src={authorTopic.avatar} alt="аватарка" />
+          <h3>{`${authorTopic.name} (${authorTopic.gender}.${authorTopic.age})`}</h3>
+          <p>{authorTopic.sity}</p>
+          <span>2023-02-24 15.00</span>
+        </div>
       </div>
       <MessageUser />
       <FormMessage getMessages={getMessages} />
