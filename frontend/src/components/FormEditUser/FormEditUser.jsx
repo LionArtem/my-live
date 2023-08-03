@@ -104,7 +104,7 @@ export default function FormEditUser() {
         {showSceletonPage ? (
           <FormEditUserPreloader />
         ) : errServer ? (
-          <h1 className={Style.textErrServer}>{`${textAnswerRequest} :(`}</h1>
+          <h1 className={Style.text_err_server}>{`${textAnswerRequest} :(`}</h1>
         ) : (
           <>
             {' '}
@@ -131,7 +131,7 @@ export default function FormEditUser() {
               maxLength={30}
             ></input>
             <span className={Style.error}>{errors.name}</span>
-            <div className={Style.conteinerAgeGender}>
+            <div className={Style.conteiner_age_gender}>
               <label>возраст</label>
               <input
                 className={Style.age}

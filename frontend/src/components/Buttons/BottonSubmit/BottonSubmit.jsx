@@ -13,14 +13,14 @@ export default function BottonSubmit({
     <div>
       {' '}
       {valid ? (
-        <button className={Style.buttonForm} type="submit">
+        <button className={Style.button_form} type="submit">
           {text}
           {showPreloader && <PreloaderPoint />}
         </button>
       ) : (
         <button
           disabled
-          className={`${Style.buttonForm} ${Style.buttonFormOff}`}
+          className={`${Style.button_form} ${Style.button_form_off}`}
           type="submit"
         >
           {text}

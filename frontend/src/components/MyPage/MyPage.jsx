@@ -28,12 +28,12 @@ export default function MyPage() {
 
   return (
     <div className={Style.root}>
-      <div className={Style.useConteiner}>
-        <div className={Style.infoUser}>
+      <div className={Style.use_conteiner}>
+        <div className={Style.info_user}>
           {showSceletonPage ? (
             <MyPagePreloader />
           ) : errServer ? (
-            <h1 className={Style.textErrServer}>{`${textAnswerRequest} :(`}</h1>
+            <h1 className={Style.text_err_server}>{`${textAnswerRequest} :(`}</h1>
           ) : (
             <>
               {' '}

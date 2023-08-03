@@ -31,9 +31,9 @@
         top: -40px;
         right: -330px;
         cursor: pointer;
-      }
-      .button_close:hover {
-        text-shadow: 1px 1px #524e4e;
+        &:hover {
+          text-shadow: 1px 1px #524e4e;
+        }
       }
       .title {
         color: aliceblue;
@@ -66,17 +66,17 @@
         padding: 5px;
         border-radius: 5px;
         cursor: pointer;
+        &:hover {
+          text-shadow: 1px 1px #524e4e;
+        }
       }
+
       .button_Off {
         cursor: none;
         color: rgb(119, 115, 115);
-      }
-
-      .button:hover {
-        text-shadow: 1px 1px #524e4e;
-      }
-      .button_Off:hover {
-        text-shadow: none;
+        &:hover {
+          text-shadow: none;
+        }
       }
     }
   }

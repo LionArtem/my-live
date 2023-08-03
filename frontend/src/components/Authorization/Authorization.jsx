@@ -16,11 +16,11 @@ export default function Authorization() {
   const dispatch = useDispatch();
   const { fopmReg, fopmSign } = useSelector(selectAuth);
   return (
-    <div className={Style.contenerAuth}>
-      <p className={Style.buttonOpen} onClick={() => dispatch(setfopmReg())}>
+    <div className={Style.contener_auth}>
+      <p className={Style.button_open} onClick={() => dispatch(setfopmReg())}>
         Регистрация
       </p>
-      <p className={Style.buttonOpen} onClick={() => dispatch(setFormSign())}>
+      <p className={Style.button_open} onClick={() => dispatch(setFormSign())}>
         Войти
       </p>
       {fopmReg && (

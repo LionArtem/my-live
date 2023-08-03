@@ -1,0 +1,10 @@
+.topic {
+  min-height: 100vh;
+  display: grid;
+  grid-template-rows: min-content min-content auto min-content min-content;
+}
+
+.conteiner_navigation{
+    display: flex;
+    column-gap: 7px;
+}

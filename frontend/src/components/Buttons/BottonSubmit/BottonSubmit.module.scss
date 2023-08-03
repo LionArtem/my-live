@@ -12,7 +12,7 @@
   color: rgb(79, 99, 216);
 }
 
-.buttonForm {
+.button_form {
   all: unset;
   display: flex;
   align-items: center;
@@ -20,24 +20,21 @@
   background-color: rgb(216, 224, 231);
   text-align: center;
   width: max-content;
-  //max-width: 250px;
   margin: 0px auto;
   padding: 5px 32px;
   cursor: pointer;
   transition: border-radius 0.5s linear, background-color 0.5s linear;
+  &:hover {
+    border-radius: 5px;
+    background-color: rgb(251, 252, 254);
+  }
 }
 
-.buttonFormOff {
+.button_form_off {
   cursor: none;
   color: rgb(72, 72, 72);
-}
-
-.buttonForm:hover {
-  border-radius: 5px;
-  background-color: rgb(251, 252, 254);
-}
-
-.buttonFormOff:hover {
-  border-radius: 0px;
-  background-color: rgb(216, 224, 231);
+  &:hover {
+    border-radius: 0px;
+    background-color: rgb(216, 224, 231);
+  }
 }

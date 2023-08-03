@@ -13,12 +13,12 @@ export default function AuthorizedUser() {
   const dispatch = useDispatch();
 
   return (
-    <div className={Style.contenerAuth}>
+    <div className={Style.contener_auth}>
       <Link to={'my-page'}>
-        <p className={Style.buttonOpen}>Моя страница </p>
+        <p className={Style.button_open}>Моя страница </p>
       </Link>
       <p
-        className={Style.buttonOpen}
+        className={Style.button_open}
         onClick={() => {
           localStorage.clear();
           dispatch(killAllStateAuth());

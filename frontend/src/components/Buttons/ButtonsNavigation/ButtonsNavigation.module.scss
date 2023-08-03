@@ -12,9 +12,8 @@ a {
   background-color: rgb(216, 224, 231);
   padding: 5px;
   transition: border-radius 0.5s linear, background-color 0.5s linear;
-}
-
-.button:hover {
-  border-radius: 5px;
-  background-color: rgb(251, 252, 254);
+  &:hover {
+    border-radius: 5px;
+    background-color: rgb(251, 252, 254);
+  }
 }

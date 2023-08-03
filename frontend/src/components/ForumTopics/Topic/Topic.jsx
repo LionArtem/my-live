@@ -1,5 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import Style from './Topic.module.scss';
 
 import {
   selectTopics,
@@ -51,9 +52,11 @@ export default function Topic() {
   }, []);
 
   return (
-    <div>
-      <ButtonsNavigation page={'/topics'} text={'Назад'} />
-      <ButtonsNavigation page={'/'} text={'На главную'} />
+    <div className={Style.topic}>
+      <div className={Style.conteiner_navigation}>
+        <ButtonsNavigation page={'/topics'} text={'Назад'} />
+        <ButtonsNavigation page={'/'} text={'На главную'} />
+      </div>
       <div>
         <h1>{titleTopic}</h1>
         <h2>{authorTopic.name}</h2>

@@ -10,9 +10,9 @@
       width: min-content;
       display: block;
       transition: transform 0.5s linear;
-    }
-    a:hover {
-      transform: translateX(10px);
+      &:hover {
+        transform: translateX(10px);
+      }
     }
   }
 }

@@ -48,8 +48,8 @@ nav::-webkit-scrollbar-button:horizontal:end:increment {
     text-align: center;
     cursor: pointer;
     transition: transform 0.2s linear;
-  }
-  li:hover {
-    transform: translateY(-3px);
+    &:hover {
+      transform: translateY(-3px);
+    }
   }
 }
