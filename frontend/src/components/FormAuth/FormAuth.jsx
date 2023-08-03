@@ -74,10 +74,8 @@ export default function FormAuth({ textButton, text }) {
               dispatch(resetForm());
               dispatch(killAllStateFormValidetion());
             }}
-            className={Style.buttoncloseform}
-          >
-            закрыть
-          </div>
+            className={Style.button_close}
+          ></div>
           <p className={Style.title}>{text}</p>
           <input
             pattern="[a-zA-Z0-9._\-]+@[a-zA-Z0-9._\-]+\.[a-zA-Z0-9_\-]+"
@@ -117,7 +115,7 @@ export default function FormAuth({ textButton, text }) {
               <button
                 disabled
                 type="submit"
-                className={`${Style.button} ${Style.buttonOff}`}
+                className={`${Style.button} ${Style.button_Off}`}
               >
                 {textButton}
               </button>

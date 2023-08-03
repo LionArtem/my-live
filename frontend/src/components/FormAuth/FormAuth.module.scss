@@ -18,19 +18,21 @@
       border: 1px solid aliceblue;
       border-radius: 5px;
       padding: 10px;
-      .buttoncloseform {
+      .button_close {
+        background-image: url(../../image/x.svg);
+        width: 20px;
+        height: 20px;
+        background-size: cover;
         color: rgb(26, 25, 25);
         border: 1px solid white;
         position: relative;
-        width: 70px;
-        text-align: center;
         background-color: aliceblue;
         border-radius: 3px;
         top: -40px;
         right: -330px;
         cursor: pointer;
       }
-      .buttoncloseform:hover {
+      .button_close:hover {
         text-shadow: 1px 1px #524e4e;
       }
       .title {
@@ -65,7 +67,7 @@
         border-radius: 5px;
         cursor: pointer;
       }
-      .buttonOff {
+      .button_Off {
         cursor: none;
         color: rgb(119, 115, 115);
       }
@@ -73,7 +75,7 @@
       .button:hover {
         text-shadow: 1px 1px #524e4e;
       }
-      .buttonOff:hover {
+      .button_Off:hover {
         text-shadow: none;
       }
     }

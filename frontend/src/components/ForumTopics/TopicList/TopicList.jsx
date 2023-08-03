@@ -43,9 +43,10 @@ export default function TopicList({ getTopic }) {
               {obj.title}
             </h1>
             {user.admin && (
-              <button onClick={(evt) => deleteTopic(evt, obj._id)}>
-                удалить
-              </button>
+              <button
+                className={Style.button_delete}
+                onClick={(evt) => deleteTopic(evt, obj._id)}
+              ></button>
             )}
           </Link>
         ))}
