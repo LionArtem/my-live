@@ -24,7 +24,6 @@ export default function MessageUser() {
                     {obj.user.name}
                     <p>{`(${obj.user.gender}.${obj.user.age})`}</p>
                   </h3>
-                  {/* <h3>{`${obj.user.name} (${obj.user.gender}.${obj.user.age})`}</h3> */}
                   <p>{obj.user.sity}</p>
                   <span>2023-02-24 15.00</span>
                 </>

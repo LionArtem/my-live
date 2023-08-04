@@ -31,7 +31,7 @@ export default function Form({ getMessages }) {
       }
     });
   };
- 
+
   return (
     <>
       {allMessagesAndAuthors.length >= 10 ? (
@@ -43,14 +43,16 @@ export default function Form({ getMessages }) {
           className={Style.form}
         >
           <textarea
-            placeholder="text"
             ref={textAreaRef}
             value={messageValue}
             onChange={(e) => {
               dispatch(setMessageValue(e.target.value));
             }}
-            className={Style.input}
+            className={Style.textarea}
             type="text"
+            name="textarea"
+            required
+            maxLength={500}
           ></textarea>
           <button className={Style.button} type="submit">
             Отправить

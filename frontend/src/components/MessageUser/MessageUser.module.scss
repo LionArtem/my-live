@@ -1,20 +1,23 @@
 .root {
   display: grid;
-  height: 150px;
+  height: max-content;
+  padding: 0px 5px 5px;
+  border: 1px solid rgb(216, 224, 231);
+  margin-bottom: 15px;
 }
 
 .foto {
   grid-area: foto;
   width: 100px;
   height: 100px;
-  object-fit: contain;
+  object-fit: cover;
   padding: 5px 0px 5px;
 }
 
 .use_conteiner {
+  height: 110px;
   display: grid;
   grid-template-columns: min-content auto;
-  grid-template-rows: min-content;
   grid-template-areas:
     'foto name'
     'foto sity'
@@ -23,11 +26,12 @@
   h3 {
     grid-area: name;
     display: flex;
+    align-items: center;
     margin: 0;
     P {
       margin: 0;
       padding-left: 5px;
-      font-weight: 100;
+      font-weight: 400;
     }
   }
   p {
@@ -39,6 +43,8 @@
 }
 
 .massage {
+  max-width: 100%;
+  overflow-wrap: anywhere;
   font-size: 24px;
   background-color: rgb(222, 232, 234);
   margin: 0;

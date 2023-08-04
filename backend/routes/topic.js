@@ -51,7 +51,7 @@ topicRouter.put('/:topicId/message', celebrate({
   }),
   body: Joi.object()
     .keys({
-      message: Joi.string().required(),
+      message: Joi.string().required().min(1).max(500),
       userId: Joi.string().hex().length(24).required(),
     }),
 }), addInTopicMessage);
