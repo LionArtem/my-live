@@ -1,35 +1,58 @@
 import React from 'react';
 import Style from './FormMessage.module.scss';
 import { useSelector, useDispatch } from 'react-redux';
-import {
-  setMessageValue,
-  selectTopics,
-  fetchAddMessageInTopic,
-} from '../../redax/slices/topicSlice';
+import { fetchAddMessageInTopic } from '../../redax/slices/topicSlice';
 
 import { selectUser } from '../../redax/slices/userSlice';
 
+import {
+  setValue,
+  selectformValidetion,
+  resetValues,
+} from '../../redax/slices/formValidetionSlice';
+import BottonSubmit from '../Buttons/BottonSubmit/BottonSubmit';
+
 export default function Form({ getMessages }) {
-  const textAreaRef = React.useRef();
-  const formRef = React.useRef();
-  const { messageValue } = useSelector(selectTopics);
   const { allMessagesAndAuthors } = useSelector(selectUser);
+  const { value, errors, valid } = useSelector(selectformValidetion);
 
   const dispatch = useDispatch();
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleSubmit = (evt) => {
+    evt.preventDefault();
     dispatch(
       fetchAddMessageInTopic({
         id: localStorage.getItem('topicId'),
         userId: localStorage.getItem('userId'),
-        message: messageValue,
+        message: value.textarea,
       })
     ).then((res) => {
       if (res.meta.requestStatus === 'fulfilled') {
         getMessages();
+        dispatch(resetValues());
       }
     });
+  };
+
+  const validetionTextarea = (evt) => {
+    const regex = /[^\s]+/;
+    const result = regex.test(evt.target.value);
+    if (result) {
+      return { checkValid: true };
+    } else {
+      return { checkValid: false, taxtErr: 'ввидите минимум один символ' };
+    }
+  };
+
+  const changeValue = (evt) => {
+    dispatch(
+      setValue({
+        value: evt.target.value,
+        name: evt.target.name,
+        errors: validetionTextarea(evt).taxtErr,
+        valid: validetionTextarea(evt).checkValid,
+      })
+    );
   };
 
   return (
@@ -37,16 +60,11 @@ export default function Form({ getMessages }) {
       {allMessagesAndAuthors.length >= 10 ? (
         ''
       ) : (
-        <form
-          onSubmit={(e) => handleSubmit(e)}
-          ref={formRef}
-          className={Style.form}
-        >
+        <form onSubmit={(evt) => handleSubmit(evt)} className={Style.form}>
           <textarea
-            ref={textAreaRef}
-            value={messageValue}
-            onChange={(e) => {
-              dispatch(setMessageValue(e.target.value));
+            value={value.textarea ?? ''}
+            onChange={(evt) => {
+              changeValue(evt);
             }}
             className={Style.textarea}
             type="text"
@@ -54,9 +72,14 @@ export default function Form({ getMessages }) {
             required
             maxLength={500}
           ></textarea>
-          <button className={Style.button} type="submit">
-            Отправить
-          </button>
+          <span className={Style.error}>{errors.textarea}</span>
+          <BottonSubmit
+            valid={valid}
+            //showPreloader={showPreloader}
+            //successRequest={successRequest}
+            //textAnswerRequest={textAnswerRequest}
+            text={'отправить'}
+          />
         </form>
       )}
     </>
