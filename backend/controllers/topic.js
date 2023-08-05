@@ -82,6 +82,37 @@ const addInTopicMessage = (req, res, next) => {
     });
 };
 
+const deleteMessage = (req, res, next) => {
+  const { topicId } = req.params;
+  const {
+    messageId,
+  } = req.body;
+  Topic.findByIdAndUpdate(
+    topicId,
+    {
+      $pull: {
+        messages: { _id: messageId },
+      },
+    },
+    { new: true },
+  )
+    .then((resTopic) => {
+      if (resTopic) {
+        res.send(resTopic);
+        return;
+      }
+      throw new NotFoundError('карточка с таким id не найдена');
+    })
+    .catch((err) => {
+      if (err.name === 'CastError') {
+        const error = new IncorrectErr('не корректные данные');
+        next(error);
+      } else {
+        next(err);
+      }
+    });
+};
+
 const getMessagePaginetion = (req, res, next) => {
   const { topicId } = req.params;
   const id = topicId.split('&')[0];
@@ -137,4 +168,5 @@ module.exports = {
   getMessagePaginetion,
   getTopicsPaginetion,
   deleteTopic,
+  deleteMessage,
 };

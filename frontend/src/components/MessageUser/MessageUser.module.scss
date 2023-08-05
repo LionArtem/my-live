@@ -17,11 +17,11 @@
 .use_conteiner {
   height: 110px;
   display: grid;
-  grid-template-columns: min-content auto;
+  grid-template-columns: min-content auto min-content;
   grid-template-areas:
-    'foto name'
-    'foto sity'
-    'foto data';
+    'foto name button'
+    'foto sity sity'
+    'foto data data';
   column-gap: 5px;
   h3 {
     grid-area: name;
@@ -39,6 +39,9 @@
   }
   span {
     grid-area: data;
+  }
+  .button_delete{
+    grid-area: button;
   }
 }
 

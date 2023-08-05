@@ -66,7 +66,7 @@ export default function Topic() {
           <span>2023-02-24 15.00</span>
         </div>
       </div>
-      <MessageUser />
+      <MessageUser getMessages={getMessages} />
       <FormMessage getMessages={getMessages} />
       <Pagination getNumberPage={getMessages} />
     </div>

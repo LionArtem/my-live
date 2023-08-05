@@ -124,6 +124,7 @@ const userSlice = createSlice({
       console.log('запрос на получение пользователя по массиву id');
     });
     builder.addCase(fetchGetUserFindId.fulfilled, (state, { payload }) => {
+     // console.log(payload);
       state.allMessagesAndAuthors = payload.topic.messages.map((messages) => {
         return {
           messages,

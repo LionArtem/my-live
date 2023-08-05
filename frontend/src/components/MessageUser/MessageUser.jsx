@@ -1,12 +1,26 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import Style from './MessageUser.module.scss';
 
 import { selectUser } from '../../redax/slices/userSlice';
+import { fetchDeleteMessage } from '../../redax/slices/topicSlice';
 
-export default function MessageUser() {
+export default function MessageUser({ getMessages }) {
+  const dispatch = useDispatch();
   const { allMessagesAndAuthors } = useSelector(selectUser);
+  const deleteMessage = (obj) => {
+    dispatch(
+      fetchDeleteMessage({
+        messageId: obj.messages._id,
+        topicId: localStorage.getItem('topicId'),
+      })
+    ).then((res) => {
+      if (res.meta.requestStatus === 'fulfilled') {
+        getMessages();
+      }
+    });
+  };
   return (
     <>
       {allMessagesAndAuthors.length > 0 ? (
@@ -26,6 +40,12 @@ export default function MessageUser() {
                   </h3>
                   <p>{obj.user.sity}</p>
                   <span>2023-02-24 15.00</span>
+                  <button
+                    onClick={() => deleteMessage(obj)}
+                    className={Style.button_delete}
+                  >
+                    delete
+                  </button>
                 </>
               ) : (
                 <>

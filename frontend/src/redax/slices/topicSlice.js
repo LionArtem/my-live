@@ -10,6 +10,14 @@ export const fetchAddMessageInTopic = createAsyncThunk(
   }
 );
 
+export const fetchDeleteMessage = createAsyncThunk(
+  'page/fetchDeleteMessage',
+  async (params, thunkAPI) => {
+    const data = await topicApi.deleteMessage(params);
+    return data;
+  }
+);
+
 export const fetchGetMessagePaginetion = createAsyncThunk(
   'page/fetchGetMessagePaginetion',
   async (params, thunkAPI) => {
@@ -88,6 +96,17 @@ const topicsSlice = createSlice({
       console.log('ошибка загрузки message');
     });
 
+    builder.addCase(fetchDeleteMessage.pending, (state) => {
+      console.log('удаление message');
+    });
+    builder.addCase(fetchDeleteMessage.fulfilled, (state, { payload }) => {
+      //console.log(payload);
+      
+    });
+    builder.addCase(fetchDeleteMessage.rejected, (state, action) => {
+      console.log('ошибка удаления message');
+    });
+
     builder.addCase(fetchGetMessagePaginetion.pending, (state) => {
       console.log('загрузка paginetion message');
     });
@@ -144,7 +163,7 @@ const topicsSlice = createSlice({
       state.showPreloader = true;
     });
     builder.addCase(fetchDeleteTopic.fulfilled, (state, { payload }) => {
-       console.log(payload);
+      console.log(payload);
     });
     builder.addCase(fetchDeleteTopic.rejected, (state, action) => {
       // console.log(action);

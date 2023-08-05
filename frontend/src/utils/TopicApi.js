@@ -38,6 +38,17 @@ class TopicApi {
     }).then(this._checkResponse);
   }
 
+  deleteMessage(params) {
+    const { messageId, topicId } = params;
+    return fetch(`${this.baseUrl}/${topicId}/message`, {
+      method: 'PATCH',
+      headers: this.headers,
+      body: JSON.stringify({
+        messageId,
+      }),
+    }).then(this._checkResponse);
+  }
+
   getMessagePaginetion(params) {
     const { id, page } = params;
     return fetch(`${this.baseUrl}/${id}&${page}/message`, {
