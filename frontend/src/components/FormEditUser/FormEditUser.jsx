@@ -2,8 +2,6 @@ import React from 'react';
 
 import Style from './FormEditUser.module.scss';
 import { useDispatch, useSelector } from 'react-redux';
-// import { Link } from 'react-router-dom';
-// import PreloaderPoint from '../Preloaders/PreloaderPoint/PreloaderPoint';
 
 import {
   setValue,
@@ -22,7 +20,7 @@ import {
 import FormEditUserPreloader from './FormEditUserPreloader';
 import ButtonsNavigation from '../Buttons/ButtonsNavigation/ButtonsNavigation';
 import BottonSubmit from '../Buttons/BottonSubmit/BottonSubmit';
-import TextErrorForms from '../../TextError/TextErrorForms/TextErrorForms';
+import TextInteractionForm from '../TextInteractionForm/TextInteractionForm';
 
 export default function FormEditUser() {
   const dispatch = useDispatch();
@@ -120,7 +118,7 @@ export default function FormEditUser() {
               placeholder="ввидите ссылку на фотографию"
               required
             ></input>
-            <TextErrorForms textError={errors.avatar} />
+            <TextInteractionForm text={errors.avatar} />
             <label>ваше имя</label>
             <input
               pattern="^\S*$"
@@ -132,7 +130,7 @@ export default function FormEditUser() {
               minLength={1}
               maxLength={30}
             ></input>
-            <TextErrorForms textError={errors.name} />
+            <TextInteractionForm text={errors.name} />
             <div className={Style.conteiner_age_gender}>
               <label>возраст</label>
               <input
@@ -179,7 +177,7 @@ export default function FormEditUser() {
               minLength={1}
               maxLength={30}
             ></input>
-            <TextErrorForms textError={errors.sity} />
+            <TextInteractionForm text={errors.sity} />
             <label>email</label>
             <input
               pattern="^\S*$"
@@ -190,7 +188,7 @@ export default function FormEditUser() {
               placeholder="ввидите your email"
               required
             ></input>
-            <TextErrorForms textError={errors.email} />
+            <TextInteractionForm text={errors.email} />
             <BottonSubmit
               valid={valid}
               showPreloader={showPreloader}

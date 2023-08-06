@@ -1,6 +1,7 @@
 import React from 'react';
 import Style from './BottonSubmit.module.scss';
 import PreloaderPoint from '../../Preloaders/PreloaderPoint/PreloaderPoint';
+import TextInteractionForm from '../../TextInteractionForm/TextInteractionForm';
 
 export default function BottonSubmit({
   valid,
@@ -27,9 +28,10 @@ export default function BottonSubmit({
           {showPreloader && <PreloaderPoint />}
         </button>
       )}
-      <span className={`${Style.error} ${successRequest && Style.success} `}>
+      <TextInteractionForm text={textAnswerRequest} request={successRequest} />
+      {/* <span className={`${Style.error} ${successRequest && Style.success} `}>
         {textAnswerRequest}
-      </span>
+      </span> */}
     </div>
   );
 }

@@ -22,7 +22,7 @@ import Topic from './TopicList/TopicList';
 import Pagination from '../Pagination/Pagination';
 import ButtonsNavigation from '../Buttons/ButtonsNavigation/ButtonsNavigation';
 import BottonSubmit from '../Buttons/BottonSubmit/BottonSubmit';
-import TextErrorForms from '../../TextError/TextErrorForms/TextErrorForms';
+import TextInteractionForm from '../TextInteractionForm/TextInteractionForm';
 
 export default function ForumTopics() {
   const dispatch = useDispatch();
@@ -84,7 +84,7 @@ export default function ForumTopics() {
             minLength={5}
             maxLength={50}
           ></input>
-           <TextErrorForms textError={errors.topic} />
+           <TextInteractionForm text={errors.topic} />
         </div>
         <BottonSubmit
           valid={valid}
