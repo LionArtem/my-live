@@ -18,6 +18,7 @@ import {
 
 import Style from './FormAuth.module.scss';
 import PreloaderPoint from '../Preloaders/PreloaderPoint/PreloaderPoint';
+import TextErrorForms from '../../TextError/TextErrorForms/TextErrorForms';
 
 export default function FormAuth({ textButton, text }) {
   const { value, errors, valid } = useSelector(selectformValidetion);
@@ -88,7 +89,7 @@ export default function FormAuth({ textButton, text }) {
             placeholder="email"
             required
           ></input>
-          <span className={Style.error}>{errors.email}</span>
+          <TextErrorForms textError={errors.email} />
           <input
             value={value.password ?? ''}
             onChange={(evt) => {
@@ -100,7 +101,7 @@ export default function FormAuth({ textButton, text }) {
             minLength={8}
             required
           ></input>
-          <span className={Style.error}>{errors.password}</span>
+          <TextErrorForms textError={errors.password} />
           {valid ? (
             <>
               {' '}
@@ -121,7 +122,7 @@ export default function FormAuth({ textButton, text }) {
               </button>
             </>
           )}
-          <span className={Style.error}>{textArrAnswerServer}</span>
+          <TextErrorForms textError={textArrAnswerServer} />
         </form>
       </div>
     </div>

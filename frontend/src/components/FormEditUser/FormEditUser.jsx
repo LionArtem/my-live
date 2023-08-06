@@ -22,6 +22,7 @@ import {
 import FormEditUserPreloader from './FormEditUserPreloader';
 import ButtonsNavigation from '../Buttons/ButtonsNavigation/ButtonsNavigation';
 import BottonSubmit from '../Buttons/BottonSubmit/BottonSubmit';
+import TextErrorForms from '../../TextError/TextErrorForms/TextErrorForms';
 
 export default function FormEditUser() {
   const dispatch = useDispatch();
@@ -87,7 +88,7 @@ export default function FormEditUser() {
       });
     }
   };
-  
+
   const changeValue = (evt) => {
     dispatch(
       setValue({
@@ -119,7 +120,7 @@ export default function FormEditUser() {
               placeholder="ввидите ссылку на фотографию"
               required
             ></input>
-            <span className={Style.error}>{errors.avatar}</span>
+            <TextErrorForms textError={errors.avatar} />
             <label>ваше имя</label>
             <input
               pattern="^\S*$"
@@ -131,7 +132,7 @@ export default function FormEditUser() {
               minLength={1}
               maxLength={30}
             ></input>
-            <span className={Style.error}>{errors.name}</span>
+            <TextErrorForms textError={errors.name} />
             <div className={Style.conteiner_age_gender}>
               <label>возраст</label>
               <input
@@ -178,7 +179,7 @@ export default function FormEditUser() {
               minLength={1}
               maxLength={30}
             ></input>
-            <span className={Style.error}>{errors.sity}</span>
+            <TextErrorForms textError={errors.sity} />
             <label>email</label>
             <input
               pattern="^\S*$"
@@ -189,7 +190,7 @@ export default function FormEditUser() {
               placeholder="ввидите your email"
               required
             ></input>
-            <span className={Style.error}>{errors.email}</span>
+            <TextErrorForms textError={errors.email} />
             <BottonSubmit
               valid={valid}
               showPreloader={showPreloader}

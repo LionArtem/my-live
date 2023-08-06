@@ -11,6 +11,7 @@ import {
   resetValues,
 } from '../../redax/slices/formValidetionSlice';
 import BottonSubmit from '../Buttons/BottonSubmit/BottonSubmit';
+import TextErrorForms from '../../TextError/TextErrorForms/TextErrorForms';
 
 export default function Form({ getMessages }) {
   const { allMessagesAndAuthors } = useSelector(selectUser);
@@ -72,7 +73,7 @@ export default function Form({ getMessages }) {
             required
             maxLength={500}
           ></textarea>
-          <span className={Style.error}>{errors.textarea}</span>
+           <TextErrorForms textError={errors.textarea} />
           <BottonSubmit
             valid={valid}
             //showPreloader={showPreloader}
