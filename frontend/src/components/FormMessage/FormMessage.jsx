@@ -9,11 +9,13 @@ import {
   setValue,
   selectformValidetion,
   resetValues,
+  setValid,
 } from '../../redax/slices/formValidetionSlice';
 import BottonSubmit from '../Buttons/BottonSubmit/BottonSubmit';
 import TextInteractionForm from '../TextInteractionForm/TextInteractionForm';
 
 export default function Form({ getMessages }) {
+  const messageRef = React.useRef();
   const { allMessagesAndAuthors } = useSelector(selectUser);
   const { value, errors, valid } = useSelector(selectformValidetion);
 
@@ -21,16 +23,36 @@ export default function Form({ getMessages }) {
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
+    addMessage();
+  };
+
+  React.useEffect(() => {
+    console.log(valid);
+    if (valid) {
+      const onKeyDown = (evt) => {
+        if (evt.keyCode === 13) {
+          addMessage();
+        }
+      };
+      document.addEventListener('keydown', onKeyDown);
+      return () => {
+        document.removeEventListener('keydown', onKeyDown);
+      };
+    }
+  }, [valid]);
+
+  const addMessage = () => {
     dispatch(
       fetchAddMessageInTopic({
         id: localStorage.getItem('topicId'),
         userId: localStorage.getItem('userId'),
-        message: value.textarea,
+        message: messageRef.current.value,
       })
     ).then((res) => {
       if (res.meta.requestStatus === 'fulfilled') {
         getMessages();
         dispatch(resetValues());
+        dispatch(setValid());
       }
     });
   };
@@ -63,6 +85,7 @@ export default function Form({ getMessages }) {
       ) : (
         <form onSubmit={(evt) => handleSubmit(evt)} className={Style.form}>
           <textarea
+            ref={messageRef}
             value={value.textarea ?? ''}
             onChange={(evt) => {
               changeValue(evt);
@@ -73,7 +96,7 @@ export default function Form({ getMessages }) {
             required
             maxLength={500}
           ></textarea>
-           <TextInteractionForm text={errors.textarea} />
+          <TextInteractionForm text={errors.textarea} />
           <BottonSubmit
             valid={valid}
             //showPreloader={showPreloader}

@@ -28,6 +28,9 @@ class TopicApi {
 
   addMessageInTopic(params) {
     const { id, message, userId } = params;
+
+    //console.log(id, message, userId);
+
     return fetch(`${this.baseUrl}/${id}/message`, {
       method: 'PUT',
       headers: this.headers,
