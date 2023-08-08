@@ -8,7 +8,7 @@ import { fetchDeleteMessage } from '../../redax/slices/topicSlice';
 
 export default function MessageUser({ getMessages }) {
   const dispatch = useDispatch();
-  const { allMessagesAndAuthors } = useSelector(selectUser);
+  const { allMessagesAndAuthors, user } = useSelector(selectUser);
   const deleteMessage = (obj) => {
     dispatch(
       fetchDeleteMessage({
@@ -21,6 +21,8 @@ export default function MessageUser({ getMessages }) {
       }
     });
   };
+
+  //console.log(user);
   return (
     <>
       {allMessagesAndAuthors.length > 0 ? (
@@ -40,10 +42,12 @@ export default function MessageUser({ getMessages }) {
                   </h3>
                   <p>{obj.user.sity}</p>
                   <span>2023-02-24 15.00</span>
-                  <button
-                    onClick={() => deleteMessage(obj)}
-                    className={Style.button_delete}
-                  ></button>
+                  {user.admin && (
+                    <button
+                      onClick={() => deleteMessage(obj)}
+                      className={Style.button_delete}
+                    ></button>
+                  )}
                 </>
               ) : (
                 <>
