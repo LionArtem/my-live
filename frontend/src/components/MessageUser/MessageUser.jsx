@@ -43,9 +43,7 @@ export default function MessageUser({ getMessages }) {
                   <button
                     onClick={() => deleteMessage(obj)}
                     className={Style.button_delete}
-                  >
-                    delete
-                  </button>
+                  ></button>
                 </>
               ) : (
                 <>

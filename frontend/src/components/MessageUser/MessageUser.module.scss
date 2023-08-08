@@ -40,8 +40,16 @@
   span {
     grid-area: data;
   }
-  .button_delete{
+  .button_delete {
+    all: unset;
+    margin-top: 5px;
     grid-area: button;
+    cursor: pointer;
+    background-image: url(../../image/x.svg);
+    width: 25px;
+    height: 25px;
+    object-fit: contain;
+    background-repeat: no-repeat;
   }
 }
 
