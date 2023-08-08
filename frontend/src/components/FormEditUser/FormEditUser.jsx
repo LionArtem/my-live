@@ -21,6 +21,7 @@ import FormEditUserPreloader from './FormEditUserPreloader';
 import ButtonsNavigation from '../Buttons/ButtonsNavigation/ButtonsNavigation';
 import BottonSubmit from '../Buttons/BottonSubmit/BottonSubmit';
 import TextInteractionForm from '../TextInteractionForm/TextInteractionForm';
+import { selectAuth } from '../../redax/slices/authSlice';
 
 export default function FormEditUser() {
   const dispatch = useDispatch();
@@ -34,6 +35,7 @@ export default function FormEditUser() {
     showSceletonPage,
     errServer,
   } = useSelector(selectUser);
+  const { token } = useSelector(selectAuth);
 
   React.useEffect(() => {
     return () => dispatch(killAllStateFormValidetion());
@@ -81,7 +83,7 @@ export default function FormEditUser() {
       dispatch(setSuccessRequest(true));
       deleteTextAnswerServer();
     } else {
-      dispatch(fetchPatchUser()).then((res) => {
+      dispatch(fetchPatchUser(token)).then(() => {
         deleteTextAnswerServer();
       });
     }

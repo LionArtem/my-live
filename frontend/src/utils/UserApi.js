@@ -31,10 +31,14 @@ class UserApi {
     ).then(this._checkResponse);
   }
 
-  patchUserMe(age, avatar, email, name, sity, gender) {
+  patchUserMe(age, avatar, email, name, sity, gender, params) {
+    const token = params;
     return fetch(`${this.baseUrl}/me`, {
       method: 'PATCH',
-      headers: this.headers,
+      headers: {
+        authorization: `Bearer ${localStorage.getItem('token') || token}`,
+        'content-type': 'application/json',
+      },
       body: JSON.stringify({ age, avatar, email, name, sity, gender }),
     }).then(this._checkResponse);
   }
@@ -44,13 +48,6 @@ class UserApi {
     }
     return res.text().then((err) => Promise.reject(JSON.parse(err)));
   };
-
-  // _checkResponse = (res) => {
-  //   if (res.ok) {
-  //     return res.json();
-  //   }
-  //   return Promise.reject(`Ошибка: ${res.status}`);
-  // };
 }
 
 const usersApi = new UserApi({

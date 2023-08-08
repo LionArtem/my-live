@@ -163,7 +163,7 @@ const topicsSlice = createSlice({
       state.showPreloader = true;
     });
     builder.addCase(fetchDeleteTopic.fulfilled, (state, { payload }) => {
-      console.log(payload);
+      //console.log(payload);
     });
     builder.addCase(fetchDeleteTopic.rejected, (state, action) => {
       // console.log(action);
