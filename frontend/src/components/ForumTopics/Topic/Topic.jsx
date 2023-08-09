@@ -23,16 +23,22 @@ export default function Topic() {
   const strDate = `${arrDate[1]} ${arrDate[2]} ${arrDate[3]} ${arrDate[4]} `;
   console.log(strDate);
 
-
   const findUniqueAuthors = (res) => {
     // собираю массив уникальных id users
-    const result = res.messages.reduce((acc, obj) => {
-      if (acc.find((item) => item === obj.userId)) {
-        return acc;
-      }
-      return [...acc, obj.userId];
-    }, []);
-    return result;
+    let set = new Set(); // лучше производительность
+    res.messages.forEach((element) => {
+      set.add(element.userId);
+    });
+    const arrUniqueUserId = Array.from(new Set(set));
+     return arrUniqueUserId
+
+    // const result = res.messages.reduce((acc, obj) => {
+    //   if (acc.find((item) => item === obj.userId)) {
+    //     return acc;
+    //   }
+    //   return [...acc, obj.userId];
+    // }, []);
+    // return result;
   };
 
   const getMessages = (page = localStorage.getItem('page') ?? 1) => {
