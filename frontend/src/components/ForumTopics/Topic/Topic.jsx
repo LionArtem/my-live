@@ -18,7 +18,11 @@ import ButtonsNavigation from '../../Buttons/ButtonsNavigation/ButtonsNavigation
 
 export default function Topic() {
   const dispatch = useDispatch();
-  const { authorTopic, titleTopic } = useSelector(selectTopics);
+  const { authorTopic, titleTopic, date } = useSelector(selectTopics);
+  const arrDate = date.split(' ');
+  const strDate = `${arrDate[1]} ${arrDate[2]} ${arrDate[3]} ${arrDate[4]} `;
+  console.log(strDate);
+
 
   const findUniqueAuthors = (res) => {
     // собираю массив уникальных id users

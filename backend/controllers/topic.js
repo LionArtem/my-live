@@ -124,7 +124,7 @@ const getMessagePaginetion = (req, res, next) => {
         res.send({
           numberMessages: topic.messages.length,
           user: topic.owner,
-          createdAt: topic.createdAt,
+          createdAt: topic.createdAt.getTime(),
           title: topic.title,
           messages: topic.messages.slice(page * 10 - 10, page * 10),
         });

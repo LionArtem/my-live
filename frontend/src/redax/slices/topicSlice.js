@@ -51,6 +51,7 @@ export const fetchDeleteTopic = createAsyncThunk(
 );
 
 const initialState = {
+  date: '',
   messageValue: '',
   authorTopic: {},
   titleTopic: '',
@@ -101,7 +102,6 @@ const topicsSlice = createSlice({
     });
     builder.addCase(fetchDeleteMessage.fulfilled, (state, { payload }) => {
       //console.log(payload);
-      
     });
     builder.addCase(fetchDeleteMessage.rejected, (state, action) => {
       console.log('ошибка удаления message');
@@ -113,6 +113,7 @@ const topicsSlice = createSlice({
     builder.addCase(
       fetchGetMessagePaginetion.fulfilled,
       (state, { payload }) => {
+        state.date = Date(payload.createdAtnew);
         state.titleTopic = payload.title;
         state.authorTopic = payload.user;
         state.numberPages = [

@@ -27,7 +27,6 @@ export default function Form({ getMessages }) {
   };
 
   React.useEffect(() => {
-    console.log(valid);
     if (valid) {
       const onKeyDown = (evt) => {
         if (evt.keyCode === 13) {
