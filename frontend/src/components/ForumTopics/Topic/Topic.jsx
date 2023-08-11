@@ -16,12 +16,11 @@ import MessageUser from '../../MessageUser/MessageUser';
 import Pagination from '../../Pagination/Pagination';
 import ButtonsNavigation from '../../Buttons/ButtonsNavigation/ButtonsNavigation';
 
+import { getTimeLocal } from '../../../utils/utils';
+
 export default function Topic() {
   const dispatch = useDispatch();
   const { authorTopic, titleTopic, date } = useSelector(selectTopics);
-  const arrDate = date.split(' ');
-  const strDate = `${arrDate[1]} ${arrDate[2]} ${arrDate[3]} ${arrDate[4]} `;
-  console.log(strDate);
 
   const findUniqueAuthors = (res) => {
     // собираю массив уникальных id users
@@ -30,7 +29,7 @@ export default function Topic() {
       set.add(element.userId);
     });
     const arrUniqueUserId = Array.from(new Set(set));
-     return arrUniqueUserId
+    return arrUniqueUserId;
 
     // const result = res.messages.reduce((acc, obj) => {
     //   if (acc.find((item) => item === obj.userId)) {
@@ -73,7 +72,7 @@ export default function Topic() {
           <img src={authorTopic.avatar} alt="аватарка" />
           <h3>{`${authorTopic.name} (${authorTopic.gender}.${authorTopic.age})`}</h3>
           <p>{authorTopic.sity}</p>
-          <span>2023-02-24 15.00</span>
+          <span>{getTimeLocal(date)}</span>
         </div>
       </div>
       <MessageUser getMessages={getMessages} />

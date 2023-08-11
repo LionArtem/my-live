@@ -6,9 +6,12 @@ import Style from './MessageUser.module.scss';
 import { selectUser } from '../../redax/slices/userSlice';
 import { fetchDeleteMessage } from '../../redax/slices/topicSlice';
 
+import { getTimeLocal } from '../../utils/utils';
+
 export default function MessageUser({ getMessages }) {
   const dispatch = useDispatch();
   const { allMessagesAndAuthors, user } = useSelector(selectUser);
+
   const deleteMessage = (obj) => {
     dispatch(
       fetchDeleteMessage({
@@ -22,7 +25,6 @@ export default function MessageUser({ getMessages }) {
     });
   };
 
-  //console.log(user);
   return (
     <>
       {allMessagesAndAuthors.length > 0 ? (
@@ -41,7 +43,7 @@ export default function MessageUser({ getMessages }) {
                     <p>{`(${obj.user.gender}.${obj.user.age})`}</p>
                   </h3>
                   <p>{obj.user.sity}</p>
-                  <span>2023-02-24 15.00</span>
+                  <span>{getTimeLocal(obj.messages.createdAt)}</span>
                   {user.admin && (
                     <button
                       onClick={() => deleteMessage(obj)}
@@ -58,7 +60,7 @@ export default function MessageUser({ getMessages }) {
                   />
                   <h3>Пользователь удалён</h3>
                   <p></p>
-                  <span>2023-02-24 15.00</span>
+                  <span>00:00:00</span>
                 </>
               )}
             </div>

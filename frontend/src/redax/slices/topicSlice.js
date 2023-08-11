@@ -113,7 +113,7 @@ const topicsSlice = createSlice({
     builder.addCase(
       fetchGetMessagePaginetion.fulfilled,
       (state, { payload }) => {
-        state.date = Date(payload.createdAtnew);
+        state.date = payload.createdAt;
         state.titleTopic = payload.title;
         state.authorTopic = payload.user;
         state.numberPages = [
