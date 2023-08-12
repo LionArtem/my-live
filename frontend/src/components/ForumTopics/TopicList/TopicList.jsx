@@ -10,6 +10,8 @@ import { selectUser, fetchGetUser } from '../../../redax/slices/userSlice';
 import { selectAuth } from '../../../redax/slices/authSlice';
 import { Link } from 'react-router-dom';
 
+import { getTimeLocal } from '../../../utils/utils';
+
 export default function TopicList({ getTopic }) {
   const dispatch = useDispatch();
   const { topicsInPage } = useSelector(selectTopics);
@@ -42,6 +44,7 @@ export default function TopicList({ getTopic }) {
             >
               {obj.title}
             </h1>
+            <p>{getTimeLocal(obj.createdAt)}</p>
             {user.admin && (
               <button
                 className={Style.button_delete}
