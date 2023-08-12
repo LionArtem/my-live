@@ -44,3 +44,8 @@
   transition: text-shadow 0.3s linear;
   cursor: pointer;
 }
+.preloader_conteiner {
+  display: flex;
+  flex-direction: column;
+  row-gap: 5px;
+}

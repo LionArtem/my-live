@@ -11,10 +11,11 @@ import { selectAuth } from '../../../redax/slices/authSlice';
 import { Link } from 'react-router-dom';
 
 import { getTimeLocal } from '../../../utils/utils';
+import TopicListPreloader from './TopicListPreloader';
 
 export default function TopicList({ getTopic }) {
   const dispatch = useDispatch();
-  const { topicsInPage } = useSelector(selectTopics);
+  const { topicsInPage, showPreloaderTopic } = useSelector(selectTopics);
   const { user } = useSelector(selectUser);
   const { token } = useSelector(selectAuth);
 
@@ -34,7 +35,14 @@ export default function TopicList({ getTopic }) {
 
   return (
     <div className={Style.conteiner}>
-      {topicsInPage &&
+      {showPreloaderTopic ? (
+        <div className={Style.preloader_conteiner}>
+          {[...new Array(10)].map((_, i) => (
+            <TopicListPreloader key={i} />
+          ))}
+        </div>
+      ) : (
+        topicsInPage &&
         topicsInPage.map((obj) => (
           <Link to={'/topic'} key={obj._id}>
             <h1
@@ -52,7 +60,8 @@ export default function TopicList({ getTopic }) {
               ></button>
             )}
           </Link>
-        ))}
+        ))
+      )}
     </div>
   );
 }

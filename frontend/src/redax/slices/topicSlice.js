@@ -58,6 +58,7 @@ const initialState = {
   topicsInPage: [],
   numberPages: [],
   showPreloader: false,
+  showPreloaderTopic: false,
   successRequest: false,
   textAnswerRequest: '',
 };
@@ -133,13 +134,16 @@ const topicsSlice = createSlice({
 
     builder.addCase(fetchGetTopicPaginetion.pending, (state) => {
       console.log('загрузка paginetion topics');
+      state.showPreloaderTopic = true;
     });
     builder.addCase(fetchGetTopicPaginetion.fulfilled, (state, { payload }) => {
       state.topicsInPage = payload.topic;
       state.numberPages = [...new Array(Math.ceil(payload.numberTopics / 10))];
+      state.showPreloaderTopic = false;
     });
     builder.addCase(fetchGetTopicPaginetion.rejected, (state, action) => {
       console.log('ошибка загрузки paginetion topic');
+      state.showPreloaderTopic = false;
     });
 
     builder.addCase(fetchAddTopic.pending, (state) => {

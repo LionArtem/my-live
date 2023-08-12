@@ -18,7 +18,7 @@ import {
   resetValues,
 } from '../../redax/slices/formValidetionSlice';
 
-import Topic from './TopicList/TopicList';
+import TopicList from './TopicList/TopicList';
 import Pagination from '../Pagination/Pagination';
 import ButtonsNavigation from '../Buttons/ButtonsNavigation/ButtonsNavigation';
 import BottonSubmit from '../Buttons/BottonSubmit/BottonSubmit';
@@ -94,7 +94,7 @@ export default function ForumTopics() {
           text={'создать тему'}
         />
       </form>
-      <Topic getTopic={getTopic} />
+      <TopicList getTopic={getTopic} />
       <Pagination getNumberPage={getTopic} />
     </div>
   );
