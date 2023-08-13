@@ -52,6 +52,7 @@ const initialState = {
   successRequest: false,
   showSceletonPage: false,
   errServer: false,
+  errServerUserMessage: false,
 };
 
 const userSlice = createSlice({
@@ -72,6 +73,7 @@ const userSlice = createSlice({
       state.successRequest = false;
       state.showSceletonPage = false;
       state.errServer = false;
+      state.errServerUserMessage = false;
     },
   },
   extraReducers: (builder) => {
@@ -141,6 +143,7 @@ const userSlice = createSlice({
     builder.addCase(fetchGetUserFindId.rejected, (state, action) => {
       console.log(action);
       console.log('ошибка запроса получение пользователя по массиву id');
+      state.errServerUserMessage = true;
     });
   },
 });

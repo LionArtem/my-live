@@ -62,6 +62,7 @@ const initialState = {
   successRequest: false,
   textAnswerRequest: '',
   srrTopicServer: false,
+  errGetMessage: false,
 };
 
 const topicsSlice = createSlice({
@@ -78,6 +79,7 @@ const topicsSlice = createSlice({
       state.successRequest = false;
       state.showPreloaderTopic = false;
       state.srrTopicServer = false;
+      state.errGetMessage = false;
     },
     resetTextAnswerRequest(state) {
       state.textAnswerRequest = '';
@@ -133,6 +135,7 @@ const topicsSlice = createSlice({
     );
     builder.addCase(fetchGetMessagePaginetion.rejected, (state, action) => {
       console.log('ошибка загрузки paginetion message');
+      state.errGetMessage = true;
     });
 
     builder.addCase(fetchGetTopicPaginetion.pending, (state) => {

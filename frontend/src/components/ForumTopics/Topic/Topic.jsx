@@ -7,8 +7,9 @@ import {
   fetchGetMessagePaginetion,
 } from '../../../redax/slices/topicSlice';
 import {
-  fetchGetUser,
+  // fetchGetUser,
   fetchGetUserFindId,
+  selectUser,
 } from '../../../redax/slices/userSlice';
 
 import FormMessage from '../../FormMessage/FormMessage';
@@ -17,10 +18,13 @@ import Pagination from '../../Pagination/Pagination';
 import ButtonsNavigation from '../../Buttons/ButtonsNavigation/ButtonsNavigation';
 
 import { getTimeLocal } from '../../../utils/utils';
+import ErrServer from '../../ErrServer/ErrServer';
 
 export default function Topic() {
   const dispatch = useDispatch();
-  const { authorTopic, titleTopic, date } = useSelector(selectTopics);
+  const { authorTopic, titleTopic, date, errGetMessage } =
+    useSelector(selectTopics);
+  const { errServerUserMessage } = useSelector(selectUser);
 
   const findUniqueAuthors = (res) => {
     // собираю массив уникальных id users
@@ -57,7 +61,7 @@ export default function Topic() {
 
   React.useEffect(() => {
     getMessages();
-    dispatch(fetchGetUser());
+    //dispatch(fetchGetUser());
   }, []);
 
   return (
@@ -66,18 +70,24 @@ export default function Topic() {
         <ButtonsNavigation page={'/topics'} text={'Назад'} />
         <ButtonsNavigation page={'/'} text={'На главную'} />
       </div>
-      <div className={Style.info_topic}>
-        <h1>{titleTopic}</h1>
-        <div className={Style.use_conteiner}>
-          <img src={authorTopic.avatar} alt="аватарка" />
-          <h3>{`${authorTopic.name} (${authorTopic.gender}.${authorTopic.age})`}</h3>
-          <p>{authorTopic.sity}</p>
-          <span>{getTimeLocal(date)}</span>
-        </div>
-      </div>
-      <MessageUser getMessages={getMessages} />
-      <FormMessage getMessages={getMessages} />
-      <Pagination getNumberPage={getMessages} />
+      {errGetMessage || errServerUserMessage ? (
+        <ErrServer textErr="На сервере произошла ошибка, попробуйте зайти позже." />
+      ) : (
+        <>
+          <div className={Style.info_topic}>
+            <h1>{titleTopic}</h1>
+            <div className={Style.use_conteiner}>
+              <img src={authorTopic.avatar} alt="аватарка" />
+              <h3>{`${authorTopic.name} (${authorTopic.gender}.${authorTopic.age})`}</h3>
+              <p>{authorTopic.sity}</p>
+              <span>{getTimeLocal(date)}</span>
+            </div>
+          </div>
+          <MessageUser getMessages={getMessages} />
+          <FormMessage getMessages={getMessages} />
+          <Pagination getNumberPage={getMessages} />
+        </>
+      )}
     </div>
   );
 }
