@@ -23,11 +23,12 @@ import Pagination from '../Pagination/Pagination';
 import ButtonsNavigation from '../Buttons/ButtonsNavigation/ButtonsNavigation';
 import BottonSubmit from '../Buttons/BottonSubmit/BottonSubmit';
 import TextInteractionForm from '../TextInteractionForm/TextInteractionForm';
+import ErrServer from '../ErrServer/ErrServer';
 
 export default function ForumTopics() {
   const dispatch = useDispatch();
   const { value, errors, valid } = useSelector(selectformValidetion);
-  const { showPreloader, successRequest, textAnswerRequest } =
+  const { showPreloader, successRequest, textAnswerRequest, srrTopicServer } =
     useSelector(selectTopics);
 
   const getTopic = (page = localStorage.getItem('page') ?? 1) => {
@@ -71,31 +72,38 @@ export default function ForumTopics() {
   return (
     <div className={Style.conteiner}>
       <ButtonsNavigation page={'/'} text={'Назад'} />
-      <form onSubmit={(e) => addPost(e)}>
-        <div>
-          {' '}
-          <input
-            type="text"
-            placeholder="введите название темы"
-            required
-            value={value.topic ?? ''}
-            name="topic"
-            onChange={(evt) => changeValue(evt)}
-            minLength={5}
-            maxLength={50}
-          ></input>
-           <TextInteractionForm text={errors.topic} />
-        </div>
-        <BottonSubmit
-          valid={valid}
-          showPreloader={showPreloader}
-          successRequest={successRequest}
-          textAnswerRequest={textAnswerRequest}
-          text={'создать тему'}
-        />
-      </form>
-      <TopicList getTopic={getTopic} />
-      <Pagination getNumberPage={getTopic} />
+      {srrTopicServer ? (
+        <ErrServer textErr="На сервере произошла ошибка, попробуйте зайти позже." />
+      ) : (
+        <>
+          <form onSubmit={(e) => addPost(e)}>
+            <div>
+              <input
+                type="text"
+                placeholder="введите название темы"
+                required
+                value={value.topic ?? ''}
+                name="topic"
+                onChange={(evt) => changeValue(evt)}
+                minLength={5}
+                maxLength={50}
+              ></input>
+              <TextInteractionForm text={errors.topic} />
+            </div>
+            <BottonSubmit
+              valid={valid}
+              showPreloader={showPreloader}
+              successRequest={successRequest}
+              textAnswerRequest={textAnswerRequest}
+              text={'создать тему'}
+            />
+          </form>
+          <TopicList getTopic={getTopic} />
+          <Pagination getNumberPage={getTopic} />
+        </>
+      )}
+
+      {/* {srrTopicServer && <ErrServer textErr="На сервере произошла ошибка" />} */}
     </div>
   );
 }

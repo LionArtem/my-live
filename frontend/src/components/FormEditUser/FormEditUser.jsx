@@ -22,6 +22,7 @@ import ButtonsNavigation from '../Buttons/ButtonsNavigation/ButtonsNavigation';
 import BottonSubmit from '../Buttons/BottonSubmit/BottonSubmit';
 import TextInteractionForm from '../TextInteractionForm/TextInteractionForm';
 import { selectAuth } from '../../redax/slices/authSlice';
+import ErrServer from '../ErrServer/ErrServer';
 
 export default function FormEditUser() {
   const dispatch = useDispatch();
@@ -106,7 +107,8 @@ export default function FormEditUser() {
         {showSceletonPage ? (
           <FormEditUserPreloader />
         ) : errServer ? (
-          <h1 className={Style.text_err_server}>{`${textAnswerRequest} :(`}</h1>
+          <ErrServer textErr="На сервере произошла ошибка, попробуйте зайти позже." />
+          // <h1 className={Style.text_err_server}>{`${textAnswerRequest} :(`}</h1>
         ) : (
           <>
             {' '}

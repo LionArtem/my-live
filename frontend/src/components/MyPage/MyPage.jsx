@@ -10,6 +10,7 @@ import { selectAuth } from '../../redax/slices/authSlice';
 import { Link } from 'react-router-dom';
 import MyPagePreloader from './MyPagePreloader';
 import ButtonsNavigation from '../Buttons/ButtonsNavigation/ButtonsNavigation';
+import ErrServer from '../ErrServer/ErrServer';
 
 export default function MyPage() {
   const dispatch = useDispatch();
@@ -33,7 +34,7 @@ export default function MyPage() {
           {showSceletonPage ? (
             <MyPagePreloader />
           ) : errServer ? (
-            <h1 className={Style.text_err_server}>{`${textAnswerRequest} :(`}</h1>
+            <ErrServer textErr="На сервере произошла ошибка, попробуйте зайти позже." />
           ) : (
             <>
               {' '}

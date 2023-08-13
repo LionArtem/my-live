@@ -61,6 +61,7 @@ const initialState = {
   showPreloaderTopic: false,
   successRequest: false,
   textAnswerRequest: '',
+  srrTopicServer: false,
 };
 
 const topicsSlice = createSlice({
@@ -75,6 +76,8 @@ const topicsSlice = createSlice({
       state.numberPages = [];
       state.showPreloader = false;
       state.successRequest = false;
+      state.showPreloaderTopic = false;
+      state.srrTopicServer = false;
     },
     resetTextAnswerRequest(state) {
       state.textAnswerRequest = '';
@@ -144,6 +147,7 @@ const topicsSlice = createSlice({
     builder.addCase(fetchGetTopicPaginetion.rejected, (state, action) => {
       console.log('ошибка загрузки paginetion topic');
       state.showPreloaderTopic = false;
+      state.srrTopicServer = true;
     });
 
     builder.addCase(fetchAddTopic.pending, (state) => {
