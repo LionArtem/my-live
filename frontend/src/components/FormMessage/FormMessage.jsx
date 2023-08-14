@@ -1,7 +1,12 @@
 import React from 'react';
 import Style from './FormMessage.module.scss';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchAddMessageInTopic } from '../../redax/slices/topicSlice';
+import {
+  fetchAddMessageInTopic,
+  selectTopics,
+  resetTextAnswerRequest,
+  resetSuccessRequest,
+} from '../../redax/slices/topicSlice';
 
 import { selectUser } from '../../redax/slices/userSlice';
 
@@ -18,6 +23,8 @@ export default function Form({ getMessages }) {
   const messageRef = React.useRef();
   const { allMessagesAndAuthors } = useSelector(selectUser);
   const { value, errors, valid } = useSelector(selectformValidetion);
+  const { showPreloader, textAnswerRequest, successRequest } =
+    useSelector(selectTopics);
 
   const dispatch = useDispatch();
 
@@ -40,6 +47,13 @@ export default function Form({ getMessages }) {
     }
   }, [valid]);
 
+  const deleteTextAnswerServer = () => {
+    setTimeout(() => {
+      dispatch(resetTextAnswerRequest());
+     // dispatch(resetSuccessRequest());
+    }, 1500);
+  };
+
   const addMessage = () => {
     dispatch(
       fetchAddMessageInTopic({
@@ -53,6 +67,7 @@ export default function Form({ getMessages }) {
         dispatch(resetValues());
         dispatch(setValid());
       }
+      deleteTextAnswerServer();
     });
   };
 
@@ -98,9 +113,9 @@ export default function Form({ getMessages }) {
           <TextInteractionForm text={errors.textarea} />
           <BottonSubmit
             valid={valid}
-            //showPreloader={showPreloader}
-            //successRequest={successRequest}
-            //textAnswerRequest={textAnswerRequest}
+            showPreloader={showPreloader}
+           // successRequest={successRequest}
+            textAnswerRequest={textAnswerRequest}
             text={'отправить'}
           />
         </form>

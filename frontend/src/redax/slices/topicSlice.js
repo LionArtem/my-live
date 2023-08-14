@@ -90,17 +90,22 @@ const topicsSlice = createSlice({
     setMessageValue(state, action) {
       state.messageValue = action.payload;
     },
+ 
   },
   extraReducers: (builder) => {
     builder.addCase(fetchAddMessageInTopic.pending, (state) => {
-      console.log('загрузка message');
+      console.log('отправка message');
+      state.showPreloader = true;
     });
-    builder.addCase(
-      fetchAddMessageInTopic.fulfilled,
-      (state, { payload }) => {}
-    );
+    builder.addCase(fetchAddMessageInTopic.fulfilled, (state, { payload }) => {
+      state.showPreloader = false;
+      //state.successRequest = true;
+      //state.textAnswerRequest = 'сообщение успешно отправлено';
+    });
     builder.addCase(fetchAddMessageInTopic.rejected, (state, action) => {
-      console.log('ошибка загрузки message');
+      console.log('ошибка отправки message');
+      state.showPreloader = false;
+      state.textAnswerRequest = 'при отправки сообщения произошла ошибка';
     });
 
     builder.addCase(fetchDeleteMessage.pending, (state) => {
@@ -191,5 +196,6 @@ export const {
   killAllStateTopic,
   resetSuccessRequest,
   resetTextAnswerRequest,
+  addTextSuccess,
 } = topicsSlice.actions;
 export default topicsSlice.reducer;
