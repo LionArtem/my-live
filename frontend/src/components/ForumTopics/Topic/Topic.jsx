@@ -20,11 +20,11 @@ import ButtonsNavigation from '../../Buttons/ButtonsNavigation/ButtonsNavigation
 
 import { getTimeLocal } from '../../../utils/utils';
 import ErrServer from '../../ErrServer/ErrServer';
-import MessageUserPreloader from '../../MessageUser/MessageUserPreloader';
+import TopicPreloader from './TopicPreloader';
 
 export default function Topic() {
   const dispatch = useDispatch();
-  const { authorTopic, titleTopic, date, errGetMessage } =
+  const { authorTopic, titleTopic, date, errGetMessage, showPreloaderMessage } =
     useSelector(selectTopics);
   const { errServerUserMessage } = useSelector(selectUser);
 
@@ -80,13 +80,20 @@ export default function Topic() {
       ) : (
         <>
           <div className={Style.info_topic}>
-            <h1>{titleTopic}</h1>
-            <div className={Style.use_conteiner}>
-              <img src={authorTopic.avatar} alt="аватарка" />
-              <h3>{`${authorTopic.name} (${authorTopic.gender}.${authorTopic.age})`}</h3>
-              <p>{authorTopic.sity}</p>
-              <span>{getTimeLocal(date)}</span>
-            </div>
+            {showPreloaderMessage ? (
+              <TopicPreloader />
+            ) : (
+              <>
+                {' '}
+                <h1>{titleTopic}</h1>
+                <div className={Style.use_conteiner}>
+                  <img src={authorTopic.avatar} alt="аватарка" />
+                  <h3>{`${authorTopic.name} (${authorTopic.gender}.${authorTopic.age})`}</h3>
+                  <p>{authorTopic.sity}</p>
+                  <span>{getTimeLocal(date)}</span>
+                </div>
+              </>
+            )}
           </div>
           <MessageUser getMessages={getMessages} />
           <FormMessage getMessages={getMessages} />
