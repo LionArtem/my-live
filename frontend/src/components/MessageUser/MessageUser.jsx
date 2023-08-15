@@ -30,6 +30,10 @@ export default function MessageUser({ getMessages }) {
     });
   };
 
+  React.useEffect(() => {
+    return () => localStorage.removeItem('page');
+  }, []);
+
   return (
     <>
       {showPreloaderMessage ? (
