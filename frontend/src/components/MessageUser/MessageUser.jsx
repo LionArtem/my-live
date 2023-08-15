@@ -4,13 +4,18 @@ import { useDispatch, useSelector } from 'react-redux';
 import Style from './MessageUser.module.scss';
 
 import { selectUser } from '../../redax/slices/userSlice';
-import { fetchDeleteMessage } from '../../redax/slices/topicSlice';
+import {
+  fetchDeleteMessage,
+  selectTopics,
+} from '../../redax/slices/topicSlice';
 
 import { getTimeLocal } from '../../utils/utils';
+import MessageUserPreloader from './MessageUserPreloader';
 
 export default function MessageUser({ getMessages }) {
   const dispatch = useDispatch();
   const { allMessagesAndAuthors, user } = useSelector(selectUser);
+  const { showPreloaderMessage } = useSelector(selectTopics);
 
   const deleteMessage = (obj) => {
     dispatch(
@@ -27,7 +32,9 @@ export default function MessageUser({ getMessages }) {
 
   return (
     <>
-      {allMessagesAndAuthors.length > 0 ? (
+      {showPreloaderMessage ? (
+        [...new Array(10)].map((_, i) => <MessageUserPreloader key={i} />)
+      ) : allMessagesAndAuthors.length > 0 ? (
         allMessagesAndAuthors.map((obj) => (
           <div key={obj.messages._id} className={Style.root}>
             <div className={Style.use_conteiner}>
@@ -68,7 +75,7 @@ export default function MessageUser({ getMessages }) {
           </div>
         ))
       ) : (
-        <p>тут пока нет сообщений</p>
+        <p>здесь пока нет сообщений</p>
       )}
     </>
   );

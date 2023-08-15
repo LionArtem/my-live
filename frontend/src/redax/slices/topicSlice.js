@@ -63,6 +63,7 @@ const initialState = {
   textAnswerRequest: '',
   srrTopicServer: false,
   errGetMessage: false,
+  showPreloaderMessage: false,
 };
 
 const topicsSlice = createSlice({
@@ -84,13 +85,15 @@ const topicsSlice = createSlice({
     resetTextAnswerRequest(state) {
       state.textAnswerRequest = '';
     },
+    isShowPreloaderMessage(state, action) {
+      state.showPreloaderMessage = action.payload;
+    },
     resetSuccessRequest(state) {
       state.successRequest = false;
     },
     setMessageValue(state, action) {
       state.messageValue = action.payload;
     },
- 
   },
   extraReducers: (builder) => {
     builder.addCase(fetchAddMessageInTopic.pending, (state) => {
@@ -197,5 +200,6 @@ export const {
   resetSuccessRequest,
   resetTextAnswerRequest,
   addTextSuccess,
+  isShowPreloaderMessage,
 } = topicsSlice.actions;
 export default topicsSlice.reducer;

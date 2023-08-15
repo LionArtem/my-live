@@ -5,6 +5,7 @@ import Style from './Topic.module.scss';
 import {
   selectTopics,
   fetchGetMessagePaginetion,
+  isShowPreloaderMessage,
 } from '../../../redax/slices/topicSlice';
 import {
   // fetchGetUser,
@@ -19,6 +20,7 @@ import ButtonsNavigation from '../../Buttons/ButtonsNavigation/ButtonsNavigation
 
 import { getTimeLocal } from '../../../utils/utils';
 import ErrServer from '../../ErrServer/ErrServer';
+import MessageUserPreloader from '../../MessageUser/MessageUserPreloader';
 
 export default function Topic() {
   const dispatch = useDispatch();
@@ -45,6 +47,7 @@ export default function Topic() {
   };
 
   const getMessages = (page = localStorage.getItem('page') ?? 1) => {
+    dispatch(isShowPreloaderMessage(true));
     dispatch(
       fetchGetMessagePaginetion({ id: localStorage.getItem('topicId'), page })
     ).then((resMessage) => {
@@ -54,7 +57,9 @@ export default function Topic() {
             arrIdUser: findUniqueAuthors(resMessage.payload),
             messages: resMessage.payload,
           })
-        );
+        ).then(() => {
+          dispatch(isShowPreloaderMessage(false));
+        });
       }
     });
   };
