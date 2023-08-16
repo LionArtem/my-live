@@ -7,6 +7,7 @@ import ForumTopics from './components/ForumTopics/ForumTopics';
 import Topic from './components/ForumTopics/Topic/Topic';
 import MyPage from './components/MyPage/MyPage';
 import FormEditUser from './components/FormEditUser/FormEditUser';
+import NotFoundPage from './components/NotFoundPage/NotFoundPage';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
       <Route path="/topic" element={<Topic />} />
       <Route path="/my-page" element={<MyPage />} />
       <Route path="/edit-user" element={<FormEditUser />} />
+      <Route path="*" element={<NotFoundPage />} />
     </Routes>
   );
 }

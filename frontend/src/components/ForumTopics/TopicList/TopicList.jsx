@@ -16,7 +16,6 @@ import TopicListPreloader from './TopicListPreloader';
 export default function TopicList({ getTopic }) {
   const dispatch = useDispatch();
   const { topicsInPage, showPreloaderTopic } = useSelector(selectTopics);
-  console.log(topicsInPage);
   const { user } = useSelector(selectUser);
   const { token } = useSelector(selectAuth);
 
