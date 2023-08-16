@@ -29,7 +29,7 @@ export const fetchGetMessagePaginetion = createAsyncThunk(
 export const fetchGetTopicPaginetion = createAsyncThunk(
   'page/fetchGetTopicPaginetion',
   async (params, thunkAPI) => {
-    const data = await topicApi.getTopicPaginetion(params);
+    const data = await topicApi.getTopicPaginetion(params.page, params.token);
     return data;
   }
 );

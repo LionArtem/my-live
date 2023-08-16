@@ -17,6 +17,7 @@ import {
   setValue,
   resetValues,
 } from '../../redax/slices/formValidetionSlice';
+import { selectAuth } from '../../redax/slices/authSlice';
 
 import TopicList from './TopicList/TopicList';
 import Pagination from '../Pagination/Pagination';
@@ -27,12 +28,14 @@ import ErrServer from '../ErrServer/ErrServer';
 
 export default function ForumTopics() {
   const dispatch = useDispatch();
+  const { token } = useSelector(selectAuth);
+
   const { value, errors, valid } = useSelector(selectformValidetion);
   const { showPreloader, successRequest, textAnswerRequest, srrTopicServer } =
     useSelector(selectTopics);
 
   const getTopic = (page = localStorage.getItem('page') ?? 1) => {
-    dispatch(fetchGetTopicPaginetion(page));
+    dispatch(fetchGetTopicPaginetion({ page, token }));
   };
 
   const addPost = (e) => {

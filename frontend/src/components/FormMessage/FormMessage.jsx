@@ -5,7 +5,6 @@ import {
   fetchAddMessageInTopic,
   selectTopics,
   resetTextAnswerRequest,
-  resetSuccessRequest,
 } from '../../redax/slices/topicSlice';
 
 import { selectUser } from '../../redax/slices/userSlice';
@@ -18,13 +17,14 @@ import {
 } from '../../redax/slices/formValidetionSlice';
 import BottonSubmit from '../Buttons/BottonSubmit/BottonSubmit';
 import TextInteractionForm from '../TextInteractionForm/TextInteractionForm';
+import { selectAuth } from '../../redax/slices/authSlice';
 
 export default function Form({ getMessages }) {
   const messageRef = React.useRef();
   const { allMessagesAndAuthors } = useSelector(selectUser);
   const { value, errors, valid } = useSelector(selectformValidetion);
-  const { showPreloader, textAnswerRequest, successRequest } =
-    useSelector(selectTopics);
+  const { showPreloader, textAnswerRequest } = useSelector(selectTopics);
+  const { token } = useSelector(selectAuth);
 
   const dispatch = useDispatch();
 
@@ -50,7 +50,7 @@ export default function Form({ getMessages }) {
   const deleteTextAnswerServer = () => {
     setTimeout(() => {
       dispatch(resetTextAnswerRequest());
-     // dispatch(resetSuccessRequest());
+      // dispatch(resetSuccessRequest());
     }, 1500);
   };
 
@@ -60,6 +60,7 @@ export default function Form({ getMessages }) {
         id: localStorage.getItem('topicId'),
         userId: localStorage.getItem('userId'),
         message: messageRef.current.value,
+        token,
       })
     ).then((res) => {
       if (res.meta.requestStatus === 'fulfilled') {
@@ -114,7 +115,7 @@ export default function Form({ getMessages }) {
           <BottonSubmit
             valid={valid}
             showPreloader={showPreloader}
-           // successRequest={successRequest}
+            // successRequest={successRequest}
             textAnswerRequest={textAnswerRequest}
             text={'отправить'}
           />

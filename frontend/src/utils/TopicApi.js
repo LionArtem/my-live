@@ -19,18 +19,24 @@ class TopicApi {
     }).then(this._checkResponse);
   }
 
-  getTopicPaginetion(page) {
+  getTopicPaginetion(page, token) {
     return fetch(`${this.baseUrl}/${page}`, {
       method: 'GET',
-      headers: this.headers,
+      headers: {
+        authorization: `Bearer ${localStorage.getItem('token') || token}`,
+        'content-type': 'application/json',
+      },
     }).then(this._checkResponse);
   }
 
   addMessageInTopic(params) {
-    const { id, message, userId } = params;
+    const { id, message, userId, token } = params;
     return fetch(`${this.baseUrl}/${id}/message`, {
       method: 'PUT',
-      headers: this.headers,
+      headers: {
+        authorization: `Bearer ${localStorage.getItem('token') || token}`,
+        'content-type': 'application/json',
+      },
       body: JSON.stringify({
         message,
         userId,
@@ -50,10 +56,13 @@ class TopicApi {
   }
 
   getMessagePaginetion(params) {
-    const { id, page } = params;
+    const { id, page, token } = params;
     return fetch(`${this.baseUrl}/${id}&${page}/message`, {
       method: 'GET',
-      headers: this.headers,
+      headers: {
+        authorization: `Bearer ${localStorage.getItem('token') || token}`,
+        'content-type': 'application/json',
+      },
     }).then(this._checkResponse);
   }
 

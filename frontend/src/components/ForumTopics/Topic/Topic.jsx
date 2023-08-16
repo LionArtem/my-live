@@ -21,12 +21,14 @@ import ButtonsNavigation from '../../Buttons/ButtonsNavigation/ButtonsNavigation
 import { getTimeLocal } from '../../../utils/utils';
 import ErrServer from '../../ErrServer/ErrServer';
 import TopicPreloader from './TopicPreloader';
+import { selectAuth } from '../../../redax/slices/authSlice';
 
 export default function Topic() {
   const dispatch = useDispatch();
   const { authorTopic, titleTopic, date, errGetMessage, showPreloaderMessage } =
     useSelector(selectTopics);
   const { errServerUserMessage } = useSelector(selectUser);
+  const { token } = useSelector(selectAuth);
 
   const findUniqueAuthors = (res) => {
     // собираю массив уникальных id users
@@ -49,13 +51,18 @@ export default function Topic() {
   const getMessages = (page = localStorage.getItem('page') ?? 1) => {
     dispatch(isShowPreloaderMessage(true));
     dispatch(
-      fetchGetMessagePaginetion({ id: localStorage.getItem('topicId'), page })
+      fetchGetMessagePaginetion({
+        id: localStorage.getItem('topicId'),
+        page,
+        token,
+      })
     ).then((resMessage) => {
       if (resMessage.meta.requestStatus === 'fulfilled') {
         dispatch(
           fetchGetUserFindId({
             arrIdUser: findUniqueAuthors(resMessage.payload),
             messages: resMessage.payload,
+            token,
           })
         ).then(() => {
           dispatch(isShowPreloaderMessage(false));

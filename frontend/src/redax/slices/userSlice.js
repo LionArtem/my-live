@@ -39,7 +39,7 @@ export const fetchGetUserId = createAsyncThunk(
 export const fetchGetUserFindId = createAsyncThunk(
   'page/fetchGetUserFindId',
   async (params, thunkAPI) => {
-    const data = await usersApi.getUserFindId(params.arrIdUser);
+    const data = await usersApi.getUserFindId(params.arrIdUser,params.token);
     return { data, topic: params.messages };
   }
 );

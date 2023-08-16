@@ -21,12 +21,15 @@ class UserApi {
     }).then(this._checkResponse);
   }
 
-  getUserFindId(arrIdUser) {
+  getUserFindId(arrIdUser, token) {
     return fetch(
       `${this.baseUrl}/faindIdUsers/${JSON.stringify({ arrIdUser })}`,
       {
         method: 'GET',
-        headers: this.headers,
+        headers: {
+          authorization: `Bearer ${localStorage.getItem('token') || token}`,
+          'content-type': 'application/json',
+        },
       }
     ).then(this._checkResponse);
   }
