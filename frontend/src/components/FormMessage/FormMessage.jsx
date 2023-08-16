@@ -21,6 +21,7 @@ import { selectAuth } from '../../redax/slices/authSlice';
 
 export default function Form({ getMessages }) {
   const messageRef = React.useRef();
+  const formRef = React.useRef();
   const { allMessagesAndAuthors } = useSelector(selectUser);
   const { value, errors, valid } = useSelector(selectformValidetion);
   const { showPreloader, textAnswerRequest } = useSelector(selectTopics);
@@ -54,6 +55,16 @@ export default function Form({ getMessages }) {
     }, 1500);
   };
 
+  const scrollForm = () => {
+    if (formRef.current) {
+      formRef.current.scrollIntoView({
+        behavior: 'smooth',
+        block: 'nearest',
+        inline: 'start',
+      });
+    }
+  };
+
   const addMessage = () => {
     dispatch(
       fetchAddMessageInTopic({
@@ -67,6 +78,11 @@ export default function Form({ getMessages }) {
         getMessages();
         dispatch(resetValues());
         dispatch(setValid());
+
+        console.log(allMessagesAndAuthors.length >= 10);
+        setTimeout(() => {
+          return scrollForm();
+        }, 500);
       }
       deleteTextAnswerServer();
     });
@@ -98,7 +114,11 @@ export default function Form({ getMessages }) {
       {allMessagesAndAuthors.length >= 10 ? (
         ''
       ) : (
-        <form onSubmit={(evt) => handleSubmit(evt)} className={Style.form}>
+        <form
+          ref={formRef}
+          onSubmit={(evt) => handleSubmit(evt)}
+          className={Style.form}
+        >
           <textarea
             ref={messageRef}
             value={value.textarea ?? ''}
