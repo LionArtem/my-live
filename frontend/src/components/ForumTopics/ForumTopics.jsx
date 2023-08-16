@@ -31,8 +31,13 @@ export default function ForumTopics() {
   const { token } = useSelector(selectAuth);
 
   const { value, errors, valid } = useSelector(selectformValidetion);
-  const { showPreloader, successRequest, textAnswerRequest, srrTopicServer } =
-    useSelector(selectTopics);
+  const {
+    showPreloader,
+    successRequest,
+    textAnswerRequest,
+    srrTopicServer,
+    numberPages,
+  } = useSelector(selectTopics);
 
   const getTopic = (page = localStorage.getItem('page') ?? 1) => {
     dispatch(fetchGetTopicPaginetion({ page, token }));
@@ -102,11 +107,9 @@ export default function ForumTopics() {
             />
           </form>
           <TopicList getTopic={getTopic} />
-          <Pagination getNumberPage={getTopic} />
+          {numberPages.length > 1 && <Pagination getNumberPage={getTopic} />}
         </>
       )}
-
-      {/* {srrTopicServer && <ErrServer textErr="На сервере произошла ошибка" />} */}
     </div>
   );
 }

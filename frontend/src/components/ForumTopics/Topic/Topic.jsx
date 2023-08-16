@@ -25,8 +25,14 @@ import { selectAuth } from '../../../redax/slices/authSlice';
 
 export default function Topic() {
   const dispatch = useDispatch();
-  const { authorTopic, titleTopic, date, errGetMessage, showPreloaderMessage } =
-    useSelector(selectTopics);
+  const {
+    authorTopic,
+    titleTopic,
+    date,
+    errGetMessage,
+    showPreloaderMessage,
+    numberPages,
+  } = useSelector(selectTopics);
   const { errServerUserMessage } = useSelector(selectUser);
   const { token } = useSelector(selectAuth);
 
@@ -73,7 +79,6 @@ export default function Topic() {
 
   React.useEffect(() => {
     getMessages();
-    //dispatch(fetchGetUser());
   }, []);
 
   return (
@@ -104,7 +109,7 @@ export default function Topic() {
           </div>
           <MessageUser getMessages={getMessages} />
           <FormMessage getMessages={getMessages} />
-          <Pagination getNumberPage={getMessages} />
+          {numberPages.length > 1 && <Pagination getNumberPage={getMessages} />}
         </>
       )}
     </div>
