@@ -19,16 +19,6 @@ class TopicApi {
     }).then(this._checkResponse);
   }
 
-  getTopicPaginetion(page, token) {
-    return fetch(`${this.baseUrl}/${page}`, {
-      method: 'GET',
-      headers: {
-        authorization: `Bearer ${localStorage.getItem('token') || token}`,
-        'content-type': 'application/json',
-      },
-    }).then(this._checkResponse);
-  }
-
   addMessageInTopic(params) {
     const { id, message, userId, token } = params;
     return fetch(`${this.baseUrl}/${id}/message`, {

@@ -7,22 +7,12 @@ const {
   getTopics,
   addInTopicMessage,
   getMessagePaginetion,
-  getTopicsPaginetion,
+  // getTopicsPaginetion,
   deleteTopic,
   deleteMessage,
 } = require('../controllers/topic');
 
 topicRouter.get('/', getTopics);
-
-topicRouter.get(
-  '/:page',
-  celebrate({
-    params: Joi.object().keys({
-      page: Joi.string().required(),
-    }),
-  }),
-  getTopicsPaginetion,
-);
 
 topicRouter.post(
   '/',

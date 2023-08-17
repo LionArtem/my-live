@@ -20,7 +20,9 @@ export default function TopicList({ getTopic }) {
   const { token } = useSelector(selectAuth);
 
   React.useEffect(() => {
-    dispatch(fetchGetUser(token));
+    if (token) {
+      dispatch(fetchGetUser(token));
+    }
   }, []);
 
   const deleteTopic = (evt, id) => {

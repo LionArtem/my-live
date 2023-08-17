@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
 import { topicApi } from '../../utils/TopicApi';
+import { notAuthRequest } from '../../utils/NotAuthRequest';
 
 export const fetchAddMessageInTopic = createAsyncThunk(
   'page/fetchAddMessageInTopic',
@@ -29,7 +30,7 @@ export const fetchGetMessagePaginetion = createAsyncThunk(
 export const fetchGetTopicPaginetion = createAsyncThunk(
   'page/fetchGetTopicPaginetion',
   async (params, thunkAPI) => {
-    const data = await topicApi.getTopicPaginetion(params.page, params.token);
+    const data = await notAuthRequest.getTopicPaginetion(params.page);
     return data;
   }
 );

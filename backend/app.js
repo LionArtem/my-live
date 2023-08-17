@@ -6,6 +6,8 @@ const router = require('./routes/index');
 // const { requestLogger, errorLogger } = require('./middlewares/logger');
 const auth = require('./middlewares/auth');
 const sigRouter = require('./routes/sig');
+const notAuth = require('./routes/notAuth');
+
 const NotFoundError = require('./errors/not-found-err');
 const centralErrorHandling = require('./middlewares/centralErrorHandling');
 const { listDomen } = require('./utils/constants');
@@ -45,6 +47,8 @@ app.use((req, res, next) => {
 });
 
 app.use('/', sigRouter);
+
+app.use('/', notAuth);
 
 app.use(auth);
 

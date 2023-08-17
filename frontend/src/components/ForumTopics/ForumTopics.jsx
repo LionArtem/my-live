@@ -3,6 +3,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import Style from './ForumTopics.module.scss';
+import { topicApi } from '../../utils/TopicApi';
 
 import {
   fetchGetTopicPaginetion,
@@ -28,7 +29,6 @@ import ErrServer from '../ErrServer/ErrServer';
 
 export default function ForumTopics() {
   const dispatch = useDispatch();
-  const { token } = useSelector(selectAuth);
 
   const { value, errors, valid } = useSelector(selectformValidetion);
   const {
@@ -40,7 +40,7 @@ export default function ForumTopics() {
   } = useSelector(selectTopics);
 
   const getTopic = (page = localStorage.getItem('page') ?? 1) => {
-    dispatch(fetchGetTopicPaginetion({ page, token }));
+    dispatch(fetchGetTopicPaginetion({ page }));
   };
 
   const addPost = (e) => {
