@@ -78,11 +78,7 @@ export default function Form({ getMessages }) {
         getMessages();
         dispatch(resetValues());
         dispatch(setValid());
-
-        console.log(allMessagesAndAuthors.length >= 10);
-        setTimeout(() => {
-          return scrollForm();
-        }, 500);
+        setTimeout(scrollForm, 500);
       }
       deleteTextAnswerServer();
     });

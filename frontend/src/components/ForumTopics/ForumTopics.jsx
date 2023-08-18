@@ -18,7 +18,6 @@ import {
   setValue,
   resetValues,
 } from '../../redax/slices/formValidetionSlice';
-import { selectAuth } from '../../redax/slices/authSlice';
 
 import TopicList from './TopicList/TopicList';
 import Pagination from '../Pagination/Pagination';
@@ -26,6 +25,7 @@ import ButtonsNavigation from '../Buttons/ButtonsNavigation/ButtonsNavigation';
 import BottonSubmit from '../Buttons/BottonSubmit/BottonSubmit';
 import TextInteractionForm from '../TextInteractionForm/TextInteractionForm';
 import ErrServer from '../ErrServer/ErrServer';
+import NavigationNotAuthUser from '../NavigationNotAuthUser/NavigationNotAuthUser';
 
 export default function ForumTopics() {
   const dispatch = useDispatch();
@@ -79,33 +79,45 @@ export default function ForumTopics() {
 
   return (
     <div className={Style.conteiner}>
-      <ButtonsNavigation page={'/'} text={'Назад'} />
+      {localStorage.getItem('token') ? (
+        <ButtonsNavigation page={'/'} text={'Назад'} />
+      ) : (
+        ''
+      )}
       {srrTopicServer ? (
         <ErrServer textErr="На сервере произошла ошибка, попробуйте зайти позже." />
       ) : (
         <>
-          <form onSubmit={(e) => addPost(e)}>
-            <div>
-              <input
-                type="text"
-                placeholder="введите название темы"
-                required
-                value={value.topic ?? ''}
-                name="topic"
-                onChange={(evt) => changeValue(evt)}
-                minLength={5}
-                maxLength={50}
-              ></input>
-              <TextInteractionForm text={errors.topic} />
-            </div>
-            <BottonSubmit
-              valid={valid}
-              showPreloader={showPreloader}
-              successRequest={successRequest}
-              textAnswerRequest={textAnswerRequest}
-              text={'создать тему'}
-            />
-          </form>
+          {localStorage.getItem('token') ? (
+            <form onSubmit={(e) => addPost(e)}>
+              <div>
+                <input
+                  type="text"
+                  placeholder="введите название темы"
+                  required
+                  value={value.topic ?? ''}
+                  name="topic"
+                  onChange={(evt) => changeValue(evt)}
+                  minLength={5}
+                  maxLength={50}
+                ></input>
+                <TextInteractionForm text={errors.topic} />
+              </div>
+              <BottonSubmit
+                valid={valid}
+                showPreloader={showPreloader}
+                successRequest={successRequest}
+                textAnswerRequest={textAnswerRequest}
+                text={'создать тему'}
+              />
+            </form>
+          ) : (
+            <NavigationNotAuthUser
+              text={'Что бы создать тему нужно авторизироваться'}
+            >
+              <ButtonsNavigation page={'/'} text={'Назад'} />
+            </NavigationNotAuthUser>
+          )}
           <TopicList getTopic={getTopic} />
           {numberPages.length > 1 && <Pagination getNumberPage={getTopic} />}
         </>
