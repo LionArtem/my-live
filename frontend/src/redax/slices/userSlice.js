@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
 import { usersApi } from '../../utils/UserApi';
+import { notAuthRequest } from '../../utils/NotAuthRequest';
 
 export const fetchGetUser = createAsyncThunk(
   'page/fetchGetUser',
@@ -39,7 +40,7 @@ export const fetchGetUserId = createAsyncThunk(
 export const fetchGetUserFindId = createAsyncThunk(
   'page/fetchGetUserFindId',
   async (params, thunkAPI) => {
-    const data = await usersApi.getUserFindId(params.arrIdUser,params.token);
+    const data = await notAuthRequest.getUserFindId(params.arrIdUser);
     return { data, topic: params.messages };
   }
 );

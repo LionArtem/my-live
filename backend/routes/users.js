@@ -7,7 +7,7 @@ const {
   getUsersMe,
   patchUsersInfo,
   getUsersId,
-  getUsersFaindId,
+  // getUsersFaindId,
 } = require('../controllers/users');
 
 usersRouter.get('/', getUsers);
@@ -30,10 +30,10 @@ usersRouter.patch('/me', celebrate({
   }),
 }), patchUsersInfo);
 
-usersRouter.get('/faindIdUsers/:id', celebrate({
-  params: Joi.object().keys({
-    id: Joi.string().required(),
-  }),
-}), getUsersFaindId);
+// usersRouter.get('/faindIdUsers/:id', celebrate({
+//   params: Joi.object().keys({
+//     id: Joi.string().required(),
+//   }),
+// }), getUsersFaindId);
 
 module.exports = usersRouter;

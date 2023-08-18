@@ -34,7 +34,6 @@ export default function Topic() {
     numberPages,
   } = useSelector(selectTopics);
   const { errServerUserMessage } = useSelector(selectUser);
-  const { token } = useSelector(selectAuth);
 
   const findUniqueAuthors = (res) => {
     // собираю массив уникальных id users
@@ -67,7 +66,6 @@ export default function Topic() {
           fetchGetUserFindId({
             arrIdUser: findUniqueAuthors(resMessage.payload),
             messages: resMessage.payload,
-            token,
           })
         ).then(() => {
           dispatch(isShowPreloaderMessage(false));

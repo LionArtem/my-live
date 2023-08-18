@@ -19,6 +19,16 @@ class NotAuthRequest {
     }).then(this._checkResponse);
   }
 
+  getUserFindId(arrIdUser) {
+    return fetch(
+      `${this.baseUrl}/faindIdUsers/${JSON.stringify({ arrIdUser })}`,
+      {
+        method: 'GET',
+        headers: this.headers,
+      }
+    ).then(this._checkResponse);
+  }
+
   _checkResponse = (res) => {
     if (res.ok) {
       return res.json();
