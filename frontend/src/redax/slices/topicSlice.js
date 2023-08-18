@@ -22,7 +22,7 @@ export const fetchDeleteMessage = createAsyncThunk(
 export const fetchGetMessagePaginetion = createAsyncThunk(
   'page/fetchGetMessagePaginetion',
   async (params, thunkAPI) => {
-    const data = await topicApi.getMessagePaginetion(params);
+    const data = await notAuthRequest.getMessagePaginetion(params);
     return data;
   }
 );

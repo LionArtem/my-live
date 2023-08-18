@@ -45,16 +45,16 @@ class TopicApi {
     }).then(this._checkResponse);
   }
 
-  getMessagePaginetion(params) {
-    const { id, page, token } = params;
-    return fetch(`${this.baseUrl}/${id}&${page}/message`, {
-      method: 'GET',
-      headers: {
-        authorization: `Bearer ${localStorage.getItem('token') || token}`,
-        'content-type': 'application/json',
-      },
-    }).then(this._checkResponse);
-  }
+  // getMessagePaginetion(params) {
+  //   const { id, page, token } = params;
+  //   return fetch(`${this.baseUrl}/${id}&${page}/message`, {
+  //     method: 'GET',
+  //     headers: {
+  //       authorization: `Bearer ${localStorage.getItem('token') || token}`,
+  //       'content-type': 'application/json',
+  //     },
+  //   }).then(this._checkResponse);
+  // }
 
   deleteTopic(params) {
     return fetch(`${this.baseUrl}/${params}`, {

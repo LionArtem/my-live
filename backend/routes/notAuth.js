@@ -3,6 +3,7 @@ const { celebrate, Joi } = require('celebrate');
 
 const {
   getTopicsPaginetion,
+  getMessagePaginetion,
 } = require('../controllers/topic');
 
 notAuth.get(
@@ -13,6 +14,16 @@ notAuth.get(
     }),
   }),
   getTopicsPaginetion,
+);
+
+notAuth.get(
+  '/messageList/:topicId',
+  celebrate({
+    params: Joi.object().keys({
+      topicId: Joi.string().required(),
+    }),
+  }),
+  getMessagePaginetion,
 );
 
 module.exports = notAuth;

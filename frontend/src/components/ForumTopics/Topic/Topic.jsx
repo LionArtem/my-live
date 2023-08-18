@@ -60,7 +60,6 @@ export default function Topic() {
       fetchGetMessagePaginetion({
         id: localStorage.getItem('topicId'),
         page,
-        token,
       })
     ).then((resMessage) => {
       if (resMessage.meta.requestStatus === 'fulfilled') {

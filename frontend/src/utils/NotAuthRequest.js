@@ -11,6 +11,14 @@ class NotAuthRequest {
     }).then(this._checkResponse);
   }
 
+  getMessagePaginetion(params) {
+    const { id, page } = params;
+    return fetch(`${this.baseUrl}/messageList/${id}&${page}`, {
+      method: 'GET',
+      headers: this.headers,
+    }).then(this._checkResponse);
+  }
+
   _checkResponse = (res) => {
     if (res.ok) {
       return res.json();

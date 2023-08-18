@@ -6,7 +6,7 @@ const {
   createTopic,
   getTopics,
   addInTopicMessage,
-  getMessagePaginetion,
+  // getMessagePaginetion,
   // getTopicsPaginetion,
   deleteTopic,
   deleteMessage,
@@ -26,15 +26,15 @@ topicRouter.post(
   createTopic,
 );
 
-topicRouter.get(
-  '/:topicId/message',
-  celebrate({
-    params: Joi.object().keys({
-      topicId: Joi.string().required(),
-    }),
-  }),
-  getMessagePaginetion,
-);
+// topicRouter.get(
+//   '/:topicId/message',
+//   celebrate({
+//     params: Joi.object().keys({
+//       topicId: Joi.string().required(),
+//     }),
+//   }),
+//   getMessagePaginetion,
+// );
 
 topicRouter.put('/:topicId/message', celebrate({
   params: Joi.object().keys({
