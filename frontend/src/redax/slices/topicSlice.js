@@ -83,6 +83,9 @@ const topicsSlice = createSlice({
       state.srrTopicServer = false;
       state.errGetMessage = false;
     },
+    changeErrGetMessage(state, action) {
+      state.errGetMessage = action.payload;
+    },
     resetTextAnswerRequest(state) {
       state.textAnswerRequest = '';
     },
@@ -202,5 +205,6 @@ export const {
   resetTextAnswerRequest,
   addTextSuccess,
   isShowPreloaderMessage,
+  changeErrGetMessage
 } = topicsSlice.actions;
 export default topicsSlice.reducer;

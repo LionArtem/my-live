@@ -6,6 +6,7 @@ import {
   selectTopics,
   fetchGetMessagePaginetion,
   isShowPreloaderMessage,
+  changeErrGetMessage,
 } from '../../../redax/slices/topicSlice';
 import {
   // fetchGetUser,
@@ -75,7 +76,11 @@ export default function Topic() {
   };
 
   React.useEffect(() => {
-    getMessages();
+    if (!localStorage.getItem('topicId')) {
+      dispatch(changeErrGetMessage(true));
+    } else {
+      getMessages();
+    }
   }, []);
 
   return (
