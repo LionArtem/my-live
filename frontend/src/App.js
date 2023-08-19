@@ -8,15 +8,18 @@ import Topic from './components/ForumTopics/Topic/Topic';
 import MyPage from './components/MyPage/MyPage';
 import FormEditUser from './components/FormEditUser/FormEditUser';
 import NotFoundPage from './components/NotFoundPage/NotFoundPage';
+import { useSelector } from 'react-redux';
+import { selectAuth } from './redax/slices/authSlice';
 
 function App() {
+  const { token } = useSelector(selectAuth);
   return (
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/topics" element={<ForumTopics />} />
       <Route path="/topic" element={<Topic />} />
-      <Route path="/my-page" element={<MyPage />} />
-      <Route path="/edit-user" element={<FormEditUser />} />
+      <Route path="/my-page" element={token ? <MyPage /> : <Home />} />
+      <Route path="/edit-user" element={token ? <FormEditUser /> : <Home />} />
       <Route path="*" element={<NotFoundPage />} />
     </Routes>
   );

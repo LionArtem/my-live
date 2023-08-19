@@ -15,7 +15,7 @@ import ErrServer from '../ErrServer/ErrServer';
 export default function MyPage() {
   const dispatch = useDispatch();
 
-  const { user, showSceletonPage, errServer, textAnswerRequest } =
+  const { user, showSceletonPage, errServer } =
     useSelector(selectUser);
   const { token } = useSelector(selectAuth);
 
