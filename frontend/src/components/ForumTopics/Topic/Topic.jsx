@@ -21,7 +21,7 @@ import ButtonsNavigation from '../../Buttons/ButtonsNavigation/ButtonsNavigation
 import { getTimeLocal } from '../../../utils/utils';
 import ErrServer from '../../ErrServer/ErrServer';
 import TopicPreloader from './TopicPreloader';
-import { selectAuth } from '../../../redax/slices/authSlice';
+import NavigationNotAuthUser from '../../NavigationNotAuthUser/NavigationNotAuthUser';
 
 export default function Topic() {
   const dispatch = useDispatch();
@@ -81,6 +81,11 @@ export default function Topic() {
   return (
     <div className={Style.topic}>
       <div className={Style.conteiner_navigation}>
+        {!localStorage.getItem('token') && (
+          <NavigationNotAuthUser
+            text={'Что бы написать сообщение нужно авторизироваться'}
+          />
+        )}
         <ButtonsNavigation page={'/topics'} text={'Назад'} />
         <ButtonsNavigation page={'/'} text={'На главную'} />
       </div>
@@ -105,7 +110,9 @@ export default function Topic() {
             )}
           </div>
           <MessageUser getMessages={getMessages} />
-          <FormMessage getMessages={getMessages} />
+          {localStorage.getItem('token') && (
+            <FormMessage getMessages={getMessages} />
+          )}
           {numberPages.length > 1 && <Pagination getNumberPage={getMessages} />}
         </>
       )}
