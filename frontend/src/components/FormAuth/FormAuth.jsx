@@ -17,7 +17,6 @@ import {
 } from '../../redax/slices/formValidetionSlice';
 
 import Style from './FormAuth.module.scss';
-// import PreloaderPoint from '../Preloaders/PreloaderPoint/PreloaderPoint';
 import TextInteractionForm from '../TextInteractionForm/TextInteractionForm';
 import BottonSubmit from '../Buttons/BottonSubmit/BottonSubmit';
 
