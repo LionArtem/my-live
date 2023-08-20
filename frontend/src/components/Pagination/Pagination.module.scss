@@ -52,4 +52,8 @@ nav::-webkit-scrollbar-button:horizontal:end:increment {
       transform: translateY(-3px);
     }
   }
+
+  .active {
+    background-color: rgb(95, 175, 88);
+  }
 }
