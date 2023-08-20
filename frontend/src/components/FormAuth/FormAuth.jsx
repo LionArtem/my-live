@@ -17,8 +17,9 @@ import {
 } from '../../redax/slices/formValidetionSlice';
 
 import Style from './FormAuth.module.scss';
-import PreloaderPoint from '../Preloaders/PreloaderPoint/PreloaderPoint';
+// import PreloaderPoint from '../Preloaders/PreloaderPoint/PreloaderPoint';
 import TextInteractionForm from '../TextInteractionForm/TextInteractionForm';
+import BottonSubmit from '../Buttons/BottonSubmit/BottonSubmit';
 
 export default function FormAuth({ textButton, text }) {
   const { value, errors, valid } = useSelector(selectformValidetion);
@@ -102,27 +103,13 @@ export default function FormAuth({ textButton, text }) {
             required
           ></input>
           <TextInteractionForm text={errors.password} />
-          {valid ? (
-            <>
-              {' '}
-              <button type="submit" className={Style.button}>
-                {textButton}
-                {showPreloader && <PreloaderPoint />}
-              </button>
-            </>
-          ) : (
-            <>
-              {' '}
-              <button
-                disabled
-                type="submit"
-                className={`${Style.button} ${Style.button_Off}`}
-              >
-                {textButton}
-              </button>
-            </>
-          )}
-          <TextInteractionForm text={textArrAnswerServer} />
+          <BottonSubmit
+            valid={valid}
+            showPreloader={showPreloader}
+            //successRequest={successRequest}
+            textAnswerRequest={textArrAnswerServer}
+            text={textButton}
+          />
         </form>
       </div>
     </div>

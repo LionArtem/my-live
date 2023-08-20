@@ -29,9 +29,6 @@ export default function BottonSubmit({
         </button>
       )}
       <TextInteractionForm text={textAnswerRequest} request={successRequest} />
-      {/* <span className={`${Style.error} ${successRequest && Style.success} `}>
-        {textAnswerRequest}
-      </span> */}
     </div>
   );
 }
