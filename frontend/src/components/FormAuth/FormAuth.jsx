@@ -68,7 +68,12 @@ export default function FormAuth({ textButton, text }) {
 
   return (
     <div className={Style.overflow}>
-      <div className={Style.form_contener}>
+      <div
+        onClick={(evt) => {
+          if (evt.target === evt.currentTarget) dispatch(resetForm());
+        }}
+        className={Style.form_contener}
+      >
         <form onSubmit={(e) => handleSubmit(e)} className={Style.form}>
           <div
             onClick={() => {
