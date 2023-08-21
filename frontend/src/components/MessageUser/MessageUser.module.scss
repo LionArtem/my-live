@@ -14,28 +14,76 @@
   padding: 5px 0px 5px;
 }
 
+@media screen and (max-width: 420px) {
+  .foto {
+    width: 80px;
+    height: 80px;
+  }
+}
+
 .use_conteiner {
-  height: 110px;
+  //height: 110px;
   display: grid;
   grid-template-columns: min-content auto min-content;
   grid-template-areas:
     'foto name button'
-    'foto sity sity'
-    'foto data data';
+    'foto sity button'
+    'foto data button';
   column-gap: 5px;
-  h3 {
+  .name {
     grid-area: name;
     display: flex;
     align-items: center;
     margin: 0;
+    h3 {
+      margin: 0;
+    }
+    @media screen and (max-width: 490px) {
+      h3 {
+        font-size: 0.9em;
+      }
+    }
+
+    @media screen and (max-width: 440px) {
+      h3 {
+        width: 240px;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+      }
+    }
+
+    @media screen and (max-width: 360px) {
+      h3 {
+        width: 200px;
+      }
+    }
     P {
       margin: 0;
       padding-left: 5px;
       font-weight: 400;
     }
+    @media screen and (max-width: 545px) {
+      p {
+        padding-left: 0;
+      }
+    }
   }
+
+  @media screen and (max-width: 545px) {
+    .name {
+      flex-direction: column;
+      align-items: start;
+    }
+  }
+
   p {
     grid-area: sity;
+  }
+  @media screen and (max-width: 420px) {
+    p {
+      margin: 0;
+    }
   }
   span {
     grid-area: data;
@@ -50,6 +98,26 @@
     height: 25px;
     object-fit: contain;
     background-repeat: no-repeat;
+  }
+}
+
+@media screen and (max-width: 420px) {
+  .use_conteiner {
+    //height: 100px;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .use_conteiner {
+    // max-height: 120px;
+    grid-template-columns: min-content auto;
+    grid-template-rows: min-content min-content;
+    grid-template-areas:
+      'button button'
+      'foto name '
+      'foto sity '
+      'foto data ';
+    column-gap: 5px;
   }
 }
 

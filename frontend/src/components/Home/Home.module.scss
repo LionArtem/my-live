@@ -1,0 +1,12 @@
+
+.page {
+    display: grid;
+    grid-template-rows: min-content auto min-content;
+    min-height: 100vh;
+    box-sizing: border-box;
+    border: 1px solid red;
+    main {
+      border-bottom: 1px solid white;
+    }
+  }
+  

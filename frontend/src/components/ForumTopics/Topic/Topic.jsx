@@ -91,8 +91,10 @@ export default function Topic() {
             text={'Что бы написать сообщение нужно авторизироваться'}
           />
         )}
-        <ButtonsNavigation page={'/topics'} text={'Назад'} />
-        <ButtonsNavigation page={'/'} text={'На главную'} />
+        <div className={Style.buttons_navigation}>
+          <ButtonsNavigation page={'/topics'} text={'Назад'} />
+          <ButtonsNavigation page={'/'} text={'На главную'} />
+        </div>
       </div>
       {errGetMessage || errServerUserMessage ? (
         <ErrServer textErr="На сервере произошла ошибка, попробуйте зайти позже." />

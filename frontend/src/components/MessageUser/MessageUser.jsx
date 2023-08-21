@@ -49,10 +49,10 @@ export default function MessageUser({ getMessages }) {
                     src={obj.user.avatar}
                     alt="аватарка"
                   />
-                  <h3>
-                    {obj.user.name}
+                  <div className={Style.name}>
+                    <h3> {obj.user.name}</h3>
                     <p>{`(${obj.user.gender}.${obj.user.age})`}</p>
-                  </h3>
+                  </div>
                   <p>{obj.user.sity}</p>
                   <span>{getTimeLocal(obj.messages.createdAt)}</span>
                   {user.admin && (

@@ -1,5 +1,8 @@
 import React from 'react';
 
+import Style from "./Home.module.scss";
+
+
 import { useDispatch, useSelector } from 'react-redux';
 import { selectAuth, resetForm } from '../../redax/slices/authSlice';
 
@@ -28,7 +31,7 @@ export default function Home() {
   }, [fopmReg, fopmSign]);
 
   return (
-    <div className="page">
+    <div className={Style.page}>
       <header className="">
         <Header />
       </header>

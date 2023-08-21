@@ -99,7 +99,7 @@ export default function ForumTopics() {
                   name="topic"
                   onChange={(evt) => changeValue(evt)}
                   minLength={5}
-                  maxLength={50}
+                  maxLength={30}
                 ></input>
                 <TextInteractionForm text={errors.topic} />
               </div>

@@ -7,6 +7,17 @@
 .conteiner_navigation {
   display: flex;
   column-gap: 7px;
+  .buttons_navigation {
+    display: flex;
+    column-gap: 7px;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .conteiner_navigation {
+    display: flex;
+    flex-direction: column-reverse;
+  }
 }
 
 .info_topic {
@@ -17,8 +28,21 @@
   margin-bottom: 20px;
   h1 {
     margin: 0px 10px 0px 0px;
-    letter-spacing: 3px;
+
     width: 50%;
+  }
+  @media screen and (max-width: 430px) {
+    h1 {
+      font-size: 1em;
+      letter-spacing: 1px;
+    }
+  }
+}
+
+@media screen and (max-width: 810px) {
+  .info_topic {
+    flex-direction: column;
+    align-items: start;
   }
 }
 
@@ -30,11 +54,22 @@
     'foto name'
     'foto sity'
     'foto data';
-    column-gap: 5px;
+  column-gap: 5px;
   h3 {
     grid-area: name;
     margin: 0;
     font-size: 1em;
+  }
+  @media screen and (max-width: 810px) {
+    h3 {
+      font-weight: 400;
+    }
+  }
+
+  @media screen and (max-width: 430px) {
+    h3 {
+      font-size: 0.8em;
+    }
   }
   p {
     grid-area: sity;
@@ -45,6 +80,13 @@
     grid-area: data;
     font-size: 0.8em;
   }
+
+  @media screen and (max-width: 400px) {
+    span {
+      font-size: 0.6em;
+    }
+  }
+
   img {
     grid-area: foto;
     width: 50px;
