@@ -53,7 +53,7 @@ export default function MessageUser({ getMessages }) {
                     <h3> {obj.user.name}</h3>
                     <p>{`(${obj.user.gender}.${obj.user.age})`}</p>
                   </div>
-                  <p>{obj.user.sity}</p>
+                  <p className={Style.sity}>{obj.user.sity}</p>
                   <span>{getTimeLocal(obj.messages.createdAt)}</span>
                   {user.admin && (
                     <button

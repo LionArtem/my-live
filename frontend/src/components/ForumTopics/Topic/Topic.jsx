@@ -109,7 +109,11 @@ export default function Topic() {
                 <h1>{titleTopic}</h1>
                 <div className={Style.use_conteiner}>
                   <img src={authorTopic.avatar} alt="аватарка" />
-                  <h3>{`${authorTopic.name} (${authorTopic.gender}.${authorTopic.age})`}</h3>
+                  <h3>
+                    {authorTopic.name}{' '}
+                    <p>{`(${authorTopic.gender}.${authorTopic.age})`}</p>
+                  </h3>
+
                   <p>{authorTopic.sity}</p>
                   <span>{getTimeLocal(date)}</span>
                 </div>

@@ -23,13 +23,17 @@
 .info_topic {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   border: 1px solid rgb(216, 224, 231);
   padding: 5px;
   margin-bottom: 20px;
   h1 {
     margin: 0px 10px 0px 0px;
-
-    width: 50%;
+  }
+  @media screen and (max-width: 810px) {
+    h1 {
+      border-bottom: 1px solid rgb(216, 224, 231);
+    }
   }
   @media screen and (max-width: 430px) {
     h1 {
@@ -43,6 +47,7 @@
   .info_topic {
     flex-direction: column;
     align-items: start;
+    row-gap: 7px;
   }
 }
 
@@ -59,22 +64,31 @@
     grid-area: name;
     margin: 0;
     font-size: 1em;
+    p {
+      font-weight: 400;
+    }
   }
   @media screen and (max-width: 810px) {
     h3 {
-      font-weight: 400;
+      font-weight: 600;
     }
   }
 
   @media screen and (max-width: 430px) {
     h3 {
       font-size: 0.8em;
+      font-weight: 600;
     }
   }
   p {
     grid-area: sity;
     margin: 0;
     font-size: 0.8em;
+  }
+  @media screen and (max-width: 430px) {
+    p {
+      font-size: 0.7em;
+    }
   }
   span {
     grid-area: data;
@@ -89,8 +103,8 @@
 
   img {
     grid-area: foto;
-    width: 50px;
-    height: 50px;
+    width: 60px;
+    height: 60px;
     object-fit: cover;
     padding: 5px 0px 5px;
   }

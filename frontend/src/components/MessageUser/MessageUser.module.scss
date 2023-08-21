@@ -22,7 +22,6 @@
 }
 
 .use_conteiner {
-  //height: 110px;
   display: grid;
   grid-template-columns: min-content auto min-content;
   grid-template-areas:
@@ -34,6 +33,7 @@
     grid-area: name;
     display: flex;
     align-items: center;
+    align-self: start;
     margin: 0;
     h3 {
       margin: 0;
@@ -68,25 +68,47 @@
         padding-left: 0;
       }
     }
+    @media screen and (max-width: 490px) {
+      p {
+        font-size: 15px;
+      }
+    }
+    @media screen and (max-width: 360px) {
+      p {
+        font-size: 12px;
+      }
+    }
   }
 
   @media screen and (max-width: 545px) {
     .name {
       flex-direction: column;
       align-items: start;
+      row-gap: 3px;
     }
   }
 
-  p {
+  .sity {
     grid-area: sity;
+    margin: 0;
+    align-self: center;
   }
-  @media screen and (max-width: 420px) {
-    p {
-      margin: 0;
+
+  @media screen and (max-width: 490px) {
+    .sity {
+      font-size: 15px;
     }
   }
+
   span {
     grid-area: data;
+    align-self: center;
+  }
+  @media screen and (max-width: 490px) {
+    span {
+      font-size: 15px;
+      margin: 0;
+    }
   }
   .button_delete {
     all: unset;
@@ -101,15 +123,8 @@
   }
 }
 
-@media screen and (max-width: 420px) {
-  .use_conteiner {
-    //height: 100px;
-  }
-}
-
 @media screen and (max-width: 400px) {
   .use_conteiner {
-    // max-height: 120px;
     grid-template-columns: min-content auto;
     grid-template-rows: min-content min-content;
     grid-template-areas:
@@ -128,4 +143,10 @@
   background-color: rgb(222, 232, 234);
   margin: 0;
   padding: 5px 5px;
+}
+
+@media screen and (max-width: 360px) {
+  .massage {
+    font-size: 18px;
+  }
 }
