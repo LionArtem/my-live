@@ -66,12 +66,23 @@ export default function ForumTopics() {
     };
   }, []);
 
+  function checkedStringGap(string) {
+    const regex = /^((?!\s{2}).)*$/;
+    const result = regex.test(string);
+    return result;
+  }
+
   const changeValue = (evt) => {
+    let errMessage = evt.target.validationMessage;
+    if (!checkedStringGap(evt.target.value)) {
+      errMessage = 'одного пробела достаточно!';
+    }
+
     dispatch(
       setValue({
         value: evt.target.value,
         name: evt.target.name,
-        errors: evt.target.validationMessage,
+        errors: errMessage,
         valid: evt.target.closest('form').checkValidity(),
       })
     );
@@ -92,6 +103,7 @@ export default function ForumTopics() {
             <form onSubmit={(e) => addPost(e)}>
               <div>
                 <input
+                  pattern="^((?!\s{2}).)*$"
                   type="text"
                   placeholder="введите название темы"
                   required
