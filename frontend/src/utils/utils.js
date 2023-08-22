@@ -11,9 +11,12 @@ const getTimeLocal = (date) => {
   const hours = timeLocal.getHours();
   const minutes = timeLocal.getMinutes();
   const seconds = timeLocal.getSeconds();
+
   const strTimeLocal = `${month}.${
     number < 10 ? '0' + number : number
-  }.${year} ${hours}:${minutes}:${seconds}`;
+  }.${year} ${hours}:${minutes < 10 ? '0' + minutes : minutes}:${
+    seconds < 10 ? '0' + seconds : seconds
+  }`;
 
   return strTimeLocal;
 };

@@ -113,7 +113,6 @@ export default function Topic() {
                     {authorTopic.name}{' '}
                     <p>{`(${authorTopic.gender}.${authorTopic.age})`}</p>
                   </h3>
-
                   <p>{authorTopic.sity}</p>
                   <span>{getTimeLocal(date)}</span>
                 </div>
