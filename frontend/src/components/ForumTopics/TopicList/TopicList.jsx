@@ -47,14 +47,16 @@ export default function TopicList({ getTopic }) {
         topicsInPage &&
         topicsInPage.map((obj) => (
           <Link to={'/topic'} key={obj._id}>
-            <h1
-              onClick={() => {
-                localStorage.setItem('topicId', obj._id);
-              }}
-            >
-              {obj.title}
-            </h1>
-            <p>{getTimeLocal(obj.createdAt)}</p>
+            <div className={Style.title}>
+              <h1
+                onClick={() => {
+                  localStorage.setItem('topicId', obj._id);
+                }}
+              >
+                {obj.title}
+              </h1>
+              <p>{getTimeLocal(obj.createdAt)}</p>
+            </div>
             {user.admin && (
               <button
                 className={Style.button_delete}

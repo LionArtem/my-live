@@ -5,7 +5,7 @@
   grid-template-rows: min-content min-content auto min-content;
   form {
     display: grid;
-    grid-template-columns: min-content 150px;
+    grid-template-columns: min-content min-content;
     grid-template-rows: 80px;
     justify-self: start;
     margin-left: 50px;
@@ -27,6 +27,14 @@
       color: brown;
       text-align: center;
       padding: 5px;
+    }
+  }
+
+  @media screen and (max-width: 500px) {
+    form {
+      grid-template-columns: min-content;
+      grid-template-rows: 65px 60px;
+      margin: auto;
     }
   }
 }
