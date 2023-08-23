@@ -9,7 +9,6 @@ import {
   changeErrGetMessage,
 } from '../../../redax/slices/topicSlice';
 import {
-  // fetchGetUser,
   fetchGetUserFindId,
   selectUser,
 } from '../../../redax/slices/userSlice';

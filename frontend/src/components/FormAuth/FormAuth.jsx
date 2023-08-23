@@ -110,7 +110,6 @@ export default function FormAuth({ textButton, text }) {
           <BottonSubmit
             valid={valid}
             showPreloader={showPreloader}
-            //successRequest={successRequest}
             textAnswerRequest={textArrAnswerServer}
             text={textButton}
           />

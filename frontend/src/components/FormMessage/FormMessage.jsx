@@ -51,7 +51,6 @@ export default function Form({ getMessages }) {
   const deleteTextAnswerServer = () => {
     setTimeout(() => {
       dispatch(resetTextAnswerRequest());
-      // dispatch(resetSuccessRequest());
     }, 1500);
   };
 
@@ -131,7 +130,6 @@ export default function Form({ getMessages }) {
           <BottonSubmit
             valid={valid}
             showPreloader={showPreloader}
-            // successRequest={successRequest}
             textAnswerRequest={textAnswerRequest}
             text={'отправить'}
           />

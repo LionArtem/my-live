@@ -3,7 +3,6 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import Style from './ForumTopics.module.scss';
-import { topicApi } from '../../utils/TopicApi';
 
 import {
   fetchGetTopicPaginetion,

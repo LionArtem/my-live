@@ -108,7 +108,6 @@ export default function FormEditUser() {
           <FormEditUserPreloader />
         ) : errServer ? (
           <ErrServer textErr="На сервере произошла ошибка, попробуйте зайти позже." />
-          // <h1 className={Style.text_err_server}>{`${textAnswerRequest} :(`}</h1>
         ) : (
           <>
             {' '}

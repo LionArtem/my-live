@@ -7,7 +7,6 @@ import {
   killAllStateUser,
 } from '../../redax/slices/userSlice';
 import { selectAuth } from '../../redax/slices/authSlice';
-import { Link } from 'react-router-dom';
 import MyPagePreloader from './MyPagePreloader';
 import ButtonsNavigation from '../Buttons/ButtonsNavigation/ButtonsNavigation';
 import ErrServer from '../ErrServer/ErrServer';

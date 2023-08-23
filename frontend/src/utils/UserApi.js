@@ -21,19 +21,6 @@ class UserApi {
     }).then(this._checkResponse);
   }
 
-  // getUserFindId(arrIdUser, token) {
-  //   return fetch(
-  //     `${this.baseUrl}/faindIdUsers/${JSON.stringify({ arrIdUser })}`,
-  //     {
-  //       method: 'GET',
-  //       headers: {
-  //         authorization: `Bearer ${localStorage.getItem('token') || token}`,
-  //         'content-type': 'application/json',
-  //       },
-  //     }
-  //   ).then(this._checkResponse);
-  // }
-
   patchUserMe(age, avatar, email, name, sity, gender, params) {
     const token = params;
     return fetch(`${this.baseUrl}/me`, {

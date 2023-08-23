@@ -107,8 +107,6 @@ const topicsSlice = createSlice({
     });
     builder.addCase(fetchAddMessageInTopic.fulfilled, (state, { payload }) => {
       state.showPreloader = false;
-      //state.successRequest = true;
-      //state.textAnswerRequest = 'сообщение успешно отправлено';
     });
     builder.addCase(fetchAddMessageInTopic.rejected, (state, action) => {
       console.log('ошибка отправки message');
