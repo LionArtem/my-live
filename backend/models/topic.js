@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-// const { regularAvatar } = require('../utils/constants');
 
 const cardSchema = new mongoose.Schema({
   title: {

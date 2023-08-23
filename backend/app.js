@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 
 const { errors } = require('celebrate');
 const router = require('./routes/index');
-// const { requestLogger, errorLogger } = require('./middlewares/logger');
+const { requestLogger, errorLogger } = require('./middlewares/logger');
 const auth = require('./middlewares/auth');
 const sigRouter = require('./routes/sig');
 const notAuth = require('./routes/notAuth');
@@ -20,13 +20,7 @@ app.use(express.urlencoded({ extended: true })); // для приёма веб-�
 
 mongoose.connect('mongodb://127.0.0.1/myLivedb');
 
-// app.get('/crash-test', () => {
-//   setTimeout(() => {
-//     throw new Error('Сервер сейчас упадёт');
-//   }, 0);
-// });
-
-// app.use(requestLogger);
+app.use(requestLogger);
 
 app.use((req, res, next) => {
   const { origin } = req.headers;
@@ -54,7 +48,7 @@ app.use(auth);
 
 app.use('/', router);
 
-// app.use(errorLogger);
+app.use(errorLogger);
 
 app.use((req, res, next) => {
   const err = new NotFoundError('адресс не существует');

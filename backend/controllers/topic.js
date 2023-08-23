@@ -4,7 +4,7 @@ const IncorrectErr = require('../errors/incorrect-err');
 const NotFoundError = require('../errors/not-found-err');
 
 const createTopic = (req, res, next) => {
-  //const id = req.user._id;
+  const id = req.user._id;
   const { title } = req.body;
   Topic.create({
     title,

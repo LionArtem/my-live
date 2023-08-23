@@ -1,13 +1,10 @@
 const topicRouter = require('express').Router();
 const { celebrate, Joi } = require('celebrate');
-// const { regularAvatar } = require('../utils/constants');
 
 const {
   createTopic,
   getTopics,
   addInTopicMessage,
-  // getMessagePaginetion,
-  // getTopicsPaginetion,
   deleteTopic,
   deleteMessage,
 } = require('../controllers/topic');
@@ -25,16 +22,6 @@ topicRouter.post(
   }),
   createTopic,
 );
-
-// topicRouter.get(
-//   '/:topicId/message',
-//   celebrate({
-//     params: Joi.object().keys({
-//       topicId: Joi.string().required(),
-//     }),
-//   }),
-//   getMessagePaginetion,
-// );
 
 topicRouter.put('/:topicId/message', celebrate({
   params: Joi.object().keys({
