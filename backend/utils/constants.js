@@ -9,7 +9,8 @@ const regularLink = /^(ftp|http|https):\/\/[^ "]+$/;
 const regularEmail = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/;
 
 const listDomen = [
-  'api.my-live.website',
+  'https://my-live.website',
+  'http://my-live.website',
 ];
 
 module.exports = {
