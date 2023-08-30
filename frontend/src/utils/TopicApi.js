@@ -61,7 +61,8 @@ class TopicApi {
 }
 
 const topicApi = new TopicApi({
-  baseUrl: 'http://localhost:3000/topic',
+  //baseUrl: 'http://localhost:3000/topic',
+  baseUrl: 'https://api.my-live.website/topic',
   headers: {
     authorization: `Bearer ${localStorage.getItem('token')}`,
     'content-type': 'application/json',
