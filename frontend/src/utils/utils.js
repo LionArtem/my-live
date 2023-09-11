@@ -6,10 +6,13 @@ const getTimeLocal = (date) => {
 
   const timeLocal = new Date(date);
 
-  let formatter = new Intl.DateTimeFormat("ru", {
-    year: "numeric",
-    month: "long",
-    day: "numeric"
+  let formatter = new Intl.DateTimeFormat('ru', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit',
+    second: '2-digit',
   });
   // const month = timeLocal.getMonth() + 1;
   // const number = timeLocal.getDate();
