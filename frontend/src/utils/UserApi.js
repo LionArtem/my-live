@@ -41,8 +41,8 @@ class UserApi {
 }
 
 const usersApi = new UserApi({
- // baseUrl: 'http://localhost:3000/users',
-  baseUrl: 'https://api.my-live.website/users',
+ baseUrl: 'http://localhost:3000/users',
+ // baseUrl: 'https://api.my-live.website/users',
   headers: {
     authorization: `Bearer ${localStorage.getItem('token')}`,
     'content-type': 'application/json',

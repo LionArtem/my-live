@@ -5,20 +5,26 @@ const getTimeLocal = (date) => {
   // const strTimeLocal = `${month} ${number} ${year} ${time}`;
 
   const timeLocal = new Date(date);
-  const month = timeLocal.getMonth() + 1;
-  const number = timeLocal.getDate();
-  const year = timeLocal.getFullYear();
-  const hours = timeLocal.getHours();
-  const minutes = timeLocal.getMinutes();
-  const seconds = timeLocal.getSeconds();
 
-  const strTimeLocal = `${month}.${
-    number < 10 ? '0' + number : number
-  }.${year} ${hours}:${minutes < 10 ? '0' + minutes : minutes}:${
-    seconds < 10 ? '0' + seconds : seconds
-  }`;
+  let formatter = new Intl.DateTimeFormat("ru", {
+    year: "numeric",
+    month: "long",
+    day: "numeric"
+  });
+  // const month = timeLocal.getMonth() + 1;
+  // const number = timeLocal.getDate();
+  // const year = timeLocal.getFullYear();
+  // const hours = timeLocal.getHours();
+  // const minutes = timeLocal.getMinutes();
+  // const seconds = timeLocal.getSeconds();
 
-  return strTimeLocal;
+  // const strTimeLocal = `${month}.${
+  //   number < 10 ? '0' + number : number
+  // }.${year} ${hours}:${minutes < 10 ? '0' + minutes : minutes}:${
+  //   seconds < 10 ? '0' + seconds : seconds
+  // }`;
+
+  return formatter.format(timeLocal);
 };
 
 export { getTimeLocal };
