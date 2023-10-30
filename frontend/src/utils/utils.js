@@ -1,4 +1,7 @@
 const getTimeLocal = (date) => {
+  if (!date) {
+    return 
+  }
   //const timeLocal = new Date(date).toString();
   //const arrTimeLocal = timeLocal.split(' ');
   //const [month, number, year, time] = arrTimeLocal.slice(1, 5);

@@ -33,6 +33,7 @@ export default function Topic() {
     showPreloaderMessage,
     numberPages,
   } = useSelector(selectTopics);
+ 
   const { errServerUserMessage } = useSelector(selectUser);
 
   const findUniqueAuthors = (res) => {

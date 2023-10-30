@@ -35,7 +35,7 @@ class Auth {
 }
 
 const auth = new Auth({
-  baseUrl: 'http://localhost:3000',
+  baseUrl: 'http://localhost:3001',
   //baseUrl: 'https://api.my-live.website',
   headers: { 'content-type': 'application/json' },
 });

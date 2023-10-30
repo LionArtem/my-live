@@ -101,6 +101,10 @@ export default function FormEditUser() {
     );
   };
 
+  const addFoto = (evt) => {
+    console.log(evt);
+  };
+
   return (
     <div className={Style.conteiner}>
       <form onSubmit={(evt) => hendelSumit(evt)} className={Style.form}>
@@ -119,6 +123,17 @@ export default function FormEditUser() {
               name="avatar"
               onChange={(evt) => changeValue(evt)}
               placeholder="ввидите ссылку на фотографию"
+              required
+            ></input>
+            <TextInteractionForm text={errors.avatar} />
+            <label>аватар</label>
+            <input
+              //pattern="^\S*$"
+              type="file"
+              //value={value.avatar ?? ''}
+              name="avatar-foto"
+              onChange={(evt) => addFoto(evt)}
+              //placeholder="ввидите ссылку на фотографию"
               required
             ></input>
             <TextInteractionForm text={errors.avatar} />
