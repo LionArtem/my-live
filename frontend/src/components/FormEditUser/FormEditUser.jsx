@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import Style from './FormEditUser.module.scss';
 import { useDispatch, useSelector } from 'react-redux';
@@ -26,7 +26,7 @@ import ErrServer from '../ErrServer/ErrServer';
 
 export default function FormEditUser() {
   const dispatch = useDispatch();
-
+  const [fileList, setFileList] = useState({});
   const { value, errors, valid } = useSelector(selectformValidetion);
   const {
     user,
@@ -102,7 +102,29 @@ export default function FormEditUser() {
   };
 
   const addFoto = (evt) => {
-    console.log(evt);
+    const file = evt.target.files ? evt.target.files[0] : false;
+    setFileToBase(file);
+    console.log(file);
+  };
+
+  const setFileToBase = (file) => {
+    try {
+      const render = new FileReader();
+      render.readAsDataURL(file);
+
+      render.onloadend = () => {
+        if (!render.result) return;
+
+        addFile(render.result, file);
+      };
+    } catch (error) {
+      console.log(error, 'Ошибка при загрузке файла!');
+    }
+  };
+
+  const addFile = (result, file) => {
+    const id = crypto.randomUUID();
+    setFileList({ id, result, file });
   };
 
   return (
@@ -127,12 +149,14 @@ export default function FormEditUser() {
             ></input>
             <TextInteractionForm text={errors.avatar} />
             <label>аватар</label>
+            <img src={fileList.result} alt="аватар" />
             <input
               //pattern="^\S*$"
               type="file"
               //value={value.avatar ?? ''}
               name="avatar-foto"
               onChange={(evt) => addFoto(evt)}
+              accept="image/*"
               //placeholder="ввидите ссылку на фотографию"
               required
             ></input>
