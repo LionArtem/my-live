@@ -6,7 +6,6 @@ const storage = multer.diskStorage({
     cb(null, 'uploads/');
   },
   filename(req, file, cd) {
-    console.log(req.user._id);
     // const date = moment().format('DDMMYYYY-HHmmss_SSS');
     cd(null, req.user._id);
     // cd(null, `${date}-${file.originalname}`);
@@ -16,7 +15,11 @@ const storage = multer.diskStorage({
 const uploads = multer({
   storage,
   fileFilter(req, file, collback) {
-    if (file.mimetype === 'image/png' || file.mimetype === 'image/jpg') {
+    if (
+      file.mimetype === 'image/png'
+    || file.mimetype === 'image/jpg'
+    || file.mimetype === 'image/jpeg'
+    ) {
       collback(null, true);
     } else {
       console.log('only jpg & png file supported!');

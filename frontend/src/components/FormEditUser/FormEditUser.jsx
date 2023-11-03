@@ -29,6 +29,7 @@ export default function FormEditUser() {
   const dispatch = useDispatch();
   const [fileList, setFileList] = useState({});
   const { value, errors, valid } = useSelector(selectformValidetion);
+  const [errorLoadingFile, setErrorLoadingFile] = useState('');
 
   const {
     user,
@@ -113,20 +114,14 @@ export default function FormEditUser() {
     try {
       const render = new FileReader();
       render.readAsDataURL(file);
-
       render.onloadend = () => {
         if (!render.result) return;
-
-        addFile(render.result, file);
+        setFileList({ result: render.result, file });
       };
     } catch (error) {
+      setErrorLoadingFile('Ошибка при загрузке файла!');
       console.log(error, 'Ошибка при загрузке файла!');
     }
-  };
-
-  const addFile = (result, file) => {
-    const id = crypto.randomUUID();
-    setFileList({ id, result, file });
   };
 
   const sendFile = () => {
@@ -150,14 +145,18 @@ export default function FormEditUser() {
             console.log(err);
           });
       } else {
-        console.log(res.text().then((err) => Promise.reject(JSON.parse(err))));
+        if (res.status === 500) {
+          setErrorLoadingFile('на сервере произошла ошибка');
+        } else {
+          setErrorLoadingFile(res.statusText);
+        }
       }
     });
   };
 
   return (
     <div className={Style.conteiner}>
-      <label>аватар</label>
+      {/* <label>аватар</label> */}
       <img
         src={
           fileList.result
@@ -174,7 +173,7 @@ export default function FormEditUser() {
         required
       ></input>
       <button onClick={() => sendFile()}>ADD</button>
-      <TextInteractionForm text={errors.avatar} />
+      <TextInteractionForm text={errorLoadingFile} />
       <form onSubmit={(evt) => hendelSumit(evt)} className={Style.form}>
         {showSceletonPage ? (
           <FormEditUserPreloader />
