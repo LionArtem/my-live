@@ -157,12 +157,18 @@ export default function FormEditUser() {
 
   return (
     <div className={Style.conteiner}>
-      <img
-        src={
-          file ? file : user.avatar && `http://localhost:3001/${user.avatar}`
-        }
-        alt="аватар"
-      />
+      <div className={Style.container_avatar}>
+        <img
+          src={
+            file ? file : user.avatar && `http://localhost:3001/${user.avatar}`
+          }
+          alt="аватар"
+        />
+        <div
+          className={Style.button_edit_foto}
+          onClick={() => refInputFile.current.click()}
+        ></div>
+      </div>
       <input
         ref={refInputFile}
         className={Style.input_file}
@@ -172,7 +178,7 @@ export default function FormEditUser() {
         accept="image/*"
         required
       ></input>
-      <div onClick={() => refInputFile.current.click()}>add foto</div>
+
       <TextInteractionForm text={errorLoadingFile} />
       <form onSubmit={(evt) => hendelSumit(evt)} className={Style.form}>
         {showSceletonPage ? (
