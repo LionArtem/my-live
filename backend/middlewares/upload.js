@@ -1,13 +1,15 @@
 const multer = require('multer');
-const moment = require('moment');
+// const moment = require('moment');
 
 const storage = multer.diskStorage({
   destination(req, file, cb) {
     cb(null, 'uploads/');
   },
   filename(req, file, cd) {
-    const date = moment().format('DDMMYYYY-HHmmss_SSS');
-    cd(null, `${date}-${file.originalname}`);
+    console.log(req.user._id);
+    // const date = moment().format('DDMMYYYY-HHmmss_SSS');
+    cd(null, req.user._id);
+    // cd(null, `${date}-${file.originalname}`);
   },
 });
 
