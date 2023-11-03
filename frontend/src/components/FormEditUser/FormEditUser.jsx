@@ -16,6 +16,7 @@ import {
   selectUser,
   addTextSuccess,
   setSuccessRequest,
+  setUserAvatar,
 } from '../../redax/slices/userSlice';
 import FormEditUserPreloader from './FormEditUserPreloader';
 import ButtonsNavigation from '../Buttons/ButtonsNavigation/ButtonsNavigation';
@@ -28,6 +29,7 @@ export default function FormEditUser() {
   const dispatch = useDispatch();
   const [fileList, setFileList] = useState({});
   const { value, errors, valid } = useSelector(selectformValidetion);
+
   const {
     user,
     showPreloader,
@@ -36,6 +38,7 @@ export default function FormEditUser() {
     showSceletonPage,
     errServer,
   } = useSelector(selectUser);
+
   const { token } = useSelector(selectAuth);
 
   React.useEffect(() => {
@@ -84,7 +87,7 @@ export default function FormEditUser() {
       dispatch(setSuccessRequest(true));
       deleteTextAnswerServer();
     } else {
-      dispatch(fetchPatchUser(token)).then(() => {
+      dispatch(fetchPatchUser({ token })).then(() => {
         deleteTextAnswerServer();
       });
     }
@@ -104,7 +107,6 @@ export default function FormEditUser() {
   const addFoto = (evt) => {
     const file = evt.target.files ? evt.target.files[0] : false;
     setFileToBase(file);
-    console.log(file);
   };
 
   const setFileToBase = (file) => {
@@ -127,8 +129,52 @@ export default function FormEditUser() {
     setFileList({ id, result, file });
   };
 
+  const sendFile = () => {
+    const avatar = new FormData();
+    avatar.append('avatar', fileList.file);
+
+    fetch('http://localhost:3001/users/add-file', {
+      method: 'POST',
+      headers: {
+        authorization: `Bearer ${localStorage.getItem('token') || token}`,
+      },
+      body: avatar,
+    }).then((res) => {
+      if (res.ok) {
+        res
+          .json()
+          .then((res) => {
+            dispatch(setUserAvatar(res.avatar));
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      } else {
+        console.log(res.text().then((err) => Promise.reject(JSON.parse(err))));
+      }
+    });
+  };
+
   return (
     <div className={Style.conteiner}>
+      <label>аватар</label>
+      <img
+        src={
+          fileList.result
+            ? fileList.result
+            : user.avatar && `http://localhost:3001/${user.avatar}`
+        }
+        alt="аватар"
+      />
+      <input
+        type="file"
+        name="avatar-foto"
+        onChange={(evt) => addFoto(evt)}
+        accept="image/*"
+        required
+      ></input>
+      <button onClick={() => sendFile()}>ADD</button>
+      <TextInteractionForm text={errors.avatar} />
       <form onSubmit={(evt) => hendelSumit(evt)} className={Style.form}>
         {showSceletonPage ? (
           <FormEditUserPreloader />
@@ -136,31 +182,6 @@ export default function FormEditUser() {
           <ErrServer textErr="На сервере произошла ошибка, попробуйте зайти позже." />
         ) : (
           <>
-            {' '}
-            <label>ссылка на фото</label>
-            <input
-              pattern="^\S*$"
-              type="url"
-              value={value.avatar ?? ''}
-              name="avatar"
-              onChange={(evt) => changeValue(evt)}
-              placeholder="ввидите ссылку на фотографию"
-              required
-            ></input>
-            <TextInteractionForm text={errors.avatar} />
-            <label>аватар</label>
-            <img src={fileList.result} alt="аватар" />
-            <input
-              //pattern="^\S*$"
-              type="file"
-              //value={value.avatar ?? ''}
-              name="avatar-foto"
-              onChange={(evt) => addFoto(evt)}
-              accept="image/*"
-              //placeholder="ввидите ссылку на фотографию"
-              required
-            ></input>
-            <TextInteractionForm text={errors.avatar} />
             <label>ваше имя</label>
             <input
               pattern="^\S*$"

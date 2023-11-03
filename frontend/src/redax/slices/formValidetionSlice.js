@@ -20,7 +20,7 @@ const formValidetionSlice = createSlice({
         name: action.payload.name,
         email: action.payload.email,
         age: action.payload.age,
-        avatar: action.payload.avatar,
+        //avatar: action.payload.avatar,
         sity: action.payload.sity,
         gender: action.payload.gender,
       };

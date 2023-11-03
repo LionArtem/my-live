@@ -14,16 +14,18 @@ export const fetchGetUser = createAsyncThunk(
 export const fetchPatchUser = createAsyncThunk(
   'page/fetchPatchUser',
   async (params, thunkAPI) => {
-    const { age, avatar, email, name, sity, gender } =
+    const { age, email, name, sity, gender } =
       thunkAPI.getState().formValidetion.value;
+    const { token } = params;
+    console.log(age, email, name, sity, gender);
+
     const data = await usersApi.patchUserMe(
       age,
-      avatar,
       email,
       name,
       sity,
       gender,
-      params
+      token
     );
     return data;
   }
@@ -63,6 +65,9 @@ const userSlice = createSlice({
     setSuccessRequest(state, action) {
       state.successRequest = action.payload;
     },
+    setUserAvatar(state, action) {
+      state.user.avatar = action.payload;
+    },
     addTextSuccess(state, action) {
       state.textAnswerRequest = action.payload;
     },
@@ -80,10 +85,11 @@ const userSlice = createSlice({
   extraReducers: (builder) => {
     // запрос на получение текущего пользователя
     builder.addCase(fetchGetUser.pending, (state) => {
-      console.log('запрос на получение пользователя');
+      //console.log('запрос на получение пользователя');
       state.showSceletonPage = true;
     });
     builder.addCase(fetchGetUser.fulfilled, (state, { payload }) => {
+      //console.log(payload);
       state.user = payload;
       localStorage.setItem('userId', payload._id);
       state.showSceletonPage = false;
@@ -125,7 +131,7 @@ const userSlice = createSlice({
 
     // запрос на получение пользователя по массиву id
     builder.addCase(fetchGetUserFindId.pending, (state) => {
-      console.log('запрос на получение пользователя по массиву id');
+      //console.log('запрос на получение пользователя по массиву id');
     });
     builder.addCase(fetchGetUserFindId.fulfilled, (state, { payload }) => {
       // console.log(payload);
@@ -151,6 +157,10 @@ const userSlice = createSlice({
 
 export const selectUser = (state) => state.user;
 
-export const { killAllStateUser, addTextSuccess, setSuccessRequest } =
-  userSlice.actions;
+export const {
+  killAllStateUser,
+  addTextSuccess,
+  setSuccessRequest,
+  setUserAvatar,
+} = userSlice.actions;
 export default userSlice.reducer;

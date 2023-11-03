@@ -33,7 +33,7 @@ export default function Topic() {
     showPreloaderMessage,
     numberPages,
   } = useSelector(selectTopics);
- 
+
   const { errServerUserMessage } = useSelector(selectUser);
 
   const findUniqueAuthors = (res) => {
@@ -108,12 +108,25 @@ export default function Topic() {
                 {' '}
                 <h1>{titleTopic}</h1>
                 <div className={Style.use_conteiner}>
-                  <img src={authorTopic.avatar} alt="аватарка" />
-                  <h3>
-                    {authorTopic.name}{' '}
-                    <p>{`(${authorTopic.gender}.${authorTopic.age})`}</p>
-                  </h3>
-                  <p>{authorTopic.sity}</p>
+                  <img
+                    src={
+                      authorTopic?.avatar
+                        ? `http://localhost:3001/${authorTopic?.avatar}`
+                        : 'https://www.murrayglass.com/wp-content/uploads/2020/10/avatar-scaled.jpeg'
+                    }
+                    alt="аватарка"
+                  />
+                  {authorTopic ? (
+                    <>
+                      <h3>
+                        {authorTopic?.name}
+                        <p>{`(${authorTopic?.gender}.${authorTopic?.age})`}</p>
+                      </h3>
+                      <p>{authorTopic?.sity}</p>
+                    </>
+                  ) : (
+                    'пользователь удален'
+                  )}
                   <span>{getTimeLocal(date)}</span>
                 </div>
               </>

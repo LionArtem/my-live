@@ -1,5 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const path = require('path');
 
 const { errors } = require('celebrate');
 const router = require('./routes/index');
@@ -12,12 +13,11 @@ const NotFoundError = require('./errors/not-found-err');
 const centralErrorHandling = require('./middlewares/centralErrorHandling');
 const { listDomen } = require('./utils/constants');
 
-const { PORT = 3000 } = process.env;
+const { PORT = 3001 } = process.env;
 const app = express();
-
 app.use(express.json()); // для собирания JSON-формата
 app.use(express.urlencoded({ extended: true })); // для приёма веб-страниц внутри POST-запроса
-
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 mongoose.connect('mongodb://127.0.0.1/myLivedb');
 
 app.use(requestLogger);
@@ -28,7 +28,7 @@ app.use((req, res, next) => {
   const requestHeaders = req.headers['access-control-request-headers'];
   const DEFAULT_ALLOWED_METHODS = 'GET,HEAD,PUT,PATCH,POST,DELETE';
   if (listDomen.includes(origin)) {
-  // устанавливаем заголовок, который разрешает браузеру запросы с этого источника
+    // устанавливаем заголовок, который разрешает браузеру запросы с этого источника
     res.header('Access-Control-Allow-Origin', origin);
   }
   // res.header('Access-Control-Allow-Origin', '*');

@@ -113,15 +113,43 @@ const getUsersId = (req, res, next) => {
     });
 };
 
+const addUserFoto = (req, res, next) => {
+  const id = req.user._id;
+  User.findByIdAndUpdate(
+    id,
+    {
+      avatar: req.file.path,
+    },
+    {
+      new: true, // обработчик then получит на вход обновлённую запись
+      runValidators: true,
+    },
+  )
+    .then((user) => {
+      res.send(user);
+    })
+    .catch((err) => {
+      if (err.name === 'ValidationError') {
+        const erros = new IncorrectErr('Некорректный данные');
+        next(erros);
+      } else if (err.codeName === 'DuplicateKey') {
+        const erros = new RepeatsEmailError('Этот email уже существует');
+        next(erros);
+      } else {
+        next(err);
+      }
+    });
+};
+
 const patchUsersInfo = (req, res, next) => {
   const id = req.user._id;
   const {
-    age, avatar, email, name, sity, gender,
+    age, email, name, sity, gender,
   } = req.body;
   User.findByIdAndUpdate(
     id,
     {
-      age, avatar, email, name, sity, gender,
+      age, email, name, sity, gender,
     },
     {
       new: true, // обработчик then получит на вход обновлённую запись
@@ -167,4 +195,5 @@ module.exports = {
   login,
   getUsersId,
   getUsersFaindId,
+  addUserFoto,
 };

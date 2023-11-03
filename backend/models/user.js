@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 const validator = require('validator');
-const { regularAvatar } = require('../utils/constants');
 
 const userSchema = new mongoose.Schema({
   name: {
@@ -29,10 +28,7 @@ const userSchema = new mongoose.Schema({
   },
   avatar: {
     type: String,
-    default: 'https://www.murrayglass.com/wp-content/uploads/2020/10/avatar-scaled.jpeg',
-    validate: {
-      validator: (v) => regularAvatar.test(v),
-    },
+    default: '',
   },
   email: {
     type: String,

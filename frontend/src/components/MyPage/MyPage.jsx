@@ -14,8 +14,7 @@ import ErrServer from '../ErrServer/ErrServer';
 export default function MyPage() {
   const dispatch = useDispatch();
 
-  const { user, showSceletonPage, errServer } =
-    useSelector(selectUser);
+  const { user, showSceletonPage, errServer } = useSelector(selectUser);
   const { token } = useSelector(selectAuth);
 
   React.useEffect(() => {
@@ -37,7 +36,11 @@ export default function MyPage() {
           ) : (
             <>
               {' '}
-              <img className={Style.foto} src={user.avatar} alt="аватарка" />
+              <img
+                className={Style.foto}
+                src={user.avatar ? `http://localhost:3001/${user.avatar}` : ''}
+                alt="аватарка"
+              />
               <h3>{user.name}</h3>
               <p>{`(${user.gender})${user.age}`}</p>
               <p>{user.sity}</p>

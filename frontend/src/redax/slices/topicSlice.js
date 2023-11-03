@@ -125,7 +125,7 @@ const topicsSlice = createSlice({
     });
 
     builder.addCase(fetchGetMessagePaginetion.pending, (state) => {
-      console.log('загрузка paginetion message');
+      //console.log('загрузка paginetion message');
     });
     builder.addCase(
       fetchGetMessagePaginetion.fulfilled,
@@ -165,7 +165,7 @@ const topicsSlice = createSlice({
     });
 
     builder.addCase(fetchAddTopic.pending, (state) => {
-      console.log('создание темы');
+      //console.log('создание темы');
       state.showPreloader = true;
     });
     builder.addCase(fetchAddTopic.fulfilled, (state, { payload }) => {

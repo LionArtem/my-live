@@ -46,7 +46,7 @@ export default function MessageUser({ getMessages }) {
                 <>
                   <img
                     className={Style.foto}
-                    src={obj.user.avatar}
+                    src={`http://localhost:3001/${obj.user.avatar}`}
                     alt="аватарка"
                   />
                   <div className={Style.name}>

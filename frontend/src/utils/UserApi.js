@@ -21,7 +21,7 @@ class UserApi {
     }).then(this._checkResponse);
   }
 
-  patchUserMe(age, avatar, email, name, sity, gender, params) {
+  patchUserMe(age, email, name, sity, gender, params) {
     const token = params;
     return fetch(`${this.baseUrl}/me`, {
       method: 'PATCH',
@@ -29,7 +29,7 @@ class UserApi {
         authorization: `Bearer ${localStorage.getItem('token') || token}`,
         'content-type': 'application/json',
       },
-      body: JSON.stringify({ age, avatar, email, name, sity, gender }),
+       body: JSON.stringify({ age, email, name, sity, gender }),
     }).then(this._checkResponse);
   }
   _checkResponse = (res) => {
@@ -41,8 +41,8 @@ class UserApi {
 }
 
 const usersApi = new UserApi({
- baseUrl: 'http://localhost:3001/users',
- // baseUrl: 'https://api.my-live.website/users',
+  baseUrl: 'http://localhost:3001/users',
+  // baseUrl: 'https://api.my-live.website/users',
   headers: {
     authorization: `Bearer ${localStorage.getItem('token')}`,
     'content-type': 'application/json',
