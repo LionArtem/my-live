@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 
 import Style from './FormEditUser.module.scss';
 import { useDispatch, useSelector } from 'react-redux';
@@ -26,6 +26,7 @@ import ErrServer from '../ErrServer/ErrServer';
 
 export default function FormEditUser() {
   const dispatch = useDispatch();
+  const refInputFile = useRef();
   const [file, setFile] = useState(null);
   const { value, errors, valid } = useSelector(selectformValidetion);
   const [errorLoadingFile, setErrorLoadingFile] = useState('');
@@ -139,9 +140,7 @@ export default function FormEditUser() {
         res
           .json()
           .then((res) => {
-            console.log(res.avatar);
             setFile(result);
-            // dispatch(setUserAvatar(res.avatar));
           })
           .catch((err) => {
             console.log(err);
@@ -158,7 +157,6 @@ export default function FormEditUser() {
 
   return (
     <div className={Style.conteiner}>
-      {/* <label>аватар</label> */}
       <img
         src={
           file ? file : user.avatar && `http://localhost:3001/${user.avatar}`
@@ -166,13 +164,15 @@ export default function FormEditUser() {
         alt="аватар"
       />
       <input
+        ref={refInputFile}
+        className={Style.input_file}
         type="file"
         name="avatar-foto"
         onChange={(evt) => addFoto(evt)}
         accept="image/*"
         required
       ></input>
-      {/* <button onClick={() => sendFile()}>ADD</button> */}
+      <div onClick={() => refInputFile.current.click()}>add foto</div>
       <TextInteractionForm text={errorLoadingFile} />
       <form onSubmit={(evt) => hendelSumit(evt)} className={Style.form}>
         {showSceletonPage ? (
