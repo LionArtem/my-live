@@ -65,9 +65,6 @@ const userSlice = createSlice({
     setSuccessRequest(state, action) {
       state.successRequest = action.payload;
     },
-    setUserAvatar(state, action) {
-      state.user.avatar = action.payload;
-    },
     addTextSuccess(state, action) {
       state.textAnswerRequest = action.payload;
     },
@@ -161,6 +158,5 @@ export const {
   killAllStateUser,
   addTextSuccess,
   setSuccessRequest,
-  setUserAvatar,
 } = userSlice.actions;
 export default userSlice.reducer;

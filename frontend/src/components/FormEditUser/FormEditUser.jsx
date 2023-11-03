@@ -16,7 +16,6 @@ import {
   selectUser,
   addTextSuccess,
   setSuccessRequest,
-  setUserAvatar,
 } from '../../redax/slices/userSlice';
 import FormEditUserPreloader from './FormEditUserPreloader';
 import ButtonsNavigation from '../Buttons/ButtonsNavigation/ButtonsNavigation';
@@ -27,7 +26,7 @@ import ErrServer from '../ErrServer/ErrServer';
 
 export default function FormEditUser() {
   const dispatch = useDispatch();
-  const [fileList, setFileList] = useState({});
+  const [file, setFile] = useState(null);
   const { value, errors, valid } = useSelector(selectformValidetion);
   const [errorLoadingFile, setErrorLoadingFile] = useState('');
 
@@ -116,7 +115,8 @@ export default function FormEditUser() {
       render.readAsDataURL(file);
       render.onloadend = () => {
         if (!render.result) return;
-        setFileList({ result: render.result, file });
+        // setFile({ result: render.result, file });
+        sendFile({ result: render.result, file });
       };
     } catch (error) {
       setErrorLoadingFile('Ошибка при загрузке файла!');
@@ -124,9 +124,9 @@ export default function FormEditUser() {
     }
   };
 
-  const sendFile = () => {
+  const sendFile = ({ result, file }) => {
     const avatar = new FormData();
-    avatar.append('avatar', fileList.file);
+    avatar.append('avatar', file);
 
     fetch('http://localhost:3001/users/add-file', {
       method: 'POST',
@@ -139,7 +139,9 @@ export default function FormEditUser() {
         res
           .json()
           .then((res) => {
-            dispatch(setUserAvatar(res.avatar));
+            console.log(res.avatar);
+            setFile(result);
+            // dispatch(setUserAvatar(res.avatar));
           })
           .catch((err) => {
             console.log(err);
@@ -159,9 +161,7 @@ export default function FormEditUser() {
       {/* <label>аватар</label> */}
       <img
         src={
-          fileList.result
-            ? fileList.result
-            : user.avatar && `http://localhost:3001/${user.avatar}`
+          file ? file : user.avatar && `http://localhost:3001/${user.avatar}`
         }
         alt="аватар"
       />
@@ -172,7 +172,7 @@ export default function FormEditUser() {
         accept="image/*"
         required
       ></input>
-      <button onClick={() => sendFile()}>ADD</button>
+      {/* <button onClick={() => sendFile()}>ADD</button> */}
       <TextInteractionForm text={errorLoadingFile} />
       <form onSubmit={(evt) => hendelSumit(evt)} className={Style.form}>
         {showSceletonPage ? (

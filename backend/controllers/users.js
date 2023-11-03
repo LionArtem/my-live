@@ -126,7 +126,7 @@ const addUserFoto = (req, res, next) => {
     },
   )
     .then((user) => {
-      res.send(user);
+      res.send({ avatar: user.avatar });
     })
     .catch((err) => {
       if (err.name === 'ValidationError') {
