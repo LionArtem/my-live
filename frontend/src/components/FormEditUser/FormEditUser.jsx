@@ -158,12 +158,18 @@ export default function FormEditUser() {
   return (
     <div className={Style.conteiner}>
       <div className={Style.container_avatar}>
-        <img
-          src={
-            file ? file : user.avatar && `http://localhost:3001/${user.avatar}`
-          }
-          alt="аватар"
-        />
+        {
+          <img
+            src={
+              file
+                ? file
+                : user.avatar
+                ? `http://localhost:3001/${user.avatar}`
+                : 'https://www.murrayglass.com/wp-content/uploads/2020/10/avatar-scaled.jpeg'
+            }
+            alt="аватар"
+          />
+        }
         <div
           className={Style.button_edit_foto}
           onClick={() => refInputFile.current.click()}
