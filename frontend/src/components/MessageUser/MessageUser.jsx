@@ -46,7 +46,11 @@ export default function MessageUser({ getMessages }) {
                 <>
                   <img
                     className={Style.foto}
-                    src={`http://localhost:3001/${obj.user.avatar}`}
+                    src={
+                      obj.user.avatar
+                        ? `http://localhost:3001/${obj.user.avatar}`
+                        : 'https://www.murrayglass.com/wp-content/uploads/2020/10/avatar-scaled.jpeg'
+                    }
                     alt="аватарка"
                   />
                   <div className={Style.name}>

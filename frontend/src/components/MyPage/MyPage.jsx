@@ -38,7 +38,11 @@ export default function MyPage() {
               {' '}
               <img
                 className={Style.foto}
-                src={user.avatar ? `http://localhost:3001/${user.avatar}` : ''}
+                src={
+                  user.avatar
+                    ? `http://localhost:3001/${user.avatar}`
+                    : 'https://www.murrayglass.com/wp-content/uploads/2020/10/avatar-scaled.jpeg'
+                }
                 alt="аватарка"
               />
               <h3>{user.name}</h3>
