@@ -188,6 +188,20 @@ export default function FormEditUser() {
     dispatch(setValid(true));
   };
 
+  let search = true;
+  const searchTown = (evt, arr, time) => {
+    if (search) {
+      setTimeout(() => {
+        const newArr = arr.filter((val) =>
+          val.city.toLowerCase().includes(evt.target.value)
+        );
+        catList(newArr, 10);
+        search = true;
+      }, 1000);
+      search = false;
+    }
+  };
+
   return (
     <div className={Style.conteiner}>
       <div className={Style.container_avatar}>
@@ -297,9 +311,15 @@ export default function FormEditUser() {
                     : `${Style.cities} ${Style.cities_off}`
                 }
               >
+                <input
+                  onChange={(evt) => searchTown(evt, allTown, 1000)}
+                  placeholder="поиск"
+                ></input>
                 {showCities?.map((town, i) => (
                   <li
-                    onClick={() => changeValueTown(town.city)}
+                    onClick={() =>
+                      changeValueTown(`${town.city} (${town.region})`)
+                    }
                     className={Style.list_town}
                     key={i}
                   >

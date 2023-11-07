@@ -26,7 +26,7 @@ usersRouter.patch('/me', celebrate({
   body: Joi.object().keys({
     gender: Joi.string().min(1).max(1),
     name: Joi.string().min(2).max(30),
-    town: Joi.string().min(2).max(30),
+    town: Joi.string().min(2).max(50),
     age: Joi.number().min(18).max(80),
     email: Joi.string().email(),
   }),

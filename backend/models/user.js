@@ -18,7 +18,7 @@ const userSchema = new mongoose.Schema({
     type: String,
     default: 'town',
     minlength: 2,
-    maxlength: 30,
+    maxlength: 50,
   },
   age: {
     type: Number,

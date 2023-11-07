@@ -146,6 +146,7 @@ const patchUsersInfo = (req, res, next) => {
   const {
     age, email, name, town, gender,
   } = req.body;
+  console.log(town);
   User.findByIdAndUpdate(
     id,
     {
