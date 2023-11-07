@@ -18,7 +18,7 @@
     left: 165px;
     background-image: url(../../image/445.png);
     width: 30px;
-    height:30px;
+    height: 30px;
     background-size: cover;
     cursor: pointer;
     border: 1px rgb(255, 254, 254) solid;
@@ -47,6 +47,76 @@
     height: 20px;
     font-size: 15px;
   }
+
+  .conteiner_town {
+    position: relative;
+  }
+
+  .conteiner_label_town {
+    width: max-content;
+    display: flex;
+    align-items: center;
+    column-gap: 5px;
+    cursor: pointer;
+    margin-bottom: 5px;
+  }
+
+  .label_icon_off {
+    background-image: url(../../image/261.svg);
+    width: 15px;
+    height: 15px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    margin-right: 5px;
+  }
+  .label_icon_onn {
+    background-image: url(../../image/262.svg);
+  }
+
+  .label_town {
+    cursor: pointer;
+    user-select: none;
+    width: max-content;
+  }
+
+  .town {
+    margin: 0px 0px 5px 0px;
+    background-color: rgb(253, 253, 253);
+    max-width: 100%;
+    padding: 3px 1px;
+    border: 1px solid rgb(133, 133, 133);
+    vertical-align: bottom;
+  }
+
+  .cities {
+    all: unset;
+    width: 305px;
+    height: 200px;
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+    background-color: #92c898;
+    padding: 7px;
+    border: 1px solid rgb(232, 230, 230);
+    position: absolute;
+    top: 50px;
+    left: 0;
+  }
+
+  .cities_off {
+    display: none;
+  }
+
+  .list_town {
+    all: unset;
+    cursor: pointer;
+    padding: 3px 0px;
+  }
+
+  .list_town:hover {
+    color: rgb(47, 47, 47);
+  }
+
   .conteiner_age_gender {
     display: flex;
     justify-content: space-between;

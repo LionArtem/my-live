@@ -14,9 +14,9 @@ const userSchema = new mongoose.Schema({
     maxlength: 1,
     default: 'ж',
   },
-  sity: {
+  town: {
     type: String,
-    default: 'Sity',
+    default: 'town',
     minlength: 2,
     maxlength: 30,
   },

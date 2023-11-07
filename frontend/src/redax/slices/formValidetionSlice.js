@@ -21,7 +21,7 @@ const formValidetionSlice = createSlice({
         email: action.payload.email,
         age: action.payload.age,
         //avatar: action.payload.avatar,
-        sity: action.payload.sity,
+        //city: action.payload.city,
         gender: action.payload.gender,
       };
     },
@@ -34,8 +34,8 @@ const formValidetionSlice = createSlice({
     resetValues(state) {
       state.value = {};
     },
-    setValid(state) {
-      state.valid = false;
+    setValid(state,{payload}) {
+      state.valid = payload;
     },
   },
 });

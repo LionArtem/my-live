@@ -14,16 +14,16 @@ export const fetchGetUser = createAsyncThunk(
 export const fetchPatchUser = createAsyncThunk(
   'page/fetchPatchUser',
   async (params, thunkAPI) => {
-    const { age, email, name, sity, gender } =
+    const { age, email, name, gender } =
       thunkAPI.getState().formValidetion.value;
-    const { token } = params;
-    console.log(age, email, name, sity, gender);
+    const { token, town } = params;
+    console.log(town);
 
     const data = await usersApi.patchUserMe(
       age,
       email,
       name,
-      sity,
+      town,
       gender,
       token
     );
@@ -154,9 +154,6 @@ const userSlice = createSlice({
 
 export const selectUser = (state) => state.user;
 
-export const {
-  killAllStateUser,
-  addTextSuccess,
-  setSuccessRequest,
-} = userSlice.actions;
+export const { killAllStateUser, addTextSuccess, setSuccessRequest } =
+  userSlice.actions;
 export default userSlice.reducer;

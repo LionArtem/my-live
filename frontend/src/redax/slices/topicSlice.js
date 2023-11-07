@@ -150,7 +150,7 @@ const topicsSlice = createSlice({
     });
 
     builder.addCase(fetchGetTopicPaginetion.pending, (state) => {
-      console.log('загрузка paginetion topics');
+      //console.log('загрузка paginetion topics');
       state.showPreloaderTopic = true;
     });
     builder.addCase(fetchGetTopicPaginetion.fulfilled, (state, { payload }) => {

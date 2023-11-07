@@ -144,12 +144,12 @@ const addUserFoto = (req, res, next) => {
 const patchUsersInfo = (req, res, next) => {
   const id = req.user._id;
   const {
-    age, email, name, sity, gender,
+    age, email, name, town, gender,
   } = req.body;
   User.findByIdAndUpdate(
     id,
     {
-      age, email, name, sity, gender,
+      age, email, name, town, gender,
     },
     {
       new: true, // обработчик then получит на вход обновлённую запись

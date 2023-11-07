@@ -4,6 +4,7 @@ import Style from './FormEditUser.module.scss';
 import { useDispatch, useSelector } from 'react-redux';
 
 import {
+  setValid,
   setValue,
   selectformValidetion,
   defaultValues,
@@ -23,13 +24,31 @@ import BottonSubmit from '../Buttons/BottonSubmit/BottonSubmit';
 import TextInteractionForm from '../TextInteractionForm/TextInteractionForm';
 import { selectAuth } from '../../redax/slices/authSlice';
 import ErrServer from '../ErrServer/ErrServer';
+import { allTown } from '../../utils/AllTown';
 
 export default function FormEditUser() {
+  const sityRef = useRef();
   const dispatch = useDispatch();
   const refInputFile = useRef();
   const [file, setFile] = useState(null);
   const { value, errors, valid } = useSelector(selectformValidetion);
   const [errorLoadingFile, setErrorLoadingFile] = useState('');
+  const [listTown, isListTown] = useState(false);
+  const [showCities, setShowCities] = useState([]);
+  const [town, setTown] = useState('');
+
+  const catList = (list, num) => {
+    setShowCities(list.slice(0, num));
+  };
+
+  const addSityInList = (evt, arr) => {
+    if (
+      evt.target.scrollHeight - evt.target.scrollTop ===
+      evt.target.clientHeight
+    ) {
+      catList(allTown, arr.length + 10);
+    }
+  };
 
   const {
     user,
@@ -55,12 +74,15 @@ export default function FormEditUser() {
             email: res.payload.email,
             age: res.payload.age,
             avatar: res.payload.avatar,
-            sity: res.payload.sity,
+            // town: res.payload.town,
             gender: res.payload.gender,
           })
         );
+        setTown(res.payload.town);
       }
     });
+
+    catList(allTown, 10);
   }, []);
 
   const findNoCoincidenceForm = (value1, value2) => {
@@ -70,7 +92,7 @@ export default function FormEditUser() {
       value1.email === value2.email &&
       value1.gender === value2.gender &&
       value1.name === value2.name &&
-      value1.sity === value2.sity;
+      user.town === town;
     return valid;
   };
 
@@ -83,12 +105,13 @@ export default function FormEditUser() {
 
   const hendelSumit = (evt) => {
     evt.preventDefault();
+
     if (findNoCoincidenceForm(user, value)) {
       dispatch(addTextSuccess('изменения сохранены'));
       dispatch(setSuccessRequest(true));
       deleteTextAnswerServer();
     } else {
-      dispatch(fetchPatchUser({ token })).then(() => {
+      dispatch(fetchPatchUser({ token, town })).then(() => {
         deleteTextAnswerServer();
       });
     }
@@ -153,6 +176,16 @@ export default function FormEditUser() {
         }
       }
     });
+  };
+
+  const openListTown = () => {
+    isListTown(!listTown);
+  };
+
+  const changeValueTown = (town) => {
+    setTown(town);
+    openListTown();
+    dispatch(setValid(true));
   };
 
   return (
@@ -240,18 +273,41 @@ export default function FormEditUser() {
                 placeholder="ввидите пол"
               ></input>
             </div>
-            <label>город</label>
-            <input
-              pattern="^\S*$"
-              value={value.sity ?? ''}
-              onChange={(evt) => changeValue(evt)}
-              name="sity"
-              placeholder="ввидите ваш город"
-              required
-              minLength={1}
-              maxLength={30}
-            ></input>
-            <TextInteractionForm text={errors.sity} />
+            <div className={Style.conteiner_town}>
+              <p className={Style.town}>{town}</p>
+              <div
+                onClick={() => openListTown()}
+                className={Style.conteiner_label_town}
+              >
+                <label className={Style.label_town}>выберите ваш город</label>
+                <div
+                  className={
+                    listTown
+                      ? `${Style.label_icon_off} ${Style.label_icon_onn}`
+                      : Style.label_icon_off
+                  }
+                ></div>
+              </div>
+              <ul
+                ref={sityRef}
+                onScroll={(evt) => addSityInList(evt, showCities)}
+                className={
+                  listTown
+                    ? `${Style.cities}`
+                    : `${Style.cities} ${Style.cities_off}`
+                }
+              >
+                {showCities?.map((town, i) => (
+                  <li
+                    onClick={() => changeValueTown(town.city)}
+                    className={Style.list_town}
+                    key={i}
+                  >
+                    {`${town.city} (${town.region})`}
+                  </li>
+                ))}
+              </ul>
+            </div>
             <label>email</label>
             <input
               pattern="^\S*$"
