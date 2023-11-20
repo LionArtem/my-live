@@ -1,10 +1,10 @@
 import React from 'react';
 
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { killAllStateAuth } from '../../redax/slices/authSlice';
 import { killAllStateFormValidetion } from '../../redax/slices/formValidetionSlice';
 import { killAllStateTopic } from '../../redax/slices/topicSlice';
-import { killAllStateUser } from '../../redax/slices/userSlice';
+import { killAllStateUser, selectUser } from '../../redax/slices/userSlice';
 import { killPaginationState } from '../../redax/slices/paginationSlice';
 
 import Style from './AuthorizedUser.module.scss';
@@ -12,12 +12,17 @@ import { Link } from 'react-router-dom';
 
 export default function AuthorizedUser() {
   const dispatch = useDispatch();
-
+  const { admin } = useSelector(selectUser);
   return (
     <div className={Style.contener_auth}>
-      <Link to={'my-page'}>
-        <p className={Style.button_open}>Моя страница </p>
+      <Link className={Style.button_open} to={'/my-page'}>
+        Моя страница
       </Link>
+      {admin && (
+        <Link to={'/admin'} className={Style.button_open}>
+          Панель администратора
+        </Link>
+      )}
       <p
         className={Style.button_open}
         onClick={() => {

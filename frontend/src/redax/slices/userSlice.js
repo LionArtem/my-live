@@ -49,6 +49,7 @@ export const fetchGetUserFindId = createAsyncThunk(
 
 const initialState = {
   user: {},
+  admin: localStorage.getItem('admin'),
   allMessagesAndAuthors: [],
   showPreloader: false,
   textAnswerRequest: '',
@@ -88,7 +89,9 @@ const userSlice = createSlice({
     builder.addCase(fetchGetUser.fulfilled, (state, { payload }) => {
       //console.log(payload);
       state.user = payload;
+      state.admin = payload.admin;
       localStorage.setItem('userId', payload._id);
+      localStorage.setItem('admin', payload.admin);
       state.showSceletonPage = false;
     });
     builder.addCase(fetchGetUser.rejected, (state, action) => {

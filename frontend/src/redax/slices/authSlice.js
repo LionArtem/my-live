@@ -69,7 +69,7 @@ const authSlice = createSlice({
 
     builder.addCase(fetchLoginUser.pending, (state) => {
       state.showPreloader = true;
-      console.log('запрос на авторизацию');
+      //console.log('запрос на авторизацию');
     });
     builder.addCase(fetchLoginUser.fulfilled, (state, { payload }) => {
       localStorage.setItem('token', payload.token);

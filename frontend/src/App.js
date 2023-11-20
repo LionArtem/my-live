@@ -8,11 +8,23 @@ import Topic from './components/ForumTopics/Topic/Topic';
 import MyPage from './components/MyPage/MyPage';
 import FormEditUser from './components/FormEditUser/FormEditUser';
 import NotFoundPage from './components/NotFoundPage/NotFoundPage';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { selectAuth } from './redax/slices/authSlice';
+import PageAdmin from './components/Pages/PageAdmin/PageAdmin';
+import { selectUser, fetchGetUser } from './redax/slices/userSlice';
 
 function App() {
+  const dispatch = useDispatch();
+
   const { token } = useSelector(selectAuth);
+  const { admin } = useSelector(selectUser);
+
+  React.useEffect(() => {
+    if (token) {
+      dispatch(fetchGetUser(token));
+    }
+  }, [token]);
+
   return (
     <Routes>
       <Route path="/" element={<Home />} />
@@ -20,6 +32,7 @@ function App() {
       <Route path="/topic" element={<Topic />} />
       <Route path="/my-page" element={token ? <MyPage /> : <Home />} />
       <Route path="/edit-user" element={token ? <FormEditUser /> : <Home />} />
+      <Route path="/admin" element={admin ? <PageAdmin /> : <Home />} />
       <Route path="*" element={<NotFoundPage />} />
     </Routes>
   );
