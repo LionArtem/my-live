@@ -6,7 +6,7 @@ import Home from './components/Home/Home';
 import ForumTopics from './components/ForumTopics/ForumTopics';
 import Topic from './components/ForumTopics/Topic/Topic';
 import MyPage from './components/Pages/MyPage/MyPage';
-import FormEditUser from './components/FormEditUser/FormEditUser';
+import FormEditUser from './components/Pages/FormEditUser/FormEditUser';
 import NotFoundPage from './components/Pages/NotFoundPage/NotFoundPage';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectAuth } from './redax/slices/authSlice';

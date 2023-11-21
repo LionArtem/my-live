@@ -23,16 +23,26 @@ class UserApi {
 
   patchUserMe(age, email, name, town, gender, params) {
     const token = params;
-    console.log(town);
     return fetch(`${this.baseUrl}/me`, {
       method: 'PATCH',
       headers: {
         authorization: `Bearer ${localStorage.getItem('token') || token}`,
         'content-type': 'application/json',
       },
-       body: JSON.stringify({ age, email, name, town, gender }),
+      body: JSON.stringify({ age, email, name, town, gender }),
     }).then(this._checkResponse);
   }
+
+  addAvatar(file, token) {
+    return fetch(`${this.baseUrl}/add-file`, {
+      method: 'POST',
+      headers: {
+        authorization: `Bearer ${localStorage.getItem('token') || token}`,
+      },
+      body: file,
+    }).then(this._checkResponse);
+  }
+
   _checkResponse = (res) => {
     if (res.ok) {
       return res.json();
