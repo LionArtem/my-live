@@ -11,6 +11,8 @@ import NotFoundPage from './components/NotFoundPage/NotFoundPage';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectAuth } from './redax/slices/authSlice';
 import PageAdmin from './components/Pages/PageAdmin/PageAdmin';
+import ListUser from './components/Pages/ListUsers/ListUsers';
+
 import { selectUser, fetchGetUser } from './redax/slices/userSlice';
 
 function App() {
@@ -33,6 +35,7 @@ function App() {
       <Route path="/my-page" element={token ? <MyPage /> : <Home />} />
       <Route path="/edit-user" element={token ? <FormEditUser /> : <Home />} />
       <Route path="/admin" element={admin ? <PageAdmin /> : <Home />} />
+      <Route path="/list-user" element={<ListUser />} />
       <Route path="*" element={<NotFoundPage />} />
     </Routes>
   );
