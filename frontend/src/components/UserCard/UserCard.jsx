@@ -1,12 +1,12 @@
 import React from 'react';
 import Style from './UserCard.module.scss';
-import { useSelector } from 'react-redux';
+// import { useSelector } from 'react-redux';
 import MyPagePreloader from './MyPagePreloader';
 import ErrServer from '../ErrServer/ErrServer';
-import { selectUser } from '../../redax/slices/userSlice';
+// import { selectUser } from '../../redax/slices/userSlice';
 
-export default function UserCard() {
-  const { user, showSceletonPage, errServer } = useSelector(selectUser);
+export default function UserCard({ user, showSceletonPage, errServer }) {
+  
 
   return (
     <div className={Style.info_user}>
