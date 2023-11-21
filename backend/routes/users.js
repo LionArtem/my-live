@@ -1,6 +1,5 @@
 const usersRouter = require('express').Router();
 const { celebrate, Joi } = require('celebrate');
-// const { regularAvatar } = require('../utils/constants');
 const upload = require('../middlewares/upload');
 
 const {

@@ -4,6 +4,16 @@ class UserApi {
     this.headers = headers;
   }
 
+  getUsers(token) {
+    return fetch(`${this.baseUrl}`, {
+      method: 'GET',
+      headers: {
+        authorization: `Bearer ${localStorage.getItem('token') || token}`,
+        'content-type': 'application/json',
+      },
+    }).then(this._checkResponse);
+  }
+
   getUserMe(token) {
     return fetch(`${this.baseUrl}/me`, {
       method: 'GET',

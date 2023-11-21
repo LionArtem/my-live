@@ -35,7 +35,7 @@ function App() {
       <Route path="/my-page" element={token ? <MyPage /> : <Home />} />
       <Route path="/edit-user" element={token ? <FormEditUser /> : <Home />} />
       <Route path="/admin" element={admin ? <PageAdmin /> : <Home />} />
-      <Route path="/list-user" element={<ListUser />} />
+      <Route path="/list-user" element={admin ? <ListUser /> : <Home />} />
       <Route path="*" element={<NotFoundPage />} />
     </Routes>
   );
