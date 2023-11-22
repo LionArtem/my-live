@@ -1,0 +1,18 @@
+.ListUsers {
+  display: flex;
+  flex-direction: column;
+}
+
+.ListUsers_containerCard {
+  all: unset;
+  border-top: 1px solid white;
+  display: flex;
+  row-gap: 20px;
+  justify-content: center;
+  column-gap: 20px;
+  flex-wrap: wrap;
+  padding: 20px;
+  li {
+    all: unset;
+  }
+}

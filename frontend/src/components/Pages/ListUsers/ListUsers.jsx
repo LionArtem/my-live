@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import Stule from './ListUsers.module.scss';
+import Style from './ListUsers.module.scss';
 import { usersApi } from '../../../utils/UserApi';
 import { useSelector } from 'react-redux';
 import { selectAuth } from '../../../redax/slices/authSlice';
@@ -34,10 +34,10 @@ export default function ListUsers() {
   }, []);
 
   return (
-    <div>
+    <div className={Style.ListUsers}>
       <ButtonsNavigation page={'/admin'} text={'Назад'} />
       <ButtonsNavigation page={'/'} text={'На главную'} />
-      <ul>
+      <ul className={Style.ListUsers_containerCard}>
         {users.map((user) => (
           <li key={user._id}>
             <UserCard
