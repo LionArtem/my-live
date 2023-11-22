@@ -21,7 +21,7 @@ import {
 } from '../../../redax/slices/userSlice';
 import FormEditUserPreloader from './FormEditUserPreloader';
 import ButtonsNavigation from '../../Buttons/ButtonsNavigation/ButtonsNavigation';
-import BottonSubmit from '../../Buttons/BottonSubmit/BottonSubmit';
+import ButtonSubmit from '../../Buttons/ButtonSubmit/ButtonSubmit';
 import TextInteractionForm from '../../TextInteractionForm/TextInteractionForm';
 import { selectAuth } from '../../../redax/slices/authSlice';
 import ErrServer from '../../ErrServer/ErrServer';
@@ -328,7 +328,7 @@ export default function FormEditUser() {
               required
             ></input>
             <TextInteractionForm text={errors.email} />
-            <BottonSubmit
+            <ButtonSubmit
               valid={valid}
               showPreloader={showPreloader}
               successRequest={successRequest}

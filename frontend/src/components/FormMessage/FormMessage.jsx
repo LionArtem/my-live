@@ -15,7 +15,7 @@ import {
   resetValues,
   setValid,
 } from '../../redax/slices/formValidetionSlice';
-import BottonSubmit from '../Buttons/BottonSubmit/BottonSubmit';
+import ButtonSubmit from '../Buttons/ButtonSubmit/ButtonSubmit';
 import TextInteractionForm from '../TextInteractionForm/TextInteractionForm';
 import { selectAuth } from '../../redax/slices/authSlice';
 
@@ -127,7 +127,7 @@ export default function Form({ getMessages }) {
             maxLength={500}
           ></textarea>
           <TextInteractionForm text={errors.textarea} />
-          <BottonSubmit
+          <ButtonSubmit
             valid={valid}
             showPreloader={showPreloader}
             textAnswerRequest={textAnswerRequest}

@@ -7,6 +7,8 @@ import UserCard from '../../UserCard/UserCard';
 import ButtonsNavigation from '../../Buttons/ButtonsNavigation/ButtonsNavigation';
 import Pagination from '../../Pagination/Pagination';
 import ErrServer from '../../ErrServer/ErrServer';
+import ButtonSubmit from '../../Buttons/ButtonSubmit/ButtonSubmit';
+import ButtonDelete from '../../Buttons/ButtonDelete/ButtonDelete';
 
 export default function ListUsers() {
   const { token } = useSelector(selectAuth);
@@ -35,6 +37,10 @@ export default function ListUsers() {
     return () => localStorage.removeItem('page');
   }, []);
 
+  const deleteUser = () => {
+    console.log('delete');
+  };
+
   return (
     <div className={Style.ListUsers}>
       <ButtonsNavigation page={'/admin'} text={'Назад'} />
@@ -52,6 +58,7 @@ export default function ListUsers() {
                 showSceletonPage={showSceletonPage}
                 errServer={errServer}
               />
+              <ButtonDelete onClick={deleteUser} text={'Удалить профиль'} />
             </li>
           ))}
         </ul>
