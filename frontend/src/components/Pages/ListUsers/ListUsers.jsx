@@ -6,6 +6,7 @@ import { selectAuth } from '../../../redax/slices/authSlice';
 import UserCard from '../../UserCard/UserCard';
 import ButtonsNavigation from '../../Buttons/ButtonsNavigation/ButtonsNavigation';
 import Pagination from '../../Pagination/Pagination';
+import ErrServer from '../../ErrServer/ErrServer';
 
 export default function ListUsers() {
   const { token } = useSelector(selectAuth);
@@ -13,6 +14,7 @@ export default function ListUsers() {
   const [numberPages, isNumberPages] = useState([]);
   const [showSceletonPage, isShowSceletonPage] = useState(true);
   const [errServer, isErrServer] = useState(false);
+  const [textErr, isTextErr] = useState('');
 
   const getUsers = (page = localStorage.getItem('page') ?? 1) => {
     usersApi
@@ -22,8 +24,8 @@ export default function ListUsers() {
         isNumberPages([...new Array(Math.ceil(res.numberUsers / 10))]);
       })
       .catch((err) => {
-        console.log(err);
         isErrServer(true);
+        isTextErr(err.message);
       })
       .finally(() => isShowSceletonPage(false));
   };
@@ -37,17 +39,23 @@ export default function ListUsers() {
     <div className={Style.ListUsers}>
       <ButtonsNavigation page={'/admin'} text={'Назад'} />
       <ButtonsNavigation page={'/'} text={'На главную'} />
-      <ul className={Style.ListUsers_containerCard}>
-        {users.map((user) => (
-          <li key={user._id}>
-            <UserCard
-              user={user}
-              showSceletonPage={showSceletonPage}
-              errServer={errServer}
-            />
-          </li>
-        ))}
-      </ul>
+      {showSceletonPage ? (
+        <h1>Загрузка...</h1>
+      ) : errServer ? (
+        <ErrServer textErr={textErr} />
+      ) : (
+        <ul className={Style.ListUsers_containerCard}>
+          {users.map((user) => (
+            <li key={user._id}>
+              <UserCard
+                user={user}
+                showSceletonPage={showSceletonPage}
+                errServer={errServer}
+              />
+            </li>
+          ))}
+        </ul>
+      )}
       {numberPages.length > 1 && (
         <Pagination getNumberPage={getUsers} numberPages={numberPages} />
       )}
