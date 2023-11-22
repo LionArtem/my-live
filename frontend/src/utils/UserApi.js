@@ -4,8 +4,8 @@ class UserApi {
     this.headers = headers;
   }
 
-  getUsers(token) {
-    return fetch(`${this.baseUrl}`, {
+  getUsers(token, page) {
+    return fetch(`${this.baseUrl}/ListUser/${page}`, {
       method: 'GET',
       headers: {
         authorization: `Bearer ${localStorage.getItem('token') || token}`,

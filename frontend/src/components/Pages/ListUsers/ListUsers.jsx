@@ -10,19 +10,24 @@ export default function ListUsers() {
   const [users, isUsers] = useState([]);
   const [showSceletonPage, isShowSceletonPage] = useState(true);
   const [errServer, isErrServer] = useState(false);
+  console.log(localStorage.getItem('page'));
 
-  useEffect(() => {
+  const getUsers = (token, page = localStorage.getItem('page') ?? 1) => {
     usersApi
-      .getUsers(token)
+      .getUsers(token, page)
       .then((res) => {
         console.log(res);
-        isUsers(res);
+        isUsers(res.users);
       })
       .catch((err) => {
         console.log(err);
         isErrServer(true);
       })
       .finally(() => isShowSceletonPage(false));
+  };
+
+  useEffect(() => {
+    getUsers(token);
   }, []);
 
   return (

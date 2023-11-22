@@ -10,7 +10,12 @@ const {
   addUserFoto,
 } = require('../controllers/users');
 
-usersRouter.get('/', getUsers);
+usersRouter.get('/ListUser/:page', celebrate({
+  params: Joi.object().keys({
+    page: Joi.string().required(),
+  }),
+}), getUsers);
+
 usersRouter.get('/me', getUsersMe);
 
 usersRouter.get('/:id', celebrate({
