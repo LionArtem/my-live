@@ -76,7 +76,6 @@ const login = (req, res, next) => {
 
 const getUsers = (req, res, next) => {
   const { page } = req.params;
-  console.log(page);
   User.find()
     .then((user) => {
       res.send({

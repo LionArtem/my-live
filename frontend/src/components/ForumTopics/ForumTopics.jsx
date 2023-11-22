@@ -130,7 +130,9 @@ export default function ForumTopics() {
             </NavigationNotAuthUser>
           )}
           <TopicList getTopic={getTopic} />
-          {numberPages.length > 1 && <Pagination getNumberPage={getTopic} />}
+          {numberPages.length > 1 && (
+            <Pagination getNumberPage={getTopic} numberPages={numberPages} />
+          )}
         </>
       )}
     </div>
