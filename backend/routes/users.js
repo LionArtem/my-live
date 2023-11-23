@@ -8,6 +8,7 @@ const {
   patchUsersInfo,
   getUsersId,
   addUserFoto,
+  deleteUsers,
 } = require('../controllers/users');
 
 usersRouter.get('/ListUser/:page', celebrate({
@@ -15,6 +16,12 @@ usersRouter.get('/ListUser/:page', celebrate({
     page: Joi.string().required(),
   }),
 }), getUsers);
+
+usersRouter.delete('/delete/:id', celebrate({
+  params: Joi.object().keys({
+    id: Joi.string().hex().length(24).required(),
+  }),
+}), deleteUsers);
 
 usersRouter.get('/me', getUsersMe);
 

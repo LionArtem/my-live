@@ -7,7 +7,6 @@ import UserCard from '../../UserCard/UserCard';
 import ButtonsNavigation from '../../Buttons/ButtonsNavigation/ButtonsNavigation';
 import Pagination from '../../Pagination/Pagination';
 import ErrServer from '../../ErrServer/ErrServer';
-import ButtonSubmit from '../../Buttons/ButtonSubmit/ButtonSubmit';
 import ButtonDelete from '../../Buttons/ButtonDelete/ButtonDelete';
 
 export default function ListUsers() {
@@ -37,8 +36,15 @@ export default function ListUsers() {
     return () => localStorage.removeItem('page');
   }, []);
 
-  const deleteUser = () => {
-    console.log('delete');
+  const deleteUser = (id) => {
+    usersApi
+      .deleteUsers(token, id)
+      .then((res) => {
+        getUsers();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   return (
@@ -58,7 +64,11 @@ export default function ListUsers() {
                 showSceletonPage={showSceletonPage}
                 errServer={errServer}
               />
-              <ButtonDelete onClick={deleteUser} text={'Удалить профиль'} />
+              <ButtonDelete
+                id={user._id}
+                onClick={deleteUser}
+                text={'Удалить профиль'}
+              />
             </li>
           ))}
         </ul>

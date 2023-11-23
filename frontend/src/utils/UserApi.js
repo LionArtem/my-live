@@ -14,6 +14,16 @@ class UserApi {
     }).then(this._checkResponse);
   }
 
+  deleteUsers(token, id) {
+    return fetch(`${this.baseUrl}/delete/${id}`, {
+      method: 'DELETE',
+      headers: {
+        authorization: `Bearer ${localStorage.getItem('token') || token}`,
+        'content-type': 'application/json',
+      },
+    }).then(this._checkResponse);
+  }
+
   getUserMe(token) {
     return fetch(`${this.baseUrl}/me`, {
       method: 'GET',

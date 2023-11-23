@@ -86,6 +86,32 @@ const getUsers = (req, res, next) => {
     .catch(next);
 };
 
+const deleteUsers = (req, res, next) => {
+  const { id } = req.params;
+  User.findById(id)
+    .then((user) => {
+      if (!user) {
+        const err = new NotFoundError('пользоватль с таким id не найден');
+        next(err);
+        return;
+      }
+      user.deleteOne()
+        .then((result) => {
+          res.send(result);
+        }).catch((err) => {
+          next(err);
+        });
+    })
+    .catch((err) => {
+      if (err.name === 'CastError') {
+        const error = new IncorrectErr('Не корректные данные');
+        next(error);
+      } else {
+        next(err);
+      }
+    });
+};
+
 const getUsersMe = (req, res, next) => {
   const id = req.user._id;
   User.findById(id)
@@ -202,4 +228,5 @@ module.exports = {
   getUsersId,
   getUsersFaindId,
   addUserFoto,
+  deleteUsers,
 };
