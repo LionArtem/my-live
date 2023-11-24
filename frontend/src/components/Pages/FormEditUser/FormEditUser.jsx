@@ -140,7 +140,6 @@ export default function FormEditUser() {
       render.readAsDataURL(file);
       render.onloadend = () => {
         if (!render.result) return;
-        // setFile({ result: render.result, file });
         sendFile({ result: render.result, file });
       };
     } catch (error) {
@@ -326,6 +325,8 @@ export default function FormEditUser() {
               type="email"
               placeholder="ввидите your email"
               required
+              minLength={5}
+              maxLength={50}
             ></input>
             <TextInteractionForm text={errors.email} />
             <ButtonSubmit

@@ -14,6 +14,7 @@ export default function MyPage() {
   const dispatch = useDispatch();
   const { user, showSceletonPage, errServer } = useSelector(selectUser);
   const { token } = useSelector(selectAuth);
+  console.log(user);
 
   React.useEffect(() => {
     dispatch(fetchGetUser(token));
@@ -25,13 +26,23 @@ export default function MyPage() {
 
   return (
     <div className={Style.use_conteiner}>
-      <UserCard
-        user={user}
-        showSceletonPage={showSceletonPage}
-        errServer={errServer}
-      />
-      <ButtonsNavigation page={'/edit-user'} text={'Редактировать профиль'} />
       <ButtonsNavigation page={'/'} text={'Назад'} />
+      <div className={Style.use_card}>
+        <img
+          className={Style.foto}
+          src={
+            user.avatar
+              ? `http://localhost:3001/${user.avatar}`
+              : 'https://www.murrayglass.com/wp-content/uploads/2020/10/avatar-scaled.jpeg'
+          }
+          alt="аватарка"
+        />
+        <p>{`Имя: ${user.name}`}</p>
+        <p>{`Город: ${user.town}`}</p>
+        <p>{`Возраст: ${user.age}`}</p>
+        <p>{`Пол: ${user.gender}`}</p>
+        <ButtonsNavigation page={'/edit-user'} text={'Редактировать профиль'} />
+      </div>
     </div>
   );
 }

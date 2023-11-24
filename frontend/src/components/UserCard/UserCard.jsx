@@ -6,8 +6,6 @@ import ErrServer from '../ErrServer/ErrServer';
 // import { selectUser } from '../../redax/slices/userSlice';
 
 export default function UserCard({ user, showSceletonPage, errServer }) {
-  
-
   return (
     <div className={Style.info_user}>
       {showSceletonPage ? (
@@ -26,10 +24,10 @@ export default function UserCard({ user, showSceletonPage, errServer }) {
             }
             alt="аватарка"
           />
-          <h3>{user.name}</h3>
+          <h3 className={Style.name}>{user.name}</h3>
           <p>{`(${user.gender})${user.age}`}</p>
           <p>{user.sity}</p>
-          <p>{user.email}</p>
+          <p className={Style.email}>{user.email}</p>
         </>
       )}
     </div>
