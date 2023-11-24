@@ -8,6 +8,7 @@ import ButtonsNavigation from '../../Buttons/ButtonsNavigation/ButtonsNavigation
 import Pagination from '../../Pagination/Pagination';
 import ErrServer from '../../ErrServer/ErrServer';
 import ButtonDelete from '../../Buttons/ButtonDelete/ButtonDelete';
+import ModulConfirmation from '../../Moduls/ModulConfirmation/ModulConfirmation';
 
 export default function ListUsers() {
   const { token } = useSelector(selectAuth);
@@ -76,6 +77,7 @@ export default function ListUsers() {
       {numberPages.length > 1 && (
         <Pagination getNumberPage={getUsers} numberPages={numberPages} />
       )}
+      <ModulConfirmation text={'Удалить?'} />
     </div>
   );
 }
