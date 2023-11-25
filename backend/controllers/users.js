@@ -78,9 +78,41 @@ const login = (req, res, next) => {
 };
 
 const getUsers = (req, res, next) => {
+  const { page } = req.params;
   User.find()
-    .then((user) => res.send(user))
+    .then((user) => {
+      res.send({
+        users: user.reverse().slice(page * 10 - 10, page * 10),
+        numberUsers: user.length,
+      });
+    })
     .catch(next);
+};
+
+const deleteUsers = (req, res, next) => {
+  const { id } = req.params;
+  User.findById(id)
+    .then((user) => {
+      if (!user) {
+        const err = new NotFoundError('пользоватль с таким id не найден');
+        next(err);
+        return;
+      }
+      user.deleteOne()
+        .then((result) => {
+          res.send(result);
+        }).catch((err) => {
+          next(err);
+        });
+    })
+    .catch((err) => {
+      if (err.name === 'CastError') {
+        const error = new IncorrectErr('Не корректные данные');
+        next(error);
+      } else {
+        next(err);
+      }
+    });
 };
 
 const getUsersMe = (req, res, next) => {
@@ -149,7 +181,7 @@ const patchUsersInfo = (req, res, next) => {
   const {
     age, email, name, town, gender,
   } = req.body;
-
+  console.log(town);
   User.findByIdAndUpdate(
     id,
     {
@@ -200,4 +232,5 @@ module.exports = {
   getUsersId,
   getUsersFaindId,
   addUserFoto,
+  deleteUsers,
 };

@@ -136,7 +136,9 @@ export default function Topic() {
           {localStorage.getItem('token') && (
             <FormMessage getMessages={getMessages} />
           )}
-          {numberPages.length > 1 && <Pagination getNumberPage={getMessages} />}
+          {numberPages.length > 1 && (
+            <Pagination getNumberPage={getMessages} numberPages={numberPages} />
+          )}
         </>
       )}
     </div>

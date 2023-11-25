@@ -1,0 +1,23 @@
+.PageAdmin {
+  display: flex;
+  flex-direction: column;
+  row-gap: 20px;
+}
+
+.listContainer {
+  all: unset;
+  padding: 20px;
+  border-top: 1px solid white;
+  .listContainer_title {
+    all: unset;
+    display: block;
+    font-size: 1.2em;
+    font-weight: 600;
+    color: rgb(16, 33, 117);
+    cursor: pointer;
+    transition: transform 0.5s linear;
+    &:hover {
+      transform: translateX(10px);
+    }
+  }
+}

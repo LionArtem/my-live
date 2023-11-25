@@ -4,6 +4,26 @@ class UserApi {
     this.headers = headers;
   }
 
+  getUsers(token, page) {
+    return fetch(`${this.baseUrl}/ListUser/${page}`, {
+      method: 'GET',
+      headers: {
+        authorization: `Bearer ${localStorage.getItem('token') || token}`,
+        'content-type': 'application/json',
+      },
+    }).then(this._checkResponse);
+  }
+
+  deleteUsers(token, id) {
+    return fetch(`${this.baseUrl}/delete/${id}`, {
+      method: 'DELETE',
+      headers: {
+        authorization: `Bearer ${localStorage.getItem('token') || token}`,
+        'content-type': 'application/json',
+      },
+    }).then(this._checkResponse);
+  }
+
   getUserMe(token) {
     return fetch(`${this.baseUrl}/me`, {
       method: 'GET',
@@ -23,16 +43,30 @@ class UserApi {
 
   patchUserMe(age, email, name, town, gender, params) {
     const token = params;
+<<<<<<< HEAD
    
+=======
+>>>>>>> 6d202dc80d77bca79e8eacf29f8873705d35f2ac
     return fetch(`${this.baseUrl}/me`, {
       method: 'PATCH',
       headers: {
         authorization: `Bearer ${localStorage.getItem('token') || token}`,
         'content-type': 'application/json',
       },
-       body: JSON.stringify({ age, email, name, town, gender }),
+      body: JSON.stringify({ age, email, name, town, gender }),
     }).then(this._checkResponse);
   }
+
+  addAvatar(file, token) {
+    return fetch(`${this.baseUrl}/add-file`, {
+      method: 'POST',
+      headers: {
+        authorization: `Bearer ${localStorage.getItem('token') || token}`,
+      },
+      body: file,
+    }).then(this._checkResponse);
+  }
+
   _checkResponse = (res) => {
     if (res.ok) {
       return res.json();

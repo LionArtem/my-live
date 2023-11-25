@@ -1,15 +1,13 @@
 import React from 'react';
 import Style from './Pagination.module.scss';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectTopics } from '../../redax/slices/topicSlice';
 import {
   selectPagination,
   pointNumberPagination,
 } from '../../redax/slices/paginationSlice';
 
-export default function Pagination({ getNumberPage }) {
+export default function Pagination({ getNumberPage, numberPages }) {
   const dispatch = useDispatch();
-  const { numberPages } = useSelector(selectTopics);
   const { paginationNumber } = useSelector(selectPagination);
 
   React.useEffect(() => {

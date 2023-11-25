@@ -1,8 +1,12 @@
 .contener_auth {
   border-bottom: 1px solid white;
+  display: grid;
+  grid-template-columns: repeat(2, min-content);
+  gap: 10px;
+  padding: 10px 0px;
   .button_open {
+    margin: 0;
     cursor: pointer;
-    width: 120px;
     transition: text-shadow 0.3s linear;
     &:hover {
       text-shadow: 1px 1px #524e4e;

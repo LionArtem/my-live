@@ -2,6 +2,7 @@ import React, { useRef, useState } from 'react';
 
 import Style from './FormEditUser.module.scss';
 import { useDispatch, useSelector } from 'react-redux';
+import { usersApi } from '../../../utils/UserApi';
 
 import {
   setValid,
@@ -9,7 +10,7 @@ import {
   selectformValidetion,
   defaultValues,
   killAllStateFormValidetion,
-} from '../../redax/slices/formValidetionSlice';
+} from '../../../redax/slices/formValidetionSlice';
 
 import {
   fetchGetUser,
@@ -17,14 +18,14 @@ import {
   selectUser,
   addTextSuccess,
   setSuccessRequest,
-} from '../../redax/slices/userSlice';
+} from '../../../redax/slices/userSlice';
 import FormEditUserPreloader from './FormEditUserPreloader';
-import ButtonsNavigation from '../Buttons/ButtonsNavigation/ButtonsNavigation';
-import BottonSubmit from '../Buttons/BottonSubmit/BottonSubmit';
-import TextInteractionForm from '../TextInteractionForm/TextInteractionForm';
-import { selectAuth } from '../../redax/slices/authSlice';
-import ErrServer from '../ErrServer/ErrServer';
-import { allTown } from '../../utils/AllTown';
+import ButtonsNavigation from '../../Buttons/ButtonsNavigation/ButtonsNavigation';
+import ButtonSubmit from '../../Buttons/ButtonSubmit/ButtonSubmit';
+import TextInteractionForm from '../../TextInteractionForm/TextInteractionForm';
+import { selectAuth } from '../../../redax/slices/authSlice';
+import ErrServer from '../../ErrServer/ErrServer';
+import { allTown } from '../../../utils/AllTown';
 
 export default function FormEditUser() {
   const sityRef = useRef();
@@ -139,7 +140,6 @@ export default function FormEditUser() {
       render.readAsDataURL(file);
       render.onloadend = () => {
         if (!render.result) return;
-        // setFile({ result: render.result, file });
         sendFile({ result: render.result, file });
       };
     } catch (error) {
@@ -152,30 +152,18 @@ export default function FormEditUser() {
     const avatar = new FormData();
     avatar.append('avatar', file);
 
-    fetch('http://localhost:3001/users/add-file', {
-      method: 'POST',
-      headers: {
-        authorization: `Bearer ${localStorage.getItem('token') || token}`,
-      },
-      body: avatar,
-    }).then((res) => {
-      if (res.ok) {
-        res
-          .json()
-          .then((res) => {
-            setFile(result);
-          })
-          .catch((err) => {
-            console.log(err);
-          });
-      } else {
-        if (res.status === 500) {
+    usersApi
+      .addAvatar(avatar, token)
+      .then(() => {
+        setFile(result);
+      })
+      .catch((err) => {
+        if (err.status === 500) {
           setErrorLoadingFile('на сервере произошла ошибка');
         } else {
-          setErrorLoadingFile(res.statusText);
+          setErrorLoadingFile(err.statusText);
         }
-      }
-    });
+      });
   };
 
   const openListTown = () => {
@@ -337,9 +325,11 @@ export default function FormEditUser() {
               type="email"
               placeholder="ввидите your email"
               required
+              minLength={5}
+              maxLength={50}
             ></input>
             <TextInteractionForm text={errors.email} />
-            <BottonSubmit
+            <ButtonSubmit
               valid={valid}
               showPreloader={showPreloader}
               successRequest={successRequest}

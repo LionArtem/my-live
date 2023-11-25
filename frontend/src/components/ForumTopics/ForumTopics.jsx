@@ -21,7 +21,7 @@ import {
 import TopicList from './TopicList/TopicList';
 import Pagination from '../Pagination/Pagination';
 import ButtonsNavigation from '../Buttons/ButtonsNavigation/ButtonsNavigation';
-import BottonSubmit from '../Buttons/BottonSubmit/BottonSubmit';
+import ButtonSubmit from '../Buttons/ButtonSubmit/ButtonSubmit';
 import TextInteractionForm from '../TextInteractionForm/TextInteractionForm';
 import ErrServer from '../ErrServer/ErrServer';
 import NavigationNotAuthUser from '../NavigationNotAuthUser/NavigationNotAuthUser';
@@ -114,7 +114,7 @@ export default function ForumTopics() {
                 ></input>
                 <TextInteractionForm text={errors.topic} />
               </div>
-              <BottonSubmit
+              <ButtonSubmit
                 valid={valid}
                 showPreloader={showPreloader}
                 successRequest={successRequest}
@@ -130,7 +130,9 @@ export default function ForumTopics() {
             </NavigationNotAuthUser>
           )}
           <TopicList getTopic={getTopic} />
-          {numberPages.length > 1 && <Pagination getNumberPage={getTopic} />}
+          {numberPages.length > 1 && (
+            <Pagination getNumberPage={getTopic} numberPages={numberPages} />
+          )}
         </>
       )}
     </div>

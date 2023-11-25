@@ -1,5 +1,5 @@
 import React from 'react';
-import Style from './BottonSubmit.module.scss';
+import Style from './ButtonSubmit.module.scss';
 import PreloaderPoint from '../../Preloaders/PreloaderPoint/PreloaderPoint';
 import TextInteractionForm from '../../TextInteractionForm/TextInteractionForm';
 

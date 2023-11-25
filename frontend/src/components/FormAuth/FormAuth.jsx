@@ -18,7 +18,7 @@ import {
 
 import Style from './FormAuth.module.scss';
 import TextInteractionForm from '../TextInteractionForm/TextInteractionForm';
-import BottonSubmit from '../Buttons/BottonSubmit/BottonSubmit';
+import ButtonSubmit from '../Buttons/ButtonSubmit/ButtonSubmit';
 
 export default function FormAuth({ textButton, text }) {
   const { value, errors, valid } = useSelector(selectformValidetion);
@@ -107,7 +107,7 @@ export default function FormAuth({ textButton, text }) {
             required
           ></input>
           <TextInteractionForm text={errors.password} />
-          <BottonSubmit
+          <ButtonSubmit
             valid={valid}
             showPreloader={showPreloader}
             textAnswerRequest={textArrAnswerServer}

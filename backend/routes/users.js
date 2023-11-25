@@ -1,6 +1,5 @@
 const usersRouter = require('express').Router();
 const { celebrate, Joi } = require('celebrate');
-// const { regularAvatar } = require('../utils/constants');
 const upload = require('../middlewares/upload');
 
 const {
@@ -9,9 +8,21 @@ const {
   patchUsersInfo,
   getUsersId,
   addUserFoto,
+  deleteUsers,
 } = require('../controllers/users');
 
-usersRouter.get('/', getUsers);
+usersRouter.get('/ListUser/:page', celebrate({
+  params: Joi.object().keys({
+    page: Joi.string().required(),
+  }),
+}), getUsers);
+
+usersRouter.delete('/delete/:id', celebrate({
+  params: Joi.object().keys({
+    id: Joi.string().hex().length(24).required(),
+  }),
+}), deleteUsers);
+
 usersRouter.get('/me', getUsersMe);
 
 usersRouter.get('/:id', celebrate({

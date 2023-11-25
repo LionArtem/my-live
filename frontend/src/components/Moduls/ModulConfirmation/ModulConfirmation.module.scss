@@ -1,0 +1,33 @@
+.overfloy {
+  position: fixed;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+  background-color: rgba(108, 148, 113, 0.9);
+  display: flex;
+}
+
+.window {
+  width: 30vh;
+  margin: auto;
+  padding: 10px;
+  background-color: aliceblue;
+  text-align: center;
+  display: grid;
+  justify-content: center;
+  grid-template-columns: repeat(2, min-content);
+  grid-template-rows: 2, min-content;
+  grid-template-areas:
+    'title title'
+    'yes no';
+  .title {
+    grid-area: title;
+  }
+  .yes {
+    grid-area: yes;
+  }
+  .no {
+    grid-area: no;
+  }
+}
