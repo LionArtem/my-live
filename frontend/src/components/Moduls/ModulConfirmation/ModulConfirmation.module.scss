@@ -19,18 +19,18 @@
   column-gap: 20px;
   justify-content: center;
   grid-template-columns: repeat(2, min-content);
-  grid-template-rows: 2, min-content;
+  grid-template-rows: repeat(2, min-content);
   grid-template-areas:
     'title title'
     'yes no';
 
   .title {
     grid-area: title;
-    
+
     font-weight: 600;
   }
 
-  .button{
+  .button {
     border: 1px solid rgba(108, 148, 113);
     border-radius: 3px;
     padding: 3px;

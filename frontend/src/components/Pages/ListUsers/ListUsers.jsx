@@ -1,8 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import Style from './ListUsers.module.scss';
 import { usersApi } from '../../../utils/UserApi';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { selectAuth } from '../../../redax/slices/authSlice';
+import {
+  selectModuleConfirmation,
+  isStatusModule,
+} from '../../../redax/slices/moduleConfirmationSlice';
+
 import UserCard from '../../UserCard/UserCard';
 import ButtonsNavigation from '../../Buttons/ButtonsNavigation/ButtonsNavigation';
 import Pagination from '../../Pagination/Pagination';
@@ -11,12 +16,15 @@ import ButtonDelete from '../../Buttons/ButtonDelete/ButtonDelete';
 import ModulConfirmation from '../../Moduls/ModulConfirmation/ModulConfirmation';
 
 export default function ListUsers() {
+  const dispatch = useDispatch();
   const { token } = useSelector(selectAuth);
+  const { statusModule } = useSelector(selectModuleConfirmation);
   const [users, isUsers] = useState([]);
   const [numberPages, isNumberPages] = useState([]);
   const [showSceletonPage, isShowSceletonPage] = useState(true);
   const [errServer, isErrServer] = useState(false);
   const [textErr, isTextErr] = useState('');
+  const [idUser, isIdUser] = useState();
 
   const getUsers = (page = localStorage.getItem('page') ?? 1) => {
     usersApi
@@ -37,15 +45,24 @@ export default function ListUsers() {
     return () => localStorage.removeItem('page');
   }, []);
 
-  const deleteUser = (id) => {
+  const deleteUser = () => {
     usersApi
-      .deleteUsers(token, id)
+      .deleteUsers(token, idUser)
       .then((res) => {
         getUsers();
       })
       .catch((err) => {
         console.log(err);
+      })
+      .finally(() => {
+        dispatch(isStatusModule(false));
+        isIdUser('');
       });
+  };
+
+  const clickButtonDelete = (id) => {
+    isIdUser(id);
+    dispatch(isStatusModule(true));
   };
 
   return (
@@ -67,7 +84,7 @@ export default function ListUsers() {
               />
               <ButtonDelete
                 id={user._id}
-                onClick={deleteUser}
+                onClick={clickButtonDelete}
                 text={'Удалить профиль'}
               />
             </li>
@@ -77,7 +94,9 @@ export default function ListUsers() {
       {numberPages.length > 1 && (
         <Pagination getNumberPage={getUsers} numberPages={numberPages} />
       )}
-      <ModulConfirmation text={'Удалить?'} />
+      {statusModule && (
+        <ModulConfirmation confirm={deleteUser} text={'Удалить?'} />
+      )}
     </div>
   );
 }
