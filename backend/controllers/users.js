@@ -15,11 +15,14 @@ const createUsers = (req, res, next) => {
     password,
   } = req.body;// получим из объекта запроса имя и описание пользователя
   let admin;
+  console.log(EMAIL_ADMIN);
   if (email === EMAIL_ADMIN) {
     admin = true;
   } else {
     admin = false;
   }
+  console.log(email,password,admin);
+  console.log(process.env);
   bcrypt.hash(password, 10)
     .then((hash) => User.create({
       email,
@@ -146,7 +149,7 @@ const patchUsersInfo = (req, res, next) => {
   const {
     age, email, name, town, gender,
   } = req.body;
-  console.log(town);
+
   User.findByIdAndUpdate(
     id,
     {

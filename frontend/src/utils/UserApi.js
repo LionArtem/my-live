@@ -23,7 +23,7 @@ class UserApi {
 
   patchUserMe(age, email, name, town, gender, params) {
     const token = params;
-    console.log(town);
+   
     return fetch(`${this.baseUrl}/me`, {
       method: 'PATCH',
       headers: {

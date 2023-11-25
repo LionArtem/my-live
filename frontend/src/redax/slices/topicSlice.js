@@ -102,7 +102,7 @@ const topicsSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(fetchAddMessageInTopic.pending, (state) => {
-      console.log('отправка message');
+      //console.log('отправка message');
       state.showPreloader = true;
     });
     builder.addCase(fetchAddMessageInTopic.fulfilled, (state, { payload }) => {
