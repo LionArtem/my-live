@@ -10,6 +10,7 @@ import Header from '../Header/Header';
 import Authorization from '../Authorization/Authorization';
 import AuthorizedUser from '../AuthorizedUser/AuthorizedUser';
 import MenuApp from './MenuApp/MenuApp';
+import Footer from '../Footer/Footer';
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -42,7 +43,7 @@ export default function Home() {
         </section>
       </main>
       <footer>
-        <p>ArtemGreen</p>
+        <Footer/>
       </footer>
     </div>
   );
