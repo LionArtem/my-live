@@ -89,13 +89,9 @@ const userSlice = createSlice({
     builder.addCase(fetchGetUser.fulfilled, (state, { payload }) => {
       // console.log(payload);
       state.user = payload;
-<<<<<<< HEAD
-      localStorage.setItem("userId", payload._id);
-=======
       state.admin = payload.admin;
       localStorage.setItem('userId', payload._id);
       localStorage.setItem('admin', payload.admin);
->>>>>>> 6d202dc80d77bca79e8eacf29f8873705d35f2ac
       state.showSceletonPage = false;
     });
     builder.addCase(fetchGetUser.rejected, (state, action) => {

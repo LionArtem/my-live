@@ -6,8 +6,8 @@ export default function ModulConfirmation({ text }) {
     <div className={Style.overfloy}>
       <div className={Style.window}>
         <p className={Style.title}>{text}</p>
-        <p className={Style.yes}>Да</p>
-        <p className={Style.no}>Нет</p>
+        <p className={`${Style.buttonYes} ${Style.button}`}>Да</p>
+        <p className={`${Style.buttonNo} ${Style.button}`}>Нет</p>
       </div>
     </div>
   );

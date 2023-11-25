@@ -43,10 +43,6 @@ class UserApi {
 
   patchUserMe(age, email, name, town, gender, params) {
     const token = params;
-<<<<<<< HEAD
-   
-=======
->>>>>>> 6d202dc80d77bca79e8eacf29f8873705d35f2ac
     return fetch(`${this.baseUrl}/me`, {
       method: 'PATCH',
       headers: {

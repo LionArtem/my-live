@@ -56,7 +56,7 @@ const authSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(fetchAddUser.pending, (state) => {
       state.showPreloader = true;
-      console.log('запрос на регистрацию');
+      //console.log('запрос на регистрацию');
     });
     builder.addCase(fetchAddUser.fulfilled, (state, { payload }) => {
       //console.log(payload);
