@@ -137,12 +137,26 @@
 }
 
 .massage {
+  display: flex;
+  flex-direction: column;
   max-width: 100%;
-  overflow-wrap: anywhere;
-  font-size: 24px;
   background-color: rgb(222, 232, 234);
   margin: 0;
   padding: 5px 5px;
+  span {
+    display: inline-block;
+    height: 26px;
+    margin: 0px 7px 0px auto;
+    color: rgb(177, 168, 40);
+    cursor: pointer;
+  }
+
+  p {
+    margin: 0;
+    padding: 0px 3px;
+    overflow-wrap: anywhere;
+    font-size: 24px;
+  }
 }
 
 @media screen and (max-width: 360px) {

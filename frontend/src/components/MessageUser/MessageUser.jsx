@@ -75,11 +75,20 @@ export default function MessageUser({ getMessages }) {
                   />
                   <h3>Пользователь удалён</h3>
                   <p></p>
-                  <span>00:00:00</span>
+                  <span>{getTimeLocal(obj.messages.createdAt)}</span>
+                  {user.admin && (
+                    <button
+                      onClick={() => deleteMessage(obj)}
+                      className={Style.button_delete}
+                    ></button>
+                  )}
                 </>
               )}
             </div>
-            <p className={Style.massage}>{obj.messages.message}</p>
+            <div className={Style.massage}>
+              <span>цитата</span>
+              <p> {obj.messages.message}</p>
+            </div>
           </div>
         ))
       ) : (
