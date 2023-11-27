@@ -136,14 +136,14 @@
   }
 }
 
-.massage {
+.containerMassage {
   display: flex;
   flex-direction: column;
   max-width: 100%;
   background-color: rgb(222, 232, 234);
   margin: 0;
   padding: 5px 5px;
-  span {
+  .duttonQuote {
     display: inline-block;
     height: 26px;
     margin: 0px 7px 0px auto;
@@ -151,7 +151,18 @@
     cursor: pointer;
   }
 
-  p {
+  .containerQuote {
+    padding: 0px 0px 10px 10px;
+    display: flex;
+    color: rgb(61, 61, 61);
+  }
+
+  .quote {
+    margin: 0;
+    font-style: italic;
+  }
+
+  .message {
     margin: 0;
     padding: 0px 3px;
     overflow-wrap: anywhere;

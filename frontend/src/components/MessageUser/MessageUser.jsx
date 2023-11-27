@@ -7,6 +7,7 @@ import { selectUser } from '../../redax/slices/userSlice';
 import {
   fetchDeleteMessage,
   selectTopics,
+  addQuote,
 } from '../../redax/slices/topicSlice';
 
 import { getTimeLocal } from '../../utils/utils';
@@ -85,9 +86,22 @@ export default function MessageUser({ getMessages }) {
                 </>
               )}
             </div>
-            <div className={Style.massage}>
-              <span>цитата</span>
-              <p> {obj.messages.message}</p>
+            <div className={Style.containerMassage}>
+              <span
+                className={Style.duttonQuote}
+                onClick={() => dispatch(addQuote(obj.messages.message))}
+              >
+                цитата
+              </span>
+              {obj.messages?.quote.length > 0 && (
+                <div className={Style.containerQuote}>
+                  <p className={Style.quote}>{`"${obj.messages?.quote.slice(
+                    0,
+                    100
+                  )}..."`}</p>
+                </div>
+              )}
+              <p className={Style.message}> {obj.messages.message}</p>
             </div>
           </div>
         ))
