@@ -1,7 +1,5 @@
-import Stule from './Footer.module.scss'
+import Style from './Footer.module.scss';
 
-export default function Footer (){
-    return ( 
-        <p>ArtemGreen</p>
-      )
+export default function Footer() {
+  return <div className={Style.footer}></div>;
 }
