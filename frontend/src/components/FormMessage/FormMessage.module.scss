@@ -1,4 +1,7 @@
 .containerQuote {
+  display: flex;
+  align-items: center;
+  column-gap: 7px;
   margin: 0;
   height: 18px;
   padding: 10px 0px 2px 25px;
@@ -12,6 +15,13 @@
   }
   .containerQuote_subtitle {
     font-style: italic;
+  }
+  .containerQuote_delete {
+    width: 17px;
+    height: 17px;
+    background-image: url('../../image/896.svg');
+    background-size: contain;
+    cursor: pointer;
   }
 }
 

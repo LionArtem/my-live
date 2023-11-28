@@ -5,6 +5,7 @@ import {
   fetchAddMessageInTopic,
   selectTopics,
   resetTextAnswerRequest,
+  addQuote,
 } from '../../redax/slices/topicSlice';
 
 import { selectUser } from '../../redax/slices/userSlice';
@@ -79,6 +80,7 @@ export default function Form({ getMessages }) {
         dispatch(resetValues());
         dispatch(setValid());
         setTimeout(scrollForm, 500);
+        dispatch(addQuote(''));
       }
       deleteTextAnswerServer();
     });
@@ -118,6 +120,10 @@ export default function Form({ getMessages }) {
                 <span
                   className={Style.containerQuote_subtitle}
                 >{` ${quote}`}</span>
+                <div
+                  onClick={() => dispatch(addQuote(''))}
+                  className={Style.containerQuote_delete}
+                ></div>
               </>
             )}
           </div>
