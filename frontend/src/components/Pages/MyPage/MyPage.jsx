@@ -39,10 +39,25 @@ export default function MyPage() {
             }
             alt="аватарка"
           />
-          <p>{`Имя: ${user.name}`}</p>
-          <p>{`Город: ${user.town}`}</p>
-          <p>{`Возраст: ${user.age}`}</p>
-          <p>{`Пол: ${user.gender}`}</p>
+          <ul className={Style.discription}>
+            <li className={Style.title}>
+              <span>Имя:</span>
+              <p>{user.name}</p>
+            </li>
+            <li className={Style.title}>
+              <span>Город:</span>
+              <p>{user.town}</p>
+            </li>
+            <li className={Style.title}>
+              <span>Возраст:</span>
+              <p>{user.age}</p>
+            </li>
+            <li className={Style.title}>
+              <span>Пол:</span>
+              <p>{user.gender}</p>
+            </li>
+          </ul>
+
           <ButtonsNavigation
             page={'/edit-user'}
             text={'Редактировать профиль'}

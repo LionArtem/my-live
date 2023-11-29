@@ -7,7 +7,7 @@
   column-gap: 15px;
   width: max-content;
   padding: 10px;
-  &::before {
+  &::after {
     content: '';
     display: block;
     width: 50px;
@@ -19,5 +19,7 @@
 
   .title {
     margin: 20px 0px 0px 0px;
+    font-family: 'Caprasimo';
+    font-size: 2.5em;
   }
 }
