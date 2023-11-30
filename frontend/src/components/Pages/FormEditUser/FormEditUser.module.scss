@@ -43,6 +43,13 @@
     margin: 15vh 0px 15vh;
     color: rgb(150, 15, 15);
   }
+
+  .title {
+    font-family: 'Caprasimo';
+    color: rgb(16, 33, 117);
+    font-size: 1.2em;
+  }
+
   input {
     height: 20px;
     font-size: 15px;
@@ -77,6 +84,9 @@
     cursor: pointer;
     user-select: none;
     width: max-content;
+    font-family: 'Caprasimo';
+    color: rgb(16, 33, 117);
+    font-size: 1.2em;
   }
 
   .town {
@@ -99,7 +109,7 @@
     padding: 7px;
     border: 1px solid rgb(232, 230, 230);
     position: absolute;
-    top: 50px;
+    top: 75px;
     left: 0;
   }
 

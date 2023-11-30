@@ -228,7 +228,7 @@ export default function FormEditUser() {
           <ErrServer textErr="На сервере произошла ошибка, попробуйте зайти позже." />
         ) : (
           <>
-            <label>ваше имя</label>
+            <label className={Style.title}>ваше имя</label>
             <input
               pattern="^\S*$"
               value={value.name ?? ''}
@@ -241,7 +241,7 @@ export default function FormEditUser() {
             ></input>
             <TextInteractionForm text={errors.name} />
             <div className={Style.conteiner_age_gender}>
-              <label>возраст</label>
+              <label className={Style.title}>возраст</label>
               <input
                 className={Style.age}
                 value={value.age ?? ''}
@@ -253,7 +253,7 @@ export default function FormEditUser() {
                 placeholder="выберите ваш возраст"
                 required
               ></input>
-              <label>м</label>
+              <label className={Style.title}>м</label>
               <input
                 checked={value.gender === 'м' ? 'checked' : ''}
                 className={Style.radio}
@@ -264,7 +264,7 @@ export default function FormEditUser() {
                 placeholder="ввидите пол"
               ></input>
 
-              <label>ж</label>
+              <label className={Style.title}>ж</label>
               <input
                 checked={value.gender === 'ж' ? 'checked' : ''}
                 className={Style.radio}
@@ -316,7 +316,7 @@ export default function FormEditUser() {
                 ))}
               </ul>
             </div>
-            <label>email</label>
+            <label className={Style.title}>email</label>
             <input
               pattern="^\S*$"
               value={value.email ?? ''}

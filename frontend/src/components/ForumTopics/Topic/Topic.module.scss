@@ -29,8 +29,10 @@
   margin-bottom: 20px;
   h1 {
     margin: 0px 10px 0px 0px;
+    color: rgb(16, 33, 117);
+    font-family: 'Caprasimo';
   }
- 
+
   @media screen and (max-width: 510px) {
     h1 {
       font-size: 1em;
