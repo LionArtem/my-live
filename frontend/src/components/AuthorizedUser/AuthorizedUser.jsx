@@ -34,7 +34,7 @@ export default function AuthorizedUser() {
           dispatch(killPaginationState());
         }}
       >
-        выйти
+        Выйти
       </p>
     </div>
   );

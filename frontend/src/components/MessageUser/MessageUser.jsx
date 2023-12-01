@@ -16,6 +16,7 @@ import MessageUserPreloader from './MessageUserPreloader';
 export default function MessageUser({ getMessages }) {
   const dispatch = useDispatch();
   const { allMessagesAndAuthors, user } = useSelector(selectUser);
+  console.log(allMessagesAndAuthors);
   const { showPreloaderMessage } = useSelector(selectTopics);
 
   const deleteMessage = (obj) => {
@@ -58,7 +59,7 @@ export default function MessageUser({ getMessages }) {
                     <h3> {obj.user.name}</h3>
                     <p>{`(${obj.user.gender}.${obj.user.age})`}</p>
                   </div>
-                  <p className={Style.sity}>{obj.user.sity}</p>
+                  <p className={Style.sity}>{obj.user.town}</p>
                   <span>{getTimeLocal(obj.messages.createdAt)}</span>
                   {user.admin && (
                     <button

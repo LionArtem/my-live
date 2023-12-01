@@ -52,7 +52,9 @@
 
   input {
     height: 20px;
-    font-size: 15px;
+    font-family: 'Sometype Mono';
+    font-weight: 400;
+    font-size: 1.2em;
   }
 
   .conteiner_town {
@@ -96,6 +98,9 @@
     padding: 3px 1px;
     border: 1px solid rgb(133, 133, 133);
     vertical-align: bottom;
+    font-family: 'Sometype Mono';
+    font-weight: 400;
+    font-size: 1.2em;
   }
 
   .cities {
@@ -109,7 +114,7 @@
     padding: 7px;
     border: 1px solid rgb(232, 230, 230);
     position: absolute;
-    top: 75px;
+    top: 80px;
     left: 0;
   }
 
@@ -121,6 +126,8 @@
     all: unset;
     cursor: pointer;
     padding: 3px 0px;
+    font-family: 'Caprasimo';
+    font-size: 1.2em;
   }
 
   .list_town:hover {
