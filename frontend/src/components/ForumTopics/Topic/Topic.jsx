@@ -1,5 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import Style from './Topic.module.scss';
 
 import {
@@ -24,6 +25,7 @@ import TopicPreloader from './TopicPreloader';
 import NavigationNotAuthUser from '../../NavigationNotAuthUser/NavigationNotAuthUser';
 
 export default function Topic() {
+  const navigation = useNavigate();
   const dispatch = useDispatch();
   const {
     authorTopic,
@@ -83,6 +85,11 @@ export default function Topic() {
     }
   }, []);
 
+  const openPageUser = (id) => {
+    localStorage.setItem('userId', id);
+    navigation('/user');
+  };
+
   return (
     <div className={Style.topic}>
       <div className={Style.conteiner_navigation}>
@@ -118,11 +125,13 @@ export default function Topic() {
                   />
                   {authorTopic ? (
                     <>
-                      <h3>
-                        {authorTopic?.name}
+                      <div className={Style.name}>
+                        <h3 onClick={() => openPageUser(authorTopic?._id)}>
+                          {authorTopic?.name}
+                        </h3>
                         <p>{`(${authorTopic?.gender}.${authorTopic?.age})`}</p>
-                      </h3>
-                      <p>{authorTopic?.sity}</p>
+                      </div>
+                      <p>{authorTopic?.town}</p>
                     </>
                   ) : (
                     'пользователь удален'
