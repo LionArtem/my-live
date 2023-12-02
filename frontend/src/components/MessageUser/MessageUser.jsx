@@ -16,7 +16,6 @@ import MessageUserPreloader from './MessageUserPreloader';
 export default function MessageUser({ getMessages }) {
   const dispatch = useDispatch();
   const { allMessagesAndAuthors, user } = useSelector(selectUser);
-  console.log(allMessagesAndAuthors);
   const { showPreloaderMessage } = useSelector(selectTopics);
 
   const deleteMessage = (obj) => {

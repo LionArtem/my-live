@@ -56,6 +56,10 @@ export default function MyPage() {
               <span>Пол:</span>
               <p>{user.gender}</p>
             </li>
+            <li className={Style.title}>
+              <span>Email:</span>
+              <p>{user.email}</p>
+            </li>
           </ul>
 
           <ButtonsNavigation

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Style from './PageUser.module.scss';
 import { usersApi } from '../../../utils/UserApi';
 import ErrServer from '../../ErrServer/ErrServer';
+import ButtonsNavigation from '../../Buttons/ButtonsNavigation/ButtonsNavigation';
 
 export default function PageUser() {
   const [user, isUser] = useState();
@@ -29,19 +30,24 @@ export default function PageUser() {
   }
 
   return (
-    <div className={Style.PageUser}>
-      <img
-        className={Style.foto}
-        src={
-          user.avatar
-            ? `http://localhost:3001/${user.avatar}`
-            : 'https://www.murrayglass.com/wp-content/uploads/2020/10/avatar-scaled.jpeg'
-        }
-        alt="аватарка"
-      />
-      <p>{user.name}</p>
-      <p>{`(${user.gender}. ${user.age})`}</p>
-      <p>{user.town}</p>
+    <div className={Style.pageUser}>
+      <div className={Style.pageUser_buttonContainer}>
+        <ButtonsNavigation page={'/list-user'} text={'Назад'} />
+        <ButtonsNavigation page={'/'} text={'На главную'} />
+      </div>
+      <div className={Style.pageUser_userCard}>
+        <img
+          className={Style.foto}
+          src={
+            user.avatar
+              ? `http://localhost:3001/${user.avatar}`
+              : 'https://www.murrayglass.com/wp-content/uploads/2020/10/avatar-scaled.jpeg'
+          }
+          alt="аватарка"
+        />
+        <p>{`${user.name} (${user.gender}. ${user.age})`}</p>
+        <p>{user.town}</p>
+      </div>
     </div>
   );
 }
