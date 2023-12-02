@@ -1,5 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 import Style from './MessageUser.module.scss';
 
@@ -14,6 +15,7 @@ import { getTimeLocal } from '../../utils/utils';
 import MessageUserPreloader from './MessageUserPreloader';
 
 export default function MessageUser({ getMessages }) {
+  const navigation = useNavigate();
   const dispatch = useDispatch();
   const { allMessagesAndAuthors, user } = useSelector(selectUser);
   const { showPreloaderMessage } = useSelector(selectTopics);
@@ -35,6 +37,11 @@ export default function MessageUser({ getMessages }) {
     return () => localStorage.removeItem('page');
   }, []);
 
+  const openPageUser = (id) => {
+    localStorage.setItem('userId', id);
+    navigation('/user');
+  };
+
   return (
     <>
       {showPreloaderMessage ? (
@@ -55,7 +62,10 @@ export default function MessageUser({ getMessages }) {
                     alt="аватарка"
                   />
                   <div className={Style.name}>
-                    <h3> {obj.user.name}</h3>
+                    <h3 onClick={() => openPageUser(obj.user._id)}>
+                      {' '}
+                      {obj.user.name}
+                    </h3>
                     <p>{`(${obj.user.gender}.${obj.user.age})`}</p>
                   </div>
                   <p className={Style.sity}>{obj.user.town}</p>

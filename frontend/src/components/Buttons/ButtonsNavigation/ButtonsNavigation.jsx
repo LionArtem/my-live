@@ -1,12 +1,13 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import {useNavigate } from 'react-router-dom';
 
 import Style from './ButtonsNavigation.module.scss';
 
 export default function ButtonsNavigation({ page, text }) {
+  const navigate = useNavigate();
   return (
-    <Link to={page}>
-      <p className={Style.button}>{text}</p>
-    </Link>
+    <p onClick={() => navigate(page)} className={Style.button}>
+      {text}
+    </p>
   );
 }

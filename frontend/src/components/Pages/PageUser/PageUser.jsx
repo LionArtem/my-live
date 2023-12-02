@@ -32,7 +32,7 @@ export default function PageUser() {
   return (
     <div className={Style.pageUser}>
       <div className={Style.pageUser_buttonContainer}>
-        <ButtonsNavigation page={'/list-user'} text={'Назад'} />
+        <ButtonsNavigation page={-1} text={'Назад'} />
         <ButtonsNavigation page={'/'} text={'На главную'} />
       </div>
       <div className={Style.pageUser_userCard}>
