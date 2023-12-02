@@ -16,6 +16,7 @@ import {
   selectformValidetion,
   setValue,
   resetValues,
+  killAllStateFormValidetion,
 } from '../../redax/slices/formValidetionSlice';
 
 import TopicList from './TopicList/TopicList';
@@ -61,6 +62,7 @@ export default function ForumTopics() {
   React.useEffect(() => {
     return () => {
       dispatch(killAllStateTopic());
+      dispatch(killAllStateFormValidetion());
       localStorage.removeItem('page');
     };
   }, []);

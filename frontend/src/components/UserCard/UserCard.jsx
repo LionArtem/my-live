@@ -1,9 +1,17 @@
 import React from 'react';
 import Style from './UserCard.module.scss';
+import { useNavigate } from 'react-router-dom';
 
 export default function UserCard({ user }) {
+  const navigation = useNavigate();
+
+  const openPageUser = (id) => {
+    localStorage.setItem('userId', id);
+    navigation('/user');
+  };
+
   return (
-    <div className={Style.info_user}>
+    <div onClick={() => openPageUser(user._id)} className={Style.info_user}>
       <img
         className={Style.foto}
         src={
