@@ -1,6 +1,7 @@
 require('dotenv').config();
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const fs = require('fs');
 const User = require('../models/user');
 
 const { NODE_ENV, JWT_SECRET, EMAIL_ADMIN } = process.env;
@@ -89,6 +90,17 @@ const getUsers = (req, res, next) => {
 
 const deleteUsers = (req, res, next) => {
   const { id } = req.params;
+  fs.access(`uploads/${id}`, (errFind) => {
+    if (!errFind) {
+      fs.unlink(`uploads/${id}`, (err) => {
+        if (err) {
+          res.send({ message: 'ошибка удаления фото пользователя' });
+        } else {
+          res.send({ message: 'фото пользователя успешно удалено удален' });
+        }
+      });
+    }
+  });
   User.findById(id)
     .then((user) => {
       if (!user) {
@@ -174,12 +186,15 @@ const addUserFoto = (req, res, next) => {
     });
 };
 
+const deleteUserFoto = () => {
+
+};
+
 const patchUsersInfo = (req, res, next) => {
   const id = req.user._id;
   const {
     age, email, name, town, gender,
   } = req.body;
-  console.log(town);
   User.findByIdAndUpdate(
     id,
     {
@@ -231,4 +246,5 @@ module.exports = {
   getUsersFaindId,
   addUserFoto,
   deleteUsers,
+  deleteUserFoto,
 };
