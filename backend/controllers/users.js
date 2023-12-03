@@ -2,6 +2,7 @@ require('dotenv').config();
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const fs = require('fs');
+const NoAccessErr = require('../errors/no-access-err');
 const User = require('../models/user');
 
 const { NODE_ENV, JWT_SECRET, EMAIL_ADMIN } = process.env;
@@ -186,8 +187,43 @@ const addUserFoto = (req, res, next) => {
     });
 };
 
-const deleteUserFoto = () => {
-
+const deleteUserFoto = (req, res, next) => {
+  const idParams = req.user._id;
+  const { id } = req.params;
+  if (id === idParams) {
+    User.findByIdAndUpdate(
+      id,
+      {
+        avatar: '',
+      },
+      {
+        new: true, // обработчик then получит на вход обновлённую запись
+        runValidators: true,
+      },
+    )
+      .then((user) => {
+        fs.access(`uploads/${id}`, (errFind) => {
+          if (!errFind) {
+            fs.unlink(`uploads/${id}`, (err) => {
+              if (err) {
+                // console.log(err);
+              } else {
+                // console.log('delte');
+              }
+            });
+          } else {
+            // console.log('не найдено');
+          }
+        });
+        res.send(user);
+      })
+      .catch((err) => {
+        next(err);
+      });
+  } else {
+    const err = new NoAccessErr('нельзя удалить чужую аватарку');
+    next(err);
+  }
 };
 
 const patchUsersInfo = (req, res, next) => {

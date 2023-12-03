@@ -34,7 +34,11 @@ usersRouter.get('/:id', celebrate({
 
 usersRouter.post('/add-file/', upload.single('avatar'), addUserFoto);
 
-usersRouter.post('/delete-file/', deleteUserFoto);
+usersRouter.patch('/delete-avatar/:id', celebrate({
+  params: Joi.object().keys({
+    id: Joi.string().hex().length(24).required(),
+  }),
+}), deleteUserFoto);
 
 usersRouter.patch('/me', celebrate({
   body: Joi.object().keys({

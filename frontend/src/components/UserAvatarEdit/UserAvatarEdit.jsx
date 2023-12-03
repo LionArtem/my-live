@@ -1,13 +1,14 @@
 import React, { useRef, useState } from 'react';
 import Style from './UserAvatarEdit.module.scss';
 import { selectAuth } from '../../redax/slices/authSlice';
-import { selectUser } from '../../redax/slices/userSlice';
+import { selectUser, resetUserAvatar } from '../../redax/slices/userSlice';
 
 import TextInteractionForm from '../TextInteractionForm/TextInteractionForm';
 import { usersApi } from '../../utils/UserApi';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 export default function UserAvatarEdit() {
+  const dispatch = useDispatch();
   const refInputFile = useRef();
   const { token } = useSelector(selectAuth);
   const { user } = useSelector(selectUser);
@@ -51,8 +52,16 @@ export default function UserAvatarEdit() {
       });
   };
 
-  const deleteFoto = (id) => {
-    console.log(id);
+  const deleteFoto = (token, id) => {
+    usersApi
+      .deleteUsersAvatar(token, id)
+      .then((res) => {
+        setFile(null);
+        dispatch(resetUserAvatar(''));
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   return (
@@ -77,7 +86,7 @@ export default function UserAvatarEdit() {
           ></div>
           <div
             className={`${Style.button} ${Style.button_delete_foto}`}
-            onClick={() => deleteFoto(user._id)}
+            onClick={() => deleteFoto(token, user._id)}
           ></div>
         </div>
       </div>
