@@ -1,0 +1,29 @@
+.container_avatar {
+  position: relative;
+  img {
+    width: 200px;
+    height: 150px;
+    object-fit: contain;
+    margin: 0px 0px 10px 0px;
+    border: 1px solid rgb(232, 230, 230);
+    padding: 3px;
+  }
+  .button_edit_foto {
+    position: absolute;
+    top: 115px;
+    left: 165px;
+    background-image: url(../../image/445.png);
+    width: 30px;
+    height: 30px;
+    background-size: cover;
+    cursor: pointer;
+    border: 1px rgb(255, 254, 254) solid;
+    border-radius: 50%;
+  }
+}
+
+.input_file {
+  visibility: hidden;
+  width: 0;
+  height: 0;
+}
