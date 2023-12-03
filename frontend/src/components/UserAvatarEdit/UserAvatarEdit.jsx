@@ -51,6 +51,10 @@ export default function UserAvatarEdit() {
       });
   };
 
+  const deleteFoto = (id) => {
+    console.log(id);
+  };
+
   return (
     <>
       <div className={Style.container_avatar}>
@@ -66,10 +70,16 @@ export default function UserAvatarEdit() {
             alt="аватар"
           />
         }
-        <div
-          className={Style.button_edit_foto}
-          onClick={() => refInputFile.current.click()}
-        ></div>
+        <div className={Style.containerButton}>
+          <div
+            className={`${Style.button} ${Style.button_edit_foto}`}
+            onClick={() => refInputFile.current.click()}
+          ></div>
+          <div
+            className={`${Style.button} ${Style.button_delete_foto}`}
+            onClick={() => deleteFoto(user._id)}
+          ></div>
+        </div>
       </div>
       <input
         ref={refInputFile}
