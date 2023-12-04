@@ -28,12 +28,14 @@ import { allTown } from '../../../utils/AllTown';
 import UserAvatarEdit from '../../UserAvatarEdit/UserAvatarEdit';
 
 export default function FormEditUser() {
+  const townRef = useRef();
   const sityRef = useRef();
   const dispatch = useDispatch();
   const { value, errors, valid } = useSelector(selectformValidetion);
   const [listTown, isListTown] = useState(false);
   const [showCities, setShowCities] = useState([]);
   const [town, setTown] = useState('');
+  const [citiesTop, isCitiesTop] = useState(0);
 
   const catList = (list, num) => {
     setShowCities(list.slice(0, num));
@@ -126,6 +128,8 @@ export default function FormEditUser() {
   };
 
   const openListTown = () => {
+    const clue = townRef.current?.getBoundingClientRect();
+    isCitiesTop(clue.height);
     isListTown(!listTown);
   };
 
@@ -206,7 +210,7 @@ export default function FormEditUser() {
                 placeholder="ввидите пол"
               ></input>
             </div>
-            <div className={Style.conteiner_town}>
+            <div ref={townRef} className={Style.conteiner_town}>
               <p className={Style.town}>{town}</p>
               <div
                 onClick={() => openListTown()}
@@ -229,6 +233,7 @@ export default function FormEditUser() {
                     ? `${Style.cities}`
                     : `${Style.cities} ${Style.cities_off}`
                 }
+                style={{ top: citiesTop }}
               >
                 <input
                   onChange={(evt) => searchTown(evt, allTown, 1000)}
