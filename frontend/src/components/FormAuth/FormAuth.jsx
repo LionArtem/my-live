@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 import {
@@ -21,10 +21,15 @@ import TextInteractionForm from '../TextInteractionForm/TextInteractionForm';
 import ButtonSubmit from '../Buttons/ButtonSubmit/ButtonSubmit';
 
 export default function FormAuth({ textButton, text }) {
+  const dispatch = useDispatch();
   const { value, errors, valid } = useSelector(selectformValidetion);
+  console.log(valid);
+  console.log(errors);
   const { showPreloader, textArrAnswerServer, fopmReg } =
     useSelector(selectAuth);
-  const dispatch = useDispatch();
+
+  const [focusInputEmail, isFocusInputEmail] = useState(false);
+  const [focusInputPassword, isFocusInputPassword] = useState(false);
 
   const loginUser = (email, password) => {
     dispatch(fetchLoginUser({ email, password })).then((res) => {
@@ -37,10 +42,30 @@ export default function FormAuth({ textButton, text }) {
     });
   };
 
+  const checkEmptyField = (value, name, text) => {
+    if (value) {
+      console.log(value);
+      dispatch(
+        setValue({
+          name,
+          errors: text,
+        })
+      );
+    }
+  };
+
   const handleSubmit = (e) => {
+    checkEmptyField(!value.email, 'email', 'Заполните это поле');
+    checkEmptyField(!value.password, 'password', 'Заполните это поле');
+    e.preventDefault();
+    if (!valid) {
+      isFocusInputEmail(true);
+      isFocusInputPassword(true);
+      return;
+    }
     const email = e.target.email.value;
     const password = e.target.password.value;
-    e.preventDefault();
+
     if (fopmReg) {
       dispatch(fetchAddUser({ email, password })).then((res) => {
         if (res.meta.requestStatus === 'fulfilled') {
@@ -66,24 +91,36 @@ export default function FormAuth({ textButton, text }) {
     );
   };
 
+  const closeForm = () => {
+    dispatch(resetForm());
+    dispatch(killAllStateFormValidetion());
+  };
+
   return (
     <div className={Style.overflow}>
       <div
         onClick={(evt) => {
-          if (evt.target === evt.currentTarget) dispatch(resetForm());
+          if (evt.target === evt.currentTarget) {
+            closeForm();
+          }
         }}
         className={Style.form_contener}
       >
-        <form onSubmit={(e) => handleSubmit(e)} className={Style.form}>
+        <form
+          noValidate
+          onSubmit={(e) => handleSubmit(e)}
+          className={Style.form}
+        >
           <div
             onClick={() => {
-              dispatch(resetForm());
-              dispatch(killAllStateFormValidetion());
+              closeForm();
             }}
             className={Style.button_close}
           ></div>
           <p className={Style.title}>{text}</p>
           <input
+            onBlur={() => isFocusInputEmail(true)}
+            onFocus={() => isFocusInputEmail(false)}
             pattern="[a-zA-Z0-9._\-]+@[a-zA-Z0-9._\-]+\.[a-zA-Z0-9_\-]+"
             value={value.email ?? ''}
             onChange={(evt) => {
@@ -94,8 +131,10 @@ export default function FormAuth({ textButton, text }) {
             placeholder="email"
             required
           ></input>
-          <TextInteractionForm text={errors.email} />
+          <TextInteractionForm text={focusInputEmail && errors.email} />
           <input
+            onBlur={() => isFocusInputPassword(true)}
+            onFocus={() => isFocusInputPassword(false)}
             value={value.password ?? ''}
             onChange={(evt) => {
               collectValidetion(evt);
@@ -106,9 +145,9 @@ export default function FormAuth({ textButton, text }) {
             minLength={8}
             required
           ></input>
-          <TextInteractionForm text={errors.password} />
+          <TextInteractionForm text={focusInputPassword && errors.password} />
           <ButtonSubmit
-            valid={valid}
+            valid={true}
             showPreloader={showPreloader}
             textAnswerRequest={textArrAnswerServer}
             text={textButton}
