@@ -23,8 +23,6 @@ import ButtonSubmit from '../Buttons/ButtonSubmit/ButtonSubmit';
 export default function FormAuth({ textButton, text }) {
   const dispatch = useDispatch();
   const { value, errors, valid } = useSelector(selectformValidetion);
-  console.log(valid);
-  console.log(errors);
   const { showPreloader, textArrAnswerServer, fopmReg } =
     useSelector(selectAuth);
 
