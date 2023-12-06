@@ -9,6 +9,7 @@ import {
 import { selectAuth } from '../../../redax/slices/authSlice';
 import ButtonsNavigation from '../../Buttons/ButtonsNavigation/ButtonsNavigation';
 import ErrServer from '../../ErrServer/ErrServer';
+import MyPageSceleton from './MyPageSceleton';
 
 export default function MyPage() {
   const dispatch = useDispatch();
@@ -26,7 +27,9 @@ export default function MyPage() {
   return (
     <div className={Style.use_conteiner}>
       <ButtonsNavigation page={'/'} text={'Назад'} />
-      {errServer ? (
+      {showSceletonPage ? (
+        <MyPageSceleton />
+      ) : errServer ? (
         <ErrServer textErr="На сервере произошла ошибка, попробуйте зайти позже." />
       ) : (
         <div className={Style.use_card}>
