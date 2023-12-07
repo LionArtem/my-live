@@ -156,125 +156,125 @@ export default function FormEditUser() {
   return (
     <div className={Style.conteiner}>
       <UserAvatarEdit />
-      <form onSubmit={(evt) => hendelSumit(evt)} className={Style.form}>
-        {showSceletonPage ? (
-          <FormEditUserPreloader />
-        ) : errServer ? (
-          <ErrServer textErr="На сервере произошла ошибка, попробуйте зайти позже." />
-        ) : (
-          <>
-            <label className={Style.title}>ваше имя</label>
-            <input
-              pattern="^\S*$"
-              value={value.name ?? ''}
-              onChange={(evt) => changeValue(evt)}
-              name="name"
-              placeholder="ввидите имя"
-              required
-              minLength={1}
-              maxLength={30}
-            ></input>
-            <TextInteractionForm text={errors.name} />
-            <div className={Style.conteiner_age_gender}>
-              <label className={Style.title}>возраст</label>
-              <input
-                className={Style.age}
-                value={value.age ?? ''}
-                onChange={(evt) => changeValue(evt)}
-                name="age"
-                type="number"
-                min={18}
-                max={80}
-                placeholder="выберите ваш возраст"
-                required
-              ></input>
-              <label className={Style.title}>м</label>
-              <input
-                checked={value.gender === 'м' ? 'checked' : ''}
-                className={Style.radio}
-                value="м"
-                onChange={(evt) => changeValue(evt)}
-                type="radio"
-                name="gender"
-                placeholder="ввидите пол"
-              ></input>
 
-              <label className={Style.title}>ж</label>
-              <input
-                checked={value.gender === 'ж' ? 'checked' : ''}
-                className={Style.radio}
-                value="ж"
-                onChange={(evt) => changeValue(evt)}
-                type="radio"
-                name="gender"
-                placeholder="ввидите пол"
-              ></input>
-            </div>
-            <div ref={townRef} className={Style.conteiner_town}>
-              <p className={Style.town}>{town}</p>
+      {showSceletonPage ? (
+        <FormEditUserPreloader />
+      ) : errServer ? (
+        <ErrServer textErr="На сервере произошла ошибка, попробуйте зайти позже." />
+      ) : (
+        <form onSubmit={(evt) => hendelSumit(evt)} className={Style.form}>
+          <label className={Style.title}>ваше имя</label>
+          <input
+            pattern="^\S*$"
+            value={value.name ?? ''}
+            onChange={(evt) => changeValue(evt)}
+            name="name"
+            placeholder="ввидите имя"
+            required
+            minLength={1}
+            maxLength={30}
+          ></input>
+          <TextInteractionForm text={errors.name} />
+          <div className={Style.conteiner_age_gender}>
+            <label className={Style.title}>возраст</label>
+            <input
+              className={Style.age}
+              value={value.age ?? ''}
+              onChange={(evt) => changeValue(evt)}
+              name="age"
+              type="number"
+              min={18}
+              max={80}
+              placeholder="выберите ваш возраст"
+              required
+            ></input>
+            <label className={Style.title}>м</label>
+            <input
+              checked={value.gender === 'м' ? 'checked' : ''}
+              className={Style.radio}
+              value="м"
+              onChange={(evt) => changeValue(evt)}
+              type="radio"
+              name="gender"
+              placeholder="ввидите пол"
+            ></input>
+
+            <label className={Style.title}>ж</label>
+            <input
+              checked={value.gender === 'ж' ? 'checked' : ''}
+              className={Style.radio}
+              value="ж"
+              onChange={(evt) => changeValue(evt)}
+              type="radio"
+              name="gender"
+              placeholder="ввидите пол"
+            ></input>
+          </div>
+          <div ref={townRef} className={Style.conteiner_town}>
+            <p className={Style.town}>{town}</p>
+            <div
+              onClick={() => openListTown()}
+              className={Style.conteiner_label_town}
+            >
+              <label className={Style.label_town}>выберите ваш город</label>
               <div
-                onClick={() => openListTown()}
-                className={Style.conteiner_label_town}
-              >
-                <label className={Style.label_town}>выберите ваш город</label>
-                <div
-                  className={
-                    listTown
-                      ? `${Style.label_icon_off} ${Style.label_icon_onn}`
-                      : Style.label_icon_off
-                  }
-                ></div>
-              </div>
-              <ul
-                ref={sityRef}
-                onScroll={(evt) => addSityInList(evt, showCities)}
                 className={
                   listTown
-                    ? `${Style.cities}`
-                    : `${Style.cities} ${Style.cities_off}`
+                    ? `${Style.label_icon_off} ${Style.label_icon_onn}`
+                    : Style.label_icon_off
                 }
-                style={{ top: citiesTop }}
-              >
-                <input
-                  onChange={(evt) => searchTown(evt, allTown, 1000)}
-                  placeholder="поиск"
-                ></input>
-                {showCities?.map((town, i) => (
-                  <li
-                    onClick={() =>
-                      changeValueTown(`${town.city} (${town.region})`)
-                    }
-                    className={Style.list_town}
-                    key={i}
-                  >
-                    {`${town.city} (${town.region})`}
-                  </li>
-                ))}
-              </ul>
+              ></div>
             </div>
-            <label className={Style.title}>email</label>
-            <input
-              pattern="^\S*$"
-              value={value.email ?? ''}
-              onChange={(evt) => changeValue(evt)}
-              name="email"
-              type="email"
-              placeholder="ввидите your email"
-              required
-              minLength={5}
-              maxLength={50}
-            ></input>
-            <TextInteractionForm text={errors.email} />
-            <ButtonSubmit
-              valid={valid}
-              showPreloader={showPreloader}
-              successRequest={successRequest}
-              textAnswerRequest={textAnswerRequest}
-              text={'редактировать профиль'}
-            />
-          </>
-        )}
-      </form>
+            <ul
+              ref={sityRef}
+              onScroll={(evt) => addSityInList(evt, showCities)}
+              className={
+                listTown
+                  ? `${Style.cities}`
+                  : `${Style.cities} ${Style.cities_off}`
+              }
+              style={{ top: citiesTop }}
+            >
+              <input
+                onChange={(evt) => searchTown(evt, allTown, 1000)}
+                placeholder="поиск"
+              ></input>
+              {showCities?.map((town, i) => (
+                <li
+                  onClick={() =>
+                    changeValueTown(`${town.city} (${town.region})`)
+                  }
+                  className={Style.list_town}
+                  key={i}
+                >
+                  {`${town.city} (${town.region})`}
+                </li>
+              ))}
+            </ul>
+          </div>
+          <label className={Style.title}>email</label>
+          <input
+            pattern="^\S*$"
+            value={value.email ?? ''}
+            onChange={(evt) => changeValue(evt)}
+            name="email"
+            type="email"
+            placeholder="ввидите your email"
+            required
+            minLength={5}
+            maxLength={50}
+          ></input>
+          <TextInteractionForm text={errors.email} />
+          <ButtonSubmit
+            valid={valid}
+            showPreloader={showPreloader}
+            successRequest={successRequest}
+            textAnswerRequest={textAnswerRequest}
+            text={'редактировать профиль'}
+          />
+        </form>
+      )}
+
       <ButtonsNavigation page={'/my-page'} text={'Назад'} />
       <ButtonsNavigation page={'/'} text={'На главную'} />
     </div>

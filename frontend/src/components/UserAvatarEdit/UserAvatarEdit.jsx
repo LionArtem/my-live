@@ -6,12 +6,13 @@ import { selectUser, resetUserAvatar } from '../../redax/slices/userSlice';
 import TextInteractionForm from '../TextInteractionForm/TextInteractionForm';
 import { usersApi } from '../../utils/UserApi';
 import { useDispatch, useSelector } from 'react-redux';
+import UserAvatarEditSceleton from './UserAvatarEditSceleton';
 
 export default function UserAvatarEdit() {
   const dispatch = useDispatch();
   const refInputFile = useRef();
   const { token } = useSelector(selectAuth);
-  const { user } = useSelector(selectUser);
+  const { user, showSceletonPage } = useSelector(selectUser);
   const [file, setFile] = useState(null);
   const [errorLoadingFile, setErrorLoadingFile] = useState('');
 
@@ -66,40 +67,46 @@ export default function UserAvatarEdit() {
 
   return (
     <>
-      <div className={Style.container_avatar}>
-        {
-          <img
-            src={
-              file
-                ? file
-                : user.avatar
-                ? `http://localhost:3001/${user.avatar}`
-                : 'https://www.murrayglass.com/wp-content/uploads/2020/10/avatar-scaled.jpeg'
+      {showSceletonPage ? (
+        <UserAvatarEditSceleton />
+      ) : (
+        <>
+          <div className={Style.container_avatar}>
+            {
+              <img
+                src={
+                  file
+                    ? file
+                    : user.avatar
+                    ? `http://localhost:3001/${user.avatar}`
+                    : 'https://www.murrayglass.com/wp-content/uploads/2020/10/avatar-scaled.jpeg'
+                }
+                alt="аватар"
+              />
             }
-            alt="аватар"
-          />
-        }
-        <div className={Style.containerButton}>
-          <div
-            className={`${Style.button} ${Style.button_edit_foto}`}
-            onClick={() => refInputFile.current.click()}
-          ></div>
-          <div
-            className={`${Style.button} ${Style.button_delete_foto}`}
-            onClick={() => deleteFoto(token, user._id)}
-          ></div>
-        </div>
-      </div>
-      <input
-        ref={refInputFile}
-        className={Style.input_file}
-        type="file"
-        name="avatar-foto"
-        onChange={(evt) => addFoto(evt)}
-        accept="image/*"
-        required
-      ></input>
-      <TextInteractionForm text={errorLoadingFile} />
+            <div className={Style.containerButton}>
+              <div
+                className={`${Style.button} ${Style.button_edit_foto}`}
+                onClick={() => refInputFile.current.click()}
+              ></div>
+              <div
+                className={`${Style.button} ${Style.button_delete_foto}`}
+                onClick={() => deleteFoto(token, user._id)}
+              ></div>
+            </div>
+          </div>
+          <input
+            ref={refInputFile}
+            className={Style.input_file}
+            type="file"
+            name="avatar-foto"
+            onChange={(evt) => addFoto(evt)}
+            accept="image/*"
+            required
+          ></input>
+          <TextInteractionForm text={errorLoadingFile} />
+        </>
+      )}
     </>
   );
 }
