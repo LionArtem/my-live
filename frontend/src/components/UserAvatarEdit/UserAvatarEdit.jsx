@@ -7,6 +7,7 @@ import TextInteractionForm from '../TextInteractionForm/TextInteractionForm';
 import { usersApi } from '../../utils/UserApi';
 import { useDispatch, useSelector } from 'react-redux';
 import UserAvatarEditSceleton from './UserAvatarEditSceleton';
+import ModulePreloader from '../Moduls/ModulePreloader/ModulePreloader';
 
 export default function UserAvatarEdit() {
   const dispatch = useDispatch();
@@ -15,8 +16,10 @@ export default function UserAvatarEdit() {
   const { user, showSceletonPage } = useSelector(selectUser);
   const [file, setFile] = useState(null);
   const [errorLoadingFile, setErrorLoadingFile] = useState('');
+  const [showPreloader, isShowPreloader] = useState(false);
 
   const addFoto = (evt) => {
+    isShowPreloader(true);
     const file = evt.target.files ? evt.target.files[0] : false;
     setFileToBase(file);
   };
@@ -30,8 +33,9 @@ export default function UserAvatarEdit() {
         sendFile({ result: render.result, file });
       };
     } catch (error) {
+      isShowPreloader(false);
       setErrorLoadingFile('Ошибка при загрузке файла!');
-      console.log(error, 'Ошибка при загрузке файла!');
+      setTimeout(() => setErrorLoadingFile(''), 3000);
     }
   };
 
@@ -43,13 +47,12 @@ export default function UserAvatarEdit() {
       .addAvatar(avatar, token)
       .then(() => {
         setFile(result);
+        isShowPreloader(false);
       })
       .catch((err) => {
-        if (err.status === 500) {
-          setErrorLoadingFile('на сервере произошла ошибка');
-        } else {
-          setErrorLoadingFile(err.statusText);
-        }
+        isShowPreloader(false);
+        setErrorLoadingFile(err.message);
+        setTimeout(() => setErrorLoadingFile(''), 3000);
       });
   };
 
@@ -105,6 +108,7 @@ export default function UserAvatarEdit() {
             required
           ></input>
           <TextInteractionForm text={errorLoadingFile} />
+          {showPreloader && <ModulePreloader text="Загрузка..." />}
         </>
       )}
     </>

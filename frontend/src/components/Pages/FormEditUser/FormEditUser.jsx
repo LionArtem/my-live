@@ -156,7 +156,6 @@ export default function FormEditUser() {
   return (
     <div className={Style.conteiner}>
       <UserAvatarEdit />
-
       {showSceletonPage ? (
         <FormEditUserPreloader />
       ) : errServer ? (

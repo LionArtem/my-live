@@ -21,12 +21,5 @@ export default function ModulConfirmation({ text, confirm }) {
         </p>
       </div>
     </ModulContainer>
-    // <div className={Style.overfloy}>
-    //   <div className={Style.window}>
-    //     <p className={Style.title}>{text}</p>
-    //     <p className={`${Style.buttonYes} ${Style.button}`}>Да</p>
-    //     <p className={`${Style.buttonNo} ${Style.button}`}>Нет</p>
-    //   </div>
-    // </div>
   );
 }
