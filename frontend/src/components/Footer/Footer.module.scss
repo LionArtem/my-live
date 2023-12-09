@@ -1,0 +1,13 @@
+@keyframes go-lift {
+  from {
+    left: 0;
+  }
+  to {
+    left: 100%;
+  }
+}
+
+.title {
+  animation: go-lift 1s alternate;
+  position: relative;
+}

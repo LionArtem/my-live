@@ -1,7 +1,5 @@
-import Stule from './Footer.module.scss'
+import Stule from "./Footer.module.scss";
 
-export default function Footer (){
-    return ( 
-        <p>ArtemGreen</p>
-      )
+export default function Footer() {
+  return <p className={Stule.title}>Name</p>;
 }
