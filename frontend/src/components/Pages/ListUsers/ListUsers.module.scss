@@ -3,9 +3,14 @@
   flex-direction: column;
 }
 
+.conteinerButton {
+  display: flex;
+  column-gap: 11px;
+  border-bottom: 1px solid white;
+}
+
 .ListUsers_containerCard {
   all: unset;
-  border-top: 1px solid white;
   display: flex;
   row-gap: 20px;
   justify-content: center;

@@ -15,6 +15,8 @@ import ErrServer from '../../ErrServer/ErrServer';
 import ButtonDelete from '../../Buttons/ButtonDelete/ButtonDelete';
 import ModulConfirmation from '../../Moduls/ModulConfirmation/ModulConfirmation';
 import ModulePreloader from '../../Moduls/ModulePreloader/ModulePreloader';
+import { selectUser } from '../../../redax/slices/userSlice';
+import ListUsersSceleton from './ListUsersSceleton';
 
 export default function ListUsers() {
   const dispatch = useDispatch();
@@ -22,13 +24,15 @@ export default function ListUsers() {
   const { statusModule } = useSelector(selectModuleConfirmation);
   const [users, isUsers] = useState([]);
   const [numberPages, isNumberPages] = useState([]);
-  const [showPreloader, isShowPreloader] = useState(true);
+  const [showPreloader, isShowPreloader] = useState(false);
+  const [showSceleton, isShowSceleton] = useState(false);
   const [errServer, isErrServer] = useState(false);
   const [textErr, isTextErr] = useState('');
   const [idUser, isIdUser] = useState();
   const [textPreloader, isTextPreloader] = useState('');
 
   const getUsers = (page = localStorage.getItem('page') ?? 1) => {
+    isShowSceleton(true);
     usersApi
       .getUsers(token, page)
       .then((res) => {
@@ -39,14 +43,10 @@ export default function ListUsers() {
         isErrServer(true);
         isTextErr(err.message);
       })
-      .finally(() => {
-        isTextPreloader('');
-        isShowPreloader(false);
-      });
+      .finally(() => isShowSceleton(false));
   };
 
   useEffect(() => {
-    isTextPreloader('Загрузка...');
     getUsers();
     return () => localStorage.removeItem('page');
   }, []);
@@ -78,23 +78,27 @@ export default function ListUsers() {
 
   return (
     <div className={Style.ListUsers}>
-      {showPreloader && <ModulePreloader text={textPreloader} />}
-      <ButtonsNavigation page={'/admin'} text={'Назад'} />
-      <ButtonsNavigation page={'/'} text={'На главную'} />
+      <div className={Style.conteinerButton}>
+        <ButtonsNavigation page={'/admin'} text={'Назад'} />
+        <ButtonsNavigation page={'/'} text={'На главную'} />
+      </div>
+
       {errServer ? (
         <ErrServer textErr={textErr} />
       ) : (
         <ul className={Style.ListUsers_containerCard}>
-          {users.map((user) => (
-            <li key={user._id}>
-              <UserCard user={user} />
-              <ButtonDelete
-                id={user._id}
-                onClick={clickButtonDelete}
-                text={'Удалить профиль'}
-              />
-            </li>
-          ))}
+          {showSceleton
+            ? [...new Array(10)].map((_, i) => <ListUsersSceleton key={i} />)
+            : users.map((user) => (
+                <li key={user._id}>
+                  <UserCard user={user} />
+                  <ButtonDelete
+                    id={user._id}
+                    onClick={clickButtonDelete}
+                    text={'Удалить профиль'}
+                  />
+                </li>
+              ))}
         </ul>
       )}
       {numberPages.length > 1 && (
@@ -103,6 +107,7 @@ export default function ListUsers() {
       {statusModule && (
         <ModulConfirmation confirm={deleteUser} text={'Удалить?'} />
       )}
+      {showPreloader && <ModulePreloader text={textPreloader} />}
     </div>
   );
 }

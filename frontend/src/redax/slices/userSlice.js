@@ -49,7 +49,7 @@ export const fetchGetUserFindId = createAsyncThunk(
 
 const initialState = {
   user: {},
-  admin: false,
+  admin: localStorage.getItem('admin'),
   allMessagesAndAuthors: [],
   showPreloader: false,
   textAnswerRequest: '',
