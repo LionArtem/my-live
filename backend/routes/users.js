@@ -9,6 +9,7 @@ const {
   getUsersId,
   addUserFoto,
   deleteUsers,
+  deleteUserFoto,
 } = require('../controllers/users');
 
 usersRouter.get('/ListUser/:page', celebrate({
@@ -32,6 +33,12 @@ usersRouter.get('/:id', celebrate({
 }), getUsersId);
 
 usersRouter.post('/add-file/', upload.single('avatar'), addUserFoto);
+
+usersRouter.patch('/delete-avatar/:id', celebrate({
+  params: Joi.object().keys({
+    id: Joi.string().hex().length(24).required(),
+  }),
+}), deleteUserFoto);
 
 usersRouter.patch('/me', celebrate({
   body: Joi.object().keys({

@@ -54,6 +54,7 @@ export const fetchDeleteTopic = createAsyncThunk(
 const initialState = {
   date: '',
   messageValue: '',
+  quote: '',
   authorTopic: {},
   titleTopic: '',
   topicsInPage: [],
@@ -83,6 +84,10 @@ const topicsSlice = createSlice({
       state.srrTopicServer = false;
       state.errGetMessage = false;
       state.date = '';
+      state.quote = '';
+    },
+    addQuote(state, action) {
+      state.quote = action.payload;
     },
     changeErrGetMessage(state, action) {
       state.errGetMessage = action.payload;
@@ -205,5 +210,6 @@ export const {
   addTextSuccess,
   isShowPreloaderMessage,
   changeErrGetMessage,
+  addQuote,
 } = topicsSlice.actions;
 export default topicsSlice.reducer;

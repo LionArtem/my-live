@@ -1,5 +1,5 @@
-import Stule from "./Footer.module.scss";
+import Style from './Footer.module.scss';
 
 export default function Footer() {
-  return <p className={Stule.title}>Name</p>;
+  return <div className={Style.footer}></div>;
 }

@@ -14,6 +14,7 @@ import PageAdmin from './components/Pages/PageAdmin/PageAdmin';
 import ListUser from './components/Pages/ListUsers/ListUsers';
 
 import { selectUser, fetchGetUser } from './redax/slices/userSlice';
+import PageUser from './components/Pages/PageUser/PageUser';
 
 function App() {
   const dispatch = useDispatch();
@@ -36,6 +37,7 @@ function App() {
       <Route path="/edit-user" element={token ? <FormEditUser /> : <Home />} />
       <Route path="/admin" element={admin ? <PageAdmin /> : <Home />} />
       <Route path="/list-user" element={admin ? <ListUser /> : <Home />} />
+      <Route path="/user" element={<PageUser />} />
       <Route path="*" element={<NotFoundPage />} />
     </Routes>
   );

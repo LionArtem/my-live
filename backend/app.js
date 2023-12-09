@@ -17,7 +17,6 @@ const { PORT = 3001 } = process.env;
 const app = express();
 app.use(express.json()); // для собирания JSON-формата
 app.use(express.urlencoded({ extended: true })); // для приёма веб-страниц внутри POST-запроса
-app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 mongoose.connect('mongodb://127.0.0.1/myLivedb');
 
 app.use(requestLogger);
@@ -39,6 +38,8 @@ app.use((req, res, next) => {
   }
   next();
 });
+
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 app.use('/', sigRouter);
 

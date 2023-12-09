@@ -13,6 +13,7 @@ import { Link } from 'react-router-dom';
 export default function AuthorizedUser() {
   const dispatch = useDispatch();
   const { admin } = useSelector(selectUser);
+ 
   return (
     <div className={Style.contener_auth}>
       <Link className={Style.button_open} to={'/my-page'}>
@@ -34,7 +35,7 @@ export default function AuthorizedUser() {
           dispatch(killPaginationState());
         }}
       >
-        выйти
+        Выйти
       </p>
     </div>
   );

@@ -40,12 +40,16 @@
       .title {
         color: aliceblue;
         margin: 0px auto;
-        font-size: 20px;
+        font-size: 1.5em;
         font-weight: 600;
         letter-spacing: 1px;
+        color: rgb(16, 33, 117);
+        font-family: 'Caprasimo';
       }
       input {
         height: 20px;
+        font-family: 'Sometype Mono';
+        font-size: 1.1em;
       }
       .button {
         all: unset;

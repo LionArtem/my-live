@@ -11,9 +11,10 @@
   .listContainer_title {
     all: unset;
     display: block;
-    font-size: 1.2em;
+    font-size: 1.5em;
     font-weight: 600;
     color: rgb(16, 33, 117);
+    font-family: 'Caprasimo';
     cursor: pointer;
     transition: transform 0.5s linear;
     &:hover {

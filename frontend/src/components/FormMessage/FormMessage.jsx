@@ -5,6 +5,7 @@ import {
   fetchAddMessageInTopic,
   selectTopics,
   resetTextAnswerRequest,
+  addQuote,
 } from '../../redax/slices/topicSlice';
 
 import { selectUser } from '../../redax/slices/userSlice';
@@ -24,7 +25,7 @@ export default function Form({ getMessages }) {
   const formRef = React.useRef();
   const { allMessagesAndAuthors } = useSelector(selectUser);
   const { value, errors, valid } = useSelector(selectformValidetion);
-  const { showPreloader, textAnswerRequest } = useSelector(selectTopics);
+  const { showPreloader, textAnswerRequest, quote } = useSelector(selectTopics);
   const { token } = useSelector(selectAuth);
 
   const dispatch = useDispatch();
@@ -70,6 +71,7 @@ export default function Form({ getMessages }) {
         id: localStorage.getItem('topicId'),
         userId: localStorage.getItem('userId'),
         message: messageRef.current.value,
+        quote,
         token,
       })
     ).then((res) => {
@@ -78,6 +80,7 @@ export default function Form({ getMessages }) {
         dispatch(resetValues());
         dispatch(setValid());
         setTimeout(scrollForm, 500);
+        dispatch(addQuote(''));
       }
       deleteTextAnswerServer();
     });
@@ -109,31 +112,48 @@ export default function Form({ getMessages }) {
       {allMessagesAndAuthors.length >= 10 ? (
         ''
       ) : (
-        <form
-          ref={formRef}
-          onSubmit={(evt) => handleSubmit(evt)}
-          className={Style.form}
-        >
-          <textarea
-            ref={messageRef}
-            value={value.textarea ?? ''}
-            onChange={(evt) => {
-              changeValue(evt);
-            }}
-            className={Style.textarea}
-            type="text"
-            name="textarea"
-            required
-            maxLength={500}
-          ></textarea>
-          <TextInteractionForm text={errors.textarea} />
-          <ButtonSubmit
-            valid={valid}
-            showPreloader={showPreloader}
-            textAnswerRequest={textAnswerRequest}
-            text={'отправить'}
-          />
-        </form>
+        <>
+          <div className={Style.containerQuote}>
+            {quote.length > 0 && (
+              <>
+                <span className={Style.containerQuote_title}>цитата:</span>
+                <span
+                  className={Style.containerQuote_subtitle}
+                >{` ${quote}`}</span>
+                <div
+                  onClick={() => dispatch(addQuote(''))}
+                  className={Style.containerQuote_delete}
+                ></div>
+              </>
+            )}
+          </div>
+
+          <form
+            ref={formRef}
+            onSubmit={(evt) => handleSubmit(evt)}
+            className={Style.form}
+          >
+            <textarea
+              ref={messageRef}
+              value={value.textarea ?? ''}
+              onChange={(evt) => {
+                changeValue(evt);
+              }}
+              className={Style.textarea}
+              type="text"
+              name="textarea"
+              required
+              maxLength={500}
+            ></textarea>
+            <TextInteractionForm text={errors.textarea} />
+            <ButtonSubmit
+              valid={valid}
+              showPreloader={showPreloader}
+              textAnswerRequest={textAnswerRequest}
+              text={'отправить'}
+            />
+          </form>
+        </>
       )}
     </>
   );

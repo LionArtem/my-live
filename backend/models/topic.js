@@ -12,6 +12,7 @@ const cardSchema = new mongoose.Schema({
   messages: [
     {
       message: { type: String, minlength: 1, maxlength: 500 },
+      quote: { type: String },
       userId: { type: String, minlength: 24, maxlength: 24 },
       createdAt: {
         type: Date,

@@ -1,35 +1,6 @@
 .conteiner {
   display: flex;
   flex-direction: column;
-  .container_avatar {
-    position: relative;
-  }
-  img {
-    width: 200px;
-    height: 150px;
-    object-fit: contain;
-    margin: 0px 0px 10px 0px;
-    border: 1px solid rgb(232, 230, 230);
-    padding: 3px;
-  }
-  .button_edit_foto {
-    position: absolute;
-    top: 115px;
-    left: 165px;
-    background-image: url(../../../image/445.png);
-    width: 30px;
-    height: 30px;
-    background-size: cover;
-    cursor: pointer;
-    border: 1px rgb(255, 254, 254) solid;
-    border-radius: 50%;
-  }
-}
-
-.input_file {
-  visibility: hidden;
-  width: 0;
-  height: 0;
 }
 
 .form {
@@ -43,9 +14,18 @@
     margin: 15vh 0px 15vh;
     color: rgb(150, 15, 15);
   }
+
+  .title {
+    font-family: 'Caprasimo';
+    color: rgb(16, 33, 117);
+    font-size: 1.2em;
+  }
+
   input {
     height: 20px;
-    font-size: 15px;
+    font-family: 'Sometype Mono';
+    font-weight: 400;
+    font-size: 1.2em;
   }
 
   .conteiner_town {
@@ -77,6 +57,9 @@
     cursor: pointer;
     user-select: none;
     width: max-content;
+    font-family: 'Caprasimo';
+    color: rgb(16, 33, 117);
+    font-size: 1.2em;
   }
 
   .town {
@@ -86,6 +69,9 @@
     padding: 3px 1px;
     border: 1px solid rgb(133, 133, 133);
     vertical-align: bottom;
+    font-family: 'Sometype Mono';
+    font-weight: 400;
+    font-size: 1.2em;
   }
 
   .cities {
@@ -99,8 +85,6 @@
     padding: 7px;
     border: 1px solid rgb(232, 230, 230);
     position: absolute;
-    top: 50px;
-    left: 0;
   }
 
   .cities_off {
@@ -111,6 +95,8 @@
     all: unset;
     cursor: pointer;
     padding: 3px 0px;
+    font-family: 'Caprasimo';
+    font-size: 1.2em;
   }
 
   .list_town:hover {

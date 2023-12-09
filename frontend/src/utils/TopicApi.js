@@ -20,7 +20,7 @@ class TopicApi {
   }
 
   addMessageInTopic(params) {
-    const { id, message, userId, token } = params;
+    const { id, message, userId, token, quote } = params;
     return fetch(`${this.baseUrl}/${id}/message`, {
       method: 'PUT',
       headers: {
@@ -30,6 +30,7 @@ class TopicApi {
       body: JSON.stringify({
         message,
         userId,
+        quote,
       }),
     }).then(this._checkResponse);
   }

@@ -1,0 +1,24 @@
+.pageUser {
+}
+
+.pageUser_userCard {
+  display: flex;
+  flex-direction: column;
+  row-gap: 7px;
+  .foto {
+    width: 300px;
+    object-fit: contain;
+    border-radius: 3px;
+  }
+
+  p {
+    font-family: 'Sometype Mono';
+    font-size: 1.1em;
+    margin: 0px 0px 0px 5px;
+  }
+}
+
+.pageUser_buttonContainer {
+  display: flex;
+  column-gap: 8px;
+}

@@ -24,6 +24,16 @@ class UserApi {
     }).then(this._checkResponse);
   }
 
+  deleteUsersAvatar(token, id) {
+    return fetch(`${this.baseUrl}/delete-avatar/${id}`, {
+      method: 'PATCH',
+      headers: {
+        authorization: `Bearer ${localStorage.getItem('token') || token}`,
+        'content-type': 'application/json',
+      },
+    }).then(this._checkResponse);
+  }
+
   getUserMe(token) {
     return fetch(`${this.baseUrl}/me`, {
       method: 'GET',
