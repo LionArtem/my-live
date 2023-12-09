@@ -11,8 +11,7 @@ export default function BottonSubmit({
   text,
 }) {
   return (
-    <div>
-      {' '}
+    <div className={Style.bottonSubmit}>
       {valid ? (
         <button className={Style.button_form} type="submit">
           {text}

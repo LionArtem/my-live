@@ -1,13 +1,13 @@
-import React, { useRef, useState } from "react";
-import Style from "./UserAvatarEdit.module.scss";
-import { selectAuth } from "../../redax/slices/authSlice";
-import { selectUser, resetUserAvatar } from "../../redax/slices/userSlice";
+import React, { useRef, useState } from 'react';
+import Style from './UserAvatarEdit.module.scss';
+import { selectAuth } from '../../redax/slices/authSlice';
+import { selectUser, resetUserAvatar } from '../../redax/slices/userSlice';
 
-import TextInteractionForm from "../TextInteractionForm/TextInteractionForm";
-import { usersApi } from "../../utils/UserApi";
-import { useDispatch, useSelector } from "react-redux";
-import UserAvatarEditSceleton from "./UserAvatarEditSceleton";
-import ModulePreloader from "../Moduls/ModulePreloader/ModulePreloader";
+import TextInteractionForm from '../TextInteractionForm/TextInteractionForm';
+import { usersApi } from '../../utils/UserApi';
+import { useDispatch, useSelector } from 'react-redux';
+import UserAvatarEditSceleton from './UserAvatarEditSceleton';
+import ModulePreloader from '../Moduls/ModulePreloader/ModulePreloader';
 
 export default function UserAvatarEdit() {
   const dispatch = useDispatch();
@@ -15,7 +15,7 @@ export default function UserAvatarEdit() {
   const { token } = useSelector(selectAuth);
   const { user, showSceletonPage } = useSelector(selectUser);
   const [file, setFile] = useState(null);
-  const [errorLoadingFile, setErrorLoadingFile] = useState("");
+  const [errorLoadingFile, setErrorLoadingFile] = useState('');
   const [showPreloader, isShowPreloader] = useState(false);
 
   const addFoto = (evt) => {
@@ -34,39 +34,41 @@ export default function UserAvatarEdit() {
       };
     } catch (error) {
       isShowPreloader(false);
-      setErrorLoadingFile("Ошибка при загрузке файла!");
-      setTimeout(() => setErrorLoadingFile(""), 3000);
+      setErrorLoadingFile('Ошибка при загрузке файла!');
+      setTimeout(() => setErrorLoadingFile(''), 3000);
     }
   };
 
   const sendFile = ({ result, file }) => {
     const avatar = new FormData();
-    avatar.append("avatar", file);
+    avatar.append('avatar', file);
 
     usersApi
       .addAvatar(avatar, token)
       .then(() => {
         setFile(result);
-        isShowPreloader(false);
       })
       .catch((err) => {
-        isShowPreloader(false);
         setErrorLoadingFile(err.message);
-        setTimeout(() => setErrorLoadingFile(""), 3000);
-      });
+        setTimeout(() => setErrorLoadingFile(''), 3000);
+      })
+      .finally(() => isShowPreloader(false));
   };
 
   const deleteFoto = (token, id) => {
+    if (!user.avatar && !file) {
+      return;
+    }
     isShowPreloader(true);
     usersApi
       .deleteUsersAvatar(token, id)
       .then((res) => {
         setFile(null);
-        dispatch(resetUserAvatar(""));
+        dispatch(resetUserAvatar(''));
       })
       .catch((err) => {
         setErrorLoadingFile(err.message);
-        setTimeout(() => setErrorLoadingFile(""), 3000);
+        setTimeout(() => setErrorLoadingFile(''), 3000);
       })
       .finally(() => isShowPreloader(false));
   };
@@ -85,7 +87,7 @@ export default function UserAvatarEdit() {
                     ? file
                     : user.avatar
                     ? `http://localhost:3001/${user.avatar}`
-                    : "https://www.murrayglass.com/wp-content/uploads/2020/10/avatar-scaled.jpeg"
+                    : 'https://www.murrayglass.com/wp-content/uploads/2020/10/avatar-scaled.jpeg'
                 }
                 alt="аватар"
               />

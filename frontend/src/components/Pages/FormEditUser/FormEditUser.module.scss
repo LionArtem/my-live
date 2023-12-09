@@ -3,6 +3,14 @@
   flex-direction: column;
 }
 
+.conteinerButton {
+  display: flex;
+  column-gap: 11px;
+  padding-bottom: 10px;
+  margin-bottom: 25px;
+  border-bottom: 1px solid rgb(232, 230, 230);
+}
+
 .form {
   display: flex;
   flex-direction: column;
