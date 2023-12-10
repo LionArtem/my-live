@@ -1,22 +1,22 @@
-import React, { useEffect, useState } from 'react';
-import Style from './ListUsers.module.scss';
-import { usersApi } from '../../../utils/UserApi';
-import { useDispatch, useSelector } from 'react-redux';
-import { selectAuth } from '../../../redax/slices/authSlice';
+import React, { useEffect, useState } from "react";
+import Style from "./ListUsers.module.scss";
+import { usersApi } from "../../../utils/UserApi";
+import { useDispatch, useSelector } from "react-redux";
+import { selectAuth } from "../../../redax/slices/authSlice";
 import {
   selectModuleConfirmation,
   isStatusModule,
-} from '../../../redax/slices/moduleConfirmationSlice';
+} from "../../../redax/slices/moduleConfirmationSlice";
 
-import UserCard from '../../UserCard/UserCard';
-import ButtonsNavigation from '../../Buttons/ButtonsNavigation/ButtonsNavigation';
-import Pagination from '../../Pagination/Pagination';
-import ErrServer from '../../ErrServer/ErrServer';
-import ButtonDelete from '../../Buttons/ButtonDelete/ButtonDelete';
-import ModulConfirmation from '../../Moduls/ModulConfirmation/ModulConfirmation';
-import ModulePreloader from '../../Moduls/ModulePreloader/ModulePreloader';
-import { selectUser } from '../../../redax/slices/userSlice';
-import ListUsersSceleton from './ListUsersSceleton';
+import UserCard from "../../UserCard/UserCard";
+import ButtonsNavigation from "../../Buttons/ButtonsNavigation/ButtonsNavigation";
+import Pagination from "../../Pagination/Pagination";
+import ErrServer from "../../ErrServer/ErrServer";
+import ButtonDelete from "../../Buttons/ButtonDelete/ButtonDelete";
+import ModulConfirmation from "../../Moduls/ModulConfirmation/ModulConfirmation";
+import ModulePreloader from "../../Moduls/ModulePreloader/ModulePreloader";
+import { selectUser } from "../../../redax/slices/userSlice";
+import ListUsersSceleton from "./ListUsersSceleton";
 
 export default function ListUsers() {
   const dispatch = useDispatch();
@@ -27,11 +27,11 @@ export default function ListUsers() {
   const [showPreloader, isShowPreloader] = useState(false);
   const [showSceleton, isShowSceleton] = useState(false);
   const [errServer, isErrServer] = useState(false);
-  const [textErr, isTextErr] = useState('');
+  const [textErr, isTextErr] = useState("");
   const [idUser, isIdUser] = useState();
-  const [textPreloader, isTextPreloader] = useState('');
+  const [textPreloader, isTextPreloader] = useState("");
 
-  const getUsers = (page = localStorage.getItem('page') ?? 1) => {
+  const getUsers = (page = localStorage.getItem("page") ?? 1) => {
     isShowSceleton(true);
     usersApi
       .getUsers(token, page)
@@ -48,26 +48,25 @@ export default function ListUsers() {
 
   useEffect(() => {
     getUsers();
-    return () => localStorage.removeItem('page');
+    return () => localStorage.removeItem("page");
   }, []);
 
   const deleteUser = () => {
     dispatch(isStatusModule(false));
-    isTextPreloader('Удаление...');
+    isTextPreloader("Удаление...");
     isShowPreloader(true);
     usersApi
       .deleteUsers(token, idUser)
       .then((res) => {
-        isTextPreloader('Загрузка...');
         getUsers();
       })
       .catch((err) => {
         console.log(err);
-        isShowPreloader(false);
-        isTextPreloader('');
+        isTextPreloader("");
       })
       .finally(() => {
-        isIdUser('');
+        isIdUser("");
+        isShowPreloader(false);
       });
   };
 
@@ -79,8 +78,8 @@ export default function ListUsers() {
   return (
     <div className={Style.ListUsers}>
       <div className={Style.conteinerButton}>
-        <ButtonsNavigation page={'/admin'} text={'Назад'} />
-        <ButtonsNavigation page={'/'} text={'На главную'} />
+        <ButtonsNavigation page={"/admin"} text={"Назад"} />
+        <ButtonsNavigation page={"/"} text={"На главную"} />
       </div>
 
       {errServer ? (
@@ -95,7 +94,7 @@ export default function ListUsers() {
                   <ButtonDelete
                     id={user._id}
                     onClick={clickButtonDelete}
-                    text={'Удалить профиль'}
+                    text={"Удалить профиль"}
                   />
                 </li>
               ))}
@@ -105,7 +104,7 @@ export default function ListUsers() {
         <Pagination getNumberPage={getUsers} numberPages={numberPages} />
       )}
       {statusModule && (
-        <ModulConfirmation confirm={deleteUser} text={'Удалить?'} />
+        <ModulConfirmation confirm={deleteUser} text={"Удалить?"} />
       )}
       {showPreloader && <ModulePreloader text={textPreloader} />}
     </div>
