@@ -4,17 +4,19 @@ import { usersApi } from '../../../utils/UserApi';
 import ErrServer from '../../ErrServer/ErrServer';
 import ButtonsNavigation from '../../Buttons/ButtonsNavigation/ButtonsNavigation';
 import PageUserSceleton from './PageUserSceleton';
+import ModulContainer from '../../Moduls/ModulContainer/ModulContainer';
 
 export default function PageUser() {
   const [user, isUser] = useState();
   const [err, isErr] = useState(false);
   const [errText, isErrText] = useState('');
   const [showSceleton, isShowSceleton] = useState(false);
+  const [showBigAvatar, isShowBigAvatar] = useState(false);
 
   useEffect(() => {
     isShowSceleton(true);
     usersApi
-      .getUserId(localStorage.getItem('userId'))
+      .getUserId(localStorage.getItem('CurrentUserId'))
       .then((user) => {
         isUser(user);
       })
@@ -23,6 +25,8 @@ export default function PageUser() {
         isErrText(err.message);
       })
       .finally(() => isShowSceleton(false));
+
+    return () => localStorage.removeItem('CurrentUserId');
   }, []);
 
   return (
@@ -38,7 +42,16 @@ export default function PageUser() {
       ) : (
         <div className={Style.pageUser_userCard}>
           <img
-            className={Style.foto}
+            onClick={() => {
+              if (user.avatar) {
+                isShowBigAvatar(true);
+              }
+            }}
+            className={
+              user.avatar
+                ? `${Style.foto} ${Style.fotoCursor}`
+                : `${Style.foto}`
+            }
             src={
               user.avatar
                 ? `http://localhost:3001/${user.avatar}`
@@ -49,6 +62,15 @@ export default function PageUser() {
           <p>{`${user.name} (${user.gender}. ${user.age})`}</p>
           <p>{user.town}</p>
         </div>
+      )}
+      {showBigAvatar && (
+        <ModulContainer clickOverly={() => isShowBigAvatar(false)}>
+          <img
+            className={Style.bigAvatar}
+            src={`http://localhost:3001/${user.avatar}`}
+            alt="аватар"
+          />
+        </ModulContainer>
       )}
     </div>
   );

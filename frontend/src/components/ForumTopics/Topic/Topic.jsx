@@ -86,7 +86,7 @@ export default function Topic() {
   }, []);
 
   const openPageUser = (id) => {
-    localStorage.setItem('userId', id);
+    localStorage.setItem('CurrentUserId', id);
     navigation('/user');
   };
 

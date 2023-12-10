@@ -6,7 +6,7 @@ export default function UserCard({ user }) {
   const navigation = useNavigate();
 
   const openPageUser = (id) => {
-    localStorage.setItem('userId', id);
+    localStorage.setItem('CurrentUserId', id);
     navigation('/user');
   };
 

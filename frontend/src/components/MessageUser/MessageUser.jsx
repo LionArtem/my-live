@@ -38,7 +38,7 @@ export default function MessageUser({ getMessages }) {
   }, []);
 
   const openPageUser = (id) => {
-    localStorage.setItem('userId', id);
+    localStorage.setItem('CurrentUserId', id);
     navigation('/user');
   };
 
