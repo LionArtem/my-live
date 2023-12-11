@@ -4,7 +4,7 @@ import { usersApi } from '../../../utils/UserApi';
 import ErrServer from '../../ErrServer/ErrServer';
 import ButtonsNavigation from '../../Buttons/ButtonsNavigation/ButtonsNavigation';
 import PageUserSceleton from './PageUserSceleton';
-import ModulContainer from '../../Moduls/ModulContainer/ModulContainer';
+import ModuleBigFoto from '../../Moduls/ModuleBigFoto/ModuleBigFoto';
 
 export default function PageUser() {
   const [user, isUser] = useState();
@@ -28,6 +28,10 @@ export default function PageUser() {
 
     return () => localStorage.removeItem('CurrentUserId');
   }, []);
+
+  const closeBigFoto = () => {
+    isShowBigAvatar(false);
+  };
 
   return (
     <div className={Style.pageUser}>
@@ -64,13 +68,7 @@ export default function PageUser() {
         </div>
       )}
       {showBigAvatar && (
-        <ModulContainer clickOverly={() => isShowBigAvatar(false)}>
-          <img
-            className={Style.bigAvatar}
-            src={`http://localhost:3001/${user.avatar}`}
-            alt="аватар"
-          />
-        </ModulContainer>
+        <ModuleBigFoto isShowBigAvatar={closeBigFoto} url={user.avatar} />
       )}
     </div>
   );

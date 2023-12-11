@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Style from './MyPage.module.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import {
@@ -10,11 +10,13 @@ import { selectAuth } from '../../../redax/slices/authSlice';
 import ButtonsNavigation from '../../Buttons/ButtonsNavigation/ButtonsNavigation';
 import ErrServer from '../../ErrServer/ErrServer';
 import MyPageSceleton from './MyPageSceleton';
+import ModuleBigFoto from '../../Moduls/ModuleBigFoto/ModuleBigFoto';
 
 export default function MyPage() {
   const dispatch = useDispatch();
   const { user, errServer, showSceletonPage } = useSelector(selectUser);
   const { token } = useSelector(selectAuth);
+  const [showBigAvatar, isShowBigAvatar] = useState(false);
 
   React.useEffect(() => {
     dispatch(fetchGetUser(token));
@@ -34,7 +36,16 @@ export default function MyPage() {
       ) : (
         <div className={Style.use_card}>
           <img
-            className={Style.foto}
+            className={
+              user.avatar
+                ? `${Style.foto} ${Style.fotoCursor}`
+                : `${Style.foto}`
+            }
+            onClick={() => {
+              if (user.avatar) {
+                isShowBigAvatar(true);
+              }
+            }}
             src={
               user.avatar
                 ? `http://localhost:3001/${user.avatar}`
@@ -70,6 +81,12 @@ export default function MyPage() {
             text={'Редактировать профиль'}
           />
         </div>
+      )}
+      {showBigAvatar && (
+        <ModuleBigFoto
+          isShowBigAvatar={() => isShowBigAvatar(false)}
+          url={user.avatar}
+        />
       )}
     </div>
   );
