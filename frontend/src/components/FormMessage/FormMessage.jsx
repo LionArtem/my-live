@@ -35,19 +35,19 @@ export default function Form({ getMessages }) {
     addMessage();
   };
 
-  React.useEffect(() => {
-    if (valid) {
-      const onKeyDown = (evt) => {
-        if (evt.keyCode === 13) {
-          addMessage();
-        }
-      };
-      document.addEventListener('keydown', onKeyDown);
-      return () => {
-        document.removeEventListener('keydown', onKeyDown);
-      };
-    }
-  }, [valid]);
+  // React.useEffect(() => {
+  //   if (valid) {
+  //     const onKeyDown = (evt) => {
+  //       if (evt.keyCode === 13) {
+  //         addMessage();
+  //       }
+  //     };
+  //     document.addEventListener('keydown', onKeyDown);
+  //     return () => {
+  //       document.removeEventListener('keydown', onKeyDown);
+  //     };
+  //   }
+  // }, [valid]);
 
   const deleteTextAnswerServer = () => {
     setTimeout(() => {
