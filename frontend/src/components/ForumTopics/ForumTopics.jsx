@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef, useState } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -29,6 +29,7 @@ import NavigationNotAuthUser from '../NavigationNotAuthUser/NavigationNotAuthUse
 
 export default function ForumTopics() {
   const dispatch = useDispatch();
+  const inputRef = useRef();
 
   const { value, errors, valid } = useSelector(selectformValidetion);
   const {
@@ -38,13 +39,33 @@ export default function ForumTopics() {
     srrTopicServer,
     numberPages,
   } = useSelector(selectTopics);
+  const [showErrValidation, isShowErrValidation] = useState(false);
+  const [validButton, isValidButton] = useState(false);
 
   const getTopic = (page = localStorage.getItem('page') ?? 1) => {
     dispatch(fetchGetTopicPaginetion({ page }));
   };
 
-  const addPost = (e) => {
-    e.preventDefault();
+  const addPost = (evt) => {
+    evt.preventDefault();
+    if (!valid) {
+      isShowErrValidation(true);
+      isValidButton(false);
+      // setTimeout(
+      //   () =>
+      //     dispatch(
+      //       setValue({
+      //         value: value.topic,
+      //         name: 'topic',
+      //         errors: '',
+      //       })
+      //     ),
+      //   2000
+      // );
+      inputRef.current.focus();
+      return;
+    }
+
     dispatch(fetchAddTopic(value.topic)).then((res) => {
       if (res.meta.requestStatus === 'fulfilled') {
         setTimeout(() => dispatch(resetSuccessRequest()), 1500);
@@ -74,6 +95,8 @@ export default function ForumTopics() {
   }
 
   const changeValue = (evt) => {
+    isShowErrValidation(false);
+    isValidButton(true);
     let errMessage = evt.target.validationMessage;
     if (!checkedStringGap(evt.target.value)) {
       errMessage = 'одного пробела достаточно!';
@@ -101,9 +124,10 @@ export default function ForumTopics() {
       ) : (
         <>
           {localStorage.getItem('token') ? (
-            <form onSubmit={(e) => addPost(e)}>
+            <form noValidate onSubmit={(e) => addPost(e)}>
               <div>
                 <input
+                  ref={inputRef}
                   pattern="^((?!\s{2}).)*$"
                   type="text"
                   placeholder="введите название темы"
@@ -114,10 +138,12 @@ export default function ForumTopics() {
                   minLength={5}
                   maxLength={30}
                 ></input>
-                <TextInteractionForm text={errors.topic} />
+                {showErrValidation && (
+                  <TextInteractionForm text={errors.topic} />
+                )}
               </div>
               <ButtonSubmit
-                valid={valid}
+                valid={validButton}
                 showPreloader={showPreloader}
                 successRequest={successRequest}
                 textAnswerRequest={textAnswerRequest}

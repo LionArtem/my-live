@@ -5,11 +5,11 @@
   grid-template-rows: min-content min-content auto min-content;
   form {
     display: grid;
-    grid-template-columns: min-content min-content;
+    grid-template-columns: 255px 175px;
     grid-template-rows: 80px;
     justify-self: start;
     margin-left: 50px;
-
+    margin-bottom: 5px;
     input {
       all: unset;
       height: 28px;
