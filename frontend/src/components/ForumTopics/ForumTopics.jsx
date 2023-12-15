@@ -41,9 +41,10 @@ export default function ForumTopics() {
   } = useSelector(selectTopics);
   const [showErrValidation, isShowErrValidation] = useState(false);
   const [validButton, isValidButton] = useState(false);
+  const [notTopics, isNotTopics] = useState(false);
 
   const getTopic = (page = localStorage.getItem('page') ?? 1) => {
-    dispatch(fetchGetTopicPaginetion({ page }));
+    dispatch(fetchGetTopicPaginetion({ page })).then(() => isNotTopics(true));
   };
 
   const addPost = (evt) => {
@@ -157,7 +158,7 @@ export default function ForumTopics() {
               <ButtonsNavigation page={'/'} text={'Назад'} />
             </NavigationNotAuthUser>
           )}
-          <TopicList getTopic={getTopic} />
+          <TopicList notTopics={notTopics} getTopic={getTopic} />
           {numberPages.length > 1 && (
             <Pagination getNumberPage={getTopic} numberPages={numberPages} />
           )}

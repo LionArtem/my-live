@@ -13,6 +13,7 @@ import {
 
 import { getTimeLocal } from '../../utils/utils';
 import MessageUserPreloader from './MessageUserPreloader';
+import EmptyPage from '../EmptyPage/EmptyPage';
 
 export default function MessageUser({ getMessages }) {
   const navigation = useNavigate();
@@ -116,7 +117,7 @@ export default function MessageUser({ getMessages }) {
           </div>
         ))
       ) : (
-        <p>здесь пока нет сообщений</p>
+        <EmptyPage text={'Здесь пока нет сообщений.'} />
       )}
     </>
   );

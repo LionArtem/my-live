@@ -187,15 +187,14 @@ const topicsSlice = createSlice({
     });
 
     builder.addCase(fetchDeleteTopic.pending, (state) => {
-      console.log('удаление темы');
-      state.showPreloader = true;
+      //console.log('удаление темы');
     });
     builder.addCase(fetchDeleteTopic.fulfilled, (state, { payload }) => {
       //console.log(payload);
     });
     builder.addCase(fetchDeleteTopic.rejected, (state, action) => {
       // console.log(action);
-      console.log('ошибка удаления темы');
+      //console.log('ошибка удаления темы');
     });
   },
 });

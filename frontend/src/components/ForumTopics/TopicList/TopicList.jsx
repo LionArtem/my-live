@@ -12,8 +12,9 @@ import { Link } from 'react-router-dom';
 
 import { getTimeLocal } from '../../../utils/utils';
 import TopicListPreloader from './TopicListPreloader';
+import EmptyPage from '../../EmptyPage/EmptyPage';
 
-export default function TopicList({ getTopic }) {
+export default function TopicList({ getTopic, notTopics }) {
   const dispatch = useDispatch();
   const { topicsInPage, showPreloaderTopic } = useSelector(selectTopics);
   const { user } = useSelector(selectUser);
@@ -43,8 +44,7 @@ export default function TopicList({ getTopic }) {
             <TopicListPreloader key={i} />
           ))}
         </div>
-      ) : (
-        topicsInPage &&
+      ) : topicsInPage.length > 0 ? (
         topicsInPage.map((obj) => (
           <Link to={'/topic'} key={obj._id}>
             <div className={Style.title}>
@@ -65,6 +65,8 @@ export default function TopicList({ getTopic }) {
             )}
           </Link>
         ))
+      ) : (
+        notTopics && <EmptyPage text={'Нет созданных тем.'} />
       )}
     </div>
   );
