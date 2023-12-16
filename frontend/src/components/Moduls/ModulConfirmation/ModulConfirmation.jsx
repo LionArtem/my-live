@@ -6,11 +6,20 @@ import { isStatusModule } from '../../../redax/slices/moduleConfirmationSlice';
 
 export default function ModulConfirmation({ text, confirm }) {
   const dispatch = useDispatch();
+
+  const confirmYes = () => {
+    confirm();
+    dispatch(isStatusModule(false));
+  };
+
   return (
     <ModulContainer clickOverly={() => dispatch(isStatusModule(false))}>
       <div className={Style.window}>
         <p className={Style.title}>{text}</p>
-        <p onClick={confirm} className={`${Style.buttonYes} ${Style.button}`}>
+        <p
+          onClick={() => confirmYes()}
+          className={`${Style.buttonYes} ${Style.button}`}
+        >
           Да
         </p>
         <p

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
@@ -14,24 +14,40 @@ import {
 import { getTimeLocal } from '../../utils/utils';
 import MessageUserPreloader from './MessageUserPreloader';
 import EmptyPage from '../EmptyPage/EmptyPage';
+import ModulConfirmation from '../Moduls/ModulConfirmation/ModulConfirmation';
+import {
+  selectModuleConfirmation,
+  isStatusModule,
+} from '../../redax/slices/moduleConfirmationSlice';
+import ModulePreloader from '../Moduls/ModulePreloader/ModulePreloader';
 
 export default function MessageUser({ getMessages }) {
   const navigation = useNavigate();
   const dispatch = useDispatch();
   const { allMessagesAndAuthors, user } = useSelector(selectUser);
   const { showPreloaderMessage } = useSelector(selectTopics);
+  const [messageId, isMessageId] = useState();
+  const { statusModule } = useSelector(selectModuleConfirmation);
+  const [modulePreloader, isModulePreloader] = useState(false);
 
-  const deleteMessage = (obj) => {
+  const deleteMessage = (messageId) => {
+    isModulePreloader(true);
     dispatch(
       fetchDeleteMessage({
-        messageId: obj.messages._id,
+        messageId,
         topicId: localStorage.getItem('topicId'),
       })
     ).then((res) => {
       if (res.meta.requestStatus === 'fulfilled') {
         getMessages();
       }
+      isModulePreloader(false);
     });
+  };
+
+  const openConfirmation = (messageId) => {
+    isMessageId(messageId);
+    dispatch(isStatusModule(true));
   };
 
   React.useEffect(() => {
@@ -73,7 +89,7 @@ export default function MessageUser({ getMessages }) {
                   <span>{getTimeLocal(obj.messages.createdAt)}</span>
                   {user.admin && (
                     <button
-                      onClick={() => deleteMessage(obj)}
+                      onClick={() => openConfirmation(obj.messages._id)}
                       className={Style.button_delete}
                     ></button>
                   )}
@@ -90,7 +106,7 @@ export default function MessageUser({ getMessages }) {
                   <span>{getTimeLocal(obj.messages.createdAt)}</span>
                   {user.admin && (
                     <button
-                      onClick={() => deleteMessage(obj)}
+                      onClick={() => openConfirmation(obj.messages._id)}
                       className={Style.button_delete}
                     ></button>
                   )}
@@ -119,6 +135,13 @@ export default function MessageUser({ getMessages }) {
       ) : (
         <EmptyPage text={'Здесь пока нет сообщений.'} />
       )}
+      {statusModule && (
+        <ModulConfirmation
+          text={'Удалить сообщение?'}
+          confirm={() => deleteMessage(messageId)}
+        />
+      )}
+      {modulePreloader && <ModulePreloader text={'Удаление...'} />}
     </>
   );
 }
