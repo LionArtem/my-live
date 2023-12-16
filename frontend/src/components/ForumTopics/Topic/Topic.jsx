@@ -93,15 +93,15 @@ export default function Topic() {
   return (
     <div className={Style.topic}>
       <div className={Style.conteiner_navigation}>
+        <div className={Style.buttons_navigation}>
+          <ButtonsNavigation page={'/topics'} text={'Назад'} />
+          <ButtonsNavigation page={'/'} text={'На главную'} />
+        </div>
         {!localStorage.getItem('token') && (
           <NavigationNotAuthUser
             text={'Что бы написать сообщение нужно авторизироваться'}
           />
         )}
-        <div className={Style.buttons_navigation}>
-          <ButtonsNavigation page={'/topics'} text={'Назад'} />
-          <ButtonsNavigation page={'/'} text={'На главную'} />
-        </div>
       </div>
       {errGetMessage || errServerUserMessage ? (
         <ErrServer textErr="На сервере произошла ошибка, попробуйте зайти позже." />

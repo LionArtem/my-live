@@ -152,11 +152,12 @@ export default function ForumTopics() {
               />
             </form>
           ) : (
-            <NavigationNotAuthUser
-              text={'Что бы создать тему нужно авторизироваться'}
-            >
+            <div>
               <ButtonsNavigation page={'/'} text={'Назад'} />
-            </NavigationNotAuthUser>
+              <NavigationNotAuthUser
+                text={'Что бы создать тему нужно авторизироваться'}
+              />
+            </div>
           )}
           <TopicList notTopics={notTopics} getTopic={getTopic} />
           {numberPages.length > 1 && (

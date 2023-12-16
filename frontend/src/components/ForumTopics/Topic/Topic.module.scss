@@ -6,6 +6,7 @@
 
 .conteiner_navigation {
   display: flex;
+  flex-direction: column;
   column-gap: 7px;
   .buttons_navigation {
     display: flex;
