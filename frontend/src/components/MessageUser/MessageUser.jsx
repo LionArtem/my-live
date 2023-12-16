@@ -114,12 +114,14 @@ export default function MessageUser({ getMessages }) {
               )}
             </div>
             <div className={Style.containerMassage}>
-              <span
-                className={Style.duttonQuote}
-                onClick={() => dispatch(addQuote(obj.messages.message))}
-              >
-                цитата
-              </span>
+              {user.name && (
+                <span
+                  className={Style.duttonQuote}
+                  onClick={() => dispatch(addQuote(obj.messages.message))}
+                >
+                  цитата
+                </span>
+              )}
               {obj.messages?.quote.length > 0 && (
                 <div className={Style.containerQuote}>
                   <p className={Style.quote}>{`"${obj.messages?.quote.slice(
