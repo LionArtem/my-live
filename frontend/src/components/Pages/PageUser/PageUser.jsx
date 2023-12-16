@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Style from './PageUser.module.scss';
-import { usersApi } from '../../../utils/UserApi';
+import { notAuthRequest } from '../../../utils/NotAuthRequest';
 import ErrServer from '../../ErrServer/ErrServer';
 import ButtonsNavigation from '../../Buttons/ButtonsNavigation/ButtonsNavigation';
 import PageUserSceleton from './PageUserSceleton';
@@ -15,7 +15,7 @@ export default function PageUser() {
 
   useEffect(() => {
     isShowSceleton(true);
-    usersApi
+    notAuthRequest
       .getUserId(localStorage.getItem('CurrentUserId'))
       .then((user) => {
         isUser(user);

@@ -26,12 +26,6 @@ usersRouter.delete('/delete/:id', celebrate({
 
 usersRouter.get('/me', getUsersMe);
 
-usersRouter.get('/:id', celebrate({
-  params: Joi.object().keys({
-    id: Joi.string().hex().length(24).required(),
-  }),
-}), getUsersId);
-
 usersRouter.post('/add-file/', upload.single('avatar'), addUserFoto);
 
 usersRouter.patch('/delete-avatar/:id', celebrate({

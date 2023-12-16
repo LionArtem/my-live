@@ -44,13 +44,6 @@ class UserApi {
     }).then(this._checkResponse);
   }
 
-  getUserId(id) {
-    return fetch(`${this.baseUrl}/${id}`, {
-      method: 'GET',
-      headers: this.headers,
-    }).then(this._checkResponse);
-  }
-
   patchUserMe(age, email, name, town, gender, params) {
     const token = params;
     return fetch(`${this.baseUrl}/me`, {

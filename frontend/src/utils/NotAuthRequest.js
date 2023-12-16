@@ -29,6 +29,13 @@ class NotAuthRequest {
     ).then(this._checkResponse);
   }
 
+  getUserId(id) {
+    return fetch(`${this.baseUrl}/users/${id}`, {
+      method: 'GET',
+      headers: this.headers,
+    }).then(this._checkResponse);
+  }
+
   _checkResponse = (res) => {
     if (res.ok) {
       return res.json();

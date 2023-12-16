@@ -1,39 +1,51 @@
-const notAuth = require('express').Router();
-const { celebrate, Joi } = require('celebrate');
+const notAuth = require("express").Router();
+const { celebrate, Joi } = require("celebrate");
 
 const {
   getTopicsPaginetion,
   getMessagePaginetion,
-} = require('../controllers/topic');
+} = require("../controllers/topic");
 
-const {
-  getUsersFaindId,
-} = require('../controllers/users');
+const { getUsersFaindId, getUsersId } = require("../controllers/users");
 
 notAuth.get(
-  '/topicList/:page',
+  "/topicList/:page",
   celebrate({
     params: Joi.object().keys({
       page: Joi.string().required(),
     }),
   }),
-  getTopicsPaginetion,
+  getTopicsPaginetion
 );
 
 notAuth.get(
-  '/messageList/:topicId',
+  "/messageList/:topicId",
   celebrate({
     params: Joi.object().keys({
       topicId: Joi.string().required(),
     }),
   }),
-  getMessagePaginetion,
+  getMessagePaginetion
 );
 
-notAuth.get('/faindIdUsers/:id', celebrate({
-  params: Joi.object().keys({
-    id: Joi.string().required(),
+notAuth.get(
+  "/faindIdUsers/:id",
+  celebrate({
+    params: Joi.object().keys({
+      id: Joi.string().required(),
+    }),
   }),
-}), getUsersFaindId);
+  getUsersFaindId
+);
+
+notAuth.get(
+  "/users/:id",
+  celebrate({
+    params: Joi.object().keys({
+      id: Joi.string().hex().length(24).required(),
+    }),
+  }),
+  getUsersId
+);
 
 module.exports = notAuth;
