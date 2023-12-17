@@ -35,3 +35,9 @@
   width: 0;
   height: 0;
 }
+
+@media screen and (max-width: 360px) {
+  .container_avatar {
+    justify-content: center;
+  }
+}
