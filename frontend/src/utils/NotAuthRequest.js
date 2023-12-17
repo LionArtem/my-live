@@ -30,7 +30,7 @@ class NotAuthRequest {
   }
 
   getUserId(id) {
-    return fetch(`${this.baseUrl}/users/${id}`, {
+    return fetch(`${this.baseUrl}/user/${id}`, {
       method: 'GET',
       headers: this.headers,
     }).then(this._checkResponse);

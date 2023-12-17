@@ -6,7 +6,6 @@ const {
   getUsers,
   getUsersMe,
   patchUsersInfo,
-  getUsersId,
   addUserFoto,
   deleteUsers,
   deleteUserFoto,

@@ -39,7 +39,7 @@ notAuth.get(
 );
 
 notAuth.get(
-  "/users/:id",
+  "/user/:id",
   celebrate({
     params: Joi.object().keys({
       id: Joi.string().hex().length(24).required(),

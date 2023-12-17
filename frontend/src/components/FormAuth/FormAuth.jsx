@@ -42,7 +42,6 @@ export default function FormAuth({ textButton, text }) {
 
   const checkEmptyField = (value, name, text) => {
     if (value) {
-      console.log(value);
       dispatch(
         setValue({
           name,
