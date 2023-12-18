@@ -1,6 +1,7 @@
 .info_user {
   height: 100%;
   border: 1px solid rgb(232, 230, 230);
+  box-sizing: border-box;
   width: 200px;
   padding: 5px;
   cursor: pointer;
@@ -34,7 +35,7 @@
 
 @media screen and (max-width: 360px) {
   .info_user {
-    width: 100px;
+    width: 150px;
     padding: 3px;
     p {
       font-size: 0.8em;
@@ -45,8 +46,8 @@
 
 @media screen and (max-width: 360px) {
   .foto {
-    width: 85px;
-    height: 85px;
+    width: 142px;
+    height: 142px;
     border-radius: 2px;
   }
 }

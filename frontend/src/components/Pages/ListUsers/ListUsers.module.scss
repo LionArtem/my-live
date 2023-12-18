@@ -12,15 +12,21 @@
 .ListUsers_containerCard {
   all: unset;
   display: flex;
-  row-gap: 20px;
+  gap: 20px;
   justify-content: center;
-  column-gap: 20px;
   flex-wrap: wrap;
   padding: 20px;
   li {
     all: unset;
     display: flex;
     flex-direction: column;
-   justify-content: space-between;
+    justify-content: space-between;
+  }
+}
+
+@media screen and (max-width: 360px) {
+  .ListUsers_containerCard {
+    padding: 10px 0px;
+    gap: 10px;
   }
 }
