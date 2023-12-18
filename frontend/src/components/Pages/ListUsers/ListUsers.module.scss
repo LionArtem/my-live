@@ -19,5 +19,8 @@
   padding: 20px;
   li {
     all: unset;
+    display: flex;
+    flex-direction: column;
+   justify-content: space-between;
   }
 }

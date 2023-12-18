@@ -1,4 +1,5 @@
 .info_user {
+  height: 100%;
   border: 1px solid rgb(232, 230, 230);
   width: 200px;
   padding: 5px;
@@ -29,4 +30,30 @@
 .email {
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+@media screen and (max-width: 360px) {
+  .info_user {
+    width: 100px;
+    padding: 3px;
+    p {
+      font-size: 0.8em;
+      margin: 6px 0px;
+    }
+  }
+}
+
+@media screen and (max-width: 360px) {
+  .foto {
+    width: 85px;
+    height: 85px;
+    border-radius: 2px;
+  }
+}
+
+@media screen and (max-width: 360px) {
+  .name {
+    font-size: 1.1em;
+    margin: 8px 0px;
+  }
 }

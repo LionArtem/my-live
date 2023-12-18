@@ -23,7 +23,7 @@ export default function UserCard({ user }) {
       />
       <h3 className={Style.name}>{user.name}</h3>
       <p>{`(${user.gender})${user.age}`}</p>
-      <p>{user.sity}</p>
+      <p>{user.town}</p>
       <p className={Style.email}>{user.email}</p>
     </div>
   );
