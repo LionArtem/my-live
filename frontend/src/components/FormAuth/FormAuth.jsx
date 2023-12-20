@@ -19,6 +19,7 @@ import {
 import Style from './FormAuth.module.scss';
 import TextInteractionForm from '../TextInteractionForm/TextInteractionForm';
 import ButtonSubmit from '../Buttons/ButtonSubmit/ButtonSubmit';
+import ModulContainer from '../Moduls/ModulContainer/ModulContainer';
 
 export default function FormAuth({ textButton, text }) {
   const dispatch = useDispatch();
@@ -94,63 +95,50 @@ export default function FormAuth({ textButton, text }) {
   };
 
   return (
-    <div className={Style.overflow}>
-      <div
-        onClick={(evt) => {
-          if (evt.target === evt.currentTarget) {
+    <ModulContainer clickOverly={() => closeForm()}>
+      <form noValidate onSubmit={(e) => handleSubmit(e)} className={Style.form}>
+        <div
+          onClick={() => {
             closeForm();
-          }
-        }}
-        className={Style.form_contener}
-      >
-        <form
-          noValidate
-          onSubmit={(e) => handleSubmit(e)}
-          className={Style.form}
-        >
-          <div
-            onClick={() => {
-              closeForm();
-            }}
-            className={Style.button_close}
-          ></div>
-          <p className={Style.title}>{text}</p>
-          <input
-            onBlur={() => isFocusInputEmail(true)}
-            onFocus={() => isFocusInputEmail(false)}
-            pattern="[a-zA-Z0-9._\-]+@[a-zA-Z0-9._\-]+\.[a-zA-Z0-9_\-]+"
-            value={value.email ?? ''}
-            onChange={(evt) => {
-              collectValidetion(evt);
-            }}
-            type="email"
-            name="email"
-            placeholder="email"
-            required
-          ></input>
-          <TextInteractionForm text={focusInputEmail && errors.email} />
-          <input
-            onBlur={() => isFocusInputPassword(true)}
-            onFocus={() => isFocusInputPassword(false)}
-            value={value.password ?? ''}
-            onChange={(evt) => {
-              collectValidetion(evt);
-            }}
-            type="password"
-            name="password"
-            placeholder="пароль"
-            minLength={8}
-            required
-          ></input>
-          <TextInteractionForm text={focusInputPassword && errors.password} />
-          <ButtonSubmit
-            valid={true}
-            showPreloader={showPreloader}
-            textAnswerRequest={textArrAnswerServer}
-            text={textButton}
-          />
-        </form>
-      </div>
-    </div>
+          }}
+          className={Style.button_close}
+        ></div>
+        <p className={Style.title}>{text}</p>
+        <input
+          onBlur={() => isFocusInputEmail(true)}
+          onFocus={() => isFocusInputEmail(false)}
+          pattern="[a-zA-Z0-9._\-]+@[a-zA-Z0-9._\-]+\.[a-zA-Z0-9_\-]+"
+          value={value.email ?? ''}
+          onChange={(evt) => {
+            collectValidetion(evt);
+          }}
+          type="email"
+          name="email"
+          placeholder="email"
+          required
+        ></input>
+        <TextInteractionForm text={focusInputEmail && errors.email} />
+        <input
+          onBlur={() => isFocusInputPassword(true)}
+          onFocus={() => isFocusInputPassword(false)}
+          value={value.password ?? ''}
+          onChange={(evt) => {
+            collectValidetion(evt);
+          }}
+          type="password"
+          name="password"
+          placeholder="пароль"
+          minLength={8}
+          required
+        ></input>
+        <TextInteractionForm text={focusInputPassword && errors.password} />
+        <ButtonSubmit
+          valid={true}
+          showPreloader={showPreloader}
+          textAnswerRequest={textArrAnswerServer}
+          text={textButton}
+        />
+      </form>
+    </ModulContainer>
   );
 }

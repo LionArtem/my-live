@@ -22,9 +22,9 @@ export default function MyPage() {
     dispatch(fetchGetUser(token));
   }, []);
 
-  React.useEffect(() => {
-    return () => dispatch(killAllStateUser());
-  }, []);
+  // React.useEffect(() => {
+  //   return () => dispatch(killAllStateUser());
+  // }, []);
 
   return (
     <div className={Style.use_conteiner}>
