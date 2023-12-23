@@ -10,6 +10,9 @@ export default function BottonSubmit({
   textAnswerRequest,
   text,
 }) {
+
+  console.log(valid);
+
   return (
     <div className={Style.bottonSubmit}>
       {valid ? (

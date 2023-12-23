@@ -52,17 +52,6 @@ export default function ForumTopics() {
     if (!valid) {
       isShowErrValidation(true);
       isValidButton(false);
-      // setTimeout(
-      //   () =>
-      //     dispatch(
-      //       setValue({
-      //         value: value.topic,
-      //         name: 'topic',
-      //         errors: '',
-      //       })
-      //     ),
-      //   2000
-      // );
       inputRef.current.focus();
       return;
     }
@@ -71,6 +60,7 @@ export default function ForumTopics() {
       if (res.meta.requestStatus === 'fulfilled') {
         setTimeout(() => dispatch(resetSuccessRequest()), 1500);
         getTopic();
+        isValidButton(false);
       }
       setTimeout(() => dispatch(resetTextAnswerRequest()), 1500);
       dispatch(resetValues());

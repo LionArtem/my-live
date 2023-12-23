@@ -29,3 +29,9 @@
   column-gap: 8px;
   border-bottom: 1px solid white;
 }
+
+@media screen and (max-width:360px) {
+  .pageUser_userCard{
+    align-items: center;
+  }
+}

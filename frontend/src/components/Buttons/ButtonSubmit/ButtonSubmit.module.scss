@@ -19,16 +19,32 @@
   padding: 5px 32px;
   cursor: pointer;
   transition: border-radius 0.5s linear, background-color 0.5s linear;
-  &:hover {
-    border-radius: 5px;
-    background-color: rgb(251, 252, 254);
-  }
+}
+
+.button_form:hover {
+  border-radius: 5px;
+  background-color: rgb(251, 252, 254);
 }
 
 .button_form_off {
   cursor: none;
-  color: rgb(72, 72, 72);
-  &:hover {
+  color: rgb(101, 101, 101);
+}
+
+.button_form_off:hover {
+  border-radius: 0px;
+  background-color: rgb(216, 224, 231);
+}
+
+@media (hover: none) and (pointer: coarse) {
+  .button_form_off:hover {
+    border-radius: 0px;
+    background-color: rgb(216, 224, 231);
+  }
+}
+
+@media (hover: none) and (pointer: coarse) {
+  .button_form:hover {
     border-radius: 0px;
     background-color: rgb(216, 224, 231);
   }
