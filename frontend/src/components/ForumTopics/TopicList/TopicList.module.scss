@@ -35,7 +35,7 @@
       margin: 0px;
       color: rgb(16, 33, 117);
       font-size: 1.5em;
-      font-family: 'Caprasimo';
+      font-family: "Caprasimo";
       cursor: pointer;
       transition: background-color 0.3s linear;
       &:hover {
@@ -103,5 +103,6 @@
 @media screen and (max-width: 360px) {
   .conteiner {
     align-items: center;
+    margin-bottom: 20px;
   }
 }

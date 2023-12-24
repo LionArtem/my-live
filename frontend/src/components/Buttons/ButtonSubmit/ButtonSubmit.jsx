@@ -11,8 +11,6 @@ export default function BottonSubmit({
   text,
 }) {
 
-  console.log(valid);
-
   return (
     <div className={Style.bottonSubmit}>
       {valid ? (
