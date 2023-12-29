@@ -51,6 +51,11 @@ nav::-webkit-scrollbar-button:horizontal:end:increment {
     &:hover {
       transform: translateY(-3px);
     }
+    @media (hover: none) and (pointer: coarse) {
+      &:hover {
+        transform: translateY(0px);
+      }
+    }
   }
 
   .active {
