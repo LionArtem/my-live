@@ -17,6 +17,7 @@ import {
   setValue,
   resetValues,
   killAllStateFormValidetion,
+  setValid,
 } from '../../redax/slices/formValidetionSlice';
 
 import TopicList from './TopicList/TopicList';
@@ -49,6 +50,19 @@ export default function ForumTopics() {
 
   const addPost = (evt) => {
     evt.preventDefault();
+    if (value.topic.length < 2 || value.topic.length > 30) {
+      dispatch(setValid(false));
+      isValidButton(false);
+      isShowErrValidation(true);
+      dispatch(
+        setValue({
+          name: 'topic',
+          errors:
+            'Название темы не должно содержать менее 2 символов и более 30',
+        })
+      );
+      return;
+    }
     if (!valid) {
       isShowErrValidation(true);
       isValidButton(false);
@@ -115,7 +129,7 @@ export default function ForumTopics() {
       ) : (
         <>
           {localStorage.getItem('token') ? (
-            <form noValidate onSubmit={(e) => addPost(e)}>
+            <form noValidate onSubmit={(evt) => addPost(evt)}>
               <div>
                 <input
                   ref={inputRef}
