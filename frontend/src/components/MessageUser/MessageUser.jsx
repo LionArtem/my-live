@@ -15,6 +15,8 @@ import { getTimeLocal } from '../../utils/utils';
 import MessageUserPreloader from './MessageUserPreloader';
 import EmptyPage from '../EmptyPage/EmptyPage';
 import ModulConfirmation from '../Moduls/ModulConfirmation/ModulConfirmation';
+import ModuleQuote from '../Moduls/ModuleQuote/ModuleQuote';
+
 import {
   selectModuleConfirmation,
   isStatusModule,
@@ -29,6 +31,8 @@ export default function MessageUser({ getMessages }) {
   const [messageId, isMessageId] = useState();
   const { statusModule } = useSelector(selectModuleConfirmation);
   const [modulePreloader, isModulePreloader] = useState(false);
+  const [quotePopap, isQuotePopap] = useState(false);
+  const [quote, isQuote] = useState(null);
 
   const deleteMessage = (messageId) => {
     isModulePreloader(true);
@@ -57,6 +61,11 @@ export default function MessageUser({ getMessages }) {
   const openPageUser = (id) => {
     localStorage.setItem('CurrentUserId', id);
     navigation('/user');
+  };
+
+  const openFullQuote = (quote) => {
+    isQuote(quote);
+    isQuotePopap(true);
   };
 
   return (
@@ -123,7 +132,10 @@ export default function MessageUser({ getMessages }) {
                 </span>
               )}
               {obj.messages?.quote.length > 0 && (
-                <div className={Style.containerQuote}>
+                <div
+                  className={Style.containerQuote}
+                  onClick={() => openFullQuote(obj.messages.quote)}
+                >
                   <p className={Style.quote}>{`"${obj.messages?.quote.slice(
                     0,
                     100
@@ -144,6 +156,7 @@ export default function MessageUser({ getMessages }) {
         />
       )}
       {modulePreloader && <ModulePreloader text={'Удаление...'} />}
+      {quotePopap && <ModuleQuote text={quote} clickOverly={isQuotePopap} />}
     </>
   );
 }
