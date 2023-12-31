@@ -1,3 +1,5 @@
+import { URL_SERVER } from "./Constants";
+
 class Auth {
   constructor({ baseUrl, headers }) {
     this.baseUrl = baseUrl;
@@ -6,7 +8,7 @@ class Auth {
 
   addUser(email, password) {
     return fetch(`${this.baseUrl}/signup`, {
-      method: 'POST',
+      method: "POST",
       headers: this.headers,
       body: JSON.stringify({
         email,
@@ -17,7 +19,7 @@ class Auth {
 
   loginUser(email, password) {
     return fetch(`${this.baseUrl}/signin`, {
-      method: 'POST',
+      method: "POST",
       headers: this.headers,
       body: JSON.stringify({
         email,
@@ -35,9 +37,8 @@ class Auth {
 }
 
 const auth = new Auth({
-  baseUrl: 'http://localhost:3001',
-  //baseUrl: 'https://api.my-live.website',
-  headers: { 'content-type': 'application/json' },
+  baseUrl: URL_SERVER,
+  headers: { "content-type": "application/json" },
 });
 
 export { auth };

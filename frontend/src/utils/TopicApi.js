@@ -1,3 +1,5 @@
+import { URL_SERVER } from "./Constants";
+
 class TopicApi {
   constructor({ baseUrl, headers }) {
     this.baseUrl = baseUrl;
@@ -6,7 +8,7 @@ class TopicApi {
 
   addNewTopic(title) {
     return fetch(this.baseUrl, {
-      method: 'POST',
+      method: "POST",
       headers: this.headers,
       body: JSON.stringify({ title }),
     }).then(this._checkResponse);
@@ -14,7 +16,7 @@ class TopicApi {
 
   getAllTopics() {
     return fetch(this.baseUrl, {
-      method: 'get',
+      method: "get",
       headers: this.headers,
     }).then(this._checkResponse);
   }
@@ -22,10 +24,10 @@ class TopicApi {
   addMessageInTopic(params) {
     const { id, message, userId, token, quote } = params;
     return fetch(`${this.baseUrl}/${id}/message`, {
-      method: 'PUT',
+      method: "PUT",
       headers: {
-        authorization: `Bearer ${localStorage.getItem('token') || token}`,
-        'content-type': 'application/json',
+        authorization: `Bearer ${localStorage.getItem("token") || token}`,
+        "content-type": "application/json",
       },
       body: JSON.stringify({
         message,
@@ -38,7 +40,7 @@ class TopicApi {
   deleteMessage(params) {
     const { messageId, topicId } = params;
     return fetch(`${this.baseUrl}/${topicId}/message`, {
-      method: 'PATCH',
+      method: "PATCH",
       headers: this.headers,
       body: JSON.stringify({
         messageId,
@@ -48,7 +50,7 @@ class TopicApi {
 
   deleteTopic(params) {
     return fetch(`${this.baseUrl}/${params}`, {
-      method: 'DELETE',
+      method: "DELETE",
       headers: this.headers,
     }).then(this._checkResponse);
   }
@@ -62,11 +64,10 @@ class TopicApi {
 }
 
 const topicApi = new TopicApi({
-  baseUrl: 'http://localhost:3001/topic',
-  //baseUrl: 'https://api.my-live.website/topic',
+  baseUrl: `${URL_SERVER}/topic`,
   headers: {
-    authorization: `Bearer ${localStorage.getItem('token')}`,
-    'content-type': 'application/json',
+    authorization: `Bearer ${localStorage.getItem("token")}`,
+    "content-type": "application/json",
   },
 });
 

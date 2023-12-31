@@ -8,6 +8,7 @@ import { usersApi } from '../../utils/UserApi';
 import { useDispatch, useSelector } from 'react-redux';
 import UserAvatarEditSceleton from './UserAvatarEditSceleton';
 import ModulePreloader from '../Moduls/ModulePreloader/ModulePreloader';
+import { URL_SERVER } from '../../utils/Constants';
 
 export default function UserAvatarEdit() {
   const dispatch = useDispatch();
@@ -86,7 +87,7 @@ export default function UserAvatarEdit() {
                   file
                     ? file
                     : user.avatar
-                    ? `http://localhost:3001/${user.avatar}`
+                    ? `${URL_SERVER}/${user.avatar}`
                     : 'https://www.murrayglass.com/wp-content/uploads/2020/10/avatar-scaled.jpeg'
                 }
                 alt="аватар"

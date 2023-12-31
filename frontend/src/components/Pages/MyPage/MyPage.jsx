@@ -1,16 +1,17 @@
-import React, { useState } from 'react';
-import Style from './MyPage.module.scss';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useState } from "react";
+import Style from "./MyPage.module.scss";
+import { useDispatch, useSelector } from "react-redux";
 import {
   fetchGetUser,
   killAllStateUser,
   selectUser,
-} from '../../../redax/slices/userSlice';
-import { selectAuth } from '../../../redax/slices/authSlice';
-import ButtonsNavigation from '../../Buttons/ButtonsNavigation/ButtonsNavigation';
-import ErrServer from '../../ErrServer/ErrServer';
-import MyPageSceleton from './MyPageSceleton';
-import ModuleBigFoto from '../../Moduls/ModuleBigFoto/ModuleBigFoto';
+} from "../../../redax/slices/userSlice";
+import { selectAuth } from "../../../redax/slices/authSlice";
+import ButtonsNavigation from "../../Buttons/ButtonsNavigation/ButtonsNavigation";
+import ErrServer from "../../ErrServer/ErrServer";
+import MyPageSceleton from "./MyPageSceleton";
+import ModuleBigFoto from "../../Moduls/ModuleBigFoto/ModuleBigFoto";
+import { URL_SERVER } from "../../../utils/Constants";
 
 export default function MyPage() {
   const dispatch = useDispatch();
@@ -28,7 +29,7 @@ export default function MyPage() {
 
   return (
     <div className={Style.use_conteiner}>
-      <ButtonsNavigation page={'/'} text={'Назад'} />
+      <ButtonsNavigation page={"/"} text={"Назад"} />
       {showSceletonPage ? (
         <MyPageSceleton />
       ) : errServer ? (
@@ -48,8 +49,8 @@ export default function MyPage() {
             }}
             src={
               user.avatar
-                ? `http://localhost:3001/${user.avatar}`
-                : 'https://www.murrayglass.com/wp-content/uploads/2020/10/avatar-scaled.jpeg'
+                ? `${URL_SERVER}/${user.avatar}`
+                : "https://www.murrayglass.com/wp-content/uploads/2020/10/avatar-scaled.jpeg"
             }
             alt="аватарка"
           />
@@ -77,8 +78,8 @@ export default function MyPage() {
           </ul>
 
           <ButtonsNavigation
-            page={'/edit-user'}
-            text={'Редактировать профиль'}
+            page={"/edit-user"}
+            text={"Редактировать профиль"}
           />
         </div>
       )}

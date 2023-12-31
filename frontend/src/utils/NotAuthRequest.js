@@ -1,3 +1,5 @@
+import { URL_SERVER } from "./Constants";
+
 class NotAuthRequest {
   constructor({ baseUrl, headers }) {
     this.baseUrl = baseUrl;
@@ -6,7 +8,7 @@ class NotAuthRequest {
 
   getTopicPaginetion(page) {
     return fetch(`${this.baseUrl}/topicList/${page}`, {
-      method: 'GET',
+      method: "GET",
       headers: this.headers,
     }).then(this._checkResponse);
   }
@@ -14,7 +16,7 @@ class NotAuthRequest {
   getMessagePaginetion(params) {
     const { id, page } = params;
     return fetch(`${this.baseUrl}/messageList/${id}&${page}`, {
-      method: 'GET',
+      method: "GET",
       headers: this.headers,
     }).then(this._checkResponse);
   }
@@ -23,7 +25,7 @@ class NotAuthRequest {
     return fetch(
       `${this.baseUrl}/faindIdUsers/${JSON.stringify({ arrIdUser })}`,
       {
-        method: 'GET',
+        method: "GET",
         headers: this.headers,
       }
     ).then(this._checkResponse);
@@ -31,7 +33,7 @@ class NotAuthRequest {
 
   getUserId(id) {
     return fetch(`${this.baseUrl}/user/${id}`, {
-      method: 'GET',
+      method: "GET",
       headers: this.headers,
     }).then(this._checkResponse);
   }
@@ -45,9 +47,8 @@ class NotAuthRequest {
 }
 
 const notAuthRequest = new NotAuthRequest({
-  baseUrl: 'http://localhost:3001',
-  //baseUrl: 'https://api.my-live.website',
-  headers: { 'content-type': 'application/json' },
+  baseUrl: URL_SERVER,
+  headers: { "content-type": "application/json" },
 });
 
 export { notAuthRequest };

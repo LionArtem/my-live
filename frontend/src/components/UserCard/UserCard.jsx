@@ -1,13 +1,14 @@
-import React from 'react';
-import Style from './UserCard.module.scss';
-import { useNavigate } from 'react-router-dom';
+import React from "react";
+import Style from "./UserCard.module.scss";
+import { useNavigate } from "react-router-dom";
+import { URL_SERVER } from "../../utils/Constants";
 
 export default function UserCard({ user }) {
   const navigation = useNavigate();
 
   const openPageUser = (id) => {
-    localStorage.setItem('CurrentUserId', id);
-    navigation('/user');
+    localStorage.setItem("CurrentUserId", id);
+    navigation("/user");
   };
 
   return (
@@ -16,8 +17,8 @@ export default function UserCard({ user }) {
         className={Style.foto}
         src={
           user.avatar
-            ? `http://localhost:3001/${user.avatar}`
-            : 'https://www.murrayglass.com/wp-content/uploads/2020/10/avatar-scaled.jpeg'
+            ? `${URL_SERVER}/${user.avatar}`
+            : "https://www.murrayglass.com/wp-content/uploads/2020/10/avatar-scaled.jpeg"
         }
         alt="аватарка"
       />

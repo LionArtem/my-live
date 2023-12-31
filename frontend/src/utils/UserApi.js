@@ -1,3 +1,5 @@
+import { URL_SERVER } from "./Constants";
+
 class UserApi {
   constructor({ baseUrl, headers }) {
     this.baseUrl = baseUrl;
@@ -75,8 +77,7 @@ class UserApi {
 }
 
 const usersApi = new UserApi({
-  baseUrl: 'http://localhost:3001/users',
-  // baseUrl: 'https://api.my-live.website/users',
+  baseUrl: `${URL_SERVER}/users`,
   headers: {
     authorization: `Bearer ${localStorage.getItem('token')}`,
     'content-type': 'application/json',
