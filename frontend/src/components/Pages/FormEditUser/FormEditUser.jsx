@@ -1,7 +1,7 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState } from "react";
 
-import Style from './FormEditUser.module.scss';
-import { useDispatch, useSelector } from 'react-redux';
+import Style from "./FormEditUser.module.scss";
+import { useDispatch, useSelector } from "react-redux";
 
 import {
   setValid,
@@ -9,7 +9,7 @@ import {
   selectformValidetion,
   defaultValues,
   killAllStateFormValidetion,
-} from '../../../redax/slices/formValidetionSlice';
+} from "../../../redax/slices/formValidetionSlice";
 
 import {
   fetchGetUser,
@@ -17,15 +17,15 @@ import {
   selectUser,
   addTextSuccess,
   setSuccessRequest,
-} from '../../../redax/slices/userSlice';
-import FormEditUserPreloader from './FormEditUserPreloader';
-import ButtonsNavigation from '../../Buttons/ButtonsNavigation/ButtonsNavigation';
-import ButtonSubmit from '../../Buttons/ButtonSubmit/ButtonSubmit';
-import TextInteractionForm from '../../TextInteractionForm/TextInteractionForm';
-import { selectAuth } from '../../../redax/slices/authSlice';
-import ErrServer from '../../ErrServer/ErrServer';
-import { allTown } from '../../../utils/AllTown';
-import UserAvatarEdit from '../../UserAvatarEdit/UserAvatarEdit';
+} from "../../../redax/slices/userSlice";
+import FormEditUserPreloader from "./FormEditUserPreloader";
+import ButtonsNavigation from "../../Buttons/ButtonsNavigation/ButtonsNavigation";
+import ButtonSubmit from "../../Buttons/ButtonSubmit/ButtonSubmit";
+import TextInteractionForm from "../../TextInteractionForm/TextInteractionForm";
+import { selectAuth } from "../../../redax/slices/authSlice";
+import ErrServer from "../../ErrServer/ErrServer";
+import { allTown } from "../../../utils/AllTown";
+import UserAvatarEdit from "../../UserAvatarEdit/UserAvatarEdit";
 
 export default function FormEditUser() {
   const townRef = useRef();
@@ -42,7 +42,7 @@ export default function FormEditUser() {
   } = useSelector(selectUser);
   const [listTown, isListTown] = useState(false);
   const [showCities, setShowCities] = useState([]);
-  const [town, setTown] = useState('');
+  const [town, setTown] = useState("");
   const [citiesTop, isCitiesTop] = useState(0);
 
   const catList = (list, num) => {
@@ -50,10 +50,10 @@ export default function FormEditUser() {
   };
 
   const addSityInList = (evt, arr) => {
-    if (
-      evt.target.scrollHeight - evt.target.scrollTop ===
-      evt.target.clientHeight
-    ) {
+    const allHeight = Math.floor(evt.target.scrollHeight);
+    const startDocument = Math.floor(evt.target.scrollTop);
+
+    if (allHeight - startDocument <= evt.target.offsetHeight) {
       catList(allTown, arr.length + 10);
     }
   };
@@ -66,7 +66,7 @@ export default function FormEditUser() {
 
   React.useEffect(() => {
     dispatch(fetchGetUser()).then((res) => {
-      if (res.meta.requestStatus === 'fulfilled') {
+      if (res.meta.requestStatus === "fulfilled") {
         dispatch(
           defaultValues({
             name: res.payload.name,
@@ -96,7 +96,7 @@ export default function FormEditUser() {
 
   const deleteTextAnswerServer = () => {
     setTimeout(() => {
-      dispatch(addTextSuccess(''));
+      dispatch(addTextSuccess(""));
       dispatch(setSuccessRequest(false));
     }, 1500);
   };
@@ -105,7 +105,7 @@ export default function FormEditUser() {
     evt.preventDefault();
 
     if (findNoCoincidenceForm(user, value)) {
-      dispatch(addTextSuccess('изменения сохранены'));
+      dispatch(addTextSuccess("изменения сохранены"));
       dispatch(setSuccessRequest(true));
       deleteTextAnswerServer();
     } else {
@@ -121,7 +121,7 @@ export default function FormEditUser() {
         value: evt.target.value,
         name: evt.target.name,
         errors: evt.target.validationMessage,
-        valid: evt.target.closest('form').checkValidity(),
+        valid: evt.target.closest("form").checkValidity(),
       })
     );
   };
@@ -155,8 +155,8 @@ export default function FormEditUser() {
   return (
     <div className={Style.conteiner}>
       <div className={Style.conteinerButton}>
-        <ButtonsNavigation page={'/my-page'} text={'Назад'} />
-        <ButtonsNavigation page={'/'} text={'На главную'} />
+        <ButtonsNavigation page={"/my-page"} text={"Назад"} />
+        <ButtonsNavigation page={"/"} text={"На главную"} />
       </div>
       <UserAvatarEdit />
       {showSceletonPage ? (
@@ -168,7 +168,7 @@ export default function FormEditUser() {
           <label className={Style.title}>ваше имя</label>
           <input
             pattern="^\S*$"
-            value={value.name ?? ''}
+            value={value.name ?? ""}
             onChange={(evt) => changeValue(evt)}
             name="name"
             placeholder="ввидите имя"
@@ -181,7 +181,7 @@ export default function FormEditUser() {
             <label className={Style.title}>возраст</label>
             <input
               className={Style.age}
-              value={value.age ?? ''}
+              value={value.age ?? ""}
               onChange={(evt) => changeValue(evt)}
               name="age"
               type="number"
@@ -192,7 +192,7 @@ export default function FormEditUser() {
             ></input>
             <label className={Style.title}>м</label>
             <input
-              checked={value.gender === 'м' ? 'checked' : ''}
+              checked={value.gender === "м" ? "checked" : ""}
               className={Style.radio}
               value="м"
               onChange={(evt) => changeValue(evt)}
@@ -203,7 +203,7 @@ export default function FormEditUser() {
 
             <label className={Style.title}>ж</label>
             <input
-              checked={value.gender === 'ж' ? 'checked' : ''}
+              checked={value.gender === "ж" ? "checked" : ""}
               className={Style.radio}
               value="ж"
               onChange={(evt) => changeValue(evt)}
@@ -257,7 +257,7 @@ export default function FormEditUser() {
           <label className={Style.title}>email</label>
           <input
             pattern="^\S*$"
-            value={value.email ?? ''}
+            value={value.email ?? ""}
             onChange={(evt) => changeValue(evt)}
             name="email"
             type="email"
@@ -272,7 +272,7 @@ export default function FormEditUser() {
             showPreloader={showPreloader}
             successRequest={successRequest}
             textAnswerRequest={textAnswerRequest}
-            text={'редактировать профиль'}
+            text={"редактировать профиль"}
           />
         </form>
       )}
