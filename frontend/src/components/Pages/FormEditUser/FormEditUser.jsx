@@ -143,11 +143,11 @@ export default function FormEditUser() {
     if (search) {
       setTimeout(() => {
         const newArr = arr.filter((val) =>
-          val.city.toLowerCase().includes(evt.target.value)
+          val.city.toLowerCase().includes(evt.target.value.toLowerCase())
         );
         catList(newArr, 10);
         search = true;
-      }, 1000);
+      }, time);
       search = false;
     }
   };

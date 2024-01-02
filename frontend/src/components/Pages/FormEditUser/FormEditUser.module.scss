@@ -89,7 +89,6 @@
 
   .cities {
     all: unset;
-    //width: 305px;
     width: 95%;
     height: 200px;
     overflow: auto;
@@ -132,13 +131,6 @@
     width: 15px;
     margin: 0;
   }
-
-  // @media screen and (max-width: 360px) {
-  //   .cities {
-  //     // width: 285px;
-  //     width: 80%;
-  //   }
-  // }
 
 }
 
