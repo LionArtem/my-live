@@ -1,29 +1,29 @@
-import React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import Style from "./Topic.module.scss";
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import Style from './Topic.module.scss';
 
 import {
   selectTopics,
   fetchGetMessagePaginetion,
   isShowPreloaderMessage,
   changeErrGetMessage,
-} from "../../../redax/slices/topicSlice";
+} from '../../../redax/slices/topicSlice';
 import {
   fetchGetUserFindId,
   selectUser,
-} from "../../../redax/slices/userSlice";
+} from '../../../redax/slices/userSlice';
 
-import FormMessage from "../../FormMessage/FormMessage";
-import MessageUser from "../../MessageUser/MessageUser";
-import Pagination from "../../Pagination/Pagination";
-import ButtonsNavigation from "../../Buttons/ButtonsNavigation/ButtonsNavigation";
+import FormMessage from '../../FormMessage/FormMessage';
+import MessageUser from '../../MessageUser/MessageUser';
+import Pagination from '../../Pagination/Pagination';
+import ButtonsNavigation from '../../Buttons/ButtonsNavigation/ButtonsNavigation';
 
-import { getTimeLocal } from "../../../utils/utils";
-import ErrServer from "../../ErrServer/ErrServer";
-import TopicPreloader from "./TopicPreloader";
-import NavigationNotAuthUser from "../../NavigationNotAuthUser/NavigationNotAuthUser";
-import { URL_SERVER } from "../../../utils/Constants";
+import { getTimeLocal } from '../../../utils/utils';
+import ErrServer from '../../ErrServer/ErrServer';
+import TopicPreloader from './TopicPreloader';
+import NavigationNotAuthUser from '../../NavigationNotAuthUser/NavigationNotAuthUser';
+import { URL_SERVER } from '../../../utils/Constants';
 
 export default function Topic() {
   const navigation = useNavigate();
@@ -39,10 +39,10 @@ export default function Topic() {
 
   const { errServerUserMessage } = useSelector(selectUser);
 
-  const findUniqueAuthors = (res) => {
+  const findUniqueAuthors = (messages) => {
     // собираю массив уникальных id users
     let set = new Set(); // лучше производительность
-    res.messages.forEach((element) => {
+    messages.forEach((element) => {
       set.add(element.userId);
     });
     const arrUniqueUserId = Array.from(new Set(set));
@@ -57,18 +57,18 @@ export default function Topic() {
     // return result;
   };
 
-  const getMessages = (page = localStorage.getItem("page") ?? 1) => {
+  const getMessages = (page = localStorage.getItem('page') ?? 1) => {
     dispatch(isShowPreloaderMessage(true));
     dispatch(
       fetchGetMessagePaginetion({
-        id: localStorage.getItem("topicId"),
+        id: localStorage.getItem('topicId'),
         page,
       })
     ).then((resMessage) => {
-      if (resMessage.meta.requestStatus === "fulfilled") {
+      if (resMessage.meta.requestStatus === 'fulfilled') {
         dispatch(
           fetchGetUserFindId({
-            arrIdUser: findUniqueAuthors(resMessage.payload),
+            arrIdUser: findUniqueAuthors(resMessage.payload.messages),
             messages: resMessage.payload,
           })
         ).then(() => {
@@ -79,7 +79,7 @@ export default function Topic() {
   };
 
   React.useEffect(() => {
-    if (!localStorage.getItem("topicId")) {
+    if (!localStorage.getItem('topicId')) {
       dispatch(changeErrGetMessage(true));
     } else {
       getMessages();
@@ -87,20 +87,20 @@ export default function Topic() {
   }, []);
 
   const openPageUser = (id) => {
-    localStorage.setItem("CurrentUserId", id);
-    navigation("/user");
+    localStorage.setItem('CurrentUserId', id);
+    navigation('/user');
   };
 
   return (
     <div className={Style.topic}>
       <div className={Style.conteiner_navigation}>
         <div className={Style.buttons_navigation}>
-          <ButtonsNavigation page={"/topics"} text={"Назад"} />
-          <ButtonsNavigation page={"/"} text={"На главную"} />
+          <ButtonsNavigation page={'/topics'} text={'Назад'} />
+          <ButtonsNavigation page={'/'} text={'На главную'} />
         </div>
-        {!localStorage.getItem("token") && (
+        {!localStorage.getItem('token') && (
           <NavigationNotAuthUser
-            text={"Что бы написать сообщение нужно авторизироваться"}
+            text={'Что бы написать сообщение нужно авторизироваться'}
           />
         )}
       </div>
@@ -113,14 +113,14 @@ export default function Topic() {
               <TopicPreloader />
             ) : (
               <>
-                {" "}
+                {' '}
                 <h1>{titleTopic}</h1>
                 <div className={Style.use_conteiner}>
                   <img
                     src={
                       authorTopic?.avatar
                         ? `${URL_SERVER}/${authorTopic?.avatar}`
-                        : "https://www.murrayglass.com/wp-content/uploads/2020/10/avatar-scaled.jpeg"
+                        : 'https://www.murrayglass.com/wp-content/uploads/2020/10/avatar-scaled.jpeg'
                     }
                     alt="аватарка"
                   />
@@ -135,7 +135,7 @@ export default function Topic() {
                       <p>{authorTopic?.town}</p>
                     </>
                   ) : (
-                    "пользователь удален"
+                    'пользователь удален'
                   )}
                   <span>{getTimeLocal(date)}</span>
                 </div>
@@ -143,7 +143,7 @@ export default function Topic() {
             )}
           </div>
           <MessageUser getMessages={getMessages} />
-          {localStorage.getItem("token") && (
+          {localStorage.getItem('token') && (
             <FormMessage getMessages={getMessages} />
           )}
           {numberPages.length > 1 && (
