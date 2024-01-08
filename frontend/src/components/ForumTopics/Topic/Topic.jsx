@@ -45,7 +45,7 @@ export default function Topic() {
     messages.forEach((element) => {
       set.add(element.userId);
     });
-    const arrUniqueUserId = Array.from(new Set(set));
+    const arrUniqueUserId = Array.from(set);
     return arrUniqueUserId;
 
     // const result = res.messages.reduce((acc, obj) => {
