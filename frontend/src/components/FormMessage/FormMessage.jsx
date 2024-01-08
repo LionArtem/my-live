@@ -134,7 +134,6 @@ export default function Form({ getMessages }) {
                 changeValue(evt);
               }}
               className={Style.textarea}
-              type="text"
               name="textarea"
               required
               maxLength={500}

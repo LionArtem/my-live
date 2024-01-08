@@ -101,7 +101,7 @@ const userSlice = createSlice({
       console.log('ошибка запроса на получение пользователя');
       state.showSceletonPage = false;
       state.errServer = true;
-      console.log(action);
+      //console.log(action);
       state.textAnswerRequest = action.error.message;
     });
     // запрос на редактирование пользователя
@@ -137,7 +137,7 @@ const userSlice = createSlice({
       //console.log('запрос на получение пользователя по массиву id');
     });
     builder.addCase(fetchGetUserFindId.fulfilled, (state, { payload }) => {
-      // console.log(payload);
+      //console.log(payload);
       state.allMessagesAndAuthors = payload.topic.messages.map((messages) => {
         return {
           messages,

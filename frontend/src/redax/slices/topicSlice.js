@@ -111,6 +111,7 @@ const topicsSlice = createSlice({
       state.showPreloader = true;
     });
     builder.addCase(fetchAddMessageInTopic.fulfilled, (state, { payload }) => {
+      //console.log(payload);
       state.showPreloader = false;
     });
     builder.addCase(fetchAddMessageInTopic.rejected, (state, action) => {
@@ -135,6 +136,7 @@ const topicsSlice = createSlice({
     builder.addCase(
       fetchGetMessagePaginetion.fulfilled,
       (state, { payload }) => {
+        // console.log(payload);
         state.date = payload.createdAt;
         state.titleTopic = payload.title;
         state.authorTopic = payload.user;
@@ -159,6 +161,7 @@ const topicsSlice = createSlice({
       state.showPreloaderTopic = true;
     });
     builder.addCase(fetchGetTopicPaginetion.fulfilled, (state, { payload }) => {
+     // console.log(payload);
       state.topicsInPage = payload.topic;
       state.numberPages = [...new Array(Math.ceil(payload.numberTopics / 10))];
       state.showPreloaderTopic = false;
@@ -174,7 +177,7 @@ const topicsSlice = createSlice({
       state.showPreloader = true;
     });
     builder.addCase(fetchAddTopic.fulfilled, (state, { payload }) => {
-      // console.log(payload);
+      //console.log(payload);
       state.showPreloader = false;
       state.successRequest = true;
       state.textAnswerRequest = 'тема успешно создана';
