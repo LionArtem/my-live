@@ -90,7 +90,7 @@ const userSlice = createSlice({
       state.showSceletonPage = true;
     });
     builder.addCase(fetchGetUser.fulfilled, (state, { payload }) => {
-      // console.log(payload);
+      //console.log(payload);
       state.user = payload;
       state.admin = payload.admin;
       localStorage.setItem('userId', payload._id);
@@ -137,7 +137,7 @@ const userSlice = createSlice({
       //console.log('запрос на получение пользователя по массиву id');
     });
     builder.addCase(fetchGetUserFindId.fulfilled, (state, { payload }) => {
-      // console.log(payload);
+      //console.log(payload);
       state.allMessagesAndAuthors = payload.topic.messages.map((messages) => {
         return {
           messages,
