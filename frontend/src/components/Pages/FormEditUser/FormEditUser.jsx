@@ -40,6 +40,7 @@ export default function FormEditUser() {
     showSceletonPage,
     errServer,
   } = useSelector(selectUser);
+  const { token } = useSelector(selectAuth);
   const [listTown, isListTown] = useState(false);
   const [showCities, setShowCities] = useState([]);
   const [town, setTown] = useState("");
@@ -58,14 +59,12 @@ export default function FormEditUser() {
     }
   };
 
-  const { token } = useSelector(selectAuth);
-
   React.useEffect(() => {
     return () => dispatch(killAllStateFormValidetion());
   }, []);
 
   React.useEffect(() => {
-    dispatch(fetchGetUser()).then((res) => {
+    dispatch(fetchGetUser({ token })).then((res) => {
       if (res.meta.requestStatus === "fulfilled") {
         dispatch(
           defaultValues({

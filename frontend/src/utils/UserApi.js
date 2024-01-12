@@ -37,6 +37,7 @@ class UserApi {
   }
 
   getUserMe(token) {
+    console.log(token);
     return fetch(`${this.baseUrl}/me`, {
       method: 'GET',
       headers: {
